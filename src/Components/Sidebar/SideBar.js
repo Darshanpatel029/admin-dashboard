@@ -9,48 +9,24 @@ const SideBar = () => {
                 <ul className="sidebar-nav" id="sidebar-nav">
 
                     <li className="nav-item">
-                        <Link className="nav-link " to="/">
+                        <Link className="nav-link" to="/">
                             <i className="bi bi-grid"></i>
                             <span>Dashboard</span>
                         </Link>
                     </li>
 
-                    {/* <li className="nav-item">
-                    <Link className="nav-link " to="/Enquiry">
-                        <i className="bi bi-journal-text"></i>
-                        <span>Enquiry</span>
-                    </Link>
-                </li> */}
                     <li className="nav-item">
-                        <Link className="nav-link collapsed" data-bs-target="#forms-nav"
-                            data-bs-toggle="collapse" >
+                        <Link className="nav-link" to="/ViewEnquiry">
                             <i className="bi bi-journal-text"></i>
                             <span>Enquiry</span>
-                            <i
-                                class="bi bi-chevron-down ms-auto"></i>
-
-
                         </Link>
-                        <ul id="forms-nav" className="nav-content collapse "
-                            data-bs-parent="#sidebar-nav">
-                            <li>
-                                <Link to="/AddEnquiry">
-                                    <i className="bi bi-circle"></i><span>Add Enquiry</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/ViewEnquiry">
-                                    <i className="bi bi-circle"></i><span>View Enquiry</span>
-                                </Link>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li className="nav-item">
-                        <Link className="nav-link " to="/DetailEnquiry">
+                        <Link className="nav-link " to="/ViewDetailEnquiry">
                             <i className="bi bi-bar-chart"></i>
                             <span>Detail-Enquiry</span>
+
                         </Link>
                     </li>
 

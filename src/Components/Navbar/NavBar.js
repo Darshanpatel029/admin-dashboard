@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, BrowserRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
     return (
@@ -8,7 +8,7 @@ const NavBar = () => {
 
                 <div class="d-flex align-items-center justify-content-between">
                     <Link to="/" class="logo d-flex align-items-center">
-                        <img src="assets/img/logo.png" alt />
+                        <img src="assets/img/logo.png" alt="" />
                         <span class="d-none d-lg-block">NiceAdmin</span>
                     </Link>
                     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -28,9 +28,9 @@ const NavBar = () => {
                     <ul className="d-flex align-items-center">
 
                         <li className="nav-item d-block d-lg-none">
-                            <a className="nav-link nav-icon search-bar-toggle ">
+                            <Link className="nav-link nav-icon search-bar-toggle ">
                                 <i className="bi bi-search"></i>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
 
@@ -131,7 +131,7 @@ const NavBar = () => {
 
                                 <li className="message-item">
                                     <Link >
-                                        <img src="assets/img/messages-1.jpg" alt
+                                        <img src="assets/img/messages-1.jpg" alt=""
                                             className="rounded-circle" />
                                         <div>
                                             <h4>Maria Hudson</h4>
@@ -146,8 +146,8 @@ const NavBar = () => {
                                 </li>
 
                                 <li className="message-item">
-                                    <Link >
-                                        <img src="assets/img/messages-2.jpg" alt
+                                    <Link>
+                                        <img src="assets/img/messages-2.jpg" alt=""
                                             className="rounded-circle" />
                                         <div>
                                             <h4>Anna Nelson</h4>
@@ -163,7 +163,7 @@ const NavBar = () => {
 
                                 <li className="message-item">
                                     <Link >
-                                        <img src="assets/img/messages-3.jpg" alt
+                                        <img src="assets/img/messages-3.jpg" alt=""
                                             className="rounded-circle" />
                                         <div>
                                             <h4>David Muldon</h4>
@@ -188,7 +188,7 @@ const NavBar = () => {
                         <li className="nav-item dropdown pe-3">
 
                             <Link className="nav-link nav-profile d-flex align-items-center pe-0"
-                                href="#" data-bs-toggle="dropdown">
+                                data-bs-toggle="dropdown">
                                 <img src="assets/img/profile-img.jpg" alt="Profile"
                                     className="rounded-circle" />
                                 <span className="d-none d-md-block dropdown-toggle ps-2">K.
@@ -207,7 +207,7 @@ const NavBar = () => {
 
                                 <li>
                                     <Link className="dropdown-item d-flex align-items-center"
-                                        href="users-profile.html">
+                                    >
                                         <i className="bi bi-person"></i>
                                         <span>My Profile</span>
                                     </Link>
