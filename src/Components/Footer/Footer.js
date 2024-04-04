@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 const Footer = () => {
     return (
@@ -11,7 +13,7 @@ const Footer = () => {
                 </div>
                 <div className="credits">
 
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <Link to="/https://bootstrapmade.com/">BootstrapMade</Link>
                 </div>
             </footer>
         </body>

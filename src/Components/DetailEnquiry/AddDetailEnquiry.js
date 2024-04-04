@@ -4,15 +4,15 @@ import NavBar from '../Navbar/NavBar';
 import SideBar from '../Sidebar/SideBar';
 import Footer from '../Footer/Footer';
 
-const DetailEnquiry = () => {
+const AddDetailEnquiry = () => {
     return (
-        <>
+        <body>
             <NavBar />
             <SideBar />
 
-            {/* <Footer /> */}
-        </>
+            <Footer />
+        </body>
     )
 }
 
-export default DetailEnquiry;
+export default AddDetailEnquiry;
