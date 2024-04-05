@@ -1,8 +1,4 @@
 import React from "react";
-import NavBar from "../Navbar/NavBar";
-import SideBar from "../Sidebar/SideBar";
-import Footer from "../Footer/Footer";
-import { Link } from "react-router-dom";
 
 const AddEnquiry = () => {
     return (
@@ -87,14 +83,14 @@ const AddEnquiry = () => {
                                     </button>
                                 </li>
                             </ul>
-                            <div className="tab-content pt-2" id="myTabContent">
+                            <div className="tab-content" id="myTabContent">
                                 <div
                                     className="tab-pane fade show active"
                                     id="pills-home"
                                     role="tabpanel"
                                     aria-labelledby="home-tab"
                                 >
-                                    <div className="card">
+                                    <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="col-md-12">
@@ -138,7 +134,7 @@ const AddEnquiry = () => {
                                     role="tabpanel"
                                     aria-labelledby="profile-tab"
                                 >
-                                    <div className="card">
+                                    <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="col-md-12">
@@ -215,7 +211,7 @@ const AddEnquiry = () => {
                                     role="tabpanel"
                                     aria-labelledby="contact-tab"
                                 >
-                                    <div className="card">
+                                    <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="col-md-4">
@@ -234,7 +230,7 @@ const AddEnquiry = () => {
                                     role="tabpanel"
                                     aria-labelledby="Enquiry-tab"
                                 >
-                                    <div className="card">
+                                    <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="col-md-6">
@@ -286,7 +282,7 @@ const AddEnquiry = () => {
                                     role="tabpanel"
                                     aria-labelledby="Counsellor-tab"
                                 >
-                                    <div className="card">
+                                    <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="col-md-12">
