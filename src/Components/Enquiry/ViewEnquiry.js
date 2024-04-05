@@ -12,6 +12,7 @@ import AddEnquiry from "./AddEnquiry";
 const ViewEnquiry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [EnquiryData, setEnquiryData] = useState([]);
+    const [errs, setErrs] = useState("");
 
     useEffect(() => {
         fetchEnquiries();
@@ -22,18 +23,25 @@ const ViewEnquiry = () => {
             const response = await fetch(
                 "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/"
             );
-            const data = await response.json();
-            const enquiriesWithNo = data.map((enquiry, index) => ({
-                ...enquiry,
-                no: index + 1,
-            }));
-            setEnquiryData(enquiriesWithNo);
+            console.log(response);
+            if (response.status === 200) {
+                const data = await response.json();
+                const enquiriesWithNo = data.map((enquiry, index) => ({
+                    ...enquiry,
+                    no: index + 1,
+                }));
+                setEnquiryData(enquiriesWithNo);
+            } else if (response.status === 500) {
+                setErrs("No Inquiry found");
+            }
+            else {
+                setErrs("Error While Fetching Data");
+            }
         } catch (error) {
-            console.error("Error fetching enquiries:", error);
+            console.log("error", error);
         }
     };
 
-    console.log(EnquiryData);
 
     const columnDefs = [
         { headerName: "No", field: "no" },
@@ -73,7 +81,7 @@ const ViewEnquiry = () => {
                             className="btn btn-primary"
                             onClick={() => setIsModalOpen(true)}
                         >
-                            Extra Large Modal
+                            Add Enquiry
                         </button>
                     </div>
                 </div>
@@ -82,22 +90,26 @@ const ViewEnquiry = () => {
                         <div className="col-lg-12">
                             <div className="card">
                                 <div className="card-body">
-                                    <div
-                                        className="ag-theme-alpine"
-                                        style={{ height: "500px", width: "100%" }}
-                                    >
-                                        <AgGridReact
-                                            rowData={EnquiryData}
-                                            columnDefs={columnDefs}
-                                            pagination={true}
-                                            paginationPageSize={10}
-                                        />
-                                    </div>
+                                    {errs ? (
+                                        <div className="alert alert-danger text-center" role="alert">
+                                            {errs}
+                                        </div>
+                                    ) : (
+                                        <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
+                                            <AgGridReact
+                                                rowData={EnquiryData}
+                                                columnDefs={columnDefs}
+                                                pagination={true}
+                                                paginationPageSize={10}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
             </main>
             <Footer />
             {isModalOpen && (
