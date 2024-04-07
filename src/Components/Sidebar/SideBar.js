@@ -37,7 +37,7 @@ const SideBar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link " to="/Application">
+                        <Link className="nav-link " to="/ViewApplication">
                             <i className="bi bi-window-stack"></i>
                             <span>Application</span>
                         </Link>
