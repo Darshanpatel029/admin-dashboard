@@ -67,7 +67,7 @@ const ViewDetailEnquiry = () => {
                             <li className="breadcrumb-item">
                                 <Link to="/">Home</Link>
                             </li>
-                            <li className="breadcrumb-item active">View-Enquiry</li>
+                            <li className="breadcrumb-item active">DetailEnquiry</li>
                         </ol>
                     </nav>
                     <div>

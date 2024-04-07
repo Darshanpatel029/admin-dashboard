@@ -7,9 +7,9 @@ import NavBar from "../Navbar/NavBar";
 import SideBar from "../Sidebar/SideBar";
 import Footer from "../Footer/Footer";
 import Modal from "react-bootstrap/Modal";
-import AddEnquiry from "./AddEnquiry";
+import AddAssesment from "./AddAssesment";
 
-const ViewEnquiry = () => {
+const ViewAssesment = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [EnquiryData, setEnquiryData] = useState([]);
     const [errs, setErrs] = useState("");
@@ -21,7 +21,7 @@ const ViewEnquiry = () => {
     const fetchEnquiries = async () => {
         try {
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/"
+                "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/"
             );
             console.log(response);
             if (response.status === 200) {
@@ -45,20 +45,15 @@ const ViewEnquiry = () => {
 
     const columnDefs = [
         { headerName: "No", field: "no" },
-        { headerName: "Student First Name", field: "student_First_Name" },
-        { headerName: "Student Last Name", field: "student_Last_Name" },
-        { headerName: "Student Email", field: "student_email" },
-        { headerName: "Country Interested", field: "country_interested" },
-        { headerName: "University Interested", field: "university_interested" },
-        { headerName: "Interested Service", field: "Interested_Services" },
-        { headerName: "Course Interested", field: "course_interested" },
-        { headerName: "Level Applying For", field: "level_applying_for" },
-        { headerName: "Intake Interested", field: "intake_interested" },
-        { headerName: "Assigned Users", field: "assigned_users" },
-        { headerName: "Enquiry Status", field: "enquiry_status" },
-        { headerName: "Notes", field: "notes" },
-        { headerName: "Total Price", field: "" },
-        { headerName: "Source Inquiry", field: "Source_Enquiry" },
+        { headerName: "Current Enquiry", field: "Current_Enquiry" },
+        { headerName: "IELTS Exam", field: "ielts_Exam" },
+        { headerName: "Toefl Exam", field: "Toefl_Exam" },
+        { headerName: "Current Education Details", field: "Current_Education_Details" },
+        { headerName: "Father Occupation", field: "Father_Occupation" },
+        { headerName: "Father Annual Income", field: "Father_Annual_Income" },
+        { headerName: "Refusal", field: "Refusal" },
+        { headerName: "Pending Amount", field: "0" },
+
     ];
 
     return (
@@ -72,7 +67,7 @@ const ViewEnquiry = () => {
                             <li className="breadcrumb-item">
                                 <Link to="/">Home</Link>
                             </li>
-                            <li className="breadcrumb-item active">Enquiry</li>
+                            <li className="breadcrumb-item active">Assesments</li>
                         </ol>
                     </nav>
                     <div>
@@ -81,7 +76,7 @@ const ViewEnquiry = () => {
                             className="btn btn-primary"
                             onClick={() => setIsModalOpen(true)}
                         >
-                            Add Enquiry
+                            Add Assesment
                         </button>
                     </div>
                 </div>
@@ -115,10 +110,10 @@ const ViewEnquiry = () => {
             {isModalOpen && (
                 <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)} size="lg">
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Enquiry</Modal.Title>
+                        <Modal.Title>Add Detail-Enquiry</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddEnquiry />
+                        <AddAssesment />
                     </Modal.Body>
                 </Modal>
             )}
@@ -126,4 +121,4 @@ const ViewEnquiry = () => {
     );
 };
 
-export default ViewEnquiry;
+export default ViewAssesment;
