@@ -21,7 +21,7 @@ const ViewAssesment = () => {
     const fetchEnquiries = async () => {
         try {
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/"
+                "https://cloudconnectcampaign.com/espicrmnew/api/assesment/"
             );
             console.log(response);
             if (response.status === 200) {
