@@ -18,7 +18,7 @@ function App() {
         <Route path="/AddEnquiry" element={<AddEnquiry />} />
         <Route path="/ViewEnquiry" element={<ViewEnquiry />} />
         <Route path="/ViewDetailEnquiry" element={<ViewDetailEnquiry />} />
-        <Route path="/Assesments" element={<Assesments />} />
+        <Route path="/ViewAssessments" element={<Assesments />} />
         <Route path="/ViewApplication" element={<ViewApplication />} />
         <Route path="/LogIn" element={<Login />} />
         <Route path="/Register" element={<Register />} />

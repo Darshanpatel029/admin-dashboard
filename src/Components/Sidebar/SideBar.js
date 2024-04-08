@@ -31,9 +31,9 @@ const SideBar = () => {
                     </li>
 
                     <li className="nav-item">
-                        <Link className="nav-link " to="/Assesments">
+                        <Link className="nav-link " to="/ViewAssessments">
                             <i className="bi bi-file-earmark-fill"></i>
-                            <span>Assesments</span>
+                            <span>Assessments</span>
                         </Link>
                     </li>
                     <li className="nav-item">

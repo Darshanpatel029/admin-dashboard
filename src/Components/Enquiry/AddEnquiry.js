@@ -93,36 +93,35 @@ const AddEnquiry = () => {
                                     <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
-                                                <div className="col-md-12">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Student First Name"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Student First Name</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Student Last Name"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Student Last Name</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="password"
-                                                        className="form-control"
-                                                        placeholder="Student passport"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Student Passport</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-
-                                                <div className="col-md-4">
-                                                    <select id="inputState" className="form-select">
-                                                        <option disabled>Source Enquiry</option>
-                                                        <option>None</option>
-                                                    </select>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Source Inquiry</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -137,69 +136,79 @@ const AddEnquiry = () => {
                                     <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
-                                                <div className="col-md-12">
-                                                    <input
-                                                        type="tel"
-                                                        className="form-control"
-                                                        placeholder="Student Phone"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Student Phone</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="number" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="tel"
-                                                        className="form-control"
-                                                        placeholder="Alternate Phone"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Alternate Phone</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="number" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-
-                                                <div className="col-12">
-                                                    <input
-                                                        type="email"
-                                                        className="form-control"
-                                                        placeholder="Student Email"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Student Email</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="email" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <textarea
-                                                        rows="4"
-                                                        cols="4"
-                                                        className="form-control"
-                                                        placeholder="Student Address"
-                                                        required
-                                                    ></textarea>
+                                                <div class="row mb-4">
+                                                    <label for="inputPassword"
+                                                        class="col-sm-4 col-form-label">Student Address</label>
+                                                    <div class="col-md-6">
+                                                        <textarea class="form-control"
+                                                            style={{ height: "100px" }} required></textarea>
+                                                    </div>
                                                 </div>
-
-                                                <div className="col-md-4">
-                                                    <select id="inputState" className="form-select">
-                                                        <option disabled>Student country</option>
-                                                        <option>india</option>
-                                                    </select>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" >Student Country</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example" required>
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div className="col-12">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Student State"
-                                                        required
-                                                    />
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Student State</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div className="col-12">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Student City"
-                                                        required
-                                                    />
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Student City</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-2">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Student Zip"
-                                                    />
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Student Zip</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -214,11 +223,17 @@ const AddEnquiry = () => {
                                     <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
-                                                <div className="col-md-4">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Current education</option>
-                                                        <option>BE</option>
-                                                    </select>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Current Education</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -233,45 +248,76 @@ const AddEnquiry = () => {
                                     <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Country interested</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>University interested</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Level applying for</option>
-                                                        <option>...</option>
-                                                    </select>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Country Interested</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Course interested</option>
-                                                        <option>...</option>
-                                                    </select>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>University Interested</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Level Applying For</label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Course Interested </label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label" required>Intake Interested </label>
+                                                    <div class="col-md-6">
+                                                        <select class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Interested Services
+                                                    </label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
 
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Intake interested</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <select id="inputState" className="form-select">
-                                                        <option>Interested Services</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
+
                                             </form>
                                         </div>
                                     </div>
@@ -285,37 +331,25 @@ const AddEnquiry = () => {
                                     <div className="">
                                         <div className="card-body">
                                             <form className="row g-3">
-                                                <div className="col-md-12">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Assigned users"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Assigned Users</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="tel"
-                                                        className="form-control"
-                                                        placeholder="Enquiry status"
-                                                        required
-                                                    />
+                                                <div className="row mb-4">
+                                                    <label for="inputEmail3" className="col-sm-4 col-form-label">Enquiry Status</label>
+                                                    <div className="col-md-6" required>
+                                                        <input type="text" className="form-control" id="inputText" />
+                                                    </div>
                                                 </div>
-
-                                                <div className="col-md-12">
-                                                    <textarea
-                                                        rows="4"
-                                                        cols="4"
-                                                        className="form-control"
-                                                        placeholder="Notes"
-                                                        required
-                                                    ></textarea>
-                                                </div>
-
-                                                <div className="text-center">
-                                                    <button type="submit" className="btn btn-primary">
-                                                        Create Enquiry{" "}
-                                                    </button>
+                                                <div class="row mb-4">
+                                                    <label for="inputPassword"
+                                                        class="col-sm-4 col-form-label">Student Address</label>
+                                                    <div class="col-md-6">
+                                                        <textarea class="form-control"
+                                                            style={{ height: "100px" }} required></textarea>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

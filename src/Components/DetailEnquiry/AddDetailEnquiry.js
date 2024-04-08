@@ -170,9 +170,9 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Current Enquiry
+                                                        <label className="col-sm-4 col-form-label" required>Current Enquiry
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -183,9 +183,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Current Education Details
+                                                        <label className="col-sm-4 col-form-label" required>Current Education Details
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -196,9 +196,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Tenth Education Details
+                                                        <label className="col-sm-4 col-form-label" required>Tenth Education Details
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -209,9 +209,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Twelveth Education Details
+                                                        <label className="col-sm-4 col-form-label" required>Twelveth Education Details
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -223,9 +223,9 @@ const AddDetailEnquiry = () => {
                                                     </div>
 
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Graduation Education Details
+                                                        <label className="col-sm-4 col-form-label" required>Graduation Education Details
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -233,12 +233,11 @@ const AddDetailEnquiry = () => {
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
                                                             </select>
-                                                        </div>
-                                                    </div>
+                                                        </div>col-sm-4                                             </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Work Experience
+                                                        <label className="col-sm-4 col-form-label" required>Work Experience
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -265,9 +264,9 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" >Toefl Exam
+                                                        <label className="col-sm-4 col-form-label" >Toefl Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -278,9 +277,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" >Ielts Exam
+                                                        <label className="col-sm-4 col-form-label" >Ielts Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -291,9 +290,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>PTE Exam
+                                                        <label className="col-sm-4 col-form-label" required>PTE Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -304,9 +303,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Duolingo Exam
+                                                        <label className="col-sm-4 col-form-label" required>Duolingo Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -318,9 +317,9 @@ const AddDetailEnquiry = () => {
                                                     </div>
 
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Gre Exam
+                                                        <label className="col-sm-4 col-form-label" required>Gre Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -331,9 +330,9 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Gmat Exam
+                                                        <label className="col-sm-4 col-form-label" required>Gmat Exam
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -360,17 +359,17 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-2">
                                                     <label for="inputText"
-                                                        className="col-sm-2 col-form-label">Father Occupation
+                                                        className="col-sm-4 col-form-label">Father Occupation
                                                     </label>
-                                                    <div className="col-sm-10">
+                                                    <div className="col-md-6">
                                                         <input type="text" className="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-1">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Father Annual Income
+                                                        class="col-sm-4 col-form-label">Father Annual Income
                                                     </label>
-                                                    <div class="col-sm-10">
+                                                    <div class="col-md-6">
                                                         <input type="number" class="form-control" />
                                                     </div>
                                                 </div>
@@ -389,46 +388,46 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Twelveth Document
+                                                        class="col-sm-4 col-form-label">Twelveth Document
                                                     </label>
-                                                    <div class="col-sm-10">
+                                                    <div class="col-md-5">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Tenth Document</label>
-                                                    <div class="col-sm-10">
-                                                        <input class="form-control" type="file" id="formFile" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Graduation Marksheet</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Tenth Document</label>
+                                                    <div class="col-md-5">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Graduation Certificate</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Graduation Marksheet</label>
+                                                    <div class="col-md-5">
+                                                        <input class="form-control" type="file" id="formFile" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3 mt-3">
+                                                    <label for="inputNumber"
+                                                        class="col-sm-4 col-form-label">Graduation Certificate</label>
+                                                    <div class="col-md-5">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">UG Marksheet</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">UG Marksheet</label>
+                                                    <div class="col-md-5">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">UG Certificate</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">UG Certificate</label>
+                                                    <div class="col-md-5">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
@@ -448,46 +447,46 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Ielts Result
+                                                        class="col-sm-4 col-form-label">Ielts Result
                                                     </label>
-                                                    <div class="col-sm-10">
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Toefl Result</label>
-                                                    <div class="col-sm-10">
-                                                        <input class="form-control" type="file" id="formFile" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">PTE Result</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Toefl Result</label>
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Duolingo Result</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">PTE Result</label>
+                                                    <div class="col-md-6">
+                                                        <input class="form-control" type="file" id="formFile" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3 mt-3">
+                                                    <label for="inputNumber"
+                                                        class="col-sm-4 col-form-label">Duolingo Result</label>
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Gre Result</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Gre Result</label>
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Gmat Result</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Gmat Result</label>
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
@@ -506,16 +505,16 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Work Experience Document
+                                                        class="col-sm-4 col-form-label">Work Experience Document
                                                     </label>
-                                                    <div class="col-sm-10">
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Passport Document</label>
-                                                    <div class="col-sm-10">
+                                                        class="col-sm-4 col-form-label">Passport Document</label>
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
@@ -534,9 +533,9 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
                                                     <label for="inputNumber"
-                                                        class="col-sm-2 col-form-label">Offer Letter
+                                                        class="col-sm-4 col-form-label">Offer Letter
                                                     </label>
-                                                    <div class="col-sm-10">
+                                                    <div class="col-md-6">
                                                         <input class="form-control" type="file" id="formFile" />
                                                     </div>
                                                 </div>
@@ -555,9 +554,9 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-2 col-form-label" required>Refusal
+                                                    <label className="col-sm-4 col-form-label" required>Refusal
                                                     </label>
-                                                    <div className="col-sm-10">
+                                                    <div className="col-md-6">
                                                         <select className="form-select"
                                                             aria-label="Default select example">
                                                             <option selected>Open this select menu</option>
@@ -582,9 +581,9 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-2 col-form-label" required>Confirmed Services
+                                                    <label className="col-sm-4 col-form-label" required>Confirmed Services
                                                     </label>
-                                                    <div className="col-sm-10">
+                                                    <div className="col-md-6">
                                                         <select className="form-select"
                                                             aria-label="Default select example">
                                                             <option selected>Open this select menu</option>
@@ -608,9 +607,9 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-2 col-form-label" required>Enquiry Status
+                                                    <label className="col-sm-4 col-form-label" required>Enquiry Status
                                                     </label>
-                                                    <div className="col-sm-10">
+                                                    <div className="col-md-6">
                                                         <select className="form-select"
                                                             aria-label="Default select example">
                                                             <option selected>Open this select menu</option>
