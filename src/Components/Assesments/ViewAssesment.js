@@ -59,7 +59,7 @@ const ViewAssesment = () => {
     return (
         <div>
             <NavBar />
-            <SideBar />
+            {/* <SideBar /> */}
             <main id="main" className="main">
                 <div className="pagetitle d-flex justify-content-between align-items-center">
                     <nav>
@@ -110,7 +110,7 @@ const ViewAssesment = () => {
             {isModalOpen && (
                 <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)} size="lg">
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Detail-Enquiry</Modal.Title>
+                        <Modal.Title>Add Assessment</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <AddAssesment />

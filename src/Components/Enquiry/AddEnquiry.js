@@ -316,8 +316,6 @@ const AddEnquiry = () => {
                                                         <input type="text" className="form-control" id="inputText" />
                                                     </div>
                                                 </div>
-
-
                                             </form>
                                         </div>
                                     </div>
@@ -356,6 +354,13 @@ const AddEnquiry = () => {
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Submit
+                                Form</button>
                         </div>
                     </div>
                 </div>

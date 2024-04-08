@@ -64,7 +64,7 @@ const ViewEnquiry = () => {
     return (
         <div>
             <NavBar />
-            <SideBar />
+            {/* <SideBar /> */}
             <main id="main" className="main">
                 <div className="pagetitle d-flex justify-content-between align-items-center">
                     <nav>

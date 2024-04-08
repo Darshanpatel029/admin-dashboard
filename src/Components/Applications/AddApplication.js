@@ -77,10 +77,10 @@ const AddApplication = () => {
                       <form className="row g-3">
                         <div className="col-md-12">
                           <div className="row mb-1">
-                            <label className="col-sm-2 col-form-label" required>
+                            <label className="col-sm-4 col-form-label" required>
                               Application
                             </label>
-                            <div className="col-sm-10">
+                            <div className="col-md-6">
                               <select
                                 className="form-select"
                                 aria-label="Default select example"
@@ -93,10 +93,10 @@ const AddApplication = () => {
                             </div>
                           </div>
                           <div className="row mb-1">
-                            <label className="col-sm-2 col-form-label" required>
+                            <label className="col-sm-4 col-form-label" required>
                               Application Status
                             </label>
-                            <div className="col-sm-10">
+                            <div className="col-md-6">
                               <select
                                 className="form-select"
                                 aria-label="Default select example"
@@ -121,15 +121,15 @@ const AddApplication = () => {
                 >
                   <div className="">
                     <div className="card-body">
-                    <form className="row g-3">
+                      <form className="row g-3">
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Diploma Marksheet
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -140,11 +140,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Bachelor Marksheet
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -156,11 +156,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Master Marksheet
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -181,15 +181,15 @@ const AddApplication = () => {
                 >
                   <div className="">
                     <div className="card-body">
-                    <form className="row g-3">
+                      <form className="row g-3">
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
-                           Ielts
+                            Ielts
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -200,11 +200,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Gre
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -216,11 +216,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Toefl
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -232,11 +232,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Gmat
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -247,11 +247,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
-                           Pte
+                            Pte
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -262,34 +262,34 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Work Experience
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
                               id="formFile"
                             />
                           </div>
-                          
+
                         </div>
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Other Documents
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
                               id="formFile"
                             />
                           </div>
-                          
+
                         </div>
                       </form>
                     </div>
@@ -307,11 +307,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Sop
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -322,11 +322,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Cv
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -338,11 +338,11 @@ const AddApplication = () => {
                         <div class="row mb-3 mt-3">
                           <label
                             for="inputNumber"
-                            class="col-sm-2 col-form-label"
+                            class="col-sm-4 col-form-label"
                           >
                             Passport
                           </label>
-                          <div class="col-sm-10">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="file"
@@ -354,7 +354,7 @@ const AddApplication = () => {
                     </div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
