@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <>
             <NavBar />
-            <SideBar />
+            {/* <SideBar /> */}
             <main id="main" className="main">
 
                 <div className="pagetitle">

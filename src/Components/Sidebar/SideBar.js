@@ -48,28 +48,28 @@ const SideBar = () => {
 
                     <li className="nav-heading">Pages</li>
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to="/Profile" className="nav-link collapsed" >
                             <i className="bi bi-person"></i>
                             <span>Profile</span>
                         </Link>
-                    </li>
+                    </li> */}
 
 
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-contact.html">
                             <i className="bi bi-envelope"></i>
                             <span>Contact</span>
                         </a>
-                    </li>
+                    </li> */}
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to="/Register" className="nav-link collapsed" >
                             <i className="bi bi-card-list"></i>
                             <span>Register</span>
                         </Link>
-                    </li>
+                    </li> */}
 
                     <li className="nav-item">
                         <Link to="/LogIn" className="nav-link collapsed" >

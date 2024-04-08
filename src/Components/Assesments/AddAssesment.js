@@ -67,9 +67,9 @@ const AddAssesment = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Assigned users
+                                                        <label className="col-sm-4 col-form-label" required>Assigned users
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -80,9 +80,9 @@ const AddAssesment = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Enquiry
+                                                        <label className="col-sm-4 col-form-label" required>Enquiry
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -93,9 +93,9 @@ const AddAssesment = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Student country
+                                                        <label className="col-sm-4 col-form-label" required>Student country
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -121,9 +121,9 @@ const AddAssesment = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required >University
+                                                        <label className="col-sm-4 col-form-label" required >University
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -134,9 +134,9 @@ const AddAssesment = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Level Applying For
+                                                        <label className="col-sm-4 col-form-label" required>Level Applying For
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -147,9 +147,9 @@ const AddAssesment = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" >Course Interested
+                                                        <label className="col-sm-4 col-form-label" >Course Interested
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -160,9 +160,9 @@ const AddAssesment = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-2 col-form-label" required>Intake Interested
+                                                        <label className="col-sm-4 col-form-label" required>Intake Interested
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <select className="form-select"
                                                                 aria-label="Default select example">
                                                                 <option selected>Open this select menu</option>
@@ -175,49 +175,49 @@ const AddAssesment = () => {
 
                                                     <div className="row mb-1 mt-2">
                                                         <label for="inputText"
-                                                            className="col-sm-2 col-form-label">Specialisation
+                                                            className="col-sm-4 col-form-label">Specialisation
                                                         </label>
-                                                        <div className="col-sm-10">
+                                                        <div className="col-md-6">
                                                             <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-2 col-form-label">Duration
+                                                            class="col-sm-4 col-form-label">Duration
                                                         </label>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-md-6">
                                                             <input type="text" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-2 col-form-label">Application Fee
+                                                            class="col-sm-4 col-form-label">Application Fee
                                                         </label>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-md-6">
                                                             <input type="text" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-2 col-form-label">Tution Fee
+                                                            class="col-sm-4 col-form-label">Tution Fee
                                                         </label>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-md-6">
                                                             <input type="text" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-2 col-form-label">Fee Currency
+                                                            class="col-sm-4 col-form-label">Fee Currency
                                                         </label>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-md-6">
                                                             <input type="text" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-2 col-form-label">Course Link
+                                                            class="col-sm-4 col-form-label">Course Link
                                                         </label>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-md-6">
                                                             <input type="text" class="form-control" />
                                                         </div>
                                                     </div>
@@ -236,8 +236,8 @@ const AddAssesment = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-3">
-                                                    <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Notes</label>
-                                                    <div className="col-sm-10">
+                                                    <label htmlFor="inputPassword" className="col-sm-4 col-form-label">Notes</label>
+                                                    <div className="col-md-6">
                                                         <textarea className="form-control" style={{ height: "100px" }}></textarea>
                                                     </div>
                                                 </div>
