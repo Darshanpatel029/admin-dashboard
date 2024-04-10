@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './Components/MainContent/Home';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from './Components/LogIn/Login';
 import Register from './Components/Register/Register';
 import Error from './Components/Error/Error';
@@ -9,10 +9,15 @@ import ViewEnquiry from './Components/Enquiry/ViewEnquiry';
 import ViewDetailEnquiry from './Components/DetailEnquiry/ViewDetailEnquiry';
 import Assesments from './Components/Assesments/ViewAssesment';
 import ViewApplication from './Components/Applications/ViewApplication';
+import NavBar from './Components/Navbar/NavBar';
+import SideBar from './Components/Sidebar/SideBar';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
-    <Router>
+    <body>
+      <NavBar />
+      <SideBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/AddEnquiry" element={<AddEnquiry />} />
@@ -23,9 +28,10 @@ function App() {
         <Route path="/LogIn" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="*" element={<Error />} />
-
       </Routes>
-    </Router>
+      <Footer />
+    </body>
+
 
   );
 }

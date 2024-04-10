@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import NavBar from "../Navbar/NavBar";
-import SideBar from "../Sidebar/SideBar";
-import Footer from "../Footer/Footer";
+
 import Modal from "react-bootstrap/Modal";
 import AddAssesment from "./AddAssesment";
 
@@ -58,8 +56,7 @@ const ViewAssesment = () => {
 
     return (
         <div>
-            <NavBar />
-            {/* <SideBar /> */}
+
             <main id="main" className="main">
                 <div className="pagetitle d-flex justify-content-between align-items-center">
                     <nav>
@@ -83,7 +80,7 @@ const ViewAssesment = () => {
                 <section className="section">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="card">
+                            <div>
                                 <div className="card-body">
                                     {errs ? (
                                         <div className="alert alert-danger text-center" role="alert">
@@ -104,9 +101,7 @@ const ViewAssesment = () => {
                         </div>
                     </div>
                 </section>
-
             </main>
-            <Footer />
             {isModalOpen && (
                 <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)} size="lg">
                     <Modal.Header closeButton>

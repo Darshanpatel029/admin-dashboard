@@ -4,19 +4,16 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <body>
+        <footer id="footer" className="footer">
+            <div className="copyright">
+                &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
+                Reserved
+            </div>
+            <div className="credits">
 
-            <footer id="footer" className="footer">
-                <div className="copyright">
-                    &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
-                    Reserved
-                </div>
-                <div className="credits">
-
-                    Designed by <Link to="/https://bootstrapmade.com/">BootstrapMade</Link>
-                </div>
-            </footer>
-        </body>
+                Designed by <Link to="/https://bootstrapmade.com/">BootstrapMade</Link>
+            </div>
+        </footer>
     )
 }
 
