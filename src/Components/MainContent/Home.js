@@ -7,8 +7,6 @@ import Footer from '../Footer/Footer';
 const Home = () => {
     return (
         <>
-            <NavBar />
-            {/* <SideBar /> */}
             <main id="main" className="main">
 
                 <div className="pagetitle">
@@ -703,15 +701,10 @@ const Home = () => {
 
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </section>
-
             </main>
-            <Footer />
-
         </>
 
 

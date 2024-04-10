@@ -5,7 +5,6 @@ const NavBar = () => {
     return (
         <body>
             <header id="header" className="header fixed-top d-flex align-items-center">
-
                 {/* <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <Link class="navbar-brand">Navbar</Link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +42,8 @@ const NavBar = () => {
                         <img src="assets/img/logo.png" alt="" />
                         <span class="d-none d-lg-block">NiceAdmin</span>
                     </Link>
+                    <i class="bi bi-list toggle-sidebar-btn"></i>
+
                 </div>
 
                 <div className="search-bar">
@@ -54,7 +55,7 @@ const NavBar = () => {
                             className="bi bi-search"></i></button>
                     </form>
                 </div>
-                <div className='container'>
+                {/* <div className='container'>
                     <ul className="sidebar-nav d-flex" id="sidebar-nav">
 
                         <li className="nav-item">
@@ -92,7 +93,7 @@ const NavBar = () => {
                             </Link>
                         </li>
                     </ul>
-                </div>
+                </div> */}
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
@@ -102,7 +103,7 @@ const NavBar = () => {
                                 <i className="bi bi-search"></i>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
+                        {/* <li className="nav-item dropdown">
 
                             <Link className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-bell"></i>
@@ -253,7 +254,7 @@ const NavBar = () => {
 
                             </ul>
 
-                        </li>
+                        </li> */}
 
                         <li className="nav-item dropdown pe-3">
 
@@ -264,50 +265,8 @@ const NavBar = () => {
                                 <span className="d-none d-md-block dropdown-toggle ps-2">K.
                                     Anderson</span>
                             </Link>
-
                             <ul
                                 className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                                <li className="dropdown-header">
-                                    <h6>Kevin Anderson</h6>
-                                    <span>Web Designer</span>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
-                                <li>
-                                    <Link className="dropdown-item d-flex align-items-center"
-                                    >
-                                        <i className="bi bi-person"></i>
-                                        <span>My Profile</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
-                                <li>
-                                    <Link className="dropdown-item d-flex align-items-center"
-                                        href="users-profile.html">
-                                        <i className="bi bi-gear"></i>
-                                        <span>Account Settings</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
-                                <li>
-                                    <Link className="dropdown-item d-flex align-items-center"
-                                        href="pages-faq.html">
-                                        <i className="bi bi-question-circle"></i>
-                                        <span>Need Help?</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
                                 <li>
                                     <Link className="dropdown-item d-flex align-items-center" href="#">
                                         <i className="bi bi-box-arrow-right"></i>
