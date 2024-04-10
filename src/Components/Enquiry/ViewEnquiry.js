@@ -42,9 +42,9 @@ const ViewEnquiry = () => {
 
     const columnDefs = [
         { headerName: "No", field: "no" },
-        { headerName: "Student First Name", field: "student_First_Name" },
+        { headerName: "Student First Name", field: "student_First_Name", editable: true },
         { headerName: "Student Last Name", field: "student_Last_Name" },
-        { headerName: "Student Email", field: "student_email" },
+        { headerName: "Student Email", field: "student_email", editable: true },
         { headerName: "Country Interested", field: "country_interested" },
         { headerName: "University Interested", field: "university_interested" },
         { headerName: "Interested Service", field: "Interested_Services" },
@@ -57,6 +57,27 @@ const ViewEnquiry = () => {
         { headerName: "Total Price", field: "" },
         { headerName: "Source Inquiry", field: "Source_Enquiry" },
     ];
+
+    const onCellValueChanged = async (params) => {
+        try {
+            const { data } = params;
+            const response = await fetch(
+                `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
+            if (!response.ok) {
+                console.error('Failed to update data on backend');
+            }
+        } catch (error) {
+            console.error('Error updating data:', error);
+        }
+    };
 
     return (
         <div>
@@ -92,10 +113,12 @@ const ViewEnquiry = () => {
                                     ) : (
                                         <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
                                             <AgGridReact
+
                                                 rowData={EnquiryData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
                                                 paginationPageSize={10}
+                                                onCellValueChanged={onCellValueChanged}
                                             />
                                         </div>
                                     )}
