@@ -46,38 +46,38 @@ const ViewEnquiry = () => {
         { headerName: "Student Last Name", field: "student_Last_Name" },
         { headerName: "Student Email", field: "student_email", editable: true },
         { headerName: "Country Interested", field: "country_interested" },
-        { headerName: "University Interested", field: "university_interested" },
+        { headerName: "University Interested", field: "university_interested.univ_name" },
         { headerName: "Interested Service", field: "Interested_Services" },
         { headerName: "Course Interested", field: "course_interested" },
-        { headerName: "Level Applying For", field: "level_applying_for" },
-        { headerName: "Intake Interested", field: "intake_interested" },
+        { headerName: "Level Applying For", field: "level_applying_for.levels" },
+        { headerName: "Intake Interested", field: "intake_interested.intake_Name" },
         { headerName: "Assigned Users", field: "assigned_users" },
-        { headerName: "Enquiry Status", field: "enquiry_status" },
+        { headerName: "Enquiry Status", field: "enquiry_status.status" },
         { headerName: "Notes", field: "notes" },
         { headerName: "Total Price", field: "" },
-        { headerName: "Source Inquiry", field: "Source_Enquiry" },
+        { headerName: "Source Inquiry", field: "Source_Enquiry.Source" },
     ];
 
-    const onCellValueChanged = async (params) => {
-        try {
-            const { data } = params;
-            const response = await fetch(
-                `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }
-            );
-            if (!response.ok) {
-                console.error('Failed to update data on backend');
-            }
-        } catch (error) {
-            console.error('Error updating data:', error);
-        }
-    };
+    // const onCellValueChanged = async (params) => {
+    //     try {
+    //         const { data } = params;
+    //         const response = await fetch(
+    //             `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}`,
+    //             {
+    //                 method: 'PUT',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 body: JSON.stringify(data)
+    //             }
+    //         );
+    //         if (!response.ok) {
+    //             console.error('Failed to update data on backend');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error updating data:', error);
+    //     }
+    // };
 
     return (
         <div>
@@ -94,7 +94,7 @@ const ViewEnquiry = () => {
                     <div>
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             onClick={() => setIsModalOpen(true)}
                         >
                             Add Enquiry
@@ -118,7 +118,6 @@ const ViewEnquiry = () => {
                                                 columnDefs={columnDefs}
                                                 pagination={true}
                                                 paginationPageSize={10}
-                                                onCellValueChanged={onCellValueChanged}
                                             />
                                         </div>
                                     )}
