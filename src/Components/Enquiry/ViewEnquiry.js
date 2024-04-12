@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
+import EditIcon from "./EditIcon";
 
 const ViewEnquiry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,10 +18,7 @@ const ViewEnquiry = () => {
 
     const fetchEnquiries = async () => {
         try {
-            const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/"
-            );
-            console.log(response);
+            const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/enquiries/");
             if (response.status === 200) {
                 const data = await response.json();
                 const enquiriesWithNo = data.map((enquiry, index) => ({
@@ -30,8 +28,7 @@ const ViewEnquiry = () => {
                 setEnquiryData(enquiriesWithNo);
             } else if (response.status === 500) {
                 setErrs("No Inquiry found");
-            }
-            else {
+            } else {
                 setErrs("Error While Fetching Data");
             }
         } catch (error) {
@@ -39,12 +36,22 @@ const ViewEnquiry = () => {
         }
     };
 
+    const EditName = (params) => (
+        <Link
+            to={`/edit/${params.data.id}`}
+            className="enquiryAction"
+            title="Edit Enquiry"
+        >
+            <EditIcon />
+        </Link>
+    );
 
     const columnDefs = [
-        { headerName: "No", field: "no" },
-        { headerName: "Student First Name", field: "student_First_Name", editable: true },
+        { headerName: "Edit", cellRenderer: "editName" },
+        // { headerName: "No", field: "no" },
+        { headerName: "Student First Name", field: "student_First_Name" },
         { headerName: "Student Last Name", field: "student_Last_Name" },
-        { headerName: "Student Email", field: "student_email", editable: true },
+        { headerName: "Student Email", field: "student_email" },
         { headerName: "Country Interested", field: "country_interested" },
         { headerName: "University Interested", field: "university_interested.univ_name" },
         { headerName: "Interested Service", field: "Interested_Services" },
@@ -56,28 +63,8 @@ const ViewEnquiry = () => {
         { headerName: "Notes", field: "notes" },
         { headerName: "Total Price", field: "" },
         { headerName: "Source Inquiry", field: "Source_Enquiry.Source" },
+        { headerName: "Edit", cellRenderer: "editCompany" }
     ];
-
-    // const onCellValueChanged = async (params) => {
-    //     try {
-    //         const { data } = params;
-    //         const response = await fetch(
-    //             `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}`,
-    //             {
-    //                 method: 'PUT',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify(data)
-    //             }
-    //         );
-    //         if (!response.ok) {
-    //             console.error('Failed to update data on backend');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error updating data:', error);
-    //     }
-    // };
 
     return (
         <div>
@@ -104,24 +91,22 @@ const ViewEnquiry = () => {
                 <section className="section">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div>
-                                <div className="card-body">
-                                    {errs ? (
-                                        <div className="alert alert-danger text-center" role="alert">
-                                            {errs}
-                                        </div>
-                                    ) : (
-                                        <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
-                                            <AgGridReact
-
-                                                rowData={EnquiryData}
-                                                columnDefs={columnDefs}
-                                                pagination={true}
-                                                paginationPageSize={10}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
+                            <div className="card-body">
+                                {errs ? (
+                                    <div className="alert alert-danger text-center" role="alert">
+                                        {errs}
+                                    </div>
+                                ) : (
+                                    <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
+                                        <AgGridReact
+                                            rowData={EnquiryData}
+                                            columnDefs={columnDefs}
+                                            pagination={true}
+                                            paginationPageSize={10}
+                                            cellRenderer={{ editName: EditName }}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

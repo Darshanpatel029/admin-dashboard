@@ -15,14 +15,14 @@ import Footer from './Components/Footer/Footer';
 
 function App() {
   const location = useLocation();
-  const hideComponents = location.pathname === "/LogIn";
+  const hideComponents = location.pathname === "/";
 
   return (
     <body>
       {!hideComponents && <NavBar />}
       {!hideComponents && <SideBar />}
       <Routes>
-        <Route path="/" element={<ViewEnquiry />} />
+        <Route path="/" element={<Login />} />
         <Route path="/AddEnquiry" element={<AddEnquiry />} />
         <Route path="/ViewEnquiry" element={<ViewEnquiry />} />
         <Route path="/ViewDetailEnquiry" element={<ViewDetailEnquiry />} />
