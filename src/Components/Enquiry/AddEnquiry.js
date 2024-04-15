@@ -40,10 +40,9 @@ const AddEnquiry = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Submitting Form Data:", JSON.stringify(formData));
 
-        const apiURL =
-            "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
-
+        const apiURL = "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
         const requestOptions = {
             method: "POST",
             headers: {
@@ -57,10 +56,7 @@ const AddEnquiry = () => {
             const response = await fetch(apiURL, requestOptions);
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(
-                    `API call failed with status: ${response.status
-                    }, body: ${JSON.stringify(data)}`
-                );
+                throw new Error(`API call failed with status: ${response.status}, body: ${JSON.stringify(data)}`);
             }
             console.log("Submission successful", data);
             alert("Enquiry submitted successfully!");
@@ -69,6 +65,7 @@ const AddEnquiry = () => {
             alert("Failed to submit enquiry. See console for details.");
         }
     };
+
 
     return (
         <section className="section">
@@ -612,7 +609,7 @@ const AddEnquiry = () => {
                     </form>
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
