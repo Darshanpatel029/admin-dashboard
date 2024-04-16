@@ -47,7 +47,7 @@ const ViewEnquiry = () => {
     );
 
     const columnDefs = [
-        { headerName: "Edit", cellRenderer: "editName" },
+        // { headerName: "Edit", cellRenderer: "editName" },
         // { headerName: "No", field: "no" },
         { headerName: "Student First Name", field: "student_First_Name" },
         { headerName: "Student Last Name", field: "student_Last_Name" },
@@ -118,7 +118,7 @@ const ViewEnquiry = () => {
                         <Modal.Title>Add Enquiry</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddEnquiry />
+                        <AddEnquiry data={EnquiryData} />
                     </Modal.Body>
                 </Modal>
             )}

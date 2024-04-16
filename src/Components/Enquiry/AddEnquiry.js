@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 
-const AddEnquiry = () => {
+
+const AddEnquiry = (props) => {
     const [formData, setFormData] = useState(
         {
             student_First_Name: "",
@@ -28,6 +29,7 @@ const AddEnquiry = () => {
             Interested_Services: "",
             assigned_users: "",
             enquiry_status: "",
+            notes: "",
         });
 
     const handleChange = (e) => {
@@ -40,8 +42,6 @@ const AddEnquiry = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitting Form Data:", JSON.stringify(formData));
-
         const apiURL = "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
         const requestOptions = {
             method: "POST",
@@ -157,7 +157,7 @@ const AddEnquiry = () => {
                                         role="tabpanel"
                                         aria-labelledby="home-tab"
                                     >
-                                        <div className="">
+                                        <div>
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div className="row mb-4">
@@ -222,17 +222,17 @@ const AddEnquiry = () => {
                                                             htmlFor="Source_Enquiry"
                                                             className="col-sm-4 col-form-label"
                                                         >
-                                                            Source Inquiry
+                                                            Source Enquiry
                                                         </label>
                                                         <div className="col-md-6">
                                                             <select
+                                                                type="number"
                                                                 name="Source_Enquiry"
                                                                 className="form-select"
-                                                                id="Source_Enquiry"
                                                                 value={formData.Source_Enquiry}
                                                                 onChange={handleChange}
                                                             >
-                                                                <option value="">Select Source</option>
+                                                                <option selected>Select Source</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -254,7 +254,6 @@ const AddEnquiry = () => {
                                                 <div className="row g-3">
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Student Phone
@@ -263,14 +262,15 @@ const AddEnquiry = () => {
                                                             <input
                                                                 type="number"
                                                                 className="form-control"
-                                                                name="alternate_phone"
-                                                                id="inputText"
+                                                                name="student_phone"
+                                                                value={formData.student_phone}
+                                                                onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Alternate Phone
@@ -280,13 +280,14 @@ const AddEnquiry = () => {
                                                                 type="number"
                                                                 className="form-control"
                                                                 name="alternate_phone"
-                                                                id="inputText"
+                                                                value={formData.alternate_phone}
+                                                                onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Student Email
@@ -296,13 +297,14 @@ const AddEnquiry = () => {
                                                                 type="email"
                                                                 className="form-control"
                                                                 name="student_email"
-                                                                id="inputText"
+                                                                value={formData.student_email}
+                                                                onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-4">
                                                         <label
-                                                            for="inputPassword"
                                                             class="col-sm-4 col-form-label"
                                                         >
                                                             Student Address
@@ -312,6 +314,10 @@ const AddEnquiry = () => {
                                                                 class="form-control"
                                                                 style={{ height: "100px" }}
                                                                 name="student_address"
+                                                                id="inputText"
+                                                                value={formData.student_address}
+                                                                onChange={handleChange}
+                                                                required
                                                             ></textarea>
                                                         </div>
                                                     </div>
@@ -323,9 +329,13 @@ const AddEnquiry = () => {
                                                             <select
                                                                 class="form-select"
                                                                 aria-label="Default select example"
+                                                                name="student_country"
+                                                                value={formData.student_country}
+                                                                onChange={handleChange}
                                                                 required
+
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Country</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -341,8 +351,11 @@ const AddEnquiry = () => {
                                                                 class="form-select"
                                                                 aria-label="Default select example"
                                                                 name="student_state"
+                                                                value={formData.student_state}
+                                                                onChange={handleChange}
+                                                                required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select State</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -358,8 +371,11 @@ const AddEnquiry = () => {
                                                                 class="form-select"
                                                                 aria-label="Default select example"
                                                                 name="student_city"
+                                                                value={formData.student_city}
+                                                                onChange={handleChange}
+                                                                required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select City</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -375,8 +391,11 @@ const AddEnquiry = () => {
                                                                 class="form-select"
                                                                 aria-label="Default select example"
                                                                 name="student_zip"
+                                                                value={formData.student_zip}
+                                                                onChange={handleChange}
+                                                                required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Zip</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -402,11 +421,14 @@ const AddEnquiry = () => {
                                                         </label>
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="current_education"
+                                                                value={formData.current_education}
+                                                                onChange={handleChange}
+                                                                required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Current Education</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -432,12 +454,14 @@ const AddEnquiry = () => {
                                                         </label>
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="country"
+                                                                value={formData.country}
+                                                                onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Country</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -451,11 +475,14 @@ const AddEnquiry = () => {
                                                         </label>
                                                         <div class="col-md-6" required>
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="university_interested"
+                                                                value={formData.university_interested}
+                                                                onChange={handleChange}
+                                                                required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select University</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -468,9 +495,11 @@ const AddEnquiry = () => {
                                                         </label>
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="level_applying_for"
+                                                                value={formData.level_applying_for}
+                                                                onChange={handleChange}
                                                                 required
                                                             >
                                                                 <option selected>Open this select menu</option>
@@ -482,16 +511,18 @@ const AddEnquiry = () => {
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label" >
-                                                            Course Interested{" "}
+                                                            Course Interested
                                                         </label>
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="course_interested"
+                                                                value={formData.course_interested}
+                                                                onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Intrested Country</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -504,12 +535,14 @@ const AddEnquiry = () => {
                                                         </label>
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="intake_interested"
+                                                                value={formData.intake_interested}
+                                                                onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select menu</option>
+                                                                <option selected>Open this select Intake</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
@@ -518,18 +551,24 @@ const AddEnquiry = () => {
                                                     </div>
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Interested Services
                                                         </label>
                                                         <div className="col-md-6" required>
-                                                            <input
-                                                                type="text"
+                                                            <select
+                                                                type="number"
                                                                 className="form-control"
-                                                                id="inputText"
-                                                                name="interestedServicess"
-                                                            />
+                                                                name="Interested_Services"
+                                                                value={formData.Interested_Services}
+                                                                onChange={handleChange}
+                                                                required
+                                                            >
+                                                                <option selected>Open this select Services</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -547,48 +586,52 @@ const AddEnquiry = () => {
                                                 <div className="row g-3">
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Assigned Users
                                                         </label>
                                                         <div className="col-md-6">
                                                             <input
-                                                                type="text"
+                                                                type="number"
                                                                 className="form-control"
-                                                                id="inputText"
                                                                 name="assigned_users"
+                                                                value={formData.assigned_users}
+                                                                onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
                                                         <label
-                                                            for="inputEmail3"
                                                             className="col-sm-4 col-form-label"
                                                         >
                                                             Enquiry Status
                                                         </label>
                                                         <div className="col-md-6">
                                                             <input
-                                                                type="text"
+                                                                type="number"
                                                                 className="form-control"
-                                                                id="inputText"
                                                                 name="enquiry_status"
+                                                                value={formData.enquiry_status}
+                                                                onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-4">
                                                         <label
-                                                            for="inputPassword"
                                                             class="col-sm-4 col-form-label"
                                                         >
-                                                            Student Address
+                                                            notes
                                                         </label>
                                                         <div class="col-md-6">
                                                             <textarea
                                                                 class="form-control"
                                                                 style={{ height: "100px" }}
-                                                                name="student_address"
+                                                                name="notes"
+                                                                value={formData.notes}
+                                                                onChange={handleChange}
+                                                                required
                                                             ></textarea>
                                                         </div>
                                                     </div>
