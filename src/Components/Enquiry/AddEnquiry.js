@@ -233,9 +233,11 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                             >
                                                                 <option selected>Select Source</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                {props.sourceEnquiry.map(option => (
+                                                                    <option key={option.id} value={option.Source}>
+                                                                        {option.Source}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -314,7 +316,6 @@ const AddEnquiry = (props) => {
                                                                 class="form-control"
                                                                 style={{ height: "100px" }}
                                                                 name="student_address"
-                                                                id="inputText"
                                                                 value={formData.student_address}
                                                                 onChange={handleChange}
                                                                 required
@@ -325,81 +326,61 @@ const AddEnquiry = (props) => {
                                                         <label class="col-sm-4 col-form-label">
                                                             Student Country
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                        <div className="col-md-6" >
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
                                                                 name="student_country"
                                                                 value={formData.student_country}
                                                                 onChange={handleChange}
                                                                 required
-
-                                                            >
-                                                                <option selected>Open this select Country</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
+                                                            />
                                                         </div>
+
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label" required>
                                                             Student State
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                        <div className="col-md-6" >
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
                                                                 name="student_state"
                                                                 value={formData.student_state}
                                                                 onChange={handleChange}
                                                                 required
-                                                            >
-                                                                <option selected>Open this select State</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
+                                                            />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label" required>
                                                             Student City
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                        <div className="col-md-6" >
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
                                                                 name="student_city"
                                                                 value={formData.student_city}
                                                                 onChange={handleChange}
                                                                 required
-                                                            >
-                                                                <option selected>Open this select City</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
+                                                            />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label" required>
                                                             Student Zip
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <select
-                                                                class="form-select"
-                                                                aria-label="Default select example"
+                                                        <div className="col-md-6" >
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
                                                                 name="student_zip"
                                                                 value={formData.student_zip}
                                                                 onChange={handleChange}
                                                                 required
-                                                            >
-                                                                <option selected>Open this select Zip</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -416,7 +397,7 @@ const AddEnquiry = (props) => {
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" required>
+                                                        <label class="col-sm-4 col-form-label" >
                                                             Current Education
                                                         </label>
                                                         <div class="col-md-6">
@@ -428,10 +409,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select Current Education</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Source</option>
+                                                                {props.EducationData.map(EducationOption => (
+                                                                    <option key={EducationOption.id} value={EducationOption.current_education}>
+                                                                        {EducationOption.current_education}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -459,12 +442,14 @@ const AddEnquiry = (props) => {
                                                                 name="country"
                                                                 value={formData.country}
                                                                 onChange={handleChange}
-                                                                required
+
                                                             >
-                                                                <option selected>Open this select Country</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Intrested Country</option>
+                                                                {props.CountryData.map(countryIntrested => (
+                                                                    <option key={countryIntrested.id} value={countryIntrested.id}>
+                                                                        {countryIntrested.country}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -482,10 +467,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select University</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Intrested University</option>
+                                                                {props.universitiesData.map(IntrestedUniversity => (
+                                                                    <option key={IntrestedUniversity.id} value={IntrestedUniversity.id}>
+                                                                        {IntrestedUniversity.univ_name}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -502,10 +489,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select menu</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Level For applying</option>
+                                                                {props.level.map(levelForApplying => (
+                                                                    <option key={levelForApplying.id} value={levelForApplying.id}>
+                                                                        {levelForApplying.levels}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -522,10 +511,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select Intrested Country</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Course</option>
+                                                                {props.courseData.map(course => (
+                                                                    <option key={course.id} value={course.id}>
+                                                                        {course.course_name}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -542,10 +533,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select Intake</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Intake</option>
+                                                                {props.IntakeData.map(intake => (
+                                                                    <option key={intake.id} value={intake.id}>
+                                                                        {intake.intake_Name}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -555,7 +548,7 @@ const AddEnquiry = (props) => {
                                                         >
                                                             Interested Services
                                                         </label>
-                                                        <div className="col-md-6" required>
+                                                        <div className="col-md-6" >
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -564,10 +557,12 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Open this select Services</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Select Services</option>
+                                                                {props.servicesData.map(services => (
+                                                                    <option key={services.id} value={services.Services}>
+                                                                        {services.Services}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -591,14 +586,18 @@ const AddEnquiry = (props) => {
                                                             Assigned Users
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <input
+                                                            <select
                                                                 type="number"
-                                                                className="form-control"
                                                                 name="assigned_users"
+                                                                className="form-select"
                                                                 value={formData.assigned_users}
                                                                 onChange={handleChange}
-                                                                required
-                                                            />
+                                                            >
+                                                                <option selected>Select Source</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
@@ -608,14 +607,20 @@ const AddEnquiry = (props) => {
                                                             Enquiry Status
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <input
+                                                            <select
                                                                 type="number"
-                                                                className="form-control"
                                                                 name="enquiry_status"
+                                                                className="form-select"
                                                                 value={formData.enquiry_status}
                                                                 onChange={handleChange}
-                                                                required
-                                                            />
+                                                            >
+                                                                <option selected>Select Services</option>
+                                                                {props.StatusData.map(status => (
+                                                                    <option key={status.id} value={status.id}>
+                                                                        {status.status}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-4">
