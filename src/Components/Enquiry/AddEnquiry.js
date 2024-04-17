@@ -1,36 +1,34 @@
 import React from "react";
 import { useState } from "react";
 
-
 const AddEnquiry = (props) => {
-    const [formData, setFormData] = useState(
-        {
-            student_First_Name: "",
-            student_Last_Name: "",
-            student_passport: "",
-            Source_Enquiry: "",
+    const [formData, setFormData] = useState({
+        student_First_Name: "",
+        student_Last_Name: "",
+        student_passport: "",
+        Source_Enquiry: "",
 
-            student_phone: "",
-            alternate_phone: "",
-            student_email: "",
-            student_address: "",
-            student_country: "",
-            student_state: "",
-            student_city: "",
-            student_zip: "",
+        student_phone: "",
+        alternate_phone: "",
+        student_email: "",
+        student_address: "",
+        student_country: "",
+        student_state: "",
+        student_city: "",
+        student_zip: "",
 
-            current_education: "",
+        current_education: "",
 
-            country: "",
-            university_interested: "",
-            level_applying_for: "",
-            course_interested: "",
-            intake_interested: "",
-            Interested_Services: "",
-            assigned_users: "",
-            enquiry_status: "",
-            notes: "",
-        });
+        country: "",
+        university_interested: "",
+        level_applying_for: "",
+        course_interested: "",
+        intake_interested: "",
+        Interested_Services: "",
+        assigned_users: "",
+        enquiry_status: "",
+        notes: "",
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,7 +40,8 @@ const AddEnquiry = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiURL = "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
+        const apiURL =
+            "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
         const requestOptions = {
             method: "POST",
             headers: {
@@ -56,7 +55,10 @@ const AddEnquiry = (props) => {
             const response = await fetch(apiURL, requestOptions);
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(`API call failed with status: ${response.status}, body: ${JSON.stringify(data)}`);
+                throw new Error(
+                    `API call failed with status: ${response.status
+                    }, body: ${JSON.stringify(data)}`
+                );
             }
             console.log("Submission successful", data);
             alert("Enquiry submitted successfully!");
@@ -65,7 +67,6 @@ const AddEnquiry = (props) => {
             alert("Failed to submit enquiry. See console for details.");
         }
     };
-
 
     return (
         <section className="section">
@@ -233,7 +234,7 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                             >
                                                                 <option selected>Select Source</option>
-                                                                {props.sourceEnquiry.map(option => (
+                                                                {props.sourceEnquiry.map((option) => (
                                                                     <option key={option.id} value={option.Source}>
                                                                         {option.Source}
                                                                     </option>
@@ -255,9 +256,7 @@ const AddEnquiry = (props) => {
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student Phone
                                                         </label>
                                                         <div className="col-md-6" required>
@@ -272,9 +271,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Alternate Phone
                                                         </label>
                                                         <div className="col-md-6" required>
@@ -289,9 +286,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student Email
                                                         </label>
                                                         <div className="col-md-6" required>
@@ -306,9 +301,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-4">
-                                                        <label
-                                                            class="col-sm-4 col-form-label"
-                                                        >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Student Address
                                                         </label>
                                                         <div class="col-md-6">
@@ -326,7 +319,7 @@ const AddEnquiry = (props) => {
                                                         <label class="col-sm-4 col-form-label">
                                                             Student Country
                                                         </label>
-                                                        <div className="col-md-6" >
+                                                        <div className="col-md-6">
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -336,13 +329,12 @@ const AddEnquiry = (props) => {
                                                                 required
                                                             />
                                                         </div>
-
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" required>
+                                                        <label class="col-sm-4 col-form-label">
                                                             Student State
                                                         </label>
-                                                        <div className="col-md-6" >
+                                                        <div className="col-md-6">
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -354,10 +346,10 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" required>
+                                                        <label class="col-sm-4 col-form-label">
                                                             Student City
                                                         </label>
-                                                        <div className="col-md-6" >
+                                                        <div className="col-md-6">
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -369,10 +361,10 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" required>
+                                                        <label class="col-sm-4 col-form-label">
                                                             Student Zip
                                                         </label>
-                                                        <div className="col-md-6" >
+                                                        <div className="col-md-6">
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -397,7 +389,7 @@ const AddEnquiry = (props) => {
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Current Education
                                                         </label>
                                                         <div class="col-md-6">
@@ -410,8 +402,11 @@ const AddEnquiry = (props) => {
                                                                 required
                                                             >
                                                                 <option selected>Select Source</option>
-                                                                {props.EducationData.map(EducationOption => (
-                                                                    <option key={EducationOption.id} value={EducationOption.current_education}>
+                                                                {props.EducationData.map((EducationOption) => (
+                                                                    <option
+                                                                        key={EducationOption.id}
+                                                                        value={EducationOption.current_education}
+                                                                    >
                                                                         {EducationOption.current_education}
                                                                     </option>
                                                                 ))}
@@ -432,7 +427,7 @@ const AddEnquiry = (props) => {
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Country Interested
                                                         </label>
                                                         <div class="col-md-6">
@@ -442,11 +437,15 @@ const AddEnquiry = (props) => {
                                                                 name="country"
                                                                 value={formData.country}
                                                                 onChange={handleChange}
-
                                                             >
-                                                                <option selected>Select Intrested Country</option>
-                                                                {props.CountryData.map(countryIntrested => (
-                                                                    <option key={countryIntrested.id} value={countryIntrested.id}>
+                                                                <option selected>
+                                                                    Select Intrested Country
+                                                                </option>
+                                                                {props.CountryData.map((countryIntrested) => (
+                                                                    <option
+                                                                        key={countryIntrested.id}
+                                                                        value={countryIntrested.id}
+                                                                    >
                                                                         {countryIntrested.country}
                                                                     </option>
                                                                 ))}
@@ -455,10 +454,10 @@ const AddEnquiry = (props) => {
                                                     </div>
 
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             University Interested
                                                         </label>
-                                                        <div class="col-md-6" required>
+                                                        <div class="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -467,17 +466,24 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Select Intrested University</option>
-                                                                {props.universitiesData.map(IntrestedUniversity => (
-                                                                    <option key={IntrestedUniversity.id} value={IntrestedUniversity.id}>
-                                                                        {IntrestedUniversity.univ_name}
-                                                                    </option>
-                                                                ))}
+                                                                <option selected>
+                                                                    Select Intrested University
+                                                                </option>
+                                                                {props.universitiesData.map(
+                                                                    (IntrestedUniversity) => (
+                                                                        <option
+                                                                            key={IntrestedUniversity.id}
+                                                                            value={IntrestedUniversity.id}
+                                                                        >
+                                                                            {IntrestedUniversity.univ_name}
+                                                                        </option>
+                                                                    )
+                                                                )}
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Level Applying For
                                                         </label>
                                                         <div class="col-md-6">
@@ -489,9 +495,14 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                                 required
                                                             >
-                                                                <option selected>Select Level For applying</option>
-                                                                {props.level.map(levelForApplying => (
-                                                                    <option key={levelForApplying.id} value={levelForApplying.id}>
+                                                                <option selected>
+                                                                    Select Level For applying
+                                                                </option>
+                                                                {props.level.map((levelForApplying) => (
+                                                                    <option
+                                                                        key={levelForApplying.id}
+                                                                        value={levelForApplying.id}
+                                                                    >
                                                                         {levelForApplying.levels}
                                                                     </option>
                                                                 ))}
@@ -499,7 +510,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Course Interested
                                                         </label>
                                                         <div class="col-md-6">
@@ -512,7 +523,7 @@ const AddEnquiry = (props) => {
                                                                 required
                                                             >
                                                                 <option selected>Select Course</option>
-                                                                {props.courseData.map(course => (
+                                                                {props.courseData.map((course) => (
                                                                     <option key={course.id} value={course.id}>
                                                                         {course.course_name}
                                                                     </option>
@@ -521,7 +532,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label" >
+                                                        <label class="col-sm-4 col-form-label">
                                                             Intake Interested
                                                         </label>
                                                         <div class="col-md-6">
@@ -534,7 +545,7 @@ const AddEnquiry = (props) => {
                                                                 required
                                                             >
                                                                 <option selected>Select Intake</option>
-                                                                {props.IntakeData.map(intake => (
+                                                                {props.IntakeData.map((intake) => (
                                                                     <option key={intake.id} value={intake.id}>
                                                                         {intake.intake_Name}
                                                                     </option>
@@ -543,12 +554,10 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Interested Services
                                                         </label>
-                                                        <div className="col-md-6" >
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -558,8 +567,11 @@ const AddEnquiry = (props) => {
                                                                 required
                                                             >
                                                                 <option selected>Select Services</option>
-                                                                {props.servicesData.map(services => (
-                                                                    <option key={services.id} value={services.Services}>
+                                                                {props.servicesData.map((services) => (
+                                                                    <option
+                                                                        key={services.id}
+                                                                        value={services.Services}
+                                                                    >
                                                                         {services.Services}
                                                                     </option>
                                                                 ))}
@@ -580,9 +592,7 @@ const AddEnquiry = (props) => {
                                             <div className="card-body">
                                                 <div className="row g-3">
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Assigned Users
                                                         </label>
                                                         <div className="col-md-6">
@@ -601,9 +611,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-4">
-                                                        <label
-                                                            className="col-sm-4 col-form-label"
-                                                        >
+                                                        <label className="col-sm-4 col-form-label">
                                                             Enquiry Status
                                                         </label>
                                                         <div className="col-md-6">
@@ -615,7 +623,7 @@ const AddEnquiry = (props) => {
                                                                 onChange={handleChange}
                                                             >
                                                                 <option selected>Select Services</option>
-                                                                {props.StatusData.map(status => (
+                                                                {props.StatusData.map((status) => (
                                                                     <option key={status.id} value={status.id}>
                                                                         {status.status}
                                                                     </option>
@@ -624,11 +632,7 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
                                                     <div class="row mb-4">
-                                                        <label
-                                                            class="col-sm-4 col-form-label"
-                                                        >
-                                                            notes
-                                                        </label>
+                                                        <label class="col-sm-4 col-form-label">notes</label>
                                                         <div class="col-md-6">
                                                             <textarea
                                                                 class="form-control"
@@ -657,7 +661,7 @@ const AddEnquiry = (props) => {
                     </form>
                 </div>
             </div>
-        </section >
+        </section>
     );
 };
 
