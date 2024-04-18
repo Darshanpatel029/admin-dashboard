@@ -1,5 +1,7 @@
 import './App.css';
 // import Home from './Components/MainContent/Home';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Login from './Components/LogIn/Login';
 import Register from './Components/Register/Register';
@@ -21,6 +23,7 @@ function App() {
     <body>
       {!hideComponents && <NavBar />}
       {!hideComponents && <SideBar />}
+      <ToastContainer theme="colored" position="top-center" autoClose={3000} />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/AddEnquiry" element={<AddEnquiry />} />

@@ -12,13 +12,13 @@ const ViewEnquiry = () => {
     const [EnquiryData, setEnquiryData] = useState([]);
     const [SourceData, setSourceData] = useState([]);
     const [EducationData, setEducationData] = useState([]);
-    const [CountryData, setCountryData] = useState([]);
+    const [countryData, setCountryData] = useState([]);
+    const [InterestedCountryData, setinterestedCountryData] = useState([]);
     const [universitiesData, setUniversities] = useState([]);
     const [levelData, setLevelData] = useState([]);
     const [courseData, setCourseData] = useState([]);
     const [IntakeData, setIntakeData] = useState([]);
     const [servicesData, setServicesData] = useState([]);
-    // const [AssignedData, setAssignedData] = useState([]);
     const [StatusData, serStatusData] = useState([]);
     const [errs, setErrs] = useState("");
 
@@ -26,36 +26,17 @@ const ViewEnquiry = () => {
         fetchEnquiries();
         fetchSourceData();
         fetchEducationData();
+        fetchIntrestedCountryData();
         fetchCountryData();
         fetchUniversityData();
         fetchLevelData();
         fetchCourseData();
         fetchIntakeData();
         fetchServicesData();
-        // fetchAssignedData();
         fetchStatusData();
 
     }, []);
 
-    // const fetchEnquiries = async () => {
-    //     try {
-    //         const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/enquiries/");
-    //         if (response.status === 200) {
-    //             const data = await response.json();
-    //             const enquiriesWithNo = data.map((enquiry, index) => ({
-    //                 ...enquiry,
-    //                 no: index + 1,
-    //             }));
-    //             setEnquiryData(enquiriesWithNo);
-    //         } else if (response.status === 500) {
-    //             setErrs("No Inquiry found");
-    //         } else {
-    //             setErrs("Error While Fetching Data");
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
     const fetchData = async (url, setter, errorMessage) => {
         try {
             const response = await fetch(url);
@@ -93,9 +74,15 @@ const ViewEnquiry = () => {
             "No Education Data found"
         );
 
-    const fetchCountryData = () =>
+    const fetchIntrestedCountryData = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/countriesIntersted/",
+            setinterestedCountryData,
+            "No Country Data found"
+        );
+    const fetchCountryData = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/countries/",
             setCountryData,
             "No Country Data found"
         );
@@ -134,12 +121,7 @@ const ViewEnquiry = () => {
             setServicesData,
             "No Services Data found"
         );
-    // const fetchAssignedData = () =>
-    //     fetchData(
-    //         "https://cloudconnectcampaign.com/espicrmnew/api/available-services/",
-    //         setServicesData,
-    //         "No Services Data found"
-    //     );
+
 
     const fetchStatusData = () =>
         fetchData(
@@ -147,9 +129,6 @@ const ViewEnquiry = () => {
             serStatusData,
             "No EnquiryStatus Data found"
         );
-
-
-
 
     const EditName = (params) => (
         <Link
@@ -167,80 +146,22 @@ const ViewEnquiry = () => {
         { headerName: "Student First Name", field: "student_First_Name" },
         { headerName: "Student Last Name", field: "student_Last_Name" },
         { headerName: "Student Email", field: "student_email" },
-        { headerName: "Country Interested", field: "country_interested" },
+        { headerName: "Country Interested", field: "country_interested.country" },
         {
             headerName: "University Interested",
             field: "university_interested.univ_name",
         },
-        { headerName: "Interested Service", field: "Interested_Services" },
-        { headerName: "Course Interested", field: "course_interested" },
+        { headerName: "Interested Service", field: "Interested_Services.Services" },
+        { headerName: "Course Interested", field: "course_interested.course_name" },
         { headerName: "Level Applying For", field: "level_applying_for.levels" },
         { headerName: "Intake Interested", field: "intake_interested.intake_Name" },
-        { headerName: "Assigned Users", field: "assigned_users" },
+        { headerName: "Assigned Users", field: "assigned_users.username" },
         { headerName: "Enquiry Status", field: "enquiry_status.status" },
         { headerName: "Notes", field: "notes" },
         { headerName: "Total Price", field: "" },
         { headerName: "Source Inquiry", field: "Source_Enquiry.Source" },
-        { headerName: "Edit", cellRenderer: "editCompany" },
+        // { headerName: "Edit", cellRenderer: "editCompany" },
     ];
-
-    // const fetchSourceData = async () => {
-    //     try {
-    //         const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/enquiry_sources/");
-    //         if (response.status === 200) {
-    //             const SourceData = await response.json();
-    //             // const enquiriesWithNo = data.map((enquiry, index) => ({
-    //             //     ...enquiry,
-    //             //     no: index + 1,
-    //             // }));
-    //             setSourceData(SourceData);
-    //         } else if (response.status === 500) {
-    //             setErrs("No Source Inquiry found");
-    //         } else {
-    //             setErrs("Error While Fetching Data");
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
-    // const fetchEducationData = async () => {
-    //     try {
-    //         const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/current-education/");
-    //         if (response.status === 200) {
-    //             const EduData = await response.json();
-    //             // const enquiriesWithNo = data.map((enquiry, index) => ({
-    //             //     ...enquiry,
-    //             //     no: index + 1,
-    //             // }));
-    //             setEducationData(EduData);
-    //         } else if (response.status === 500) {
-    //             setErrs("No Source Inquiry found");
-    //         } else {
-    //             setErrs("Error While Fetching Data");
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
-    // const fetchCountryData = async () => {
-    //     try {
-    //         const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/countriesIntersted/");
-    //         if (response.status === 200) {
-    //             const CountryIntrestedData = await response.json();
-    //             // const enquiriesWithNo = data.map((enquiry, index) => ({
-    //             //     ...enquiry,
-    //             //     no: index + 1,
-    //             // }));
-    //             setCountryData(CountryIntrestedData);
-    //         } else if (response.status === 500) {
-    //             setErrs("No Source Inquiry found");
-    //         } else {
-    //             setErrs("Error While Fetching Data");
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
 
     return (
         <div>
@@ -304,7 +225,8 @@ const ViewEnquiry = () => {
                         <AddEnquiry
                             sourceEnquiry={SourceData}
                             EducationData={EducationData}
-                            CountryData={CountryData}
+                            countryData={countryData}
+                            IntrestedCountryData={InterestedCountryData}
                             universitiesData={universitiesData}
                             level={levelData}
                             courseData={courseData}
