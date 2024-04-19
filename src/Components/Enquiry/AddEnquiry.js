@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-
 const AddEnquiry = (props) => {
     const [formData, setFormData] = useState({
         student_First_Name: "",
@@ -33,22 +32,17 @@ const AddEnquiry = (props) => {
         notes: "",
     });
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         [name]: value,
-    //     }));
-    // };
-
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         let newValue = value;
 
-        // Convert 'Interested_Services' into an array
         if (name === "Interested_Services") {
-            newValue = value.map(val => ({ id: val.id, Services: val.Services, Price: val.Price }));
+            console.log(value);
+            newValue = value.map((val) => ({
+                id: val.id,
+                Services: val.Services,
+                Price: val.Price,
+            }));
         }
 
         setFormData((prevState) => ({
@@ -56,7 +50,6 @@ const AddEnquiry = (props) => {
             [name]: newValue,
         }));
     };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,12 +74,8 @@ const AddEnquiry = (props) => {
                 );
             }
             toast.success("Enquiry submitted successfully!");
-            // console.log("Submission successful", data);
-            // alert("Enquiry submitted successfully!");
         } catch (error) {
             toast.error("Failed to submit enquiry. See console for details.");
-            // console.error("Error during submission:", error);
-            // alert("Failed to submit enquiry. See console for details.");
         }
     };
 
@@ -348,11 +337,8 @@ const AddEnquiry = (props) => {
                                                                 name="student_country"
                                                                 value={formData.student_country}
                                                                 onChange={handleChange}
-
                                                             >
-                                                                <option selected>
-                                                                    Select Country
-                                                                </option>
+                                                                <option selected>Select Country</option>
                                                                 {props.countryData.map((countryData) => (
                                                                     <option
                                                                         key={countryData.id}
@@ -363,7 +349,6 @@ const AddEnquiry = (props) => {
                                                                 ))}
                                                             </select>
                                                         </div>
-
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label">
@@ -473,19 +458,20 @@ const AddEnquiry = (props) => {
                                                                 value={formData.country_interested}
                                                                 onChange={handleChange}
                                                                 required
-
                                                             >
                                                                 <option selected>
                                                                     Select Interested Country
                                                                 </option>
-                                                                {props.IntrestedCountryData.map((countryInterested) => (
-                                                                    <option
-                                                                        key={countryInterested.id}
-                                                                        value={countryInterested.id}
-                                                                    >
-                                                                        {countryInterested.country}
-                                                                    </option>
-                                                                ))}
+                                                                {props.IntrestedCountryData.map(
+                                                                    (countryInterested) => (
+                                                                        <option
+                                                                            key={countryInterested.id}
+                                                                            value={countryInterested.id}
+                                                                        >
+                                                                            {countryInterested.country}
+                                                                        </option>
+                                                                    )
+                                                                )}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -600,14 +586,10 @@ const AddEnquiry = (props) => {
                                                                 name="Interested_Services"
                                                                 value={formData.Interested_Services}
                                                                 onChange={handleChange}
-
                                                             >
                                                                 <option>Select Services</option>
                                                                 {props.servicesData.map((services) => (
-                                                                    <option
-                                                                        key={services.id}
-                                                                        value={services.id}
-                                                                    >
+                                                                    <option key={services.id} value={services.id}>
                                                                         {services.Services}
                                                                     </option>
                                                                 ))}

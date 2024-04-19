@@ -1,17 +1,105 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AddDetailEnquiry = () => {
+    const [detailEnquiry, setDetailEnquiry] = useState({
+        Current_Enquiry: "",
+        current_education: "",
+        Tenth_Education_Details: "",
+        Twelveth_Education_Details: "",
+        Graduation_Education_Details: "",
+        Work_Experience: "",
+
+        Toefl_Exam: "",
+        ielts_Exam: "",
+        PTE_Exam: "",
+        Duolingo_Exam: "",
+        Gre_Exam: "",
+        Gmat_Exam: "",
+
+        Twelveth_Document: "",
+        Tenth_Document: "",
+        Graduation_Marksheet: "",
+        Graduation_Certificate: "",
+        UG_Marksheet: "",
+        UG_Certificate: "",
+
+        Ielts_Result: "",
+        Toefl_Result: "",
+        PTE_Result: "",
+        Duolingo_Result: 1,
+        Gre_Result: "",
+        Gmat_Result: "",
+
+        Work_Experience_Document: "",
+        Passport_Document: "",
+
+        Offer_Letter: "",
+
+        Refusal: "",
+
+        Confirmed_Services: [],
+
+        Enquiry_Status: "",
+
+        followup: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        let newValue = value;
+
+        if (name === "Interested_Services") {
+            console.log(value);
+            newValue = value.map((val) => ({
+                id: val.id,
+                Services: val.Services,
+                Price: val.Price,
+            }));
+        }
+
+        setDetailEnquiry((prevState) => ({
+            ...prevState,
+            [name]: newValue,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const apiURL =
+            "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(detailEnquiry),
+        };
+
+        try {
+            const response = await fetch(apiURL, requestOptions);
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(
+                    `API call failed with status: ${response.status
+                    }, body: ${JSON.stringify(data)}`
+                );
+            }
+            toast.success("Enquiry submitted successfully!");
+        } catch (error) {
+            toast.error("Failed to submit enquiry. See console for details.");
+        }
+    };
+
     return (
         <section className="section">
             <div className="row">
                 <div className="col">
                     <div className="card">
                         <div className="card-body">
-                            <ul
-                                className="nav nav-pills mb-3"
-                                id="pills-tab"
-                                role="tablist"
-                            >
+                            <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
                                     <button
                                         className="nav-link active"
@@ -156,7 +244,6 @@ const AddDetailEnquiry = () => {
                                         Enquiry Status
                                     </button>
                                 </li>
-
                             </ul>
                             <div className="tab-content" id="myTabContent">
                                 <div
@@ -170,11 +257,15 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Current Enquiry
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Current Enquiry
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -183,11 +274,16 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Current Education Details
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Current Education Details
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -196,11 +292,15 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Tenth Education Details
+                                                        <label className="col-sm-4 col-form-label" required>
+                                                            Tenth Education Details
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -209,11 +309,15 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Twelveth Education Details
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Twelveth Education Details
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -223,23 +327,15 @@ const AddDetailEnquiry = () => {
                                                     </div>
 
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Graduation Education Details
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Graduation Education Details
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select menu</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>col-sm-4                                             </div>
-                                                    <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Work Experience
-                                                        </label>
-                                                        <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -247,7 +343,24 @@ const AddDetailEnquiry = () => {
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div className="row mb-1">
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Work Experience
+                                                        </label>
+                                                        <div className="col-md-6">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
 
+                                                            >
+                                                                <option selected>Open this select menu</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -264,11 +377,15 @@ const AddDetailEnquiry = () => {
                                             <form className="row g-3">
                                                 <div className="col-md-12">
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" >Toefl Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Toefl Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -277,11 +394,16 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" >Ielts Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Ielts Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -290,11 +412,16 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>PTE Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            PTE Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -303,11 +430,16 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Duolingo Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Duolingo Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -317,11 +449,16 @@ const AddDetailEnquiry = () => {
                                                     </div>
 
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Gre Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Gre Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -330,11 +467,16 @@ const AddDetailEnquiry = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row mb-1">
-                                                        <label className="col-sm-4 col-form-label" required>Gmat Exam
+                                                        <label className="col-sm-4 col-form-label">
+                                                            Gmat Exam
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <select className="form-select"
-                                                                aria-label="Default select example">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={handleChange}
+
+                                                            >
                                                                 <option selected>Open this select menu</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
@@ -342,7 +484,6 @@ const AddDetailEnquiry = () => {
                                                             </select>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </form>
                                         </div>
@@ -358,19 +499,29 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-2">
-                                                    <label for="inputText"
-                                                        className="col-sm-4 col-form-label">Father Occupation
+                                                    <label
+                                                        for="inputText"
+                                                        className="col-sm-4 col-form-label"
+                                                    >
+                                                        Father Occupation
                                                     </label>
                                                     <div className="col-md-6">
-                                                        <input type="text" className="form-control" />
+                                                        <input type="text" className="form-control"
+                                                            onChange={handleChange}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-1">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Father Annual Income
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Father Annual Income
                                                     </label>
                                                     <div class="col-md-6">
-                                                        <input type="number" class="form-control" />
+                                                        <input type="number" class="form-control"
+                                                            onChange={handleChange}
+                                                        />
                                                     </div>
                                                 </div>
                                             </form>
@@ -387,51 +538,109 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Twelveth Document
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Twelveth Document
                                                     </label>
                                                     <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Tenth Document</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Tenth Document
+                                                    </label>
                                                     <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Graduation Marksheet</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Graduation Marksheet
+                                                    </label>
                                                     <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Graduation Certificate</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Graduation Certificate
+                                                    </label>
                                                     <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">UG Marksheet</label>
-                                                    <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">UG Certificate</label>
-                                                    <div class="col-md-5">
-                                                        <input class="form-control" type="file" id="formFile" />
-                                                    </div>
-                                                </div>
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
 
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 mt-3">
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        UG Marksheet
+                                                    </label>
+                                                    <div class="col-md-5">
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 mt-3">
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        UG Certificate
+                                                    </label>
+                                                    <div class="col-md-5">
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -446,48 +655,109 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Ielts Result
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Ielts Result
                                                     </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Toefl Result</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                        onChange={handleChange}
+
+                                                    >
+                                                        Toefl Result
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">PTE Result</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        PTE Result
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Duolingo Result</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Duolingo Result
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Gre Result</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Gre Result
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Gmat Result</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Gmat Result
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                             </form>
@@ -504,18 +774,37 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Work Experience Document
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Work Experience Document
                                                     </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Passport Document</label>
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Passport Document
+                                                    </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
                                             </form>
@@ -532,14 +821,22 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div class="row mb-3 mt-3">
-                                                    <label for="inputNumber"
-                                                        class="col-sm-4 col-form-label">Offer Letter
+                                                    <label
+                                                        for="inputNumber"
+                                                        class="col-sm-4 col-form-label"
+                                                    >
+                                                        Offer Letter
                                                     </label>
                                                     <div class="col-md-6">
-                                                        <input class="form-control" type="file" id="formFile" />
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            id="formFile"
+                                                            onChange={handleChange}
+
+                                                        />
                                                     </div>
                                                 </div>
-
                                             </form>
                                         </div>
                                     </div>
@@ -554,11 +851,16 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-4 col-form-label" required>Refusal
+                                                    <label className="col-sm-4 col-form-label">
+                                                        Refusal
                                                     </label>
                                                     <div className="col-md-6">
-                                                        <select className="form-select"
-                                                            aria-label="Default select example">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={handleChange}
+
+                                                        >
                                                             <option selected>Open this select menu</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -566,7 +868,6 @@ const AddDetailEnquiry = () => {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                             </form>
                                         </div>
                                     </div>
@@ -581,11 +882,16 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-4 col-form-label" required>Confirmed Services
+                                                    <label className="col-sm-4 col-form-label">
+                                                        Confirmed Services
                                                     </label>
                                                     <div className="col-md-6">
-                                                        <select className="form-select"
-                                                            aria-label="Default select example">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={handleChange}
+
+                                                        >
                                                             <option selected>Open this select menu</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -607,11 +913,16 @@ const AddDetailEnquiry = () => {
                                         <div className="card-body">
                                             <form className="row g-3">
                                                 <div className="row mb-1 mt-3">
-                                                    <label className="col-sm-4 col-form-label" required>Enquiry Status
+                                                    <label className="col-sm-4 col-form-label">
+                                                        Enquiry Status
                                                     </label>
                                                     <div className="col-md-6">
-                                                        <select className="form-select"
-                                                            aria-label="Default select example">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={handleChange}
+
+                                                        >
                                                             <option selected>Open this select menu</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -629,7 +940,7 @@ const AddDetailEnquiry = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default AddDetailEnquiry;
