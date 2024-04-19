@@ -9,29 +9,46 @@ import AddDetailEnquiry from "./AddDetailEnquiry";
 const ViewDetailEnquiry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [EnquiryData, setEnquiryData] = useState([]);
+
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
-        fetchEnquiries();
+        fetchDetailEnquiries();
     }, []);
 
-    const fetchEnquiries = async () => {
+    // const fetchEnquiries = async () => {
+    //     try {
+    //         const response = await fetch(
+    //             "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/"
+    //         );
+    //         console.log(response);
+    //         if (response.status === 200) {
+    //             const data = await response.json();
+    //             const enquiriesWithNo = data.map((enquiry, index) => ({
+    //                 ...enquiry,
+    //                 no: index + 1,
+    //             }));
+    //             setEnquiryData(enquiriesWithNo);
+    //         } else if (response.status === 500) {
+    //             setErrs("No Inquiry found");
+    //         }
+    //         else {
+    //             setErrs("Error While Fetching Data");
+    //         }
+    //     } catch (error) {
+    //         console.log("error", error);
+    //     }
+    // };
+
+    const fetchData = async (url, setter, errorMessage) => {
         try {
-            const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/"
-            );
-            console.log(response);
+            const response = await fetch(url);
             if (response.status === 200) {
                 const data = await response.json();
-                const enquiriesWithNo = data.map((enquiry, index) => ({
-                    ...enquiry,
-                    no: index + 1,
-                }));
-                setEnquiryData(enquiriesWithNo);
+                setter(data);
             } else if (response.status === 500) {
-                setErrs("No Inquiry found");
-            }
-            else {
+                setErrs(errorMessage);
+            } else {
                 setErrs("Error While Fetching Data");
             }
         } catch (error) {
@@ -39,13 +56,20 @@ const ViewDetailEnquiry = () => {
         }
     };
 
+    const fetchDetailEnquiries = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
+            setEnquiryData,
+            "No Detail Inquiry found"
+        );
+
 
     const columnDefs = [
-        { headerName: "No", field: "no" },
-        { headerName: "Current Enquiry", field: "Current_Enquiry" },
+        // { headerName: "No", field: "no" },
+        { headerName: "Current Enquiry", field: "Current_Enquiry.student_First_Name" },
         { headerName: "IELTS Exam", field: "ielts_Exam" },
         { headerName: "Toefl Exam", field: "Toefl_Exam" },
-        { headerName: "Current Education Details", field: "Current_Education_Details" },
+        { headerName: "Current Education Details", field: "Current_Education_Details.level" },
         { headerName: "Father Occupation", field: "Father_Occupation" },
         { headerName: "Father Annual Income", field: "Father_Annual_Income" },
         { headerName: "Refusal", field: "Refusal" },

@@ -34,7 +34,6 @@ const ViewEnquiry = () => {
         fetchIntakeData();
         fetchServicesData();
         fetchStatusData();
-
     }, []);
 
     const fetchData = async (url, setter, errorMessage) => {
@@ -122,7 +121,6 @@ const ViewEnquiry = () => {
             "No Services Data found"
         );
 
-
     const fetchStatusData = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-statuses/",
@@ -130,23 +128,57 @@ const ViewEnquiry = () => {
             "No EnquiryStatus Data found"
         );
 
-    const EditName = (params) => (
-        <Link
-            to={`/edit/${params.data.id}`}
-            className="enquiryAction"
-            title="Edit Enquiry"
-        >
-            <EditIcon />
-        </Link>
-    );
+
+
+    const handleCellValueChanged = async (event) => {
+        const { data, colDef, newValue, oldValue } = event;
+        if (newValue !== oldValue) {
+            const updatedRows = EnquiryData.map((row) =>
+                row.id === data.id ? { ...row, [colDef.field]: newValue } : row
+            );
+            setEnquiryData(updatedRows);
+
+            const update = { id: data.id, [colDef.field]: newValue };
+            console.log(update);
+
+            try {
+                const response = await fetch(`https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(update),
+                });
+
+                if (!response.ok) {
+                    setEnquiryData(EnquiryData.map((row) =>
+                        row.id === data.id ? { ...row, [colDef.field]: oldValue } : row
+                    ));
+                }
+
+                console.log('Update successful');
+            } catch (error) {
+                console.error('Error in updating data:', error);
+            }
+
+        }
+    };
+
 
     const columnDefs = [
-        // { headerName: "Edit", cellRenderer: "editName" },
-        // { headerName: "No", field: "no" },
-        { headerName: "Student First Name", field: "student_First_Name" },
-        { headerName: "Student Last Name", field: "student_Last_Name" },
-        { headerName: "Student Email", field: "student_email" },
-        { headerName: "Country Interested", field: "country_interested.country" },
+        { headerName: "Student First Name", field: "student_First_Name", editable: true },
+        { headerName: "Student Last Name", field: "student_Last_Name", editable: true },
+        { headerName: "Student Email", field: "student_email", editable: true },
+        {
+            headerName: "Country Interested",
+            field: "country_interested.country",
+            valueGetter: (params) => {
+                const services = params.data.Interested_Services?.map(
+                    (service) => service.Services
+                ).join(", ");
+                return services || "No services";
+            },
+        },
         {
             headerName: "University Interested",
             field: "university_interested.univ_name",
@@ -160,7 +192,6 @@ const ViewEnquiry = () => {
         { headerName: "Notes", field: "notes" },
         { headerName: "Total Price", field: "" },
         { headerName: "Source Inquiry", field: "Source_Enquiry.Source" },
-        // { headerName: "Edit", cellRenderer: "editCompany" },
     ];
 
     return (
@@ -203,7 +234,7 @@ const ViewEnquiry = () => {
                                             columnDefs={columnDefs}
                                             pagination={true}
                                             paginationPageSize={10}
-                                            cellRenderer={{ editName: EditName }}
+                                            onCellValueChanged={handleCellValueChanged}
                                         />
                                     </div>
                                 )}
