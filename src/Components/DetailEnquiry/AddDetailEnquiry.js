@@ -585,15 +585,15 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Father Annual Income
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="number" class="form-control"
+                                                        <div className="col-md-6">
+                                                            <input type="number" className="form-control"
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
@@ -611,16 +611,16 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Twelveth Document
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -628,16 +628,16 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Tenth Document
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -646,16 +646,16 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Graduation Marksheet
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -664,16 +664,16 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Graduation Certificate
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -681,16 +681,16 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             UG Marksheet
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -698,16 +698,16 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             UG Certificate
                                                         </label>
-                                                        <div class="col-md-5">
+                                                        <div className="col-md-5">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -728,16 +728,16 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Ielts Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -745,18 +745,18 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                             onChange={handleChange}
 
                                                         >
                                                             Toefl Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -765,16 +765,16 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             PTE Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -783,48 +783,48 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Duolingo Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Gre Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Gmat Result
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -844,32 +844,32 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Work Experience Document
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Passport Document
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -889,16 +889,16 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3" >
-                                                    <div class="row mb-3 mt-3">
+                                                    <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
-                                                            class="col-sm-4 col-form-label"
+                                                            className="col-sm-4 col-form-label"
                                                         >
                                                             Offer Letter
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <input
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 type="file"
                                                                 id="formFile"
                                                                 onChange={handleChange}
@@ -1052,9 +1052,9 @@ const AddDetailEnquiry = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3 text-center">
-                            <div class="col-sm-10 ">
-                                <button type="submit" class="btn btn-primary btn-sm">
+                        <div className="row mb-3 text-center">
+                            <div className="col-sm-10 ">
+                                <button type="submit" className="btn btn-primary btn-sm">
                                     Submit Form
                                 </button>
                             </div>

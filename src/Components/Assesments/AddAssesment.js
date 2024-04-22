@@ -181,44 +181,44 @@ const AddAssesment = () => {
                                                             <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-4 col-form-label">Duration
+                                                            className="col-sm-4 col-form-label">Duration
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="text" class="form-control" />
+                                                        <div className="col-md-6">
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-4 col-form-label">Application Fee
+                                                            className="col-sm-4 col-form-label">Application Fee
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="text" class="form-control" />
+                                                        <div className="col-md-6">
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-4 col-form-label">Tution Fee
+                                                            className="col-sm-4 col-form-label">Tution Fee
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="text" class="form-control" />
+                                                        <div className="col-md-6">
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-4 col-form-label">Fee Currency
+                                                            className="col-sm-4 col-form-label">Fee Currency
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="text" class="form-control" />
+                                                        <div className="col-md-6">
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-1">
+                                                    <div className="row mb-1">
                                                         <label for="inputNumber"
-                                                            class="col-sm-4 col-form-label">Course Link
+                                                            className="col-sm-4 col-form-label">Course Link
                                                         </label>
-                                                        <div class="col-md-6">
-                                                            <input type="text" class="form-control" />
+                                                        <div className="col-md-6">
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
