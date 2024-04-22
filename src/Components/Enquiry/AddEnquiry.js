@@ -311,13 +311,13 @@ const AddEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-4">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-4">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student Address
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <textarea
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 style={{ height: "100px" }}
                                                                 name="student_address"
                                                                 value={formData.student_address}
@@ -326,8 +326,8 @@ const AddEnquiry = (props) => {
                                                             ></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student Country
                                                         </label>
                                                         <div className="col-md-6">
@@ -350,8 +350,8 @@ const AddEnquiry = (props) => {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student State
                                                         </label>
                                                         <div className="col-md-6">
@@ -365,8 +365,8 @@ const AddEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student City
                                                         </label>
                                                         <div className="col-md-6">
@@ -380,8 +380,8 @@ const AddEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Student Zip
                                                         </label>
                                                         <div className="col-md-6">
@@ -408,11 +408,11 @@ const AddEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <div className="row g-3">
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Current Education
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -446,11 +446,11 @@ const AddEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <div className="row g-3">
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Country Interested
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -476,11 +476,11 @@ const AddEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             University Interested
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -505,11 +505,11 @@ const AddEnquiry = (props) => {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Level Applying For
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -532,11 +532,11 @@ const AddEnquiry = (props) => {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Course Interested
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -554,11 +554,11 @@ const AddEnquiry = (props) => {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <label class="col-sm-4 col-form-label">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-4 col-form-label">
                                                             Intake Interested
                                                         </label>
-                                                        <div class="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
                                                                 type="number"
                                                                 className="form-control"
@@ -649,11 +649,11 @@ const AddEnquiry = (props) => {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-4">
-                                                        <label class="col-sm-4 col-form-label">notes</label>
-                                                        <div class="col-md-6">
+                                                    <div className="row mb-4">
+                                                        <label className="col-sm-4 col-form-label">notes</label>
+                                                        <div className="col-md-6">
                                                             <textarea
-                                                                class="form-control"
+                                                                className="form-control"
                                                                 style={{ height: "100px" }}
                                                                 name="notes"
                                                                 value={formData.notes}
@@ -669,9 +669,9 @@ const AddEnquiry = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3 text-center">
-                            <div class="col-sm-10 ">
-                                <button type="submit" class="btn btn-primary btn-sm">
+                        <div className="row mb-3 text-center">
+                            <div className="col-sm-10 ">
+                                <button type="submit" className="btn btn-primary btn-sm">
                                     Submit Form
                                 </button>
                             </div>
