@@ -8,12 +8,38 @@ import AddDetailEnquiry from "./AddDetailEnquiry";
 
 const ViewDetailEnquiry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [DetailEnquiryData, setDetailEnquiryData] = useState([]);
     const [EnquiryData, setEnquiryData] = useState([]);
+    const [EducationData, setEducationData] = useState([]);
+    const [WorkExperience, setWorkExperience] = useState([]);
+    const [ToeflData, setToeflData] = useState([]);
+    const [IeltsData, setIeltsData] = useState([]);
+    const [PteData, setPteData] = useState([]);
+    const [DuolingoData, setDuolingoData] = useState([]);
+    const [GreData, setGreData] = useState([]);
+    const [GmatData, setGmatData] = useState([]);
+    const [RefusalData, setRefusalData] = useState([]);
+    const [ServicesData, setServicesData] = useState([]);
+    const [statusData, setStatusData] = useState([]);
+    const [followupData, setFollowupData] = useState([]);
 
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
         fetchDetailEnquiries();
+        fetchEnquiry();
+        EduLevel();
+        WorkExperienceData();
+        ToeflExam();
+        Ielts();
+        Pte();
+        DuolingoExam();
+        GreExam();
+        GmatExam();
+        Refusal();
+        AvailableServices();
+        EnquiryStatus();
+        FollowUpStatus();
     }, []);
 
     // const fetchEnquiries = async () => {
@@ -59,22 +85,116 @@ const ViewDetailEnquiry = () => {
     const fetchDetailEnquiries = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
-            setEnquiryData,
+            setDetailEnquiryData,
             "No Detail Inquiry found"
         );
 
+    const fetchEnquiry = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/",
+            setEnquiryData,
+            "No Enquiry found"
+        );
+
+    const EduLevel = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/edu-levels/",
+            setEducationData,
+            "No Detail found"
+        );
+
+    const WorkExperienceData = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/work-experiences/",
+            setWorkExperience,
+            "No Detail found"
+        );
+
+    const ToeflExam = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/toefl_exams/",
+            setToeflData,
+            "No Detail found"
+        );
+
+    const Ielts = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/ielts_exams/",
+            setIeltsData,
+            "No Detail found"
+        );
+
+    const Pte = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/pte_exams/",
+            setPteData,
+            "No Detail found"
+        );
+
+    const DuolingoExam = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/duolingo_exams/",
+            setDuolingoData,
+            "No Detail found"
+        );
+
+    const GreExam = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/gre_exams/",
+            setGreData,
+            "No Detail found"
+        );
+    const GmatExam = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/gmat_exams/",
+            setGmatData,
+            "No Detail found"
+        );
+
+    const Refusal = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/rejection_reasons/",
+            setRefusalData,
+            "No Detail found"
+        );
+
+    const AvailableServices = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/available-services/",
+            setServicesData,
+            "No Detail found"
+        );
+
+    const EnquiryStatus = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-statuses/",
+            setStatusData,
+            "No Detail found"
+        );
+
+    const FollowUpStatus = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/followups/",
+            setFollowupData,
+            "No Detail found"
+        );
 
     const columnDefs = [
         // { headerName: "No", field: "no" },
-        { headerName: "Current Enquiry", field: "Current_Enquiry.student_First_Name" },
+        {
+            headerName: "Current Enquiry",
+            field: "Current_Enquiry.student_First_Name",
+        },
         { headerName: "IELTS Exam", field: "ielts_Exam" },
         { headerName: "Toefl Exam", field: "Toefl_Exam" },
-        { headerName: "Current Education Details", field: "Current_Education_Details.level" },
+        {
+            headerName: "Current Education Details",
+            field: "Current_Education_Details.level",
+        },
         { headerName: "Father Occupation", field: "Father_Occupation" },
         { headerName: "Father Annual Income", field: "Father_Annual_Income" },
         { headerName: "Refusal", field: "Refusal" },
         { headerName: "Pending Amount", field: "0" },
-
     ];
 
     return (
@@ -105,13 +225,19 @@ const ViewDetailEnquiry = () => {
                             <div>
                                 <div className="card-body">
                                     {errs ? (
-                                        <div className="alert alert-danger text-center" role="alert">
+                                        <div
+                                            className="alert alert-danger text-center"
+                                            role="alert"
+                                        >
                                             {errs}
                                         </div>
                                     ) : (
-                                        <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
+                                        <div
+                                            className="ag-theme-alpine"
+                                            style={{ height: "500px", width: "100%" }}
+                                        >
                                             <AgGridReact
-                                                rowData={EnquiryData}
+                                                rowData={DetailEnquiryData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
                                                 paginationPageSize={10}
@@ -125,12 +251,30 @@ const ViewDetailEnquiry = () => {
                 </section>
             </main>
             {isModalOpen && (
-                <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)} size="lg">
+                <Modal
+                    show={isModalOpen}
+                    onHide={() => setIsModalOpen(false)}
+                    size="lg"
+                >
                     <Modal.Header closeButton>
                         <Modal.Title>Add Detail-Enquiry</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddDetailEnquiry />
+                        <AddDetailEnquiry
+                            EnquiryData={EnquiryData}
+                            EducationData={EducationData}
+                            WorkExperience={WorkExperience}
+                            ToeflData={ToeflData}
+                            IeltsData={IeltsData}
+                            PteData={PteData}
+                            DuolingoData={DuolingoData}
+                            GreData={GreData}
+                            GmatData={GmatData}
+                            RefusalData={RefusalData}
+                            ServicesData={ServicesData}
+                            statusData={statusData}
+                            followupData={followupData}
+                        />
                     </Modal.Body>
                 </Modal>
             )}
