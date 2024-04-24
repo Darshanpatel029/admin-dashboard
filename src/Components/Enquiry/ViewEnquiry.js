@@ -5,7 +5,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
-import EditIcon from "./EditIcon";
+// import EditIcon from "./EditIcon";
 
 const ViewEnquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -128,43 +128,43 @@ const ViewEnquiry = () => {
       "No EnquiryStatus Data found"
     );
 
-//   const handleCellValueChanged = async (event) => {
-//     const { data, colDef, newValue, oldValue } = event;
-//     if (newValue !== oldValue) {
-//       const updatedRows = EnquiryData.map((row) =>
-//         row.id === data.id ? { ...row, [colDef.field]: newValue } : row
-//       );
-//       setEnquiryData(updatedRows);
+  //   const handleCellValueChanged = async (event) => {
+  //     const { data, colDef, newValue, oldValue } = event;
+  //     if (newValue !== oldValue) {
+  //       const updatedRows = EnquiryData.map((row) =>
+  //         row.id === data.id ? { ...row, [colDef.field]: newValue } : row
+  //       );
+  //       setEnquiryData(updatedRows);
 
-//       const update = { id: data.id, [colDef.field]: newValue };
-//       console.log(update);
+  //       const update = { id: data.id, [colDef.field]: newValue };
+  //       console.log(update);
 
-//       try {
-//         const response = await fetch(
-//           `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`,
-//           {
-//             method: "PUT",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(update),
-//           }
-//         );
+  //       try {
+  //         const response = await fetch(
+  //           `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`,
+  //           {
+  //             method: "PUT",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //             },
+  //             body: JSON.stringify(update),
+  //           }
+  //         );
 
-//         if (!response.ok) {
-//           setEnquiryData(
-//             EnquiryData.map((row) =>
-//               row.id === data.id ? { ...row, [colDef.field]: oldValue } : row
-//             )
-//           );
-//         }
+  //         if (!response.ok) {
+  //           setEnquiryData(
+  //             EnquiryData.map((row) =>
+  //               row.id === data.id ? { ...row, [colDef.field]: oldValue } : row
+  //             )
+  //           );
+  //         }
 
-//         console.log("Update successful");
-//       } catch (error) {
-//         console.error("Error in updating data:", error);
-//       }
-//     }
-//   };
+  //         console.log("Update successful");
+  //       } catch (error) {
+  //         console.error("Error in updating data:", error);
+  //       }
+  //     }
+  //   };
 
   const columnDefs = [
     {
@@ -178,10 +178,7 @@ const ViewEnquiry = () => {
       editable: true,
     },
     { headerName: "Student Email", field: "student_email", editable: true },
-    {
-      headerName: "Country Interested",
-      field: "country_interested",
-    },
+    { headerName: "Country Interested", field: "country_interested.country" },
     {
       headerName: "University Interested",
       field: "university_interested.univ_name",
