@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+// import Multiselect from 'multiselect-react-dropdown';
 
 const AddEnquiry = (props) => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const AddEnquiry = (props) => {
     level_applying_for: "",
     course_interested: "",
     intake_interested: "",
-    Interested_Services: [],
+    Interested_Services: "",
     assigned_users: "",
     created_by: 1,
     enquiry_status: "",
@@ -34,22 +35,21 @@ const AddEnquiry = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let newValue = value;
-
-    // if (name === "Interested_Services") {
-    //   console.log(value);
-    //   newValue = value.map((val) => ({
-    //     id: val.id,
-    //     Services: val.Services,
-    //     Price: val.Price,
-    //   }));
-    // }
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: newValue,
-    }));
+    // If it's a multi-select dropdown, handle multiple selections
+    if (e.target.multiple) {
+      const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: selectedOptions,
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,8 +69,7 @@ const AddEnquiry = (props) => {
       const data = await response.json();
       if (!response.ok) {
         throw new Error(
-          `API call failed with status: ${
-            response.status
+          `API call failed with status: ${response.status
           }, body: ${JSON.stringify(data)}`
         );
       }
@@ -343,7 +342,7 @@ const AddEnquiry = (props) => {
                                 {props.countryData.map((countryData) => (
                                   <option
                                     key={countryData.id}
-                                    value={countryData.id}
+                                    value={countryData.country}
                                   >
                                     {countryData.country}
                                   </option>
@@ -587,6 +586,7 @@ const AddEnquiry = (props) => {
                                 name="Interested_Services"
                                 value={formData.Interested_Services}
                                 onChange={handleChange}
+                                multiple // Add this attribute for multi-select
                               >
                                 <option>Select Services</option>
                                 {props.servicesData.map((services) => (

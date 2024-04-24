@@ -21,7 +21,7 @@ const ViewDetailEnquiry = () => {
     const [RefusalData, setRefusalData] = useState([]);
     const [ServicesData, setServicesData] = useState([]);
     const [statusData, setStatusData] = useState([]);
-    const [followupData, setFollowupData] = useState([]);
+    // const [followupData, setFollowupData] = useState([]);
 
     const [errs, setErrs] = useState("");
 
@@ -39,7 +39,7 @@ const ViewDetailEnquiry = () => {
         Refusal();
         AvailableServices();
         EnquiryStatus();
-        FollowUpStatus();
+        // FollowUpStatus();
     }, []);
 
     // const fetchEnquiries = async () => {
@@ -75,7 +75,7 @@ const ViewDetailEnquiry = () => {
             } else if (response.status === 500) {
                 setErrs(errorMessage);
             } else {
-                setErrs("Error While Fetching Data");
+                setErrs("No Data Found");
             }
         } catch (error) {
             console.log("error", error);
@@ -172,12 +172,12 @@ const ViewDetailEnquiry = () => {
             "No Detail found"
         );
 
-    const FollowUpStatus = () =>
-        fetchData(
-            "https://cloudconnectcampaign.com/espicrmnew/api/followups/",
-            setFollowupData,
-            "No Detail found"
-        );
+    // const FollowUpStatus = () =>
+    //     fetchData(
+    //         "https://cloudconnectcampaign.com/espicrmnew/api/followups/",
+    //         setFollowupData,
+    //         "No Detail found"
+    //     );
 
     const columnDefs = [
         // { headerName: "No", field: "no" },
@@ -185,8 +185,8 @@ const ViewDetailEnquiry = () => {
             headerName: "Current Enquiry",
             field: "Current_Enquiry.student_First_Name",
         },
-        { headerName: "IELTS Exam", field: "ielts_Exam" },
-        { headerName: "Toefl Exam", field: "Toefl_Exam" },
+        { headerName: "IELTS Exam", field: "ielts_Exam.Overall" },
+        { headerName: "Toefl Exam", field: "Toefl_Exam.Overall" },
         {
             headerName: "Current Education Details",
             field: "Current_Education_Details.level",
@@ -273,7 +273,7 @@ const ViewDetailEnquiry = () => {
                             RefusalData={RefusalData}
                             ServicesData={ServicesData}
                             statusData={statusData}
-                            followupData={followupData}
+                        // followupData={followupData}
                         />
                     </Modal.Body>
                 </Modal>
