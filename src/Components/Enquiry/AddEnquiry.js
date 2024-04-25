@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-// import Multiselect from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown';
 
 const AddEnquiry = (props) => {
   const [formData, setFormData] = useState({
@@ -581,20 +581,23 @@ const AddEnquiry = (props) => {
                               Interested Services
                             </label>
                             <div className="col-md-6">
-                              <select
-                                className="form-control"
-                                name="Interested_Services"
-                                value={formData.Interested_Services}
-                                onChange={handleChange}
-                                multiple // Add this attribute for multi-select
-                              >
-                                <option>Select Services</option>
-                                {props.servicesData.map((services) => (
-                                  <option key={services.id} value={services.id}>
-                                    {services.Services}
-                                  </option>
-                                ))}
-                              </select>
+                              <Multiselect
+                                options={props.servicesData.map((services) => ({
+                                  key: services.id,
+                                  value: services.id,
+                                  label: services.Services
+                                }))}
+                                selectedValues={formData.Interested_Services}
+                                onSelect={(selectedList, selectedItem) => {
+                                  // handle selection
+                                  // You can update formData.Interested_Services here
+                                }}
+                                onRemove={(selectedList, removedItem) => {
+                                  // handle removal
+                                  // You can update formData.Interested_Services here
+                                }}
+                                displayValue="label"
+                              />
                             </div>
                           </div>
                         </div>

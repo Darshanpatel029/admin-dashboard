@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Multiselect from 'multiselect-react-dropdown';
+
 
 const AddDetailEnquiry = (props) => {
     const [detailEnquiry, setDetailEnquiry] = useState({
@@ -27,7 +29,7 @@ const AddDetailEnquiry = (props) => {
         Ielts_Result: "",
         Toefl_Result: "",
         PTE_Result: "",
-        Duolingo_Result: 1,
+        Duolingo_Result: " ",
         Gre_Result: "",
         Gmat_Result: "",
         Work_Experience_Document: "",
@@ -82,7 +84,7 @@ const AddDetailEnquiry = (props) => {
         formData.append("Refusal", detailEnquiry.Refusal);
         formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
         formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        formData.append("followup", detailEnquiry.followup); // Append Followup value
+        // formData.append("followup", detailEnquiry.followup); 
 
         Object.keys(detailEnquiry).forEach((key) => {
             if (
@@ -103,8 +105,8 @@ const AddDetailEnquiry = (props) => {
                 key !== "Offer_Letter" &&
                 key !== "Refusal" &&
                 key !== "Confirmed_Services" &&
-                key !== "Enquiry_Status" &&
-                key !== "followup"
+                key !== "Enquiry_Status"
+                // key !== "followup"
             ) {
                 formData.append(key, detailEnquiry[key]);
             }
@@ -693,7 +695,6 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Tenth_Document"
                                                                 onChange={handleChange}
-
                                                             />
                                                         </div>
                                                     </div>
@@ -1016,7 +1017,7 @@ const AddDetailEnquiry = (props) => {
                                                         <label className="col-sm-4 col-form-label">
                                                             Confirmed Services
                                                         </label>
-                                                        <div className="col-md-6">
+                                                        {/* <div className="col-md-6">
                                                             <select
                                                                 className="form-select"
                                                                 aria-label="Default select example"
@@ -1033,6 +1034,25 @@ const AddDetailEnquiry = (props) => {
                                                                     </option>
                                                                 ))}
                                                             </select>
+                                                        </div> */}
+                                                        <div className="col-md-6">
+                                                            <Multiselect
+                                                                options={props.ServicesData.map((services) => ({
+                                                                    key: services.id,
+                                                                    value: services.id,
+                                                                    label: services.Services
+                                                                }))}
+                                                                selectedValues={detailEnquiry.Confirmed_Services}
+                                                                onSelect={(selectedList, selectedItem) => {
+                                                                    // handle selection
+                                                                    // You can update formData.Interested_Services here
+                                                                }}
+                                                                onRemove={(selectedList, removedItem) => {
+                                                                    // handle removal
+                                                                    // You can update formData.Interested_Services here
+                                                                }}
+                                                                displayValue="label"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </form>
