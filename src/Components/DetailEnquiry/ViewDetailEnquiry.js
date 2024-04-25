@@ -103,6 +103,7 @@ const ViewDetailEnquiry = () => {
             "No Detail found"
         );
 
+
     const WorkExperienceData = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/work-experiences/",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -21,6 +21,7 @@ const ViewEnquiry = () => {
   const [servicesData, setServicesData] = useState([]);
   const [StatusData, serStatusData] = useState([]);
   const [errs, setErrs] = useState("");
+
 
   useEffect(() => {
     fetchEnquiries();
@@ -51,6 +52,41 @@ const ViewEnquiry = () => {
       console.log("error", error);
     }
   };
+
+
+  const updateDataOnServer = async (data) => {
+    try {
+      const url = `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`; // Use the correct URL and endpoint
+      const response = await fetch(url, {
+        method: "PATCH", // or 'PATCH'
+        headers: {
+          "Content-Type": "application/json",
+          // Include other headers as required, such as Authorization
+        },
+        body: JSON.stringify(data),
+      });
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Update successful:", responseData);
+      } else {
+        console.error("Update failed:", responseData);
+      }
+    } catch (error) {
+      console.error("Failed to update data:", error);
+    }
+  };
+
+  // Function to handle the cell value change
+  const handleCellValueChanged = async (params) => {
+    // Extract the updated data from the params
+    const updatedRowData = params.data;
+
+    // Call your existing API update function
+    await updateDataOnServer(updatedRowData);
+  };
+
+
+
 
   const fetchEnquiries = () =>
     fetchData(
@@ -128,43 +164,6 @@ const ViewEnquiry = () => {
       "No EnquiryStatus Data found"
     );
 
-  //   const handleCellValueChanged = async (event) => {
-  //     const { data, colDef, newValue, oldValue } = event;
-  //     if (newValue !== oldValue) {
-  //       const updatedRows = EnquiryData.map((row) =>
-  //         row.id === data.id ? { ...row, [colDef.field]: newValue } : row
-  //       );
-  //       setEnquiryData(updatedRows);
-
-  //       const update = { id: data.id, [colDef.field]: newValue };
-  //       console.log(update);
-
-  //       try {
-  //         const response = await fetch(
-  //           `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`,
-  //           {
-  //             method: "PUT",
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //             body: JSON.stringify(update),
-  //           }
-  //         );
-
-  //         if (!response.ok) {
-  //           setEnquiryData(
-  //             EnquiryData.map((row) =>
-  //               row.id === data.id ? { ...row, [colDef.field]: oldValue } : row
-  //             )
-  //           );
-  //         }
-
-  //         console.log("Update successful");
-  //       } catch (error) {
-  //         console.error("Error in updating data:", error);
-  //       }
-  //     }
-  //   };
 
   const columnDefs = [
     {
@@ -243,7 +242,7 @@ const ViewEnquiry = () => {
                       columnDefs={columnDefs}
                       pagination={true}
                       paginationPageSize={10}
-                    //   onCellValueChanged={handleCellValueChanged}
+                      onCellValueChanged={handleCellValueChanged}
                     />
                   </div>
                 )}
