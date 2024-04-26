@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Multiselect from 'multiselect-react-dropdown';
-
 
 const AddDetailEnquiry = (props) => {
     const [detailEnquiry, setDetailEnquiry] = useState({
@@ -29,7 +27,7 @@ const AddDetailEnquiry = (props) => {
         Ielts_Result: "",
         Toefl_Result: "",
         PTE_Result: "",
-        Duolingo_Result: " ",
+        Duolingo_Result: 1,
         Gre_Result: "",
         Gmat_Result: "",
         Work_Experience_Document: "",
@@ -46,22 +44,24 @@ const AddDetailEnquiry = (props) => {
 
         const newValue = files ? files[0] : value;
 
-        if (name === "Interested_Services") {
-            console.log(value);
-            newValue = value.map((val) => ({
-                id: val.id,
-                Services: val.Services,
-                Price: val.Price,
+        if (e.target.multiple) {
+            const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+            setDetailEnquiry((prevState) => ({
+                ...prevState,
+                [name]: selectedOptions,
+            }));
+        } else {
+            setDetailEnquiry((prevState) => ({
+                ...prevState,
+                [name]: newValue,
             }));
         }
-
-        setDetailEnquiry((prevState) => ({
-            ...prevState,
-            [name]: newValue,
-        }));
     };
 
+    console.log("---Service----->", detailEnquiry.Confirmed_Services)
+
     const handleSubmit = async (e) => {
+        const { name, value, files } = e.target;
         e.preventDefault();
 
         const formData = new FormData();
@@ -69,7 +69,10 @@ const AddDetailEnquiry = (props) => {
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
         formData.append("Tenth_Document", detailEnquiry.Tenth_Document);
         formData.append("Graduation_Marksheet", detailEnquiry.Graduation_Marksheet);
-        formData.append("Graduation_Certificate", detailEnquiry.Graduation_Certificate);
+        formData.append(
+            "Graduation_Certificate",
+            detailEnquiry.Graduation_Certificate
+        );
         formData.append("UG_Marksheet", detailEnquiry.UG_Marksheet);
         formData.append("UG_Certificate", detailEnquiry.UG_Certificate);
         formData.append("Ielts_Result", detailEnquiry.Ielts_Result);
@@ -78,13 +81,16 @@ const AddDetailEnquiry = (props) => {
         formData.append("Duolingo_Result", detailEnquiry.Duolingo_Result);
         formData.append("Gre_Result", detailEnquiry.Gre_Result);
         formData.append("Gmat_Result", detailEnquiry.Gmat_Result);
-        formData.append("Work_Experience_Document", detailEnquiry.Work_Experience_Document);
+        formData.append(
+            "Work_Experience_Document",
+            detailEnquiry.Work_Experience_Document
+        );
         formData.append("Passport_Document", detailEnquiry.Passport_Document);
         formData.append("Offer_Letter", detailEnquiry.Offer_Letter);
         formData.append("Refusal", detailEnquiry.Refusal);
         formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
         formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        // formData.append("followup", detailEnquiry.followup); 
+        // formData.append("followup", detailEnquiry.followup);
 
         Object.keys(detailEnquiry).forEach((key) => {
             if (
@@ -113,15 +119,19 @@ const AddDetailEnquiry = (props) => {
         });
 
         try {
-            const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/", {
-                method: "POST",
-                body: formData,
-            });
+            const response = await fetch(
+                "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
 
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(
-                    `API call failed with status: ${response.status}, body: ${JSON.stringify(data)}`
+                    `API call failed with status: ${response.status
+                    }, body: ${JSON.stringify(data)}`
                 );
             }
             toast.success("Enquiry submitted successfully!");
@@ -130,7 +140,6 @@ const AddDetailEnquiry = (props) => {
         }
     };
 
-
     return (
         <section className="section">
             <div className="row">
@@ -138,7 +147,11 @@ const AddDetailEnquiry = (props) => {
                     <form onSubmit={handleSubmit}>
                         <div className="card">
                             <div className="card-body">
-                                <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <ul
+                                    className="nav nav-pills mb-3"
+                                    id="pills-tab"
+                                    role="tablist"
+                                >
                                     <li className="nav-item" role="presentation">
                                         <button
                                             className="nav-link active"
@@ -323,10 +336,7 @@ const AddDetailEnquiry = (props) => {
                                                                 >
                                                                     <option selected>Select Enquiry</option>
                                                                     {props.EnquiryData.map((Enquiry) => (
-                                                                        <option
-                                                                            key={Enquiry.id}
-                                                                            value={Enquiry.id}
-                                                                        >
+                                                                        <option key={Enquiry.id} value={Enquiry.id}>
                                                                             {Enquiry.student_First_Name}
                                                                         </option>
                                                                     ))}
@@ -343,9 +353,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="current_education"
                                                                     onChange={handleChange}
-
                                                                 >
-                                                                    <option selected>Select Current Education</option>
+                                                                    <option selected>
+                                                                        Select Current Education
+                                                                    </option>
                                                                     {props.EducationData.map((Education) => (
                                                                         <option
                                                                             key={Education.id}
@@ -358,7 +369,10 @@ const AddDetailEnquiry = (props) => {
                                                             </div>
                                                         </div>
                                                         <div className="row mb-1">
-                                                            <label className="col-sm-4 col-form-label" required>
+                                                            <label
+                                                                className="col-sm-4 col-form-label"
+                                                                required
+                                                            >
                                                                 Tenth Education Details
                                                             </label>
                                                             <div className="col-md-6">
@@ -368,7 +382,9 @@ const AddDetailEnquiry = (props) => {
                                                                     name="Tenth_Education_Details"
                                                                     onChange={handleChange}
                                                                 >
-                                                                    <option selected>Select Current Education</option>
+                                                                    <option selected>
+                                                                        Select Current Education
+                                                                    </option>
                                                                     {props.EducationData.map((Education) => (
                                                                         <option
                                                                             key={Education.id}
@@ -391,7 +407,9 @@ const AddDetailEnquiry = (props) => {
                                                                     name="Twelveth_Education_Details"
                                                                     onChange={handleChange}
                                                                 >
-                                                                    <option selected>Select Twelveth Education</option>
+                                                                    <option selected>
+                                                                        Select Twelveth Education
+                                                                    </option>
                                                                     {props.EducationData.map((Education) => (
                                                                         <option
                                                                             key={Education.id}
@@ -414,7 +432,9 @@ const AddDetailEnquiry = (props) => {
                                                                     name="Graduation_Education_Details"
                                                                     onChange={handleChange}
                                                                 >
-                                                                    <option selected>Select Graduation Details</option>
+                                                                    <option selected>
+                                                                        Select Graduation Details
+                                                                    </option>
                                                                     {props.EducationData.map((Education) => (
                                                                         <option
                                                                             key={Education.id}
@@ -436,9 +456,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Work_Experience"
                                                                     onChange={handleChange}
-
                                                                 >
-                                                                    <option selected>Select Work Experience</option>
+                                                                    <option selected>
+                                                                        Select Work Experience
+                                                                    </option>
                                                                     {props.WorkExperience.map((Experience) => (
                                                                         <option
                                                                             key={Experience.id}
@@ -478,10 +499,7 @@ const AddDetailEnquiry = (props) => {
                                                                 >
                                                                     <option selected>Toefl</option>
                                                                     {props.ToeflData.map((Toefl) => (
-                                                                        <option
-                                                                            key={Toefl.id}
-                                                                            value={Toefl.id}
-                                                                        >
+                                                                        <option key={Toefl.id} value={Toefl.id}>
                                                                             {Toefl.Overall}
                                                                         </option>
                                                                     ))}
@@ -498,14 +516,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="ielts_Exam"
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>ielts</option>
                                                                     {props.IeltsData.map((Ielts) => (
-                                                                        <option
-                                                                            key={Ielts.id}
-                                                                            value={Ielts.id}
-                                                                        >
+                                                                        <option key={Ielts.id} value={Ielts.id}>
                                                                             {Ielts.Overall}
                                                                         </option>
                                                                     ))}
@@ -522,14 +536,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="PTE_Exam"
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>pte</option>
                                                                     {props.PteData.map((Pte) => (
-                                                                        <option
-                                                                            key={Pte.id}
-                                                                            value={Pte.id}
-                                                                        >
+                                                                        <option key={Pte.id} value={Pte.id}>
                                                                             {Pte.Overall}
                                                                         </option>
                                                                     ))}
@@ -546,7 +556,6 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Duolingo_Exam"
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>Duolingo</option>
                                                                     {props.DuolingoData.map((Duolingo) => (
@@ -570,14 +579,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Gre_Exam"
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>Gmat</option>
                                                                     {props.GreData.map((Gre) => (
-                                                                        <option
-                                                                            key={Gre.id}
-                                                                            value={Gre.id}
-                                                                        >
+                                                                        <option key={Gre.id} value={Gre.id}>
                                                                             {Gre.overall}
                                                                         </option>
                                                                     ))}
@@ -594,14 +599,10 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Gmat_Exam"
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>Gmat</option>
                                                                     {props.GmatData.map((Gmat) => (
-                                                                        <option
-                                                                            key={Gmat.id}
-                                                                            value={Gmat.id}
-                                                                        >
+                                                                        <option key={Gmat.id} value={Gmat.id}>
                                                                             {Gmat.overall}
                                                                         </option>
                                                                     ))}
@@ -630,7 +631,9 @@ const AddDetailEnquiry = (props) => {
                                                             Father Occupation
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <input type="text" className="form-control"
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
                                                                 name="Father_Occupation"
                                                                 onChange={handleChange}
                                                             />
@@ -644,7 +647,9 @@ const AddDetailEnquiry = (props) => {
                                                             Father Annual Income
                                                         </label>
                                                         <div className="col-md-6">
-                                                            <input type="number" className="form-control"
+                                                            <input
+                                                                type="number"
+                                                                className="form-control"
                                                                 name="Father_Annual_Income"
                                                                 onChange={handleChange}
                                                             />
@@ -677,7 +682,6 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Twelveth_Document"
                                                                 onChange={handleChange}
-
                                                             />
                                                         </div>
                                                     </div>
@@ -795,7 +799,6 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Ielts_Result"
                                                                 onChange={handleChange}
-
                                                             />
                                                         </div>
                                                     </div>
@@ -946,7 +949,7 @@ const AddDetailEnquiry = (props) => {
                                     >
                                         <div className="">
                                             <div className="card-body">
-                                                <form className="row g-3" >
+                                                <form className="row g-3">
                                                     <div className="row mb-3 mt-3">
                                                         <label
                                                             for="inputNumber"
@@ -990,10 +993,7 @@ const AddDetailEnquiry = (props) => {
                                                             >
                                                                 <option selected>Select Refusal Reasons</option>
                                                                 {props.RefusalData.map((Refusal) => (
-                                                                    <option
-                                                                        key={Refusal.id}
-                                                                        value={Refusal.id}
-                                                                    >
+                                                                    <option key={Refusal.id} value={Refusal.id}>
                                                                         {Refusal.Refusal_Reason}
                                                                     </option>
                                                                 ))}
@@ -1017,42 +1017,20 @@ const AddDetailEnquiry = (props) => {
                                                         <label className="col-sm-4 col-form-label">
                                                             Confirmed Services
                                                         </label>
-                                                        {/* <div className="col-md-6">
+                                                        <div className="col-md-6">
                                                             <select
-                                                                className="form-select"
-                                                                aria-label="Default select example"
+                                                                className="form-control"
                                                                 name="Confirmed_Services"
+                                                                value={detailEnquiry.Confirmed_Services}
                                                                 onChange={handleChange}
+                                                                multiple
                                                             >
-                                                                <option selected>Select Services Reasons</option>
-                                                                {props.ServicesData.map((Services) => (
-                                                                    <option
-                                                                        key={Services.id}
-                                                                        value={Services.id}
-                                                                    >
-                                                                        {Services.Services}
+                                                                {props.ServicesData.map((services) => (
+                                                                    <option key={services.id} value={services.id}>
+                                                                        {services.Services}
                                                                     </option>
                                                                 ))}
                                                             </select>
-                                                        </div> */}
-                                                        <div className="col-md-6">
-                                                            <Multiselect
-                                                                options={props.ServicesData.map((services) => ({
-                                                                    key: services.id,
-                                                                    value: services.id,
-                                                                    label: services.Services
-                                                                }))}
-                                                                selectedValues={detailEnquiry.Confirmed_Services}
-                                                                onSelect={(selectedList, selectedItem) => {
-                                                                    // handle selection
-                                                                    // You can update formData.Interested_Services here
-                                                                }}
-                                                                onRemove={(selectedList, removedItem) => {
-                                                                    // handle removal
-                                                                    // You can update formData.Interested_Services here
-                                                                }}
-                                                                displayValue="label"
-                                                            />
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1081,10 +1059,7 @@ const AddDetailEnquiry = (props) => {
                                                             >
                                                                 <option selected>Select Enquiry Status</option>
                                                                 {props.statusData.map((Status) => (
-                                                                    <option
-                                                                        key={Status.id}
-                                                                        value={Status.id}
-                                                                    >
+                                                                    <option key={Status.id} value={Status.id}>
                                                                         {Status.status}
                                                                     </option>
                                                                 ))}
@@ -1142,9 +1117,9 @@ const AddDetailEnquiry = (props) => {
                             </div>
                         </div>
                     </form>
-                </div >
-            </div >
-        </section >
+                </div>
+            </div>
+        </section>
     );
 };
 

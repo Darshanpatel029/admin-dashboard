@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Multiselect from 'multiselect-react-dropdown';
+
 
 const AddEnquiry = (props) => {
   const [formData, setFormData] = useState({
@@ -26,12 +26,14 @@ const AddEnquiry = (props) => {
     level_applying_for: "",
     course_interested: "",
     intake_interested: "",
-    Interested_Services: "",
+    Interested_Services: [],
     assigned_users: "",
     created_by: 1,
     enquiry_status: "",
     notes: "",
   });
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,7 +51,6 @@ const AddEnquiry = (props) => {
       }));
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -581,25 +582,22 @@ const AddEnquiry = (props) => {
                               Interested Services
                             </label>
                             <div className="col-md-6">
-                              <Multiselect
-                                options={props.servicesData.map((services) => ({
-                                  key: services.id,
-                                  value: services.id,
-                                  label: services.Services
-                                }))}
-                                selectedValues={formData.Interested_Services}
-                                onSelect={(selectedList, selectedItem) => {
-                                  // handle selection
-                                  // You can update formData.Interested_Services here
-                                }}
-                                onRemove={(selectedList, removedItem) => {
-                                  // handle removal
-                                  // You can update formData.Interested_Services here
-                                }}
-                                displayValue="label"
-                              />
+                              <select
+                                className="form-control"
+                                name="Interested_Services"
+                                value={formData.Interested_Services}
+                                onChange={handleChange}
+                                multiple
+                              >
+                                {props.servicesData.map((services) => (
+                                  <option key={services.id} value={services.id}>
+                                    {services.Services}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                           </div>
+
                         </div>
                       </div>
                     </div>
