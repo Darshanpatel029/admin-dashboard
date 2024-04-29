@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
-// import EditIcon from "./EditIcon";
 
 const ViewEnquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +20,6 @@ const ViewEnquiry = () => {
   const [servicesData, setServicesData] = useState([]);
   const [StatusData, serStatusData] = useState([]);
   const [errs, setErrs] = useState("");
-
 
   useEffect(() => {
     fetchEnquiries();
@@ -53,7 +51,6 @@ const ViewEnquiry = () => {
     }
   };
 
-
   const updateDataOnServer = async (data) => {
     try {
       const url = `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`; // Use the correct URL and endpoint
@@ -84,9 +81,6 @@ const ViewEnquiry = () => {
     // Call your existing API update function
     await updateDataOnServer(updatedRowData);
   };
-
-
-
 
   const fetchEnquiries = () =>
     fetchData(
@@ -164,12 +158,35 @@ const ViewEnquiry = () => {
       "No EnquiryStatus Data found"
     );
 
+  // const deleteEnquiry = async (id) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${id}/`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       // Remove the deleted row from the state
+  //       setEnquiryData(EnquiryData.filter((enquiry) => enquiry.id !== id));
+  //     } else {
+  //       console.error("Failed to delete enquiry");
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to delete enquiry:", error);
+  //   }
+  // };
 
   const columnDefs = [
+
     {
       headerName: "Student First Name",
       field: "student_First_Name",
       editable: true,
+
     },
     {
       headerName: "Student Last Name",
@@ -177,10 +194,15 @@ const ViewEnquiry = () => {
       editable: true,
     },
     { headerName: "Student Email", field: "student_email", editable: true },
-    { headerName: "Country Interested", field: "country_interested.country" },
+    {
+      headerName: "Country Interested",
+      field: "country_interested.country",
+      editable: true,
+    },
     {
       headerName: "University Interested",
       field: "university_interested.univ_name",
+      editable: true,
     },
     {
       headerName: "Interested Service",
@@ -191,15 +213,40 @@ const ViewEnquiry = () => {
         ).join(", ");
         return services || "No services";
       },
+      editable: true,
     },
-    { headerName: "Course Interested", field: "course_interested.course_name" },
-    { headerName: "Level Applying For", field: "level_applying_for.levels" },
-    { headerName: "Intake Interested", field: "intake_interested.intake_Name" },
-    { headerName: "Assigned Users", field: "assigned_users.username" },
-    { headerName: "Enquiry Status", field: "enquiry_status.status" },
-    { headerName: "Notes", field: "notes" },
-    { headerName: "Total Price", field: "" },
-    { headerName: "Source Inquiry", field: "Source_Enquiry.Source" },
+    {
+      headerName: "Course Interested",
+      field: "course_interested.course_name",
+      editable: true,
+    },
+    {
+      headerName: "Level Applying For",
+      field: "level_applying_for.levels",
+      editable: true,
+    },
+    {
+      headerName: "Intake Interested",
+      field: "intake_interested.intake_Name",
+      editable: true,
+    },
+    {
+      headerName: "Assigned Users",
+      field: "assigned_users.username",
+      editable: true,
+    },
+    {
+      headerName: "Enquiry Status",
+      field: "enquiry_status.status",
+      editable: true,
+    },
+    { headerName: "Notes", field: "notes", editable: true },
+    { headerName: "Total Price", field: "", editable: true },
+    {
+      headerName: "Source Inquiry",
+      field: "Source_Enquiry.Source",
+      editable: true,
+    },
   ];
 
   return (
@@ -240,6 +287,7 @@ const ViewEnquiry = () => {
                     <AgGridReact
                       rowData={EnquiryData}
                       columnDefs={columnDefs}
+                      rowSelection="multiple"
                       pagination={true}
                       paginationPageSize={10}
                       onCellValueChanged={handleCellValueChanged}
