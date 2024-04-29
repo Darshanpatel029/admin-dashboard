@@ -61,7 +61,6 @@ const AddDetailEnquiry = (props) => {
     console.log("---Service----->", detailEnquiry.Confirmed_Services)
 
     const handleSubmit = async (e) => {
-        const { name, value, files } = e.target;
         e.preventDefault();
 
         const formData = new FormData();
@@ -583,7 +582,7 @@ const AddDetailEnquiry = (props) => {
                                                                     <option selected>Gmat</option>
                                                                     {props.GreData.map((Gre) => (
                                                                         <option key={Gre.id} value={Gre.id}>
-                                                                            {Gre.overall}
+                                                                            {Gre.Overall}
                                                                         </option>
                                                                     ))}
                                                                 </select>
@@ -603,7 +602,7 @@ const AddDetailEnquiry = (props) => {
                                                                     <option selected>Gmat</option>
                                                                     {props.GmatData.map((Gmat) => (
                                                                         <option key={Gmat.id} value={Gmat.id}>
-                                                                            {Gmat.overall}
+                                                                            {Gmat.Overall}
                                                                         </option>
                                                                     ))}
                                                                 </select>
