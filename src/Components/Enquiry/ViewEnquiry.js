@@ -22,7 +22,8 @@ const ViewEnquiry = () => {
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
-    fetchEnquiries();
+    const token = localStorage.getItem("token");
+    fetchEnquiries(token);
     fetchSourceData();
     fetchEducationData();
     fetchIntrestedCountryData();
@@ -37,7 +38,12 @@ const ViewEnquiry = () => {
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
-      const response = await fetch(url);
+      const token = localStorage.getItem("token");
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.status === 200) {
         const data = await response.json();
         setter(data);
