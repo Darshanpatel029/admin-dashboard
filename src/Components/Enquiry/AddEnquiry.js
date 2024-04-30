@@ -33,11 +33,8 @@ const AddEnquiry = (props) => {
     notes: "",
   });
 
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // If it's a multi-select dropdown, handle multiple selections
     if (e.target.multiple) {
       const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
       setFormData((prevState) => ({
@@ -55,7 +52,7 @@ const AddEnquiry = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiURL =
-      "https://cloudconnectcampaign.com/espicrmnew/api/enquiry_create/";
+      "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/";
     const requestOptions = {
       method: "POST",
       headers: {

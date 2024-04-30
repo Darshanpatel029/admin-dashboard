@@ -45,7 +45,8 @@ const AddDetailEnquiry = (props) => {
         const newValue = files ? files[0] : value;
 
         if (e.target.multiple) {
-            const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+            const selectedOptions = Array.from(e.target.selectedOptions).map(option => parseInt(option.value));
+
             setDetailEnquiry((prevState) => ({
                 ...prevState,
                 [name]: selectedOptions,
@@ -57,8 +58,8 @@ const AddDetailEnquiry = (props) => {
             }));
         }
     };
-
     console.log("---Service----->", detailEnquiry.Confirmed_Services)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

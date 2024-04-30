@@ -9,48 +9,48 @@ import AddAssesment from "./AddAssesment";
 
 const ViewAssesment = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [EnquiryData, setEnquiryData] = useState([]);
+    const [AssessmenData, setAssessmentData] = useState([]);
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
-        fetchEnquiries();
+        fetchAssessment();
     }, []);
 
-    const fetchEnquiries = async () => {
+    const fetchData = async (url, setter, errorMessage) => {
         try {
-            const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/assesment/"
-            );
-            console.log(response);
+            const response = await fetch(url);
             if (response.status === 200) {
                 const data = await response.json();
-                const enquiriesWithNo = data.map((enquiry, index) => ({
-                    ...enquiry,
-                    no: index + 1,
-                }));
-                setEnquiryData(enquiriesWithNo);
+                setter(data);
             } else if (response.status === 500) {
-                setErrs("No Inquiry found");
-            }
-            else {
-                setErrs("Error While Fetching Data");
+                setErrs(errorMessage);
+            } else {
+                setErrs("No Data Found");
             }
         } catch (error) {
             console.log("error", error);
         }
     };
 
+    const fetchAssessment = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/",
+            setAssessmentData,
+            "No Inquiry found"
+        );
+
+
 
     const columnDefs = [
-        { headerName: "No", field: "no" },
-        { headerName: "Current Enquiry", field: "Current_Enquiry" },
-        { headerName: "IELTS Exam", field: "ielts_Exam" },
-        { headerName: "Toefl Exam", field: "Toefl_Exam" },
-        { headerName: "Current Education Details", field: "Current_Education_Details" },
-        { headerName: "Father Occupation", field: "Father_Occupation" },
-        { headerName: "Father Annual Income", field: "Father_Annual_Income" },
-        { headerName: "Refusal", field: "Refusal" },
-        { headerName: "Pending Amount", field: "0" },
+        { headerName: "Enquiry", field: "enquiry" },
+        { headerName: "Student country", field: "student_country" },
+        { headerName: "University", field: "university" },
+        { headerName: "Level applying for", field: "level_applying_for" },
+        { headerName: "Course interested", field: "course_interested" },
+        { headerName: "Intake interested", field: "intake_interested" },
+        { headerName: "Specialisation", field: "specialisation" },
+        { headerName: "Application fee", field: "application_fee" },
+        { headerName: "Tution fee", field: "tution_fee" },
 
     ];
 
@@ -89,7 +89,7 @@ const ViewAssesment = () => {
                                     ) : (
                                         <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
                                             <AgGridReact
-                                                rowData={EnquiryData}
+                                                rowData={AssessmenData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
                                                 paginationPageSize={10}

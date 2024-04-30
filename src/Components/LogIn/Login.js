@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
-// import * as Yup from "yup";
-// import { toast } from "react-toastify";
-
-
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,37 +16,39 @@ const Login = () => {
         });
     };
 
-    const validateForm = () => {
-        const newErrors = {};
-        if (!userCredentials.username) {
-            newErrors.username = "Please enter your username.";
-        }
-        if (!userCredentials.password) {
-            newErrors.password = "Please enter your password!";
-        }
-        return newErrors;
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length === 0) {
-            login();
-        } else {
-            setErrors(formErrors);
-        }
-    };
+        try {
+            const response = await fetch('https://cloudconnectcampaign.com/espicrmnew/api/login/', {
+                method: 'POST',
 
-    const login = () => {
-        if (userCredentials.username === 'admin' && userCredentials.password === 'admin') {
-            localStorage.setItem('user', JSON.stringify(userCredentials));
-            navigate('/ViewEnquiry');
-        } else {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(userCredentials),
+            });
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                localStorage.setItem('token', data.access); // Store the token in local storage
+                navigate('/ViewEnquiry');
+            } else {
+                setErrors({
+                    submit: data.message || 'Invalid username or password'
+                });
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
             setErrors({
-                submit: 'Invalid username or password'
+                submit: 'An error occurred. Please try again later.'
             });
         }
     };
+
+
     return (
         <main>
             <div className="container">

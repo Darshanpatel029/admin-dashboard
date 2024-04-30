@@ -194,7 +194,7 @@ const ViewDetailEnquiry = () => {
         },
         { headerName: "Father Occupation", field: "Father_Occupation" },
         { headerName: "Father Annual Income", field: "Father_Annual_Income" },
-        { headerName: "Refusal", field: "Refusal" },
+        { headerName: "Refusal", field: "Refusal.Refusal_Reason" },
         { headerName: "Pending Amount", field: "0" },
     ];
 
