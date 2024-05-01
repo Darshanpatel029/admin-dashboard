@@ -29,10 +29,10 @@ const ViewApplication = () => {
                 }));
                 setEnquiryData(enquiriesWithNo);
             } else if (response.status === 500) {
-                setErrs("No Inquiry found");
+                setErrs("No Application found");
             }
             else {
-                setErrs("Error While Fetching Data");
+                setErrs("No Data found");
             }
         } catch (error) {
             console.log("error", error);

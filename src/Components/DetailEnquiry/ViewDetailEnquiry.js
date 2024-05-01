@@ -26,7 +26,8 @@ const ViewDetailEnquiry = () => {
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
-        fetchDetailEnquiries();
+        const token = localStorage.getItem("token");
+        fetchDetailEnquiries(token);
         fetchEnquiry();
         EduLevel();
         WorkExperienceData();
@@ -68,7 +69,12 @@ const ViewDetailEnquiry = () => {
 
     const fetchData = async (url, setter, errorMessage) => {
         try {
-            const response = await fetch(url);
+            const token = localStorage.getItem("token");
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 const data = await response.json();
                 setter(data);

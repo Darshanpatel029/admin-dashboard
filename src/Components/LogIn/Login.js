@@ -21,7 +21,6 @@ const Login = () => {
         try {
             const response = await fetch('https://cloudconnectcampaign.com/espicrmnew/api/login/', {
                 method: 'POST',
-
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -33,7 +32,7 @@ const Login = () => {
             const data = await response.json();
             console.log(data);
             if (response.ok) {
-                localStorage.setItem('token', data.access); // Store the token in local storage
+                localStorage.setItem('token', data.access);
                 navigate('/ViewEnquiry');
             } else {
                 setErrors({
