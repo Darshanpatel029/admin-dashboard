@@ -8,49 +8,47 @@ import AddApplication from "./AddApplication";
 
 const ViewApplication = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [EnquiryData, setEnquiryData] = useState([]);
+    const [applicationData, setapplicationData] = useState([]);
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
-        fetchEnquiries();
+        fetchApplications();
     }, []);
 
-    const fetchEnquiries = async () => {
+    const fetchData = async (url, setter, errorMessage) => {
         try {
-            const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/application/"
-            );
-            console.log(response);
+            const token = localStorage.getItem("token");
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 const data = await response.json();
-                const enquiriesWithNo = data.map((enquiry, index) => ({
-                    ...enquiry,
-                    no: index + 1,
-                }));
-                setEnquiryData(enquiriesWithNo);
+                setter(data);
             } else if (response.status === 500) {
-                setErrs("No Application found");
-            }
-            else {
-                setErrs("No Data found");
+                setErrs(errorMessage);
+            } else {
+                setErrs("No Data Found");
             }
         } catch (error) {
             console.log("error", error);
         }
     };
 
+    const fetchApplications = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/application/",
+            setapplicationData,
+            "No Detail Inquiry found"
+        );
 
     const columnDefs = [
-        { headerName: "No", field: "no" },
-        { headerName: "Current Enquiry", field: "Current_Enquiry" },
-        { headerName: "IELTS Exam", field: "ielts_Exam" },
-        { headerName: "Toefl Exam", field: "Toefl_Exam" },
-        { headerName: "Current Education Details", field: "Current_Education_Details" },
-        { headerName: "Father Occupation", field: "Father_Occupation" },
-        { headerName: "Father Annual Income", field: "Father_Annual_Income" },
-        { headerName: "Refusal", field: "Refusal" },
-        { headerName: "Pending Amount", field: "0" },
-
+        { headerName: "Application", field: "application.enquiry.Current_Enquiry.student_First_Name" },
+        { headerName: "Application Status", field: "application_status.App_status" },
+        { headerName: "SOP", field: "sop" },
+        { headerName: "Passport", field: "passport" },
+        { headerName: "CV", field: "cv" },
     ];
 
     return (
@@ -87,7 +85,7 @@ const ViewApplication = () => {
                                     ) : (
                                         <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
                                             <AgGridReact
-                                                rowData={EnquiryData}
+                                                rowData={applicationData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
                                                 paginationPageSize={10}

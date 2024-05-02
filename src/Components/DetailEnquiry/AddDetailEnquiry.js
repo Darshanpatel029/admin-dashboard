@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const AddDetailEnquiry = (props) => {
@@ -39,13 +39,27 @@ const AddDetailEnquiry = (props) => {
         // followup: "",
     });
 
+    useEffect(() => {
+        // Fetch token from local storage
+        const token = localStorage.getItem("token");
+        // If token exists, add it to the headers
+        if (token) {
+            setDetailEnquiry((prevState) => ({
+                ...prevState,
+                token: token,
+            }));
+        }
+    }, []);
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
 
         const newValue = files ? files[0] : value;
 
         if (e.target.multiple) {
-            const selectedOptions = Array.from(e.target.selectedOptions).map(option => parseInt(option.value));
+            const selectedOptions = Array.from(e.target.selectedOptions).map(
+                (option) => parseInt(option.value)
+            );
 
             setDetailEnquiry((prevState) => ({
                 ...prevState,
@@ -58,12 +72,10 @@ const AddDetailEnquiry = (props) => {
             }));
         }
     };
-    console.log("---Service----->", detailEnquiry.Confirmed_Services)
-
+    // console.log("---Service----->", detailEnquiry.Confirmed_Services)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const formData = new FormData();
 
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
@@ -119,24 +131,34 @@ const AddDetailEnquiry = (props) => {
         });
 
         try {
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    ...(detailEnquiry.token && {
+                        Authorization: `Bearer ${detailEnquiry.token}`,
+                    }),
+                },
+                body: formData,
+            };
+
             const response = await fetch(
                 "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
-                {
-                    method: "POST",
-                    body: formData,
-                }
+                requestOptions
             );
 
             const data = await response.json();
+
             if (!response.ok) {
                 throw new Error(
                     `API call failed with status: ${response.status
                     }, body: ${JSON.stringify(data)}`
                 );
             }
+
             toast.success("Enquiry submitted successfully!");
         } catch (error) {
-            toast.error("Failed to submit enquiry. See console for details.");
+            toast.error("Failed to submit enquiry.");
         }
     };
 

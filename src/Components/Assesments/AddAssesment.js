@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AddAssesment = (props) => {
     const [assessmentData, setAssessmentData] = useState({
@@ -17,11 +18,40 @@ const AddAssesment = (props) => {
         course_link: "",
         notes: "",
     });
+
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setAssessmentData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/assesment/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(assessmentData),
+            });
+            if (!response.ok) {
+                throw new Error("Failed to submit form");
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+
+        }
+    };
     return (
         <section className="section">
             <div className="row">
                 <div className="col">
-                    <form >
+                    <form onSubmit={handleSubmit}>
                         <div className="card">
                             <div className="card-body">
                                 <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -84,20 +114,23 @@ const AddAssesment = (props) => {
                                                                 Assigned users
                                                             </label>
                                                             <div className="col-md-6">
-                                                                {/* <select className="form-select"
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select menu</option>
-                                                                {props.IntrestedCountryData.map(
-                                                                    (countryInterested) => (
+                                                                <select
+                                                                    className="form-select"
+                                                                    name="assigned_users"
+                                                                    aria-label="Default select example"
+                                                                    value={assessmentData.assigned_users}
+                                                                    onChange={handleChange}
+                                                                >
+                                                                    <option selected>Select User</option>
+                                                                    {props.userData.map((User) => (
                                                                         <option
-                                                                            key={countryInterested.id}
-                                                                            value={countryInterested.id}
+                                                                            key={User.id}
+                                                                            value={User.id}
                                                                         >
-                                                                            {countryInterested.country}
+                                                                            {User.current_education}
                                                                         </option>
-                                                                    )
-                                                                )}
-                                                            </select> */}
+                                                                    ))}
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-1">
@@ -107,7 +140,10 @@ const AddAssesment = (props) => {
                                                             <div className="col-md-6">
                                                                 <select
                                                                     className="form-select"
+                                                                    name="enquiry"
                                                                     aria-label="Default select example"
+                                                                    value={assessmentData.enquiry}
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>Open this select menu</option>
                                                                     {props.EnquiryData.map((Enquiry) => (
@@ -125,8 +161,10 @@ const AddAssesment = (props) => {
                                                             <div className="col-md-6">
                                                                 <select
                                                                     className="form-select"
+                                                                    name="student_country"
                                                                     aria-label="Default select example"
-                                                                // value={assessmentData.student_country}
+                                                                    value={assessmentData.student_country}
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select country
@@ -162,7 +200,9 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                // value={assessmentData.student_country}
+                                                                    value={assessmentData.student_country}
+                                                                    name="student_country"
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select country
@@ -186,7 +226,9 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                // value={assessmentData.student_country}
+                                                                    name="student_country"
+                                                                    value={assessmentData.student_country}
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select Course Level
@@ -207,7 +249,9 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                // value={assessmentData.student_country}
+                                                                    name="student_country"
+                                                                    value={assessmentData.student_country}
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select Course Level
@@ -228,7 +272,9 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                // value={assessmentData.intake_interested}
+                                                                    name="intake_interested"
+                                                                    value={assessmentData.intake_interested}
+                                                                    onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select Course Level
@@ -253,7 +299,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.specialisation}
+                                                                    name="specialisation"
+                                                                    value={assessmentData.specialisation}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -268,7 +316,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.duration}
+                                                                    name="duration"
+                                                                    value={assessmentData.duration}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -283,7 +333,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.application_fee}
+                                                                    name="application_fee"
+                                                                    value={assessmentData.application_fee}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -298,7 +350,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.tution_fee}
+                                                                    name="tution_fee"
+                                                                    value={assessmentData.tution_fee}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -313,7 +367,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.fee_currency}
+                                                                    name="fee_currency"
+                                                                    value={assessmentData.fee_currency}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -328,7 +384,9 @@ const AddAssesment = (props) => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                // value={assessmentData.course_link}
+                                                                    name="course_link"
+                                                                    value={assessmentData.course_link}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </div>
@@ -357,7 +415,9 @@ const AddAssesment = (props) => {
                                                             <textarea
                                                                 className="form-control"
                                                                 style={{ height: "100px" }}
-                                                            // value={assessmentData.notes}
+                                                                name="notes"
+                                                                value={assessmentData.notes}
+                                                                onChange={handleChange}
                                                             ></textarea>
                                                         </div>
                                                     </div>

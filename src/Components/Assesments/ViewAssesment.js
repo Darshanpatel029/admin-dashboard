@@ -97,12 +97,12 @@ const ViewAssesment = () => {
         );
 
     const columnDefs = [
-        { headerName: "Enquiry", field: "enquiry" },
-        { headerName: "Student country", field: "student_country" },
-        { headerName: "University", field: "university" },
-        { headerName: "Level applying for", field: "level_applying_for" },
-        { headerName: "Course interested", field: "course_interested" },
-        { headerName: "Intake interested", field: "intake_interested" },
+        { headerName: "Enquiry", field: "enquiry.Current_Enquiry.student_First_Name" },
+        { headerName: "Student country", field: "student_country.country" },
+        { headerName: "University", field: "university.univ_name" },
+        { headerName: "Level applying for", field: "level_applying_for.levels" },
+        { headerName: "Course interested", field: "course_interested.course_name" },
+        { headerName: "Intake interested", field: "intake_interested.intake_Name" },
         { headerName: "Specialisation", field: "specialisation" },
         { headerName: "Application fee", field: "application_fee" },
         { headerName: "Tution fee", field: "tution_fee" },
