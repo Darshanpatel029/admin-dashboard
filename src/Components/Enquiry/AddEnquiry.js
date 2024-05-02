@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-
 const AddEnquiry = (props) => {
   const [formData, setFormData] = useState({
     student_First_Name: "",
@@ -36,7 +35,9 @@ const AddEnquiry = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (e.target.multiple) {
-      const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+      const selectedOptions = Array.from(e.target.selectedOptions).map(
+        (option) => option.value
+      );
       setFormData((prevState) => ({
         ...prevState,
         [name]: selectedOptions,
@@ -51,13 +52,15 @@ const AddEnquiry = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiURL =
-      "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/";
+    const apiURL = "https://cloudconnectcampaign.com/espicrmnew/api/create-enquiry/";
+    const token = localStorage.getItem("token");
+
     const requestOptions = {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     };
@@ -73,7 +76,7 @@ const AddEnquiry = (props) => {
       }
       toast.success("Enquiry submitted successfully!");
     } catch (error) {
-      toast.error("Failed to submit enquiry. See console for details.");
+      toast.error("Failed to submit enquiry.");
     }
   };
 
@@ -594,7 +597,6 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -621,7 +623,12 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                               >
                                 <option selected>Select Source</option>
-                                <option value="1">One</option>
+                                <option value="1" >admin</option>
+                                {/* {props.userData.map((user) => (
+                                  <option key={user.id} value={user.id}>
+                                    {user.username}
+                                  </option>
+                                ))} */}
                               </select>
                             </div>
                           </div>

@@ -17,6 +17,7 @@ const ViewEnquiry = () => {
   const [levelData, setLevelData] = useState([]);
   const [courseData, setCourseData] = useState([]);
   const [IntakeData, setIntakeData] = useState([]);
+  const [userData, setuserData] = useState([]);
   const [servicesData, setServicesData] = useState([]);
   const [StatusData, serStatusData] = useState([]);
   const [errs, setErrs] = useState("");
@@ -31,6 +32,7 @@ const ViewEnquiry = () => {
     fetchUniversityData();
     fetchLevelData();
     fetchCourseData();
+    fetchuserData(token);
     fetchIntakeData();
     fetchServicesData();
     fetchStatusData();
@@ -147,6 +149,12 @@ const ViewEnquiry = () => {
     fetchData(
       "https://cloudconnectcampaign.com/espicrmnew/api/intakes/",
       setIntakeData,
+      "No Intake Data found"
+    );
+  const fetchuserData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+      setuserData,
       "No Intake Data found"
     );
 
@@ -324,6 +332,7 @@ const ViewEnquiry = () => {
               level={levelData}
               courseData={courseData}
               IntakeData={IntakeData}
+              userData={userData}
               servicesData={servicesData}
               StatusData={StatusData}
             />
