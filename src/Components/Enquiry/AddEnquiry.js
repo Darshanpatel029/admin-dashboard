@@ -241,8 +241,8 @@ const AddEnquiry = (props) => {
                               <select
                                 type="number"
                                 name="Source_Enquiry"
-                                className="form-select"
                                 value={formData.Source_Enquiry}
+                                className="form-select"
                                 onChange={handleChange}
                               >
                                 <option selected>Select Source</option>
@@ -623,12 +623,12 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                               >
                                 <option selected>Select Source</option>
-                                <option value="1" >admin</option>
-                                {/* {props.userData.map((user) => (
+                                {/* <option value="1" >admin</option> */}
+                                {props.userData.map((user) => (
                                   <option key={user.id} value={user.id}>
                                     {user.username}
                                   </option>
-                                ))} */}
+                                ))}
                               </select>
                             </div>
                           </div>

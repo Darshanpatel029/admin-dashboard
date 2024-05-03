@@ -1,14 +1,140 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
-const AddApplication = () => {
+const AddApplication = (props) => {
+  const [application, setApplication] = useState({
+    application: "",
+    application_status: "",
+
+    diploma_marksheet: "",
+    bachelor_marksheet: "",
+    master_marksheet: "",
+
+    ielts: "",
+    gre: "",
+    toefl: "",
+    gmat: "",
+    pte: "",
+    work_experience: "",
+    other_documents: "",
+
+    sop: "",
+    cv: "",
+    passport: "",
+  });
+
+  useEffect(() => {
+    // Fetch token from local storage
+    const token = localStorage.getItem("token");
+    // If token exists, add it to the headers
+    if (token) {
+      setApplication((prevState) => ({
+        ...prevState,
+        token: token,
+      }));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    const newValue = files ? files[0] : value;
+    setApplication((prevState) => ({
+      ...prevState,
+      [name]: newValue,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("diploma_marksheet", application.diploma_marksheet);
+    formData.append("bachelor_marksheet", application.bachelor_marksheet);
+    formData.append("master_marksheet", application.master_marksheet);
+
+    formData.append("ielts", application.ielts);
+    formData.append("gre", application.gre);
+    formData.append("toefl", application.toefl);
+    formData.append("gmat", application.gmat);
+    formData.append("pte", application.pte);
+    formData.append("work_experience", application.work_experience);
+    formData.append("other_documents", application.other_documents);
+
+    formData.append("sop", application.sop);
+    formData.append("cv", application.cv);
+    formData.append("passport", application.passport);
+
+    Object.keys(application).forEach((key) => {
+      if (
+        key !== "diploma_marksheet" &&
+        key !== "bachelor_marksheet" &&
+        key !== "master_marksheet" &&
+        key !== "ielts" &&
+        key !== "gre" &&
+        key !== "toefl" &&
+        key !== "gmat" &&
+        key !== "pte" &&
+        key !== "work_experience" &&
+        key !== "other_documents" &&
+        key !== "Gre_Result" &&
+        key !== "Gmat_Result" &&
+        key !== "Work_Experience_Document" &&
+        key !== "Passport_Document" &&
+        key !== "sop" &&
+        key !== "cv" &&
+        key !== "passport"
+      ) {
+        formData.append(key, application[key]);
+      }
+    });
+
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          ...(application.token && {
+            Authorization: `Bearer ${application.token}`,
+          }),
+        },
+        body: formData,
+      };
+
+      const response = await fetch(
+        "https://cloudconnectcampaign.com/espicrmnew/api/application/",
+        requestOptions
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          `API call failed with status: ${response.status
+          }, body: ${JSON.stringify(data)}`
+        );
+      }
+
+      toast.success("Application submitted successfully!");
+    } catch (error) {
+      toast.error("Failed to submit Application.");
+    }
+  };
+
+
+  console.log(props.EnquiryData);
   return (
     <section className="section">
       <div className="row">
         <div className="col">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="card">
               <div className="card-body">
-                <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <ul
+                  className="nav nav-pills mb-3"
+                  id="pills-tab"
+                  role="tablist"
+                >
                   <li className="nav-item" role="presentation">
                     <button
                       className="nav-link active"
@@ -78,34 +204,50 @@ const AddApplication = () => {
                         <form className="row g-3">
                           <div className="col-md-12">
                             <div className="row mb-1">
-                              <label className="col-sm-4 col-form-label" required>
+                              <label
+                                className="col-sm-4 col-form-label"
+                                required
+                              >
                                 Application
                               </label>
                               <div className="col-md-6">
                                 <select
                                   className="form-select"
                                   aria-label="Default select example"
+                                  onChange={handleChange}
+                                  name="application"
+                                  value={application.application}
                                 >
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <option selected>Select Source</option>
+                                  {props.EnquiryData.map((Enquiry) => (
+                                    <option key={Enquiry.id} value={Enquiry.id}>
+                                      {Enquiry.enquiry.Current_Enquiry.student_First_Name}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
                             <div className="row mb-1">
-                              <label className="col-sm-4 col-form-label" required>
+                              <label
+                                className="col-sm-4 col-form-label"
+                                required
+                              >
                                 Application Status
                               </label>
                               <div className="col-md-6">
                                 <select
                                   className="form-select"
                                   aria-label="Default select example"
+                                  onChange={handleChange}
+                                  name="application_status"
+                                  value={application.application_status}
                                 >
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <option selected>Select Source</option>
+                                  {props.statusData.map((Status) => (
+                                    <option key={Status.id} value={Status.id}>
+                                      {Status.App_status}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
@@ -135,6 +277,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="diploma_marksheet"
+                              // value={application.diploma_marksheet}
                               />
                             </div>
                           </div>
@@ -150,6 +295,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="bachelor_marksheet"
+                              // value={application.bachelor_marksheet}
                               />
                             </div>
                           </div>
@@ -166,6 +314,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="master_marksheet"
+                              // value={application.master_marksheet}
                               />
                             </div>
                           </div>
@@ -194,6 +345,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="ielts"
+                              // value={application.ielts}
                               />
                             </div>
                           </div>
@@ -209,6 +363,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="gre"
+                              // value={application.gre}
                               />
                             </div>
                           </div>
@@ -225,6 +382,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="toefl"
+                              // value={application.toefl}
                               />
                             </div>
                           </div>
@@ -241,6 +401,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="gmat"
+                              // value={application.gmat}
                               />
                             </div>
                           </div>
@@ -256,6 +419,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="pte"
+                              // value={application.pte}
                               />
                             </div>
                           </div>
@@ -271,6 +437,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="work_experience"
+                              // value={application.work_experience}
                               />
                             </div>
                           </div>
@@ -286,6 +455,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="other_documents"
+                              // value={application.other_documents}
                               />
                             </div>
                           </div>
@@ -314,6 +486,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="sop"
+                              // value={application.sop}
                               />
                             </div>
                           </div>
@@ -329,6 +504,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="cv"
+                              // value={application.cv}
                               />
                             </div>
                           </div>
@@ -345,6 +523,9 @@ const AddApplication = () => {
                                 className="form-control"
                                 type="file"
                                 id="formFile"
+                                onChange={handleChange}
+                                name="passport"
+                              // value={application.passport}
                               />
                             </div>
                           </div>

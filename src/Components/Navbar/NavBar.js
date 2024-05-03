@@ -204,7 +204,7 @@ const NavBar = () => {
                         <ul
                             className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li>
-                                <Link className="dropdown-item d-flex align-items-center" to="/">
+                                <Link className="dropdown-item d-flex align-items-center" to="/LogIn">
                                     <i className="bi bi-box-arrow-right"></i>
                                     <span>Sign Out</span>
                                 </Link>

@@ -9,10 +9,14 @@ import AddApplication from "./AddApplication";
 const ViewApplication = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [applicationData, setapplicationData] = useState([]);
+    const [EnquiryData, setEnquiryData] = useState([]);
+    const [statusData, setstatusData] = useState([]);
     const [errs, setErrs] = useState("");
 
     useEffect(() => {
         fetchApplications();
+        fetchEnquiries();
+        fetchStatusData();
     }, []);
 
     const fetchData = async (url, setter, errorMessage) => {
@@ -43,13 +47,33 @@ const ViewApplication = () => {
             "No Detail Inquiry found"
         );
 
+    const fetchEnquiries = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
+            setEnquiryData,
+            "No Inquiry found"
+        );
+
+    const fetchStatusData = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/application-statuses/",
+            setstatusData,
+            "No Inquiry found"
+        );
     const columnDefs = [
-        { headerName: "Application", field: "application.enquiry.Current_Enquiry.student_First_Name" },
-        { headerName: "Application Status", field: "application_status.App_status" },
+        {
+            headerName: "Application",
+            field: "application.enquiry.Current_Enquiry.student_First_Name",
+        },
+        {
+            headerName: "Application Status",
+            field: "application_status.App_status",
+        },
         { headerName: "SOP", field: "sop" },
         { headerName: "Passport", field: "passport" },
         { headerName: "CV", field: "cv" },
     ];
+    console.log(applicationData)
 
     return (
         <div>
@@ -60,7 +84,7 @@ const ViewApplication = () => {
                             <li className="breadcrumb-item">
                                 <Link to="/">Home</Link>
                             </li>
-                            <li className="breadcrumb-item active">Assesments</li>
+                            <li className="breadcrumb-item active">Application</li>
                         </ol>
                     </nav>
                     <div>
@@ -79,15 +103,22 @@ const ViewApplication = () => {
                             <div>
                                 <div className="card-body">
                                     {errs ? (
-                                        <div className="alert alert-danger text-center" role="alert">
+                                        <div
+                                            className="alert alert-danger text-center"
+                                            role="alert"
+                                        >
                                             {errs}
                                         </div>
                                     ) : (
-                                        <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
+                                        <div
+                                            className="ag-theme-alpine"
+                                            style={{ height: "500px", width: "100%" }}
+                                        >
                                             <AgGridReact
                                                 rowData={applicationData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
+                                                rowSelection="multiple"
                                                 paginationPageSize={10}
                                             />
                                         </div>
@@ -97,15 +128,21 @@ const ViewApplication = () => {
                         </div>
                     </div>
                 </section>
-
             </main>
             {isModalOpen && (
-                <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)} size="lg">
+                <Modal
+                    show={isModalOpen}
+                    onHide={() => setIsModalOpen(false)}
+                    size="lg"
+                >
                     <Modal.Header closeButton>
                         <Modal.Title>Add Application</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddApplication />
+                        <AddApplication
+                            EnquiryData={EnquiryData}
+                            statusData={statusData}
+                        />
                     </Modal.Body>
                 </Modal>
             )}

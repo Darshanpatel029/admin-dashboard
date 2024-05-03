@@ -247,6 +247,7 @@ const ViewDetailEnquiry = () => {
                                                 rowData={DetailEnquiryData}
                                                 columnDefs={columnDefs}
                                                 pagination={true}
+                                                rowSelection="multiple"
                                                 paginationPageSize={10}
                                             />
                                         </div>
