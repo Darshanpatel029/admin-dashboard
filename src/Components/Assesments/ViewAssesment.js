@@ -15,6 +15,7 @@ const ViewAssesment = () => {
     const [universitiesData, setUniversities] = useState([]);
     const [courseData, setCourseData] = useState([]);
     const [levelData, setLevelData] = useState([]);
+    const [userData, setuserData] = useState([]);
     const [IntakeData, setIntakeData] = useState([]);
     const [errs, setErrs] = useState("");
 
@@ -22,6 +23,7 @@ const ViewAssesment = () => {
         const token = localStorage.getItem("token");
         fetchAssessment(token);
         fetchEnquiry();
+        fetchuserData();
         fetchIntrestedCountryData();
         fetchUniversityData();
         fetchLevelData();
@@ -57,6 +59,13 @@ const ViewAssesment = () => {
             "No Inquiry found"
         );
 
+    const fetchuserData = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+            setuserData,
+            "No Intake Data found"
+        );
+
     const fetchEnquiry = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/",
@@ -89,6 +98,7 @@ const ViewAssesment = () => {
             setLevelData,
             "No level Data found"
         );
+
     const fetchIntakeData = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/intakes/",
@@ -150,6 +160,7 @@ const ViewAssesment = () => {
                                             <AgGridReact
                                                 rowData={AssessmenData}
                                                 columnDefs={columnDefs}
+                                                rowSelection="multiple"
                                                 pagination={true}
                                                 paginationPageSize={10}
                                             />
@@ -178,6 +189,7 @@ const ViewAssesment = () => {
                             levelData={levelData}
                             courseData={courseData}
                             IntakeData={IntakeData}
+                            userData={userData}
                         />
                     </Modal.Body>
                 </Modal>

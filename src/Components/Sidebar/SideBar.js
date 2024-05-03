@@ -36,7 +36,7 @@ const SideBar = () => {
                 </li>
 
                 <li className="nav-item">
-                    <Link to="/" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" >
+                    <Link to="/LogIn" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" >
                         <i className="bi bi-box-arrow-in-right"></i>
                         <span>Sign Out</span>
                     </Link>

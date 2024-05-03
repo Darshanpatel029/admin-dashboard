@@ -30,11 +30,14 @@ const AddAssesment = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const token = localStorage.getItem("token");
         try {
             const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/assesment/", {
                 method: "POST",
                 headers: {
+                    Accept: "application/json",
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(assessmentData),
             });
@@ -122,12 +125,9 @@ const AddAssesment = (props) => {
                                                                     onChange={handleChange}
                                                                 >
                                                                     <option selected>Select User</option>
-                                                                    {props.userData.map((User) => (
-                                                                        <option
-                                                                            key={User.id}
-                                                                            value={User.id}
-                                                                        >
-                                                                            {User.current_education}
+                                                                    {props.userData.map((user) => (
+                                                                        <option key={user.id} value={user.id}>
+                                                                            {user.username}
                                                                         </option>
                                                                     ))}
                                                                 </select>
@@ -200,8 +200,8 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                    value={assessmentData.student_country}
-                                                                    name="student_country"
+                                                                    value={assessmentData.university}
+                                                                    name="university"
                                                                     onChange={handleChange}
                                                                 >
                                                                     <option selected>
@@ -226,8 +226,8 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                    name="student_country"
-                                                                    value={assessmentData.student_country}
+                                                                    name="level_applying_for"
+                                                                    value={assessmentData.level_applying_for}
                                                                     onChange={handleChange}
                                                                 >
                                                                     <option selected>
@@ -249,16 +249,16 @@ const AddAssesment = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                    name="student_country"
-                                                                    value={assessmentData.student_country}
+                                                                    name="course_interested"
+                                                                    value={assessmentData.course_interested}
                                                                     onChange={handleChange}
                                                                 >
                                                                     <option selected>
                                                                         Open this select Course Level
                                                                     </option>
-                                                                    {props.courseData.map((Course) => (
-                                                                        <option key={Course.id} value={Course.id}>
-                                                                            {Course.course_name}
+                                                                    {props.IntakeData.map((Intake) => (
+                                                                        <option key={Intake.id} value={Intake.id}>
+                                                                            {Intake.intake_Name}
                                                                         </option>
                                                                     ))}
                                                                 </select>
