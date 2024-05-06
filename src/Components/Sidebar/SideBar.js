@@ -32,6 +32,12 @@ const SideBar = () => {
                         <span>Application</span>
                     </Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link collapsed " to="/Payments" data-bs-toggle="tooltip" data-bs-placement="right" title="Application">
+                    <i class="bi bi-credit-card-fill"></i>
+                        <span>Payment</span>
+                    </Link>
+                </li>
 
                 <li className="nav-item">
                     <Link to="/" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" >
