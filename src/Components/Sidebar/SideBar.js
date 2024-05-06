@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 const SideBar = () => {
     return (
         <aside id="sidebar" className="sidebar">
-
             <ul className="sidebar-nav" id="sidebar-nav">
-
                 <li className="nav-item">
                     <Link className="nav-link collapsed" to="/ViewEnquiry" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
                         <i className="bi bi-grid" ></i>
@@ -36,7 +34,7 @@ const SideBar = () => {
                 </li>
 
                 <li className="nav-item">
-                    <Link to="/LogIn" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" >
+                    <Link to="/" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" >
                         <i className="bi bi-box-arrow-in-right"></i>
                         <span>Sign Out</span>
                     </Link>

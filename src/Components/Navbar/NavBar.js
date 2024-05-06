@@ -12,9 +12,8 @@ const NavBar = () => {
 
     return (
         <header id="header" className="header fixed-top d-flex align-items-center">
-
             <div className="d-flex align-items-center justify-content-between">
-                <Link to="/" className="logo d-flex align-items-center">
+                <Link to="/ViewEnquiry" className="logo d-flex align-items-center">
                     <img src="assets/img/logo.png" alt="" />
                     <span className="d-none d-lg-block">NiceAdmin</span>
                 </Link>
@@ -204,7 +203,7 @@ const NavBar = () => {
                         <ul
                             className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li>
-                                <Link className="dropdown-item d-flex align-items-center" to="/LogIn">
+                                <Link className="dropdown-item d-flex align-items-center" to="/">
                                     <i className="bi bi-box-arrow-right"></i>
                                     <span>Sign Out</span>
                                 </Link>

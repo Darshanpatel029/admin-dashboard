@@ -125,7 +125,7 @@ const ViewAssesment = () => {
                     <nav>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item">
-                                <Link to="/">Home</Link>
+                                <Link to="/ViewEnquiry">Home</Link>
                             </li>
                             <li className="breadcrumb-item active">Assesments</li>
                         </ol>
