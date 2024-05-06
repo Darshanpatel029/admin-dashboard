@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Login from './Components/LogIn/Login';
-import Register from './Components/Register/Register';
 import Error from './Components/Error/Error';
 import AddEnquiry from './Components/Enquiry/AddEnquiry';
 import ViewEnquiry from './Components/Enquiry/ViewEnquiry';
@@ -14,6 +13,7 @@ import ViewApplication from './Components/Applications/ViewApplication';
 import NavBar from './Components/Navbar/NavBar';
 import SideBar from './Components/Sidebar/SideBar';
 import Footer from './Components/Footer/Footer';
+import ViewPayment from './Components/Payments/ViewPayment';
 
 function App() {
   const location = useLocation();
@@ -31,8 +31,7 @@ function App() {
         <Route path="/ViewDetailEnquiry" element={<ViewDetailEnquiry />} />
         <Route path="/ViewAssessments" element={<Assesments />} />
         <Route path="/ViewApplication" element={<ViewApplication />} />
-        <Route path="/LogIn" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/Payments" element={<ViewPayment />} />
         <Route path="*" element={<Error />} />
       </Routes>
       {!hideComponents && <Footer />}

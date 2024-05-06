@@ -40,9 +40,7 @@ const AddDetailEnquiry = (props) => {
     });
 
     useEffect(() => {
-        // Fetch token from local storage
         const token = localStorage.getItem("token");
-        // If token exists, add it to the headers
         if (token) {
             setDetailEnquiry((prevState) => ({
                 ...prevState,
