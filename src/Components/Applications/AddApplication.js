@@ -114,8 +114,8 @@ const AddApplication = (props) => {
           }, body: ${JSON.stringify(data)}`
         );
       }
-
       toast.success("Application submitted successfully!");
+      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit Application.");
     }

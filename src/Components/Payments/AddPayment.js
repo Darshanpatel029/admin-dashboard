@@ -1,5 +1,5 @@
 import React from "react";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const AddPayment = (props) => {
@@ -21,12 +21,12 @@ const AddPayment = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-        setPaymentData((prevState) => ({
-            ...prevState,
-            token: token,
-        }));
+      setPaymentData((prevState) => ({
+        ...prevState,
+        token: token,
+      }));
     }
-}, []);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -83,13 +83,12 @@ const AddPayment = (props) => {
 
       if (!response.ok) {
         throw new Error(
-          `API call failed with status: ${
-            response.status
+          `API call failed with status: ${response.status
           }, body: ${JSON.stringify(data)}`
         );
       }
-
       toast.success("Payment Data submitted successfully!");
+      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit Payment Data.");
     }

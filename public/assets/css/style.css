@@ -42,7 +42,7 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
+  margin-top: 0px;
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -370,6 +370,7 @@ h6 {
 }
 
 .logo span {
+  margin-left: 40px;
   font-size: 26px;
   font-weight: 700;
   color: #012970;
@@ -389,7 +390,7 @@ h6 {
 
 .header .toggle-sidebar-btn {
   font-size: 32px;
-  padding-left: 10px;
+  padding-left: 0px;
   cursor: pointer;
   color: #012970;
 }
@@ -474,6 +475,7 @@ h6 {
 }
 
 .header-nav .nav-profile {
+  margin-right: 30px;
   color: #012970;
 }
 
@@ -602,7 +604,7 @@ h6 {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 240px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -633,7 +635,7 @@ h6 {
 
   #main,
   #footer {
-    margin-left: 300px;
+    margin-left: 260px;
   }
 }
 

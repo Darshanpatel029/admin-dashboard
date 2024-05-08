@@ -107,7 +107,7 @@ const ViewPayment = () => {
       headerName: "Payment Type",
       field: "Payment_Type.Type",
     },
-    { headerName: "Payment Date", field: "payment_date",},
+    { headerName: "Payment Date", field: "payment_date", },
     {
       headerName: "Payment Amount",
       field: "payment_amount",
@@ -136,8 +136,12 @@ const ViewPayment = () => {
       headerName: "Pending Amount",
       field: "0",
     },
-    
+
   ];
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
@@ -157,6 +161,7 @@ const ViewPayment = () => {
               className="btn btn-primary btn-sm"
               onClick={() => setIsModalOpen(true)}
             >
+              <i class="bi bi-file-plus"></i>&nbsp;
               Add Payment
             </button>
           </div>
@@ -179,7 +184,7 @@ const ViewPayment = () => {
                       columnDefs={columnDefs}
                       rowSelection="multiple"
                       pagination={true}
-                      paginationPageSize={10} 
+                      paginationPageSize={10}
                     />
                   </div>
                 )}
@@ -205,6 +210,7 @@ const ViewPayment = () => {
               avilableServices={avilableServices}
               paymentStatus={paymentStatus}
               userData={userData}
+              closeModal={closeModal}
             />
           </Modal.Body>
         </Modal>

@@ -68,7 +68,7 @@ const ViewAssesment = () => {
 
     const fetchEnquiry = () =>
         fetchData(
-            "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/",
+            "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
             setEnquiryData,
             "No Enquiry found"
         );
@@ -118,6 +118,10 @@ const ViewAssesment = () => {
         { headerName: "Tution fee", field: "tution_fee" },
     ];
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div>
             <main id="main" className="main">
@@ -133,9 +137,10 @@ const ViewAssesment = () => {
                     <div>
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             onClick={() => setIsModalOpen(true)}
                         >
+                            <i class="bi bi-file-plus"></i>&nbsp;
                             Add Assesment
                         </button>
                     </div>
@@ -190,6 +195,7 @@ const ViewAssesment = () => {
                             courseData={courseData}
                             IntakeData={IntakeData}
                             userData={userData}
+                            closeModal={closeModal}
                         />
                     </Modal.Body>
                 </Modal>

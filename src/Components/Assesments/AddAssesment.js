@@ -44,9 +44,12 @@ const AddAssesment = (props) => {
             if (!response.ok) {
                 throw new Error("Failed to submit form");
             }
+            toast.success("Assessment submitted successfully!");
+            props.closeModal();
+
 
         } catch (error) {
-            console.error("Error:", error);
+            toast.error("Assessment not submitted !");
 
         }
     };
@@ -148,7 +151,7 @@ const AddAssesment = (props) => {
                                                                     <option selected>Open this select menu</option>
                                                                     {props.EnquiryData.map((Enquiry) => (
                                                                         <option key={Enquiry.id} value={Enquiry.id}>
-                                                                            {Enquiry.student_First_Name}
+                                                                            {Enquiry.Current_Enquiry.student_First_Name}
                                                                         </option>
                                                                     ))}
                                                                 </select>

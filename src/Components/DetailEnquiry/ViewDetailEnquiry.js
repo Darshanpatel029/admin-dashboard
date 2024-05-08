@@ -43,30 +43,6 @@ const ViewDetailEnquiry = () => {
         // FollowUpStatus();
     }, []);
 
-    // const fetchEnquiries = async () => {
-    //     try {
-    //         const response = await fetch(
-    //             "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/"
-    //         );
-    //         console.log(response);
-    //         if (response.status === 200) {
-    //             const data = await response.json();
-    //             const enquiriesWithNo = data.map((enquiry, index) => ({
-    //                 ...enquiry,
-    //                 no: index + 1,
-    //             }));
-    //             setEnquiryData(enquiriesWithNo);
-    //         } else if (response.status === 500) {
-    //             setErrs("No Inquiry found");
-    //         }
-    //         else {
-    //             setErrs("Error While Fetching Data");
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
-
     const fetchData = async (url, setter, errorMessage) => {
         try {
             const token = localStorage.getItem("token");
@@ -204,6 +180,10 @@ const ViewDetailEnquiry = () => {
         { headerName: "Pending Amount", field: "0" },
     ];
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div>
             <main id="main" className="main">
@@ -219,9 +199,10 @@ const ViewDetailEnquiry = () => {
                     <div>
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             onClick={() => setIsModalOpen(true)}
                         >
+                            <i class="bi bi-file-plus"></i>&nbsp;
                             Add Detail-Enquiry
                         </button>
                     </div>
@@ -281,7 +262,8 @@ const ViewDetailEnquiry = () => {
                             RefusalData={RefusalData}
                             ServicesData={ServicesData}
                             statusData={statusData}
-                        // followupData={followupData}
+                            // followupData={followupData}
+                            closeModal={closeModal}
                         />
                     </Modal.Body>
                 </Modal>

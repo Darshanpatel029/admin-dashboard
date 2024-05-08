@@ -6,12 +6,13 @@ const Footer = () => {
     return (
         <footer id="footer" className="footer">
             <div className="copyright">
-                &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
+                &copy; Copyright <strong><span>ESPI</span></strong>. All Rights
                 Reserved
             </div>
             <div className="credits">
 
-                Designed by <Link to="/https://bootstrapmade.com/">BootstrapMade</Link>
+                Designed by <Link to="/https://anantsoftcomputing.com/">Anant Soft Computing
+                </Link>
             </div>
         </footer>
     )
