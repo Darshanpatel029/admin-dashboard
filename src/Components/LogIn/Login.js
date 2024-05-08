@@ -52,7 +52,7 @@ const Login = () => {
         submit: "An error occurred. Please try again later.",
       });
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -68,8 +68,7 @@ const Login = () => {
                     to="/"
                     className="logo d-flex align-items-center w-auto"
                   >
-                    <img src="assets/img/logo.png" alt="" />
-                    <span className="d-none d-lg-block">NiceAdmin</span>
+                    <span className="d-none d-lg-block">ESPI CRM</span>
                   </Link>
                 </div>
 
