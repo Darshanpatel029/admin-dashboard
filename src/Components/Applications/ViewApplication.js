@@ -73,7 +73,11 @@ const ViewApplication = () => {
         { headerName: "Passport", field: "passport" },
         { headerName: "CV", field: "cv" },
     ];
-    console.log(applicationData)
+
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <div>
@@ -90,9 +94,10 @@ const ViewApplication = () => {
                     <div>
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             onClick={() => setIsModalOpen(true)}
                         >
+                            <i class="bi bi-file-plus"></i>&nbsp;
                             Add Application
                         </button>
                     </div>
@@ -142,6 +147,7 @@ const ViewApplication = () => {
                         <AddApplication
                             EnquiryData={EnquiryData}
                             statusData={statusData}
+                            closeModal={closeModal}
                         />
                     </Modal.Body>
                 </Modal>

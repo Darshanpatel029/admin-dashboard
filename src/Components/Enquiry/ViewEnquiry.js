@@ -61,12 +61,13 @@ const ViewEnquiry = () => {
 
   const updateDataOnServer = async (data) => {
     try {
+      const token = localStorage.getItem("token");
       const url = `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`; // Use the correct URL and endpoint
       const response = await fetch(url, {
         method: "PATCH", // or 'PATCH'
         headers: {
           "Content-Type": "application/json",
-          // Include other headers as required, such as Authorization
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });
@@ -263,6 +264,11 @@ const ViewEnquiry = () => {
     },
   ];
 
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <main id="main" className="main">
@@ -335,6 +341,7 @@ const ViewEnquiry = () => {
               userData={userData}
               servicesData={servicesData}
               StatusData={StatusData}
+              closeModal={closeModal}
             />
           </Modal.Body>
         </Modal>

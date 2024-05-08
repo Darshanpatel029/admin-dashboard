@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const AddDetailEnquiry = (props) => {
@@ -39,26 +39,15 @@ const AddDetailEnquiry = (props) => {
         // followup: "",
     });
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            setDetailEnquiry((prevState) => ({
-                ...prevState,
-                token: token,
-            }));
-        }
-    }, []);
+    const token = localStorage.getItem("token");
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-
         const newValue = files ? files[0] : value;
-
         if (e.target.multiple) {
             const selectedOptions = Array.from(e.target.selectedOptions).map(
                 (option) => parseInt(option.value)
             );
-
             setDetailEnquiry((prevState) => ({
                 ...prevState,
                 [name]: selectedOptions,
@@ -70,7 +59,6 @@ const AddDetailEnquiry = (props) => {
             }));
         }
     };
-    // console.log("---Service----->", detailEnquiry.Confirmed_Services)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -133,28 +121,23 @@ const AddDetailEnquiry = (props) => {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
-                    ...(detailEnquiry.token && {
-                        Authorization: `Bearer ${detailEnquiry.token}`,
-                    }),
+                    Authorization: `Bearer ${token}`,
                 },
                 body: formData,
             };
-
             const response = await fetch(
                 "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
                 requestOptions
             );
-
             const data = await response.json();
-
             if (!response.ok) {
                 throw new Error(
                     `API call failed with status: ${response.status
                     }, body: ${JSON.stringify(data)}`
                 );
             }
-
             toast.success("Enquiry submitted successfully!");
+            props.closeModal();
         } catch (error) {
             toast.error("Failed to submit enquiry.");
         }
@@ -997,7 +980,7 @@ const AddDetailEnquiry = (props) => {
                                         role="tabpanel"
                                         aria-labelledby="Refusal-tab"
                                     >
-                                        <div className="">
+                                        <div >
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="row mb-1 mt-3">

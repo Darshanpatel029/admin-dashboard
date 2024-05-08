@@ -14,20 +14,10 @@ const NavBar = () => {
         <header id="header" className="header fixed-top d-flex align-items-center">
             <div className="d-flex align-items-center justify-content-between">
                 <Link to="/ViewEnquiry" className="logo d-flex align-items-center">
-                    <img src="assets/img/logo.png" alt="" />
-                    <span className="d-none d-lg-block">NiceAdmin</span>
+                    {/* <img src="assets/img/logo.png" alt="" /> */}
+                    <span className="d-none d-lg-block">ESPI CRM</span>
                 </Link>
                 <i className="bi bi-list toggle-sidebar-btn" onClick={toggleSidebar}></i>
-            </div>
-
-            <div className="search-bar">
-                <form className="search-form d-flex align-items-center" method="POST"
-                    action="#">
-                    <input type="text" name="query" placeholder="Search"
-                        title="Enter search keyword" />
-                    <button type="submit" title="Search"><i
-                        className="bi bi-search"></i></button>
-                </form>
             </div>
 
             <nav className="header-nav ms-auto">
@@ -197,8 +187,7 @@ const NavBar = () => {
                             data-bs-toggle="dropdown">
                             <img src="assets/img/profile-img.jpg" alt="Profile"
                                 className="rounded-circle" />
-                            <span className="d-none d-md-block dropdown-toggle ps-2">K.
-                                Anderson</span>
+                            <span className="d-none d-md-block dropdown-toggle ps-2">Admin</span>
                         </Link>
                         <ul
                             className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -215,7 +204,7 @@ const NavBar = () => {
                 </ul>
             </nav>
 
-        </header>
+        </header >
     )
 }
 

@@ -20,7 +20,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     try {
       const response = await fetch(
         "https://cloudconnectcampaign.com/espicrmnew/api/login/",
@@ -94,7 +94,6 @@ const Login = () => {
                           Username
                         </label>
                         <div className="input-group has-validation">
-                          {/* <span className="input-group-text" id="inputGroupPrepend">@</span> */}
                           <input
                             type="text"
                             name="username"

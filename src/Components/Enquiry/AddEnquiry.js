@@ -75,6 +75,7 @@ const AddEnquiry = (props) => {
         );
       }
       toast.success("Enquiry submitted successfully!");
+      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit enquiry.");
     }
@@ -623,7 +624,6 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                               >
                                 <option selected>Select Source</option>
-                                {/* <option value="1" >admin</option> */}
                                 {props.userData.map((user) => (
                                   <option key={user.id} value={user.id}>
                                     {user.username}
