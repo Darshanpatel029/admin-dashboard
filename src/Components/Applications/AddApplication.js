@@ -6,6 +6,7 @@ const AddApplication = (props) => {
   const [application, setApplication] = useState({
     application: "",
     application_status: "",
+    Rejection_reason: "",
 
     diploma_marksheet: "",
     bachelor_marksheet: "",
@@ -25,9 +26,7 @@ const AddApplication = (props) => {
   });
 
   useEffect(() => {
-    // Fetch token from local storage
     const token = localStorage.getItem("token");
-    // If token exists, add it to the headers
     if (token) {
       setApplication((prevState) => ({
         ...prevState,
@@ -217,6 +216,7 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application"
                                   value={application.application}
+                                  required
                                 >
                                   <option selected>Select Source</option>
                                   {props.EnquiryData.map((Enquiry) => (
@@ -241,6 +241,7 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application_status"
                                   value={application.application_status}
+                                  required
                                 >
                                   <option selected>Select Source</option>
                                   {props.statusData.map((Status) => (
@@ -279,7 +280,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="diploma_marksheet"
-                              // value={application.diploma_marksheet}
+                                required
                               />
                             </div>
                           </div>
@@ -297,7 +298,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="bachelor_marksheet"
-                              // value={application.bachelor_marksheet}
+                                required
                               />
                             </div>
                           </div>
@@ -316,7 +317,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="master_marksheet"
-                              // value={application.master_marksheet}
+                                required
                               />
                             </div>
                           </div>
@@ -347,7 +348,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="ielts"
-                              // value={application.ielts}
+                                required
                               />
                             </div>
                           </div>
@@ -365,7 +366,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="gre"
-                              // value={application.gre}
+                                required
                               />
                             </div>
                           </div>
@@ -384,7 +385,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="toefl"
-                              // value={application.toefl}
+                                required
                               />
                             </div>
                           </div>
@@ -403,7 +404,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="gmat"
-                              // value={application.gmat}
+                                required
                               />
                             </div>
                           </div>
@@ -421,7 +422,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="pte"
-                              // value={application.pte}
+                                required
                               />
                             </div>
                           </div>
@@ -439,7 +440,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="work_experience"
-                              // value={application.work_experience}
+                                required
                               />
                             </div>
                           </div>
@@ -457,7 +458,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="other_documents"
-                              // value={application.other_documents}
+                                required
                               />
                             </div>
                           </div>
@@ -488,7 +489,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="sop"
-                              // value={application.sop}
+                                required
                               />
                             </div>
                           </div>
@@ -506,7 +507,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="cv"
-                              // value={application.cv}
+                                required
                               />
                             </div>
                           </div>
@@ -525,7 +526,7 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="passport"
-                              // value={application.passport}
+                                required
                               />
                             </div>
                           </div>

@@ -21,7 +21,7 @@ const ViewDetailEnquiry = () => {
     const [RefusalData, setRefusalData] = useState([]);
     const [ServicesData, setServicesData] = useState([]);
     const [statusData, setStatusData] = useState([]);
-    // const [followupData, setFollowupData] = useState([]);
+    const [followupData, setFollowupData] = useState([]);
 
     const [errs, setErrs] = useState("");
 
@@ -40,7 +40,7 @@ const ViewDetailEnquiry = () => {
         Refusal();
         AvailableServices();
         EnquiryStatus();
-        // FollowUpStatus();
+        DetailEnquiryFollowUp();
     }, []);
 
     const fetchData = async (url, setter, errorMessage) => {
@@ -155,12 +155,12 @@ const ViewDetailEnquiry = () => {
             "No Detail found"
         );
 
-    // const FollowUpStatus = () =>
-    //     fetchData(
-    //         "https://cloudconnectcampaign.com/espicrmnew/api/followups/",
-    //         setFollowupData,
-    //         "No Detail found"
-    //     );
+    const DetailEnquiryFollowUp = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/detail-enquiry-followups/",
+            setFollowupData,
+            "No Detail found"
+        );
 
     const columnDefs = [
         // { headerName: "No", field: "no" },
@@ -262,7 +262,7 @@ const ViewDetailEnquiry = () => {
                             RefusalData={RefusalData}
                             ServicesData={ServicesData}
                             statusData={statusData}
-                            // followupData={followupData}
+                            followupData={followupData}
                             closeModal={closeModal}
                         />
                     </Modal.Body>

@@ -18,6 +18,9 @@ const AddDetailEnquiry = (props) => {
         Gre_Exam: "",
         Gmat_Exam: "",
 
+        Father_Occupation: "",
+        Father_Annual_Income: "",
+
         Twelveth_Document: "",
         Tenth_Document: "",
         Graduation_Marksheet: "",
@@ -27,7 +30,7 @@ const AddDetailEnquiry = (props) => {
         Ielts_Result: "",
         Toefl_Result: "",
         PTE_Result: "",
-        Duolingo_Result: 1,
+        Duolingo_Result: "",
         Gre_Result: "",
         Gmat_Result: "",
         Work_Experience_Document: "",
@@ -36,7 +39,7 @@ const AddDetailEnquiry = (props) => {
         Refusal: "",
         Confirmed_Services: [],
         Enquiry_Status: "",
-        // followup: "",
+        DetaiEnquiryFollowup: "",
     });
 
     const token = localStorage.getItem("token");
@@ -88,7 +91,7 @@ const AddDetailEnquiry = (props) => {
         formData.append("Refusal", detailEnquiry.Refusal);
         formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
         formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        // formData.append("followup", detailEnquiry.followup);
+        formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
 
         Object.keys(detailEnquiry).forEach((key) => {
             if (
@@ -109,12 +112,14 @@ const AddDetailEnquiry = (props) => {
                 key !== "Offer_Letter" &&
                 key !== "Refusal" &&
                 key !== "Confirmed_Services" &&
-                key !== "Enquiry_Status"
-                // key !== "followup"
+                key !== "Enquiry_Status" &&
+                key !== "DetaiEnquiryFollowup"
             ) {
                 formData.append(key, detailEnquiry[key]);
             }
         });
+
+
 
         try {
             const requestOptions = {
@@ -300,7 +305,7 @@ const AddDetailEnquiry = (props) => {
                                         </button>
                                     </li>
 
-                                    {/* <li className="nav-item" role="presentation">
+                                    <li className="nav-item" role="presentation">
                                         <button
                                             className="nav-link"
                                             id="pills-FollowUp-tab"
@@ -313,7 +318,7 @@ const AddDetailEnquiry = (props) => {
                                         >
                                             Followup Status
                                         </button>
-                                    </li> */}
+                                    </li>
                                 </ul>
                                 <div className="tab-content" id="myTabContent">
                                     <div
@@ -336,6 +341,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Current_Enquiry"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Current_Enquiry}
+                                                                    required
                                                                 >
                                                                     <option selected>Select Enquiry</option>
                                                                     {props.EnquiryData.map((Enquiry) => (
@@ -356,6 +363,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="current_education"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.current_education}
+                                                                    required
                                                                 >
                                                                     <option selected>
                                                                         Select Current Education
@@ -384,6 +393,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Tenth_Education_Details"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Tenth_Education_Details}
+                                                                    required
                                                                 >
                                                                     <option selected>
                                                                         Select Current Education
@@ -409,6 +420,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Twelveth_Education_Details"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Twelveth_Document}
+                                                                    required
                                                                 >
                                                                     <option selected>
                                                                         Select Twelveth Education
@@ -434,6 +447,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Graduation_Education_Details"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Graduation_Education_Details}
+                                                                    required
                                                                 >
                                                                     <option selected>
                                                                         Select Graduation Details
@@ -459,6 +474,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Work_Experience"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Work_Experience}
+                                                                    required
                                                                 >
                                                                     <option selected>
                                                                         Select Work Experience
@@ -499,6 +516,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Toefl_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Toefl_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>Toefl</option>
                                                                     {props.ToeflData.map((Toefl) => (
@@ -519,6 +538,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="ielts_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.ielts_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>ielts</option>
                                                                     {props.IeltsData.map((Ielts) => (
@@ -539,6 +560,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="PTE_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.PTE_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>pte</option>
                                                                     {props.PteData.map((Pte) => (
@@ -559,6 +582,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Duolingo_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Duolingo_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>Duolingo</option>
                                                                     {props.DuolingoData.map((Duolingo) => (
@@ -582,6 +607,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Gre_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Gre_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>Gmat</option>
                                                                     {props.GreData.map((Gre) => (
@@ -602,6 +629,8 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Gmat_Exam"
                                                                     onChange={handleChange}
+                                                                    value={detailEnquiry.Gmat_Exam}
+                                                                    required
                                                                 >
                                                                     <option selected>Gmat</option>
                                                                     {props.GmatData.map((Gmat) => (
@@ -639,6 +668,8 @@ const AddDetailEnquiry = (props) => {
                                                                 className="form-control"
                                                                 name="Father_Occupation"
                                                                 onChange={handleChange}
+                                                                value={detailEnquiry.Father_Occupation}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -655,6 +686,8 @@ const AddDetailEnquiry = (props) => {
                                                                 className="form-control"
                                                                 name="Father_Annual_Income"
                                                                 onChange={handleChange}
+                                                                value={detailEnquiry.Father_Annual_Income}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -685,6 +718,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Twelveth_Document"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -702,6 +736,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Tenth_Document"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -720,6 +755,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Graduation_Marksheet"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -738,6 +774,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Graduation_Certificate"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -755,6 +792,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="UG_Marksheet"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -772,6 +810,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="UG_Certificate"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -802,6 +841,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Ielts_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -809,7 +849,6 @@ const AddDetailEnquiry = (props) => {
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
-                                                            onChange={handleChange}
                                                         >
                                                             Toefl Result
                                                         </label>
@@ -820,6 +859,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Toefl_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -838,6 +878,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="PTE_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -856,6 +897,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Duolingo_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -873,6 +915,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Gre_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -890,6 +933,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Gmat_Result"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -920,6 +964,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Work_Experience_Document"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -937,6 +982,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Passport_Document"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -945,6 +991,7 @@ const AddDetailEnquiry = (props) => {
                                         </div>
                                     </div>
                                     <div
+                                        required
                                         className="tab-pane fade"
                                         id="pills-Offer"
                                         role="tabpanel"
@@ -967,6 +1014,7 @@ const AddDetailEnquiry = (props) => {
                                                                 id="formFile"
                                                                 name="Offer_Letter"
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -992,7 +1040,9 @@ const AddDetailEnquiry = (props) => {
                                                                 className="form-select"
                                                                 aria-label="Default select example"
                                                                 name="Refusal"
+                                                                value={detailEnquiry.Refusal}
                                                                 onChange={handleChange}
+                                                                required
                                                             >
                                                                 <option selected>Select Refusal Reasons</option>
                                                                 {props.RefusalData.map((Refusal) => (
@@ -1026,6 +1076,7 @@ const AddDetailEnquiry = (props) => {
                                                                 name="Confirmed_Services"
                                                                 value={detailEnquiry.Confirmed_Services}
                                                                 onChange={handleChange}
+                                                                required
                                                                 multiple
                                                             >
                                                                 {props.ServicesData.map((services) => (
@@ -1058,7 +1109,9 @@ const AddDetailEnquiry = (props) => {
                                                                 className="form-select"
                                                                 aria-label="Default select example"
                                                                 name="Enquiry_Status"
+                                                                value={detailEnquiry.Enquiry_Status}
                                                                 onChange={handleChange}
+                                                                required
                                                             >
                                                                 <option selected>Select Enquiry Status</option>
                                                                 {props.statusData.map((Status) => (
@@ -1073,7 +1126,7 @@ const AddDetailEnquiry = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div
+                                    <div
                                         className="tab-pane fade"
                                         id="pills-FollowUp"
                                         role="tabpanel"
@@ -1084,7 +1137,7 @@ const AddDetailEnquiry = (props) => {
                                                 <form className="row g-3">
                                                     <div className="row mb-1 mt-3">
                                                         <label className="col-sm-4 col-form-label">
-                                                            Followup
+                                                            DetaiEnquiryFollowup
                                                         </label>
                                                         <div className="col-md-6">
                                                             <select
@@ -1092,6 +1145,8 @@ const AddDetailEnquiry = (props) => {
                                                                 aria-label="Default select example"
                                                                 name="followup"
                                                                 onChange={handleChange}
+                                                                value={detailEnquiry.followup}
+                                                                required
                                                             >
                                                                 <option selected>Select FollowUp Status</option>
                                                                 {props.followupData.map((followup) => (
@@ -1099,7 +1154,7 @@ const AddDetailEnquiry = (props) => {
                                                                         key={followup.id}
                                                                         value={followup.id}
                                                                     >
-                                                                        {followup.name}
+                                                                        {followup.next_followup_date}
                                                                     </option>
                                                                 ))}
                                                             </select>
@@ -1108,7 +1163,7 @@ const AddDetailEnquiry = (props) => {
                                                 </form>
                                             </div>
                                         </div>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>

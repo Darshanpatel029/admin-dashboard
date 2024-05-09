@@ -79,6 +79,13 @@ const ViewAssesment = () => {
             setinterestedCountryData,
             "No interested Country Data found"
         );
+
+    const fetchLevelData = () =>
+        fetchData(
+            "https://cloudconnectcampaign.com/espicrmnew/api/course-levels/",
+            setLevelData,
+            "No level Data found"
+        );
     const fetchCourseData = () =>
         fetchData(
             "https://cloudconnectcampaign.com/espicrmnew/api/courses/",
@@ -90,13 +97,6 @@ const ViewAssesment = () => {
             "https://cloudconnectcampaign.com/espicrmnew/api/universities/",
             setUniversities,
             "No University Data found"
-        );
-
-    const fetchLevelData = () =>
-        fetchData(
-            "https://cloudconnectcampaign.com/espicrmnew/api/course-levels/",
-            setLevelData,
-            "No level Data found"
         );
 
     const fetchIntakeData = () =>
