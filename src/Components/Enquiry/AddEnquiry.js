@@ -29,6 +29,7 @@ const AddEnquiry = (props) => {
     assigned_users: "",
     created_by: 1,
     enquiry_status: "",
+    EnquiryFollowup: "",
     notes: "",
   });
 
@@ -48,7 +49,14 @@ const AddEnquiry = (props) => {
         [name]: value,
       }));
     }
+
+
+    const requiredFields = ["student_First_Name", "student_Last_Name", "student_passport", "Source_Enquiry"];
+    if (requiredFields.includes(name) && value.trim() === "") {
+      toast.error(`${name.replace('_', ' ')} is required.`);
+    }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -339,6 +347,7 @@ const AddEnquiry = (props) => {
                                 name="student_country"
                                 value={formData.student_country}
                                 onChange={handleChange}
+                                required
                               >
                                 <option selected>Select Country</option>
                                 {props.countryData.map((countryData) => (
@@ -622,6 +631,7 @@ const AddEnquiry = (props) => {
                                 className="form-select"
                                 value={formData.assigned_users}
                                 onChange={handleChange}
+                                required
                               >
                                 <option selected>Select Source</option>
                                 {props.userData.map((user) => (
@@ -643,11 +653,34 @@ const AddEnquiry = (props) => {
                                 className="form-select"
                                 value={formData.enquiry_status}
                                 onChange={handleChange}
+                                required
                               >
                                 <option selected>Select Services</option>
                                 {props.StatusData.map((status) => (
                                   <option key={status.id} value={status.id}>
                                     {status.status}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="row mb-4">
+                            <label className="col-sm-4 col-form-label">
+                              EnquiryFollowup
+                            </label>
+                            <div className="col-md-6">
+                              <select
+                                type="number"
+                                name="EnquiryFollowup"
+                                className="form-select"
+                                value={formData.EnquiryFollowup}
+                                onChange={handleChange}
+                                required
+                              >
+                                <option selected>Select Services</option>
+                                {props.followupData.map((Followup) => (
+                                  <option key={Followup.id} value={Followup.id}>
+                                    {Followup.next_followup_date}
                                   </option>
                                 ))}
                               </select>

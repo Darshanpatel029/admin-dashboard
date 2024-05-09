@@ -20,6 +20,7 @@ const ViewEnquiry = () => {
   const [userData, setuserData] = useState([]);
   const [servicesData, setServicesData] = useState([]);
   const [StatusData, serStatusData] = useState([]);
+  const [followupData, setFollowupData] = useState([]);
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const ViewEnquiry = () => {
     fetchIntakeData();
     fetchServicesData();
     fetchStatusData();
+    fetchfollowupData();
   }, []);
 
   const fetchData = async (url, setter, errorMessage) => {
@@ -173,6 +175,13 @@ const ViewEnquiry = () => {
       "No EnquiryStatus Data found"
     );
 
+  const fetchfollowupData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-followups/",
+      setFollowupData,
+      "No Followup Data found"
+    );
+
   // const deleteEnquiry = async (id) => {
   //   try {
   //     const response = await fetch(
@@ -196,12 +205,10 @@ const ViewEnquiry = () => {
   // };
 
   const columnDefs = [
-
     {
       headerName: "Student First Name",
       field: "student_First_Name",
       editable: true,
-
     },
     {
       headerName: "Student Last Name",
@@ -263,7 +270,6 @@ const ViewEnquiry = () => {
       editable: true,
     },
   ];
-
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -341,6 +347,7 @@ const ViewEnquiry = () => {
               userData={userData}
               servicesData={servicesData}
               StatusData={StatusData}
+              followupData={followupData}
               closeModal={closeModal}
             />
           </Modal.Body>
