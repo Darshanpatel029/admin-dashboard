@@ -22,7 +22,6 @@ const AddAssesment = (props) => {
         notes: "",
     });
 
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setAssessmentData((prevData) => ({
@@ -35,25 +34,25 @@ const AddAssesment = (props) => {
         event.preventDefault();
         const token = localStorage.getItem("token");
         try {
-            const response = await fetch("https://cloudconnectcampaign.com/espicrmnew/api/assesment/", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(assessmentData),
-            });
+            const response = await fetch(
+                "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(assessmentData),
+                }
+            );
             if (!response.ok) {
                 throw new Error("Failed to submit form");
             }
             toast.success("Assessment submitted successfully!");
             props.closeModal();
-
-
         } catch (error) {
             toast.error("Assessment not submitted !");
-
         }
     };
     return (
@@ -63,7 +62,11 @@ const AddAssesment = (props) => {
                     <form onSubmit={handleSubmit}>
                         <div className="card">
                             <div className="card-body">
-                                <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <ul
+                                    className="nav nav-pills mb-3"
+                                    id="pills-tab"
+                                    role="tablist"
+                                >
                                     <li className="nav-item" role="presentation">
                                         <button
                                             className="nav-link active"
@@ -153,17 +156,22 @@ const AddAssesment = (props) => {
                                                                     onChange={handleChange}
                                                                     required
                                                                 >
-                                                                    <option selected>Open this select menu</option>
+                                                                    <option selected>
+                                                                        Open this select menu
+                                                                    </option>
                                                                     {props.EnquiryData.map((Enquiry) => (
                                                                         <option key={Enquiry.id} value={Enquiry.id}>
-                                                                            {Enquiry.Current_Enquiry.student_First_Name}
+                                                                            {
+                                                                                Enquiry.Current_Enquiry
+                                                                                    .student_First_Name
+                                                                            }
                                                                         </option>
                                                                     ))}
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-1">
-                                                            <label className="col-sm-4 col-form-label" >
+                                                            <label className="col-sm-4 col-form-label">
                                                                 Student country
                                                             </label>
                                                             <div className="col-md-6">
@@ -178,11 +186,16 @@ const AddAssesment = (props) => {
                                                                     <option selected>
                                                                         Open this select country
                                                                     </option>
-                                                                    {props.InterestedCountryData.map((Country) => (
-                                                                        <option key={Country.id} value={Country.id}>
-                                                                            {Country.country}
-                                                                        </option>
-                                                                    ))}
+                                                                    {props.InterestedCountryData.map(
+                                                                        (Country) => (
+                                                                            <option
+                                                                                key={Country.id}
+                                                                                value={Country.id}
+                                                                            >
+                                                                                {Country.country}
+                                                                            </option>
+                                                                        )
+                                                                    )}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -202,7 +215,7 @@ const AddAssesment = (props) => {
                                                 <form className="row g-3">
                                                     <div className="col-md-12">
                                                         <div className="row mb-1">
-                                                            <label className="col-sm-4 col-form-label" >
+                                                            <label className="col-sm-4 col-form-label">
                                                                 University
                                                             </label>
                                                             <div className="col-md-6">
@@ -229,7 +242,7 @@ const AddAssesment = (props) => {
                                                             </div>
                                                         </div>
                                                         <div className="row mb-1">
-                                                            <label className="col-sm-4 col-form-label" >
+                                                            <label className="col-sm-4 col-form-label">
                                                                 Level Applying For
                                                             </label>
                                                             <div className="col-md-6">
@@ -277,7 +290,7 @@ const AddAssesment = (props) => {
                                                             </div>
                                                         </div>
                                                         <div className="row mb-1">
-                                                            <label className="col-sm-4 col-form-label" >
+                                                            <label className="col-sm-4 col-form-label">
                                                                 Intake Interested
                                                             </label>
                                                             <div className="col-md-6">

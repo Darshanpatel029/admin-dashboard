@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../UI/Loading/Loading";
 import { toast } from "react-toastify";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [userCredentials, setUserCredentials] = useState({
+  const [loading, setLoading] = useState(false);
+
+  const initialValues = {
     username: "",
     password: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false); // Add loading state
-
-  const handleChange = (e) => {
-    setUserCredentials({
-      ...userCredentials,
-      [e.target.name]: e.target.value,
-    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const handleLogin = async (values) => {
     setLoading(true);
+    const { username, password } = values;
+
+    const bodyData = {
+      username: username,
+      password: password,
+    };
+
     try {
       const response = await fetch(
         "https://cloudconnectcampaign.com/espicrmnew/api/login/",
@@ -30,29 +37,25 @@ const Login = () => {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          method: "POST",
-          body: JSON.stringify(userCredentials),
+          body: JSON.stringify(bodyData),
         }
       );
-      console.log(response);
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         localStorage.setItem("token", data.access);
         navigate("/ViewEnquiry");
-        toast.success("LogIn Successfull");
-      } else {
-        setErrors({
-          submit: data.message || "Invalid username or password",
-        });
+        toast.success("LogIn Successful");
+      } else if (response.status === 401) {
+        toast.error("Invalid username or password");
+      }
+      else {
+        toast.error("Some Problem Occurred. Please try again.");
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      setErrors({
-        submit: "An error occurred. Please try again later.",
-      });
     } finally {
       setLoading(false);
+      // setSubmitting(false);
     }
   };
 
@@ -64,10 +67,7 @@ const Login = () => {
             <div className="row justify-content-center">
               <div className="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
                 <div className="d-flex justify-content-center py-4">
-                  <Link
-                    to="/"
-                    className="logo d-flex align-items-center w-auto"
-                  >
+                  <Link className="logo d-flex align-items-center w-auto">
                     <span className="d-none d-lg-block">ESPI CRM</span>
                   </Link>
                 </div>
@@ -83,70 +83,58 @@ const Login = () => {
                       </p>
                     </div>
 
-                    <form
-                      className="row g-3 needs-validation"
-                      onSubmit={handleSubmit}
-                      novalidate
+                    <Formik
+                      initialValues={initialValues}
+                      validationSchema={validationSchema}
+                      onSubmit={handleLogin}
                     >
-                      <div className="col-12">
-                        <label for="yourUsername" className="form-label">
-                          Username
-                        </label>
-                        <div className="input-group has-validation">
-                          <input
+                      <Form className="row g-3 needs-validation" noValidate>
+                        <div className="col-12">
+                          <label htmlFor="yourUsername" className="form-label">
+                            Username
+                          </label>
+                          <Field
+                            id="yourUsername"
                             type="text"
                             name="username"
                             className="form-control"
-                            id="yourUsername"
-                            onChange={handleChange}
-                            required
                           />
-                          <div className="invalid-feedback">
-                            Please enter your username.
-                          </div>
+                          <ErrorMessage
+                            name="username"
+                            component="div"
+                            className="text-danger mt-2"
+                          />
                         </div>
-                      </div>
-
-                      <div className="col-12">
-                        <label for="yourPassword" className="form-label">
-                          Password
-                        </label>
-                        <input
-                          type="password"
-                          name="password"
-                          className="form-control"
-                          id="yourPassword"
-                          onChange={handleChange}
-                          required
-                        />
-                        <div className="invalid-feedback">
-                          Please enter your password!
+                        <div className="col-12">
+                          <label htmlFor="yourPassword" className="form-label">
+                            Password
+                          </label>
+                          <Field
+                            id="yourPassword"
+                            type="password"
+                            name="password"
+                            className="form-control"
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            className="text-danger mt-2"
+                          />
                         </div>
-                      </div>
-                      <div className="col-12">
-                        {loading ? (
-                          <button
-                            className="btn btn-primary w-100"
-                            type="button"
-                            disabled
-                          >
-                            <span
-                              className="spinner-border spinner-border-sm"
-                              role="status"
-                              aria-hidden="true"
-                            ></span>
-                            Loading...
-                          </button>
-                        ) : (
-                          <button
-                            className="btn btn-primary w-100"
-                            type="submit"
-                          >
-                            Login
-                          </button>
-                        )}
-                      </div>
-                    </form>
+                        <div className="col-12">
+                          {loading ? (
+                            <Loading />
+                          ) : (
+                            <button
+                              className="btn btn-primary w-100"
+                              type="submit"
+                            >
+                              Login
+                            </button>
+                          )}
+                        </div>
+                      </Form>
+                    </Formik>
                   </div>
                 </div>
               </div>
