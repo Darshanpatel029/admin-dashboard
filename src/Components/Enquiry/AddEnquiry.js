@@ -1,6 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../UI/Loading/Loading";
+
+const initialSubmit = {
+  isError: false,
+  errMsg: null,
+  isSubmitting: false,
+};
 
 const AddEnquiry = (props) => {
   const [formData, setFormData] = useState({
@@ -33,6 +40,29 @@ const AddEnquiry = (props) => {
     notes: "",
   });
 
+  const [formStatus, setFormStatus] = useState(initialSubmit);
+
+  const validateForm = () => {
+    if (!formData.student_First_Name) {
+      setFormError("Company Name is Required");
+      return false;
+    }
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: false,
+    });
+    return true;
+  };
+
+  const setFormError = (errMsg) => {
+    setFormStatus({
+      isError: true,
+      errMsg,
+      isSubmitting: false,
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (e.target.multiple) {
@@ -49,18 +79,19 @@ const AddEnquiry = (props) => {
         [name]: value,
       }));
     }
-
-
-    const requiredFields = ["student_First_Name", "student_Last_Name", "student_passport", "Source_Enquiry"];
-    if (requiredFields.includes(name) && value.trim() === "") {
-      toast.error(`${name.replace('_', ' ')} is required.`);
-    }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiURL = "https://cloudconnectcampaign.com/espicrmnew/api/create-enquiry/";
+    if (!validateForm()) return;
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: true,
+    });
+
+    const apiURL =
+      "https://cloudconnectcampaign.com/espicrmnew/api/create-enquiry/";
     const token = localStorage.getItem("token");
 
     const requestOptions = {
@@ -75,17 +106,20 @@ const AddEnquiry = (props) => {
 
     try {
       const response = await fetch(apiURL, requestOptions);
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(
-          `API call failed with status: ${response.status
-          }, body: ${JSON.stringify(data)}`
-        );
+      console.log(response);
+      if (response.status === 201) {
+        toast.success("Enquiry submitted successfully!");
+        props.closeModal();
+      } else {
+        toast.error("Failed to submit enquiry.");
       }
-      toast.success("Enquiry submitted successfully!");
-      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit enquiry.");
+    } finally {
+      setFormStatus({
+        ...formStatus,
+        isSubmitting: false,
+      });
     }
   };
 
@@ -197,10 +231,15 @@ const AddEnquiry = (props) => {
                                 id="student_First_Name"
                                 value={formData.student_First_Name}
                                 onChange={handleChange}
-                                required
                               />
+                              {formData.student_First_Name === "" ? (
+                                <div className="invalid-feedback">
+                                  Please enter your username.
+                                </div>
+                              ) : null}
                             </div>
                           </div>
+
                           <div className="row mb-4">
                             <label
                               htmlFor="student_Last_Name"
@@ -710,9 +749,18 @@ const AddEnquiry = (props) => {
             </div>
             <div className="row mb-3 text-center">
               <div className="col-sm-10 ">
-                <button type="submit" className="btn btn-primary btn-sm">
-                  Submit Form
-                </button>
+                {formStatus.isError ? (
+                  <div className="text-danger mb-2">{formStatus.errMsg}</div>
+                ) : (
+                  <div className="text-success mb-2">{formStatus.errMsg}</div>
+                )}
+                {formStatus.isSubmitting ? (
+                  <Loading />
+                ) : (
+                  <button className="btn btn-primary btn-sm" type="submit">
+                    Submit Form
+                  </button>
+                )}
               </div>
             </div>
           </form>

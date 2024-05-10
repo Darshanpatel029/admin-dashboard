@@ -5,6 +5,8 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
+import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
+
 
 const ViewEnquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,9 +66,9 @@ const ViewEnquiry = () => {
   const updateDataOnServer = async (data) => {
     try {
       const token = localStorage.getItem("token");
-      const url = `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`; // Use the correct URL and endpoint
+      const url = `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${data.id}/`;
       const response = await fetch(url, {
-        method: "PATCH", // or 'PATCH'
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -182,27 +184,6 @@ const ViewEnquiry = () => {
       "No Followup Data found"
     );
 
-  // const deleteEnquiry = async (id) => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://cloudconnectcampaign.com/espicrmnew/api/enquiries/${id}/`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     if (response.ok) {
-  //       // Remove the deleted row from the state
-  //       setEnquiryData(EnquiryData.filter((enquiry) => enquiry.id !== id));
-  //     } else {
-  //       console.error("Failed to delete enquiry");
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to delete enquiry:", error);
-  //   }
-  // };
 
   const columnDefs = [
     {
@@ -280,12 +261,7 @@ const ViewEnquiry = () => {
       <main id="main" className="main">
         <div className="pagetitle d-flex justify-content-between align-items-center">
           <nav>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <Link to="/ViewEnquiry">Home</Link>
-              </li>
-              <li className="breadcrumb-item active">Enquiry</li>
-            </ol>
+            <Breadcrumbs main="Enquiry" />
           </nav>
           <div>
             <button
