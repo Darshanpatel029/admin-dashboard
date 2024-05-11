@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
 import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
-
+import Table from "../UI/Table/Table";
 
 const ViewEnquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -184,7 +182,6 @@ const ViewEnquiry = () => {
       "No Followup Data found"
     );
 
-
   const columnDefs = [
     {
       headerName: "Student First Name",
@@ -261,6 +258,7 @@ const ViewEnquiry = () => {
       <main id="main" className="main">
         <div className="pagetitle d-flex justify-content-between align-items-center">
           <nav>
+            <h5 className="card-title">Enquiry</h5>
             <Breadcrumbs main="Enquiry" />
           </nav>
           <div>
@@ -269,7 +267,7 @@ const ViewEnquiry = () => {
               className="btn btn-primary btn-sm"
               onClick={() => setIsModalOpen(true)}
             >
-              Add Enquiry
+              <i class="bi bi-file-plus"></i>&nbsp; Add Enquiry
             </button>
           </div>
         </div>
@@ -286,12 +284,11 @@ const ViewEnquiry = () => {
                     className="ag-theme-alpine"
                     style={{ height: "500px", width: "100%" }}
                   >
-                    <AgGridReact
+                    <Table
                       rowData={EnquiryData}
                       columnDefs={columnDefs}
                       rowSelection="multiple"
                       pagination={true}
-                      paginationPageSize={10}
                       onCellValueChanged={handleCellValueChanged}
                     />
                   </div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddPayment from "./AddPayment";
+import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
+import Table from "../UI/Table/Table";
 
 const ViewPayment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,7 +98,6 @@ const ViewPayment = () => {
     );
 
   const columnDefs = [
-
     {
       headerName: "Payment Id",
       field: "payment_id",
@@ -107,7 +106,7 @@ const ViewPayment = () => {
       headerName: "Payment Type",
       field: "Payment_Type.Type",
     },
-    { headerName: "Payment Date", field: "payment_date", },
+    { headerName: "Payment Date", field: "payment_date" },
     {
       headerName: "Payment Amount",
       field: "payment_amount",
@@ -136,7 +135,6 @@ const ViewPayment = () => {
       headerName: "Pending Amount",
       field: "0",
     },
-
   ];
 
   const closeModal = () => {
@@ -148,12 +146,8 @@ const ViewPayment = () => {
       <main id="main" className="main">
         <div className="pagetitle d-flex justify-content-between align-items-center">
           <nav>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <Link to="/ViewEnquiry">Home</Link>
-              </li>
-              <li className="breadcrumb-item active">Payments</li>
-            </ol>
+            <h5 className="card-title">Payments</h5>
+            <Breadcrumbs main="Payments" />
           </nav>
           <div>
             <button
@@ -161,8 +155,7 @@ const ViewPayment = () => {
               className="btn btn-primary btn-sm"
               onClick={() => setIsModalOpen(true)}
             >
-              <i class="bi bi-file-plus"></i>&nbsp;
-              Add Payment
+              <i class="bi bi-file-plus"></i>&nbsp; Add Payment
             </button>
           </div>
         </div>
@@ -179,12 +172,11 @@ const ViewPayment = () => {
                     className="ag-theme-alpine"
                     style={{ height: "500px", width: "100%" }}
                   >
-                    <AgGridReact
+                    <Table
                       rowData={paymentData}
                       columnDefs={columnDefs}
                       rowSelection="multiple"
                       pagination={true}
-                      paginationPageSize={10}
                     />
                   </div>
                 )}
@@ -217,6 +209,6 @@ const ViewPayment = () => {
       )}
     </div>
   );
-}
+};
 
-export default ViewPayment
+export default ViewPayment;
