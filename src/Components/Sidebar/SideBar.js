@@ -6,8 +6,8 @@ const SideBar = () => {
         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
             <aside id="sidebar" className="sidebar">
                 <ul className="sidebar-nav" id="sidebar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link collapsed" to="/ViewEnquiry" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                    <li className="nav-item active">
+                        <Link className="nav-link " to="/ViewEnquiry" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
                             <i className="bi bi-grid" ></i>
                             <span>Dashboard</span>
                         </Link>

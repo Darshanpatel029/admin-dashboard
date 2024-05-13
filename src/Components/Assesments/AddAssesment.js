@@ -1,6 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../UI/Loading/Loading";
+
+const initialSubmit = {
+    isError: false,
+    errMsg: null,
+    isSubmitting: false,
+};
 
 const AddAssesment = (props) => {
     const [assessmentData, setAssessmentData] = useState({
@@ -21,6 +28,35 @@ const AddAssesment = (props) => {
         ass_status: "",
         notes: "",
     });
+    const [formStatus, setFormStatus] = useState(initialSubmit);
+
+    const validateForm = () => {
+        if (!assessmentData.assigned_users) {
+            setFormError("Assigned user is Required");
+            return false;
+        }
+        else if (!assessmentData.enquiry) {
+            setFormError("Enquiry is Required");
+            return false;
+        }
+
+        setFormStatus({
+            isError: false,
+            errMsg: null,
+            isSubmitting: false,
+        });
+        return true;
+    };
+
+    const setFormError = (errMsg) => {
+        setFormStatus({
+            isError: true,
+            errMsg,
+            isSubmitting: false,
+        });
+    };
+
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -32,6 +68,12 @@ const AddAssesment = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!validateForm()) return;
+        setFormStatus({
+            isError: false,
+            errMsg: null,
+            isSubmitting: true,
+        });
         const token = localStorage.getItem("token");
         try {
             const response = await fetch(
@@ -132,7 +174,7 @@ const AddAssesment = (props) => {
                                                                     aria-label="Default select example"
                                                                     value={assessmentData.assigned_users}
                                                                     onChange={handleChange}
-                                                                    required
+
                                                                 >
                                                                     <option selected>Select User</option>
                                                                     {props.userData.map((user) => (
@@ -463,9 +505,18 @@ const AddAssesment = (props) => {
                         </div>
                         <div className="row mb-3 text-center">
                             <div className="col-sm-10 ">
-                                <button type="submit" className="btn btn-primary btn-sm">
-                                    Submit Form
-                                </button>
+                                {formStatus.isError ? (
+                                    <div className="text-danger mb-2">{formStatus.errMsg}</div>
+                                ) : (
+                                    <div className="text-success mb-2">{formStatus.errMsg}</div>
+                                )}
+                                {formStatus.isSubmitting ? (
+                                    <Loading />
+                                ) : (
+                                    <button className="btn btn-primary btn-sm" type="submit">
+                                        Submit Form
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </form>

@@ -1,6 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Loading from "../UI/Loading/Loading";
+
+const initialSubmit = {
+  isError: false,
+  errMsg: null,
+  isSubmitting: false,
+};
 
 const AddPayment = (props) => {
   const [paymentData, setPaymentData] = useState({
@@ -28,6 +35,63 @@ const AddPayment = (props) => {
     }
   }, []);
 
+
+  const [formStatus, setFormStatus] = useState(initialSubmit);
+
+  const validateForm = () => {
+    if (!paymentData.Memo_For) {
+      setFormError("Memo is Required");
+      return false;
+    }
+    else if (!paymentData.payment_id) {
+      setFormError("Payment id is Required");
+      return false;
+    }
+    else if (!paymentData.Payment_Type) {
+      setFormError("Payment Type is Required");
+      return false;
+    }
+    else if (!paymentData.payment_date) {
+      setFormError("Payment Date is Required");
+      return false;
+    }
+    else if (!paymentData.payment_amount) {
+      setFormError("PAyment Amount is Required");
+      return false;
+    }
+    else if (!paymentData.payment_mode) {
+      setFormError("PAyment Mode is Required");
+      return false;
+    }
+    else if (!paymentData.payment_status) {
+      setFormError("Payment Status is Required");
+      return false;
+    }
+    else if (!paymentData.payment_document) {
+      setFormError("Payment Document is Required");
+      return false;
+    }
+    else if (!paymentData.payment_received_by) {
+      setFormError("Payment Receiver is Required");
+      return false;
+    }
+
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: false,
+    });
+    return true;
+  };
+
+  const setFormError = (errMsg) => {
+    setFormStatus({
+      isError: true,
+      errMsg,
+      isSubmitting: false,
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -52,6 +116,12 @@ const AddPayment = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: true,
+    });
     const formData = new FormData();
 
     formData.append("payment_document", paymentData.payment_document);
@@ -170,7 +240,7 @@ const AddPayment = (props) => {
                                 id="student_First_Name"
                                 value={paymentData.payment_id}
                                 onChange={handleChange}
-                                required
+
                               />
                             </div>
                           </div>
@@ -230,13 +300,13 @@ const AddPayment = (props) => {
                             </label>
                             <div className="col-md-6">
                               <input
-                                type="text"
+                                type="date"
                                 name="payment_date"
                                 className="form-control"
                                 id="student_First_Name"
                                 value={paymentData.payment_date}
                                 onChange={handleChange}
-                                required
+
                               />
                             </div>
                           </div>
@@ -256,7 +326,7 @@ const AddPayment = (props) => {
                                 id="student_Last_Name"
                                 value={paymentData.payment_amount}
                                 onChange={handleChange}
-                                required
+
                               />
                             </div>
                           </div>
@@ -326,7 +396,7 @@ const AddPayment = (props) => {
                                 id="student_Last_Name"
                                 value={paymentData.payment_reference}
                                 onChange={handleChange}
-                                required
+
                               />
                             </div>
                           </div>
@@ -399,9 +469,18 @@ const AddPayment = (props) => {
             </div>
             <div className="row mb-3 text-center">
               <div className="col-sm-10 ">
-                <button type="submit" className="btn btn-primary btn-sm">
-                  Submit Form
-                </button>
+                {formStatus.isError ? (
+                  <div className="text-danger mb-2">{formStatus.errMsg}</div>
+                ) : (
+                  <div className="text-success mb-2">{formStatus.errMsg}</div>
+                )}
+                {formStatus.isSubmitting ? (
+                  <Loading />
+                ) : (
+                  <button className="btn btn-primary btn-sm" type="submit">
+                    Submit Form
+                  </button>
+                )}
               </div>
             </div>
           </form>

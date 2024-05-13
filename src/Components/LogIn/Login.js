@@ -123,7 +123,18 @@ const Login = () => {
                         </div>
                         <div className="col-12">
                           {loading ? (
-                            <Loading />
+                            <button
+                              className="btn btn-primary w-100"
+                              type="button"
+                              disabled
+                            >
+                              <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              &nbsp; Loading...
+                            </button>
                           ) : (
                             <button
                               className="btn btn-primary w-100"
