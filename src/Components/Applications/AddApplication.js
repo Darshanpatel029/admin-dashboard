@@ -1,6 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Loading from "../UI/Loading/Loading";
+
+
+
+const initialSubmit = {
+  isError: false,
+  errMsg: null,
+  isSubmitting: false,
+};
 
 const AddApplication = (props) => {
   const [application, setApplication] = useState({
@@ -25,6 +34,47 @@ const AddApplication = (props) => {
     passport: "",
   });
 
+  const token = localStorage.getItem("token");
+  const [formStatus, setFormStatus] = useState(initialSubmit);
+
+  const validateForm = () => {
+    if (!application.application) {
+      setFormError("Application is Required");
+      return false;
+    }
+    else if (!application.application_status) {
+      setFormError("Application status is Required");
+      return false;
+    }
+    else if (!application.sop) {
+      setFormError("SOP is Required");
+      return false;
+    }
+    else if (!application.cv) {
+      setFormError("CV is Required");
+      return false;
+    }
+    else if (!application.passport) {
+      setFormError("Passport is Required");
+      return false;
+    }
+
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: false,
+    });
+    return true;
+  };
+
+  const setFormError = (errMsg) => {
+    setFormStatus({
+      isError: true,
+      errMsg,
+      isSubmitting: false,
+    });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -46,6 +96,12 @@ const AddApplication = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+    setFormStatus({
+      isError: false,
+      errMsg: null,
+      isSubmitting: true,
+    });
     const formData = new FormData();
 
     formData.append("diploma_marksheet", application.diploma_marksheet);
@@ -93,9 +149,7 @@ const AddApplication = (props) => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          ...(application.token && {
-            Authorization: `Bearer ${application.token}`,
-          }),
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       };
@@ -106,6 +160,7 @@ const AddApplication = (props) => {
       );
 
       const data = await response.json();
+      console.log(data);
 
       if (!response.ok) {
         throw new Error(
@@ -120,8 +175,6 @@ const AddApplication = (props) => {
     }
   };
 
-
-  console.log(props.EnquiryData);
   return (
     <section className="section">
       <div className="row">
@@ -216,7 +269,7 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application"
                                   value={application.application}
-                                  required
+
                                 >
                                   <option selected>Select Source</option>
                                   {props.EnquiryData.map((Enquiry) => (
@@ -230,7 +283,7 @@ const AddApplication = (props) => {
                             <div className="row mb-1">
                               <label
                                 className="col-sm-4 col-form-label"
-                                required
+
                               >
                                 Application Status
                               </label>
@@ -241,7 +294,7 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application_status"
                                   value={application.application_status}
-                                  required
+
                                 >
                                   <option selected>Select Source</option>
                                   {props.statusData.map((Status) => (
@@ -489,7 +542,6 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="sop"
-                                required
                               />
                             </div>
                           </div>
@@ -507,7 +559,6 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="cv"
-                                required
                               />
                             </div>
                           </div>
@@ -526,7 +577,6 @@ const AddApplication = (props) => {
                                 id="formFile"
                                 onChange={handleChange}
                                 name="passport"
-                                required
                               />
                             </div>
                           </div>
@@ -539,9 +589,18 @@ const AddApplication = (props) => {
             </div>
             <div className="row mb-3 text-center">
               <div className="col-sm-10 ">
-                <button type="submit" className="btn btn-primary btn-sm">
-                  Submit Form
-                </button>
+                {formStatus.isError ? (
+                  <div className="text-danger mb-2">{formStatus.errMsg}</div>
+                ) : (
+                  <div className="text-success mb-2">{formStatus.errMsg}</div>
+                )}
+                {formStatus.isSubmitting ? (
+                  <Loading />
+                ) : (
+                  <button className="btn btn-primary btn-sm" type="submit">
+                    Submit Form
+                  </button>
+                )}
               </div>
             </div>
           </form>

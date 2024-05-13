@@ -14,7 +14,8 @@ const ViewApplication = () => {
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
-    fetchApplications();
+    const token = localStorage.getItem("token");
+    fetchApplications(token);
     fetchEnquiries();
     fetchStatusData();
   }, []);
@@ -27,8 +28,10 @@ const ViewApplication = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("response", response);
       if (response.status === 200) {
         const data = await response.json();
+        console.log("------sdfsfsd------->", data);
         setter(data);
       } else if (response.status === 500) {
         setErrs(errorMessage);
@@ -60,6 +63,8 @@ const ViewApplication = () => {
       setstatusData,
       "No Inquiry found"
     );
+
+
   const columnDefs = [
     {
       headerName: "Application",
@@ -116,9 +121,7 @@ const ViewApplication = () => {
                       <Table
                         rowData={applicationData}
                         columnDefs={columnDefs}
-                        pagination={true}
                         rowSelection="multiple"
-                        paginationPageSize={10}
                       />
                     </div>
                   )}

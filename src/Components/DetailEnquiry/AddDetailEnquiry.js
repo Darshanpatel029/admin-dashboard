@@ -1,6 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../UI/Loading/Loading";
+
+
+const initialSubmit = {
+    isError: false,
+    errMsg: null,
+    isSubmitting: false,
+};
 
 const AddDetailEnquiry = (props) => {
     const [detailEnquiry, setDetailEnquiry] = useState({
@@ -44,6 +52,39 @@ const AddDetailEnquiry = (props) => {
 
     const token = localStorage.getItem("token");
 
+    const [formStatus, setFormStatus] = useState(initialSubmit);
+
+    const validateForm = () => {
+        if (!detailEnquiry.Father_Occupation) {
+            setFormError("Father Occupation is Required");
+            return false;
+        }
+        else if (!detailEnquiry.Father_Annual_Income) {
+            setFormError("Father Annual Income is Required");
+            return false;
+        }
+        else if (!detailEnquiry.Offer_Letter) {
+            setFormError("Offer Letter is Required");
+            return false;
+        }
+
+
+        setFormStatus({
+            isError: false,
+            errMsg: null,
+            isSubmitting: false,
+        });
+        return true;
+    };
+
+    const setFormError = (errMsg) => {
+        setFormStatus({
+            isError: true,
+            errMsg,
+            isSubmitting: false,
+        });
+    };
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         const newValue = files ? files[0] : value;
@@ -65,6 +106,12 @@ const AddDetailEnquiry = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateForm()) return;
+        setFormStatus({
+            isError: false,
+            errMsg: null,
+            isSubmitting: true,
+        });
         const formData = new FormData();
 
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
@@ -1169,9 +1216,18 @@ const AddDetailEnquiry = (props) => {
                         </div>
                         <div className="row mb-3 text-center">
                             <div className="col-sm-10 ">
-                                <button type="submit" className="btn btn-primary btn-sm">
-                                    Submit Form
-                                </button>
+                                {formStatus.isError ? (
+                                    <div className="text-danger mb-2">{formStatus.errMsg}</div>
+                                ) : (
+                                    <div className="text-success mb-2">{formStatus.errMsg}</div>
+                                )}
+                                {formStatus.isSubmitting ? (
+                                    <Loading />
+                                ) : (
+                                    <button className="btn btn-primary btn-sm" type="submit">
+                                        Submit Form
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </form>
