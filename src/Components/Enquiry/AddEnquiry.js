@@ -44,7 +44,47 @@ const AddEnquiry = (props) => {
 
   const validateForm = () => {
     if (!formData.student_First_Name) {
-      setFormError("Company Name is Required");
+      setFormError("Student Name is Required");
+      return false;
+    }
+    else if (!formData.student_Last_Name){
+      setFormError("Student Last Name is Required");
+      return false;
+    }
+    else if (!formData.student_passport){
+      setFormError("Student Passport is Required");
+      return false;
+    }
+    else if (!formData.student_phone){
+      setFormError("Student LastName is Required");
+      return false;
+    }
+    else if (!formData.alternate_phone){
+      setFormError("alternate phone is Required");
+      return false;
+    }
+    else if (!formData.student_email){
+      setFormError("Email is Required");
+      return false;
+    }
+    else if (!formData.student_address){
+      setFormError("Address is Required");
+      return false;
+    }
+    else if (!formData.student_state){
+      setFormError("state is Required");
+      return false;
+    }
+    else if (!formData.student_city){
+      setFormError("City is Required");
+      return false;
+    }
+    else if (!formData.student_zip){
+      setFormError("Zip is Required");
+      return false;
+    }
+    else if (!formData.notes){
+      setFormError("Notes is Required");
       return false;
     }
     setFormStatus({
@@ -255,7 +295,7 @@ const AddEnquiry = (props) => {
                                 id="student_Last_Name"
                                 value={formData.student_Last_Name}
                                 onChange={handleChange}
-                                required
+                                
                               />
                             </div>
                           </div>
@@ -274,7 +314,7 @@ const AddEnquiry = (props) => {
                                 id="student_passport"
                                 value={formData.student_passport}
                                 onChange={handleChange}
-                                required
+                                 
                               />
                             </div>
                           </div>
@@ -319,14 +359,14 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Student Phone
                             </label>
-                            <div className="col-md-6" required>
+                            <div className="col-md-6" >
                               <input
                                 type="number"
                                 className="form-control"
                                 name="student_phone"
                                 value={formData.student_phone}
                                 onChange={handleChange}
-                                required
+                                
                               />
                             </div>
                           </div>
@@ -334,14 +374,14 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Alternate Phone
                             </label>
-                            <div className="col-md-6" required>
+                            <div className="col-md-6" >
                               <input
                                 type="number"
                                 className="form-control"
                                 name="alternate_phone"
                                 value={formData.alternate_phone}
                                 onChange={handleChange}
-                                required
+                                
                               />
                             </div>
                           </div>
@@ -349,14 +389,14 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Student Email
                             </label>
-                            <div className="col-md-6" required>
+                            <div className="col-md-6" >
                               <input
                                 type="email"
                                 className="form-control"
                                 name="student_email"
                                 value={formData.student_email}
                                 onChange={handleChange}
-                                required
+                                
                               />
                             </div>
                           </div>
@@ -371,7 +411,7 @@ const AddEnquiry = (props) => {
                                 name="student_address"
                                 value={formData.student_address}
                                 onChange={handleChange}
-                                required
+                                
                               ></textarea>
                             </div>
                           </div>
@@ -736,7 +776,6 @@ const AddEnquiry = (props) => {
                                 name="notes"
                                 value={formData.notes}
                                 onChange={handleChange}
-                                required
                               ></textarea>
                             </div>
                           </div>

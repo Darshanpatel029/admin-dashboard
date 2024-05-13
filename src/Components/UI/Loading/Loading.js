@@ -3,7 +3,7 @@ import React from 'react'
 const Loading = () => {
     return (
         <button
-            className="btn btn-primary w-100"
+            className="btn btn-primary"
             type="button"
             disabled
         >
