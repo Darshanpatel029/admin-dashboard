@@ -54,7 +54,7 @@ const ViewEnquiry = () => {
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
-        setErrs("Error While Fetching Data");
+        setErrs("No Data Found");
       }
     } catch (error) {
       console.log("error", error);
