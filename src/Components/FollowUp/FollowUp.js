@@ -10,71 +10,59 @@ const initialSubmit = {
 };
 
 const FollowUp = (props) => {
-    const [formData, setFormData] = useState({
-        student_First_Name: "",
-        student_Last_Name: "",
-        student_passport: "",
-        Source_Enquiry: "",
-
-        student_phone: "",
-        alternate_phone: "",
-        student_email: "",
-        student_address: "",
-        student_country: "",
-        student_state: "",
-        student_city: "",
-        student_zip: "",
-
-        current_education: "",
-
-        country_interested: "",
-        university_interested: "",
-        level_applying_for: "",
-        course_interested: "",
-        intake_interested: "",
-        Interested_Services: [],
-        assigned_users: "",
-        created_by: 1,
-        enquiry_status: "",
-        EnquiryFollowup: "",
+    const [FollowUpData, setFollowupData] = useState({
+        last_contact_date: "",
+        last_interaction_summary: "",
+        last_interaction_type: "",
+        next_followup_date: "",
+        next_followup_purpose: "",
+        next_followup_method: "",
+        next_followup_date: "",
+        // reminder_date_time: "",
+        reminder_frequency: "",
+        reminder_notification_method: "",
+        priority_level: "",
+        urgency: "",
         notes: "",
+        status: "",
+        outcome: "",
+        attachment_enquiryFollowup: "",
+        user: "",
     });
-
+    const token = localStorage.getItem("token");
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!formData.student_First_Name) {
-            setFormError("Student Name is Required");
+        if (!FollowUpData.last_contact_date) {
+            setFormError("Last Contact date is Required");
             return false;
-        } else if (!formData.student_Last_Name) {
-            setFormError("Student Last Name is Required");
+        }
+        else if (!FollowUpData.last_interaction_type) {
+            setFormError("Last Interaction Type is Required");
             return false;
-        } else if (!formData.student_passport) {
-            setFormError("Student Passport is Required");
+
+        } else if (!FollowUpData.next_followup_method) {
+            setFormError("Next FollowUp Method is Required");
             return false;
-        } else if (!formData.student_phone) {
-            setFormError("Student LastName is Required");
+
+        } else if (!FollowUpData.reminder_frequency) {
+            setFormError("Reminder Frequency is Required");
             return false;
-        } else if (!formData.alternate_phone) {
-            setFormError("alternate phone is Required");
+
+        } else if (!FollowUpData.reminder_notification_method) {
+            setFormError("Reminder Notification Method is Required");
             return false;
-        } else if (!formData.student_email) {
-            setFormError("Email is Required");
+
+        } else if (!FollowUpData.priority_level) {
+            setFormError("Priority Level is Required");
             return false;
-        } else if (!formData.student_address) {
-            setFormError("Address is Required");
+
+        } else if (!FollowUpData.status) {
+            setFormError("Status is Required");
             return false;
-        } else if (!formData.student_state) {
-            setFormError("state is Required");
-            return false;
-        } else if (!formData.student_city) {
-            setFormError("City is Required");
-            return false;
-        } else if (!formData.student_zip) {
-            setFormError("Zip is Required");
-            return false;
-        } else if (!formData.notes) {
-            setFormError("Notes is Required");
+
+        } else if (!FollowUpData.user) {
+            setFormError("User is Required");
             return false;
         }
         setFormStatus({
@@ -94,22 +82,15 @@ const FollowUp = (props) => {
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (e.target.multiple) {
-            const selectedOptions = Array.from(e.target.selectedOptions).map(
-                (option) => option.value
-            );
-            setFormData((prevState) => ({
-                ...prevState,
-                [name]: selectedOptions,
-            }));
-        } else {
-            setFormData((prevState) => ({
-                ...prevState,
-                [name]: value,
-            }));
-        }
+        const { name, value, files } = e.target;
+        const newValue = files ? files[0] : value;
+        setFollowupData((prevState) => ({
+            ...prevState,
+            [name]: newValue,
+        }));
+
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -119,39 +100,51 @@ const FollowUp = (props) => {
             errMsg: null,
             isSubmitting: true,
         });
+        const formData = new FormData();
+        formData.append("attachment_enquiryFollowup", FollowUpData.attachment_enquiryFollowup);
 
-        const apiURL =
-            "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-followups/";
-        const token = localStorage.getItem("token");
+        // Concatenate date and time into a single string
+        const reminderDateTime = `${FollowUpData.reminder_date} ${FollowUpData.reminder_time}`;
 
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(formData),
-        };
+        // Pass concatenated date and time in the array
+        formData.append("reminder_date_time", reminderDateTime);
+
+        Object.keys(FollowUpData).forEach((key) => {
+            if (key !== "attachment_enquiryFollowup" && key !== "reminder_time") {
+                formData.append(key, FollowUpData[key]);
+            }
+        });
 
         try {
-            const response = await fetch(apiURL, requestOptions);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success("FollowUp submitted successfully!");
-                props.closeModal();
-            } else {
-                toast.error("Failed to submit FollowUp.");
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            };
+
+            const response = await fetch(
+                "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-followups/",
+                requestOptions
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    `API call failed with status: ${response.status
+                    }, body: ${JSON.stringify(data)}`
+                );
             }
+            toast.success("Payment Data submitted successfully!");
+            props.closeModal();
         } catch (error) {
-            toast.error("Failed to submit FollowUp.");
-        } finally {
-            setFormStatus({
-                ...formStatus,
-                isSubmitting: false,
-            });
+            toast.error("Failed to submit Payment Data.");
         }
     };
+
     return (
         <div className="col">
             <form onSubmit={handleSubmit}>
@@ -166,17 +159,36 @@ const FollowUp = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
+
+                                        <div className="row mb-4">
+                                            <label
+                                                htmlFor="student_First_Name"
+                                                className="col-sm-4 col-form-label"
+                                            >
+                                                Last Contact Date
+                                            </label>
+                                            <div className="col-md-6">
+                                                <input
+                                                    type="date"
+                                                    name="last_contact_date"
+                                                    className="form-control"
+                                                    id="student_First_Name"
+                                                    value={FollowUpData.last_contact_date}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
                                         <div className="row g-3">
                                             <div className="row mb-4">
                                                 <label className="col-sm-4 col-form-label">
-                                                    Last interaction summary
+                                                    Last Interaction Summary
                                                 </label>
                                                 <div className="col-md-6">
                                                     <textarea
                                                         className="form-control"
                                                         style={{ height: "100px" }}
-                                                        name="notes"
-                                                        value={formData.notes}
+                                                        name="last_interaction_summary"
+                                                        value={FollowUpData.last_interaction_summary}
                                                         onChange={handleChange}
                                                     ></textarea>
                                                 </div>
@@ -192,31 +204,49 @@ const FollowUp = (props) => {
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="last_interaction_type"
+                                                        value={FollowUpData.last_interaction_type}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option selected>Select Type</option>
+                                                        <option value="call">Call</option>
+                                                        <option value="meeting">Meeting</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="other">Other</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div className="row mb-4">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Next FollowUp Date
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="date"
+                                                        name="next_followup_date"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={FollowUpData.next_followup_date}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="row mb-4">
                                                 <label className="col-sm-4 col-form-label">
-                                                    Next followup purpose
+                                                    Next Followup Purpose
                                                 </label>
                                                 <div className="col-md-6">
                                                     <textarea
                                                         className="form-control"
                                                         style={{ height: "100px" }}
-                                                        name="notes"
-                                                        value={formData.notes}
+                                                        name="next_followup_purpose"
+                                                        value={FollowUpData.next_followup_purpose}
                                                         onChange={handleChange}
                                                     ></textarea>
                                                 </div>
@@ -227,22 +257,71 @@ const FollowUp = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Next followup method
+                                                    Next Followup Method
                                                 </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="next_followup_method"
+                                                        value={FollowUpData.next_followup_method}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option selected>Select Method</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="phone">Phone</option>
+                                                        <option value="sms">SMS</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div className="row mb-4">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Reminder Date&Time
+                                                </label>
+                                                <div className="col-md-6">
+                                                    Date:  <input
+                                                        type="date"
+                                                        name="reminder_date"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={FollowUpData.reminder_date}
+                                                        onChange={handleChange}
+                                                    />
+                                                    Time: <input
+                                                        type="time"
+                                                        name="reminder_time"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={FollowUpData.reminder_time}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="row mb-3">
+                                                <label
+                                                    htmlFor="Source_Enquiry"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Reminder Frequency
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <select
+                                                        type="number"
+                                                        name="reminder_frequency"
+                                                        value={FollowUpData.reminder_frequency}
+                                                        className="form-select"
+                                                        onChange={handleChange}
+                                                    >
+                                                        <option selected>Select Reminder Frequency</option>
+                                                        <option value="one-time">One-time</option>
+                                                        <option value="daily">Daily</option>
+                                                        <option value="weekly">Weekly</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -252,22 +331,22 @@ const FollowUp = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Reminder frequency
+                                                    Reminder Notification Method
+
                                                 </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="reminder_notification_method"
+                                                        value={FollowUpData.reminder_notification_method}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option selected>Select REminder Notification Method</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="phone">Phone</option>
+                                                        <option value="sms">SMS</option>
+                                                        <option value="other">Other</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -277,48 +356,20 @@ const FollowUp = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Reminder notification method
-
+                                                    Priority Level
                                                 </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="priority_level"
+                                                        value={FollowUpData.priority_level}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
                                                         <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-3">
-                                                <label
-                                                    htmlFor="Source_Enquiry"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Priority level
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <select
-                                                        type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
-                                                        className="form-select"
-                                                        onChange={handleChange}
-                                                    >
-                                                        <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option value="high">High</option>
+                                                        <option value="medium">Medium</option>
+                                                        <option value="low">Low</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -330,8 +381,8 @@ const FollowUp = (props) => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        name="student_email"
-                                                        value={formData.student_email}
+                                                        name="urgency"
+                                                        value={FollowUpData.urgency}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -344,7 +395,7 @@ const FollowUp = (props) => {
                                                         className="form-control"
                                                         style={{ height: "100px" }}
                                                         name="notes"
-                                                        value={formData.notes}
+                                                        value={FollowUpData.notes}
                                                         onChange={handleChange}
                                                     ></textarea>
                                                 </div>
@@ -360,17 +411,14 @@ const FollowUp = (props) => {
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="status"
+                                                        value={FollowUpData.status}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
                                                         <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option value="pending" >Pending</option>
+                                                        <option value="completed" >Completed</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -382,8 +430,8 @@ const FollowUp = (props) => {
                                                     <textarea
                                                         className="form-control"
                                                         style={{ height: "100px" }}
-                                                        name="notes"
-                                                        value={formData.notes}
+                                                        name="outcome"
+                                                        value={FollowUpData.outcome}
                                                         onChange={handleChange}
                                                     ></textarea>
                                                 </div>
@@ -401,9 +449,8 @@ const FollowUp = (props) => {
                                                         className="form-control"
                                                         type="file"
                                                         id="formFile"
-                                                        name="Twelveth_Document"
+                                                        name="attachment_enquiryFollowup"
                                                         onChange={handleChange}
-                                                        required
                                                     />
                                                 </div>
                                             </div>
@@ -418,17 +465,13 @@ const FollowUp = (props) => {
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
-                                                        name="Source_Enquiry"
-                                                        value={formData.Source_Enquiry}
+                                                        name="user"
+                                                        value={FollowUpData.user}
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
-                                                        {props.sourceEnquiry.map((option) => (
-                                                            <option key={option.id} value={option.id}>
-                                                                {option.Source}
-                                                            </option>
-                                                        ))}
+                                                        <option selected>Select User</option>
+                                                        <option value={1}>Admin</option>
                                                     </select>
                                                 </div>
                                             </div>

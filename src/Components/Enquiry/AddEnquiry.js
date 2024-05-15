@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
 import FollowUp from "../FollowUp/FollowUp";
+// import FetchFollowUp from "../FollowUp/FetchFollowUp";
+// import { fetchData } from "../FollowUp/FetchFollowUp";
 
+// part of validation
 const initialSubmit = {
   isError: false,
   errMsg: null,
   isSubmitting: false,
 };
+// part of validation
 
 const AddEnquiry = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,50 +47,41 @@ const AddEnquiry = (props) => {
     notes: "",
   });
 
-  const [formStatus, setFormStatus] = useState(initialSubmit);
+  // Validation
 
+  const [formStatus, setFormStatus] = useState(initialSubmit);
   const validateForm = () => {
     if (!formData.student_First_Name) {
       setFormError("Student Name is Required");
       return false;
-    }
-    else if (!formData.student_Last_Name) {
+    } else if (!formData.student_Last_Name) {
       setFormError("Student Last Name is Required");
       return false;
-    }
-    else if (!formData.student_passport) {
+    } else if (!formData.student_passport) {
       setFormError("Student Passport is Required");
       return false;
-    }
-    else if (!formData.student_phone) {
+    } else if (!formData.student_phone) {
       setFormError("Student LastName is Required");
       return false;
-    }
-    else if (!formData.alternate_phone) {
+    } else if (!formData.alternate_phone) {
       setFormError("alternate phone is Required");
       return false;
-    }
-    else if (!formData.student_email) {
+    } else if (!formData.student_email) {
       setFormError("Email is Required");
       return false;
-    }
-    else if (!formData.student_address) {
+    } else if (!formData.student_address) {
       setFormError("Address is Required");
       return false;
-    }
-    else if (!formData.student_state) {
+    } else if (!formData.student_state) {
       setFormError("state is Required");
       return false;
-    }
-    else if (!formData.student_city) {
+    } else if (!formData.student_city) {
       setFormError("City is Required");
       return false;
-    }
-    else if (!formData.student_zip) {
+    } else if (!formData.student_zip) {
       setFormError("Zip is Required");
       return false;
-    }
-    else if (!formData.notes) {
+    } else if (!formData.notes) {
       setFormError("Notes is Required");
       return false;
     }
@@ -105,6 +100,8 @@ const AddEnquiry = (props) => {
       isSubmitting: false,
     });
   };
+
+  // validation end
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -292,7 +289,6 @@ const AddEnquiry = (props) => {
                                 id="student_Last_Name"
                                 value={formData.student_Last_Name}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -311,7 +307,6 @@ const AddEnquiry = (props) => {
                                 id="student_passport"
                                 value={formData.student_passport}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -356,14 +351,13 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Student Phone
                             </label>
-                            <div className="col-md-6" >
+                            <div className="col-md-6">
                               <input
                                 type="number"
                                 className="form-control"
                                 name="student_phone"
                                 value={formData.student_phone}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -371,14 +365,13 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Alternate Phone
                             </label>
-                            <div className="col-md-6" >
+                            <div className="col-md-6">
                               <input
                                 type="number"
                                 className="form-control"
                                 name="alternate_phone"
                                 value={formData.alternate_phone}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -386,14 +379,13 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Student Email
                             </label>
-                            <div className="col-md-6" >
+                            <div className="col-md-6">
                               <input
                                 type="email"
                                 className="form-control"
                                 name="student_email"
                                 value={formData.student_email}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -408,7 +400,6 @@ const AddEnquiry = (props) => {
                                 name="student_address"
                                 value={formData.student_address}
                                 onChange={handleChange}
-
                               ></textarea>
                             </div>
                           </div>
@@ -742,7 +733,7 @@ const AddEnquiry = (props) => {
                           </div>
                           <div className="row mb-4">
                             <label className="col-sm-4 col-form-label">
-                              EnquiryFollowup
+                              Enquiry Followup
                             </label>
                             <div className="col-md-6 d-flex">
                               <select
@@ -759,7 +750,6 @@ const AddEnquiry = (props) => {
                                     {Followup.next_followup_date}
                                   </option>
                                 ))}
-
                               </select>
                               <div className="d-flex justify-content-center align-items-center m-2">
                                 <button
@@ -771,11 +761,10 @@ const AddEnquiry = (props) => {
                                 </button>
                               </div>
                             </div>
-
                           </div>
                           <div className="row mb-4">
                             <label className="col-sm-4 col-form-label">
-                              notes
+                              Notes
                             </label>
                             <div className="col-md-6">
                               <textarea
@@ -818,7 +807,7 @@ const AddEnquiry = (props) => {
         <Modal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
-          size="md"
+          size="lg"
         >
           <Modal.Header closeButton>
             <Modal.Title>Add FollowUp</Modal.Title>
