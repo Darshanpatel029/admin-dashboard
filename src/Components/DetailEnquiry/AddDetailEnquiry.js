@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
+import Modal from "react-bootstrap/Modal";
+import FollowUp from "../FollowUp/FollowUp";
 
 
 const initialSubmit = {
@@ -11,6 +13,7 @@ const initialSubmit = {
 };
 
 const AddDetailEnquiry = (props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [detailEnquiry, setDetailEnquiry] = useState({
         Current_Enquiry: "",
         current_education: "",
@@ -50,6 +53,7 @@ const AddDetailEnquiry = (props) => {
         DetaiEnquiryFollowup: "",
     });
 
+    // get token from local Storage
     const token = localStorage.getItem("token");
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
@@ -165,8 +169,6 @@ const AddDetailEnquiry = (props) => {
                 formData.append(key, detailEnquiry[key]);
             }
         });
-
-
 
         try {
             const requestOptions = {
@@ -1186,7 +1188,7 @@ const AddDetailEnquiry = (props) => {
                                                         <label className="col-sm-4 col-form-label">
                                                             DetaiEnquiryFollowup
                                                         </label>
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-6 d-flex">
                                                             <select
                                                                 className="form-select"
                                                                 aria-label="Default select example"
@@ -1205,6 +1207,15 @@ const AddDetailEnquiry = (props) => {
                                                                     </option>
                                                                 ))}
                                                             </select>
+                                                            <div className="d-flex justify-content-center align-items-center m-2">
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-primary btn-sm"
+                                                                    onClick={() => setIsModalOpen(true)}
+                                                                >
+                                                                    <i class="bi bi-file-plus"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1233,6 +1244,20 @@ const AddDetailEnquiry = (props) => {
                     </form>
                 </div>
             </div>
+            {isModalOpen && (
+                <Modal
+                    show={isModalOpen}
+                    onHide={() => setIsModalOpen(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <FollowUp />
+                    </Modal.Body>
+                </Modal>
+            )}
         </section>
     );
 };
