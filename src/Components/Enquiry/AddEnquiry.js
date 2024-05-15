@@ -3,9 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
-import FollowUp from "../FollowUp/FollowUp";
-// import FetchFollowUp from "../FollowUp/FetchFollowUp";
-// import { fetchData } from "../FollowUp/FetchFollowUp";
+import EnquiryFollowup from "../FollowUp/EnquiryFollowUp";
 
 // part of validation
 const initialSubmit = {
@@ -255,7 +253,7 @@ const AddEnquiry = (props) => {
                     <div>
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_First_Name"
                               className="col-sm-4 col-form-label"
@@ -274,7 +272,7 @@ const AddEnquiry = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_Last_Name"
                               className="col-sm-4 col-form-label"
@@ -292,7 +290,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_passport"
                               className="col-sm-4 col-form-label"
@@ -310,7 +308,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"
@@ -347,7 +345,7 @@ const AddEnquiry = (props) => {
                     <div className="">
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student Phone
                             </label>
@@ -361,7 +359,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Alternate Phone
                             </label>
@@ -375,7 +373,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student Email
                             </label>
@@ -389,7 +387,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student Address
                             </label>
@@ -403,7 +401,7 @@ const AddEnquiry = (props) => {
                               ></textarea>
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student Country
                             </label>
@@ -428,7 +426,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student State
                             </label>
@@ -443,7 +441,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student City
                             </label>
@@ -458,7 +456,7 @@ const AddEnquiry = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Student Zip
                             </label>
@@ -486,7 +484,7 @@ const AddEnquiry = (props) => {
                     <div className="">
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Current Education
                             </label>
@@ -524,7 +522,7 @@ const AddEnquiry = (props) => {
                     <div className="">
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Country Interested
                             </label>
@@ -554,7 +552,7 @@ const AddEnquiry = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               University Interested
                             </label>
@@ -583,7 +581,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Level Applying For
                             </label>
@@ -610,7 +608,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Course Interested
                             </label>
@@ -632,7 +630,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Intake Interested
                             </label>
@@ -654,7 +652,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Interested Services
                             </label>
@@ -687,7 +685,7 @@ const AddEnquiry = (props) => {
                     <div className="">
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Assigned Users
                             </label>
@@ -709,7 +707,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Enquiry Status
                             </label>
@@ -731,7 +729,7 @@ const AddEnquiry = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Enquiry Followup
                             </label>
@@ -762,7 +760,7 @@ const AddEnquiry = (props) => {
                               </div>
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Notes
                             </label>
@@ -813,7 +811,7 @@ const AddEnquiry = (props) => {
             <Modal.Title>Add FollowUp</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FollowUp />
+            <EnquiryFollowup />
           </Modal.Body>
         </Modal>
       )}
