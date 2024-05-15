@@ -3,8 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
-import FollowUp from "../FollowUp/FollowUp";
-
+import DetaiEnquiryFollowup from "../FollowUp/DetailEnquiryFollowUp";
 
 const initialSubmit = {
     isError: false,
@@ -16,7 +15,7 @@ const AddDetailEnquiry = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [detailEnquiry, setDetailEnquiry] = useState({
         Current_Enquiry: "",
-        current_education: "",
+        Current_Education_Details: "",
         Tenth_Education_Details: "",
         Twelveth_Education_Details: "",
         Graduation_Education_Details: "",
@@ -53,26 +52,20 @@ const AddDetailEnquiry = (props) => {
         DetaiEnquiryFollowup: "",
     });
 
-    // get token from local Storage
     const token = localStorage.getItem("token");
-
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
         if (!detailEnquiry.Father_Occupation) {
             setFormError("Father Occupation is Required");
             return false;
-        }
-        else if (!detailEnquiry.Father_Annual_Income) {
+        } else if (!detailEnquiry.Father_Annual_Income) {
             setFormError("Father Annual Income is Required");
             return false;
-        }
-        else if (!detailEnquiry.Offer_Letter) {
+        } else if (!detailEnquiry.Offer_Letter) {
             setFormError("Offer Letter is Required");
             return false;
         }
-
-
         setFormStatus({
             isError: false,
             errMsg: null,
@@ -108,6 +101,7 @@ const AddDetailEnquiry = (props) => {
         }
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -117,6 +111,28 @@ const AddDetailEnquiry = (props) => {
             isSubmitting: true,
         });
         const formData = new FormData();
+        formData.append("Current_Enquiry", detailEnquiry.Current_Enquiry);
+        formData.append("Current_Education_Details", detailEnquiry.Current_Education_Details);
+        formData.append("Tenth_Education_Details", detailEnquiry.Tenth_Education_Details);
+        formData.append("Twelveth_Education_Details", detailEnquiry.Twelveth_Education_Details);
+        formData.append("Graduation_Education_Details", detailEnquiry.Graduation_Education_Details);
+        formData.append("Work_Experience", detailEnquiry.Work_Experience);
+
+        formData.append("Toefl_Exam", detailEnquiry.Toefl_Exam);
+        formData.append("ielts_Exam", detailEnquiry.ielts_Exam);
+        formData.append("PTE_Exam", detailEnquiry.PTE_Exam);
+        formData.append("Duolingo_Exam", detailEnquiry.Duolingo_Exam);
+        formData.append("Gre_Exam", detailEnquiry.Gre_Exam);
+        formData.append("Gmat_Exam", detailEnquiry.Gmat_Exam);
+
+        formData.append("Father_Occupation", detailEnquiry.Father_Occupation);
+        formData.append("Father_Annual_Income", detailEnquiry.Father_Annual_Income);
+
+        formData.append("Refusal", detailEnquiry.Refusal);
+        formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
+        formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
+        formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
+
 
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
         formData.append("Tenth_Document", detailEnquiry.Tenth_Document);
@@ -139,59 +155,25 @@ const AddDetailEnquiry = (props) => {
         );
         formData.append("Passport_Document", detailEnquiry.Passport_Document);
         formData.append("Offer_Letter", detailEnquiry.Offer_Letter);
-        formData.append("Refusal", detailEnquiry.Refusal);
-        formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
-        formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
 
-        Object.keys(detailEnquiry).forEach((key) => {
-            if (
-                key !== "Twelveth_Document" &&
-                key !== "Tenth_Document" &&
-                key !== "Graduation_Marksheet" &&
-                key !== "Graduation_Certificate" &&
-                key !== "UG_Marksheet" &&
-                key !== "UG_Certificate" &&
-                key !== "Ielts_Result" &&
-                key !== "Toefl_Result" &&
-                key !== "PTE_Result" &&
-                key !== "Duolingo_Result" &&
-                key !== "Gre_Result" &&
-                key !== "Gmat_Result" &&
-                key !== "Work_Experience_Document" &&
-                key !== "Passport_Document" &&
-                key !== "Offer_Letter" &&
-                key !== "Refusal" &&
-                key !== "Confirmed_Services" &&
-                key !== "Enquiry_Status" &&
-                key !== "DetaiEnquiryFollowup"
-            ) {
-                formData.append(key, detailEnquiry[key]);
-            }
-        });
 
         try {
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: formData,
-            };
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
-                requestOptions
+                "https://cloudconnectcampaign.com/espicrmnew/api/create-detail-enquiry/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                    method: "POST",
+                    body: formData,
+                }
             );
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(
-                    `API call failed with status: ${response.status
-                    }, body: ${JSON.stringify(data)}`
-                );
+            console.log("---response---->", response)
+            if (response.status === 201) {
+                toast.success("Enquiry submitted successfully!");
+                props.closeModal();
             }
-            toast.success("Enquiry submitted successfully!");
-            props.closeModal();
         } catch (error) {
             toast.error("Failed to submit enquiry.");
         }
@@ -410,9 +392,11 @@ const AddDetailEnquiry = (props) => {
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
-                                                                    name="current_education"
+                                                                    name="Current_Education_Details"
                                                                     onChange={handleChange}
-                                                                    value={detailEnquiry.current_education}
+                                                                    value={
+                                                                        detailEnquiry.Current_Education_Details
+                                                                    }
                                                                     required
                                                                 >
                                                                     <option selected>
@@ -469,8 +453,9 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Twelveth_Education_Details"
                                                                     onChange={handleChange}
-                                                                    value={detailEnquiry.Twelveth_Document}
-                                                                    required
+                                                                    value={
+                                                                        detailEnquiry.Twelveth_Education_Details
+                                                                    }
                                                                 >
                                                                     <option selected>
                                                                         Select Twelveth Education
@@ -496,7 +481,9 @@ const AddDetailEnquiry = (props) => {
                                                                     aria-label="Default select example"
                                                                     name="Graduation_Education_Details"
                                                                     onChange={handleChange}
-                                                                    value={detailEnquiry.Graduation_Education_Details}
+                                                                    value={
+                                                                        detailEnquiry.Graduation_Education_Details
+                                                                    }
                                                                     required
                                                                 >
                                                                     <option selected>
@@ -1077,7 +1064,7 @@ const AddDetailEnquiry = (props) => {
                                         role="tabpanel"
                                         aria-labelledby="Refusal-tab"
                                     >
-                                        <div >
+                                        <div>
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="row mb-1 mt-3">
@@ -1199,10 +1186,7 @@ const AddDetailEnquiry = (props) => {
                                                             >
                                                                 <option selected>Select FollowUp Status</option>
                                                                 {props.followupData.map((followup) => (
-                                                                    <option
-                                                                        key={followup.id}
-                                                                        value={followup.id}
-                                                                    >
+                                                                    <option key={followup.id} value={followup.id}>
                                                                         {followup.next_followup_date}
                                                                     </option>
                                                                 ))}
@@ -1254,7 +1238,7 @@ const AddDetailEnquiry = (props) => {
                         <Modal.Title>Add FollowUp</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <FollowUp />
+                        <DetaiEnquiryFollowup />
                     </Modal.Body>
                 </Modal>
             )}
