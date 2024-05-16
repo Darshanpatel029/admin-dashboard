@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 
-
-
 const initialSubmit = {
   isError: false,
   errMsg: null,
@@ -244,18 +242,18 @@ const AddApplication = (props) => {
                     </button>
                   </li>
                 </ul>
-                <div className="tab-content" id="myTabContent">
+                <div className="tab-content mt-4" id="myTabContent">
                   <div
                     className="tab-pane fade show active"
                     id="pills-home"
                     role="tabpanel"
                     aria-labelledby="home-tab"
                   >
-                    <div className="">
+                    <div>
                       <div className="card-body">
                         <form className="row g-3">
                           <div className="col-md-12">
-                            <div className="row mb-1">
+                            <div className="row mb-2">
                               <label
                                 className="col-sm-4 col-form-label"
                                 required
@@ -280,7 +278,7 @@ const AddApplication = (props) => {
                                 </select>
                               </div>
                             </div>
-                            <div className="row mb-1">
+                            <div className="row mb-2">
                               <label
                                 className="col-sm-4 col-form-label"
 
@@ -319,7 +317,7 @@ const AddApplication = (props) => {
                     <div className="">
                       <div className="card-body">
                         <form className="row g-3">
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -337,7 +335,7 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -356,7 +354,7 @@ const AddApplication = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -387,12 +385,12 @@ const AddApplication = (props) => {
                     <div className="">
                       <div className="card-body">
                         <form className="row g-3">
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Ielts
+                              IELTS
                             </label>
                             <div className="col-md-6">
                               <input
@@ -405,12 +403,12 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Gre
+                              GRE
                             </label>
                             <div className="col-md-6">
                               <input
@@ -424,12 +422,12 @@ const AddApplication = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Toefl
+                              TOEFL
                             </label>
                             <div className="col-md-6">
                               <input
@@ -443,12 +441,12 @@ const AddApplication = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Gmat
+                              GMAT
                             </label>
                             <div className="col-md-6">
                               <input
@@ -461,12 +459,12 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Pte
+                              PTE
                             </label>
                             <div className="col-md-6">
                               <input
@@ -479,7 +477,7 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -497,7 +495,7 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -528,12 +526,12 @@ const AddApplication = (props) => {
                     <div className="">
                       <div className="card-body">
                         <form className="row g-3">
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Sop
+                              SOP
                             </label>
                             <div className="col-md-6">
                               <input
@@ -545,7 +543,7 @@ const AddApplication = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -563,7 +561,7 @@ const AddApplication = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"

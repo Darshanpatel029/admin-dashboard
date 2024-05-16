@@ -9,7 +9,7 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const DetailEnquiryFollowUp = (props) => {
+const FollowUp = (props) => {
     const [FollowUpData, setFollowupData] = useState({
         last_contact_date: "",
         last_interaction_summary: "",
@@ -18,7 +18,7 @@ const DetailEnquiryFollowUp = (props) => {
         next_followup_purpose: "",
         next_followup_method: "",
         next_followup_date: "",
-        // reminder_date_time: "",
+        reminder_date_time: "",
         reminder_frequency: "",
         reminder_notification_method: "",
         priority_level: "",
@@ -26,9 +26,11 @@ const DetailEnquiryFollowUp = (props) => {
         notes: "",
         status: "",
         outcome: "",
-        attachment_enquiryFollowup: "",
+        attachment_DetailEnquiryFollowup: "",
         user: "",
     });
+
+    console.log("---------->", FollowUpData)
     const token = localStorage.getItem("token");
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
@@ -91,7 +93,6 @@ const DetailEnquiryFollowUp = (props) => {
 
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -100,50 +101,42 @@ const DetailEnquiryFollowUp = (props) => {
             errMsg: null,
             isSubmitting: true,
         });
-        const formData = new FormData();
-        formData.append("attachment_enquiryFollowup", FollowUpData.attachment_enquiryFollowup);
+        const { reminder_date, reminder_time, ...formData } = FollowUpData;
+        const reminder_date_time = `${reminder_date}T${reminder_time}:00`;
 
-        // Concatenate date and time into a single string
-        const reminderDateTime = `${FollowUpData.reminder_date} ${FollowUpData.reminder_time}`;
+        const formDataToSend = new FormData();
+        formDataToSend.append("attachment_DetailEnquiryFollowup", FollowUpData.attachment_DetailEnquiryFollowup);
 
-        // Pass concatenated date and time in the array
-        formData.append("reminder_date_time", reminderDateTime);
-
-        Object.keys(FollowUpData).forEach((key) => {
-            if (key !== "attachment_enquiryFollowup" && key !== "reminder_time") {
-                formData.append(key, FollowUpData[key]);
+        Object.keys(formData).forEach((key) => {
+            if (key !== "attachment_DetailEnquiryFollowup" && key !== "reminder_date" && key !== "reminder_time") {
+                formDataToSend.append(key, formData[key]);
             }
         });
 
+        formDataToSend.append("reminder_date_time", reminder_date_time);
+
         try {
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: formData,
-            };
-
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-followups/",
-                requestOptions
+                "https://cloudconnectcampaign.com/espicrmnew/api/detail-enquiry-followups/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        Accept: "application/json",
+                    },
+                    method: "POST",
+                    body: formDataToSend,
+                }
             );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    `API call failed with status: ${response.status
-                    }, body: ${JSON.stringify(data)}`
-                );
+            if (response.status === 201) {
+                props.getNewData();
+                toast.success("Enquiry submitted successfully!");
+                props.closeModal();
             }
-            toast.success("FollowUp Data submitted successfully!");
-            props.closeModal();
-        } catch (error) {
-            toast.error("Failed to submit FollowUp Data");
+        } catch (errMsg) {
+            toast.error("Failed to submit enquiry.");
         }
     };
+
 
     return (
         <div className="col">
@@ -160,26 +153,26 @@ const DetailEnquiryFollowUp = (props) => {
                                 <div>
                                     <div className="card-body">
 
-                                        <div className="row mb-4">
-                                            <label
-                                                htmlFor="student_First_Name"
-                                                className="col-sm-4 col-form-label"
-                                            >
-                                                Last Contact Date
-                                            </label>
-                                            <div className="col-md-6">
-                                                <input
-                                                    type="date"
-                                                    name="last_contact_date"
-                                                    className="form-control"
-                                                    id="student_First_Name"
-                                                    value={FollowUpData.last_contact_date}
-                                                    onChange={handleChange}
-                                                />
-                                            </div>
-                                        </div>
                                         <div className="row g-3">
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Last Contact Date
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="date"
+                                                        name="last_contact_date"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={FollowUpData.last_contact_date}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
                                                 <label className="col-sm-4 col-form-label">
                                                     Last Interaction Summary
                                                 </label>
@@ -194,7 +187,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -218,7 +211,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
@@ -237,7 +230,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label className="col-sm-4 col-form-label">
                                                     Next Followup Purpose
                                                 </label>
@@ -252,7 +245,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -276,7 +269,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
@@ -303,13 +296,12 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
-                                                <label
-                                                    htmlFor="Source_Enquiry"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Reminder Frequency
-                                                </label>
+                                            <div className="row mb-2">                                                <label
+                                                htmlFor="Source_Enquiry"
+                                                className="col-sm-4 col-form-label"
+                                            >
+                                                Reminder Frequency
+                                            </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
@@ -326,7 +318,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -351,7 +343,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -373,7 +365,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label className="col-sm-4 col-form-label">
                                                     Urgency
                                                 </label>
@@ -388,7 +380,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label className="col-sm-4 col-form-label">notes</label>
                                                 <div className="col-md-6">
                                                     <textarea
@@ -401,7 +393,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -423,7 +415,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-4">
+                                            <div className="row mb-2">
                                                 <label className="col-sm-4 col-form-label">Outcome
                                                 </label>
                                                 <div className="col-md-6">
@@ -437,7 +429,7 @@ const DetailEnquiryFollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3 mt-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     for="inputNumber"
                                                     className="col-sm-4 col-form-label"
@@ -449,13 +441,13 @@ const DetailEnquiryFollowUp = (props) => {
                                                         className="form-control"
                                                         type="file"
                                                         id="formFile"
-                                                        name="attachment_enquiryFollowup"
+                                                        name="attachment_DetailEnquiryFollowup"
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
+                                            <div className="row mb-2">
                                                 <label
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
@@ -471,7 +463,11 @@ const DetailEnquiryFollowUp = (props) => {
                                                         onChange={handleChange}
                                                     >
                                                         <option selected>Select User</option>
-                                                        <option value={1}>Admin</option>
+                                                        {props.user.map((user) => (
+                                                            <option key={user.id} value={user.id}>
+                                                                {user.username}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
                                             </div>
@@ -505,4 +501,4 @@ const DetailEnquiryFollowUp = (props) => {
     );
 };
 
-export default DetailEnquiryFollowUp;
+export default FollowUp;

@@ -38,7 +38,11 @@ const ViewPayment = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        setter(data);
+        if (data.length === 0) {
+          setErrs("No Data Found");
+        } else {
+          setter(data);
+        }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {

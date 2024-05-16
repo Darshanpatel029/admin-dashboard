@@ -8,6 +8,7 @@ import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
 
 const ViewAssesment = () => {
+  const [data, setData] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [AssessmenData, setAssessmentData] = useState([]);
   const [EnquiryData, setEnquiryData] = useState([]);
@@ -17,6 +18,7 @@ const ViewAssesment = () => {
   const [levelData, setLevelData] = useState([]);
   const [userData, setuserData] = useState([]);
   const [IntakeData, setIntakeData] = useState([]);
+  const [statusData, setstatusData] = useState([]);
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
@@ -29,7 +31,8 @@ const ViewAssesment = () => {
     fetchLevelData();
     fetchCourseData();
     fetchIntakeData();
-  }, []);
+    fetchStatusData();
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
@@ -41,7 +44,11 @@ const ViewAssesment = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        setter(data);
+        if (data.length === 0) {
+          setErrs("No Data Found");
+        } else {
+          setter(data);
+        }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
@@ -106,6 +113,13 @@ const ViewAssesment = () => {
       "No Intake Data found"
     );
 
+  const fetchStatusData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmnew/api/assessment-statuses/",
+      setstatusData,
+      "No Intake Data found"
+    );
+
   const columnDefs = [
     {
       headerName: "Enquiry",
@@ -124,6 +138,9 @@ const ViewAssesment = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const getNewData = () => {
+    setData(1);
+  }
 
   return (
     <div>
@@ -192,7 +209,9 @@ const ViewAssesment = () => {
               courseData={courseData}
               IntakeData={IntakeData}
               userData={userData}
+              status={statusData}
               closeModal={closeModal}
+              getNewData={getNewData}
             />
           </Modal.Body>
         </Modal>

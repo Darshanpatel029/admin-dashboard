@@ -7,6 +7,7 @@ import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
 
 const ViewEnquiry = () => {
+  const [data, setData] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [EnquiryData, setEnquiryData] = useState([]);
   const [SourceData, setSourceData] = useState([]);
@@ -38,7 +39,7 @@ const ViewEnquiry = () => {
     fetchServicesData();
     fetchStatusData();
     fetchfollowupData();
-  }, []);
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
@@ -50,8 +51,13 @@ const ViewEnquiry = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        setter(data);
-      } else if (response.status === 500) {
+        if (data.length === 0) {
+          setErrs("No Data Found");
+        } else {
+          setter(data);
+        }
+      }
+      else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
         setErrs("No Data Found");
@@ -253,6 +259,10 @@ const ViewEnquiry = () => {
     setIsModalOpen(false);
   };
 
+  const getNewData = () => {
+    setData(1);
+  }
+
   return (
     <div>
       <main id="main" className="main">
@@ -322,6 +332,7 @@ const ViewEnquiry = () => {
               StatusData={StatusData}
               followupData={followupData}
               closeModal={closeModal}
+              getNewData={getNewData}
             />
           </Modal.Body>
         </Modal>
