@@ -87,7 +87,7 @@ const AddDetailEnquiry = (props) => {
         const newValue = files ? files[0] : value;
         if (e.target.multiple) {
             const selectedOptions = Array.from(e.target.selectedOptions).map(
-                (option) => parseInt(option.value)
+                (option) => option.value
             );
             setDetailEnquiry((prevState) => ({
                 ...prevState,
@@ -156,6 +156,31 @@ const AddDetailEnquiry = (props) => {
         formData.append("Passport_Document", detailEnquiry.Passport_Document);
         formData.append("Offer_Letter", detailEnquiry.Offer_Letter);
 
+        Object.keys(detailEnquiry).forEach((key) => {
+            if (
+                key !== "Twelveth_Document" &&
+                key !== "Tenth_Document" &&
+                key !== "Graduation_Marksheet" &&
+                key !== "Graduation_Certificate" &&
+                key !== "UG_Marksheet" &&
+                key !== "UG_Certificate" &&
+                key !== "Ielts_Result" &&
+                key !== "Toefl_Result" &&
+                key !== "PTE_Result" &&
+                key !== "Duolingo_Result" &&
+                key !== "Gre_Result" &&
+                key !== "Gmat_Result" &&
+                key !== "Work_Experience_Document" &&
+                key !== "Passport_Document" &&
+                key !== "Offer_Letter" &&
+                key !== "Refusal" &&
+                key !== "Confirmed_Services" &&
+                key !== "Enquiry_Status" &&
+                key !== "followup"
+            ) {
+                formData.append(key, detailEnquiry[key]);
+            }
+        });
 
         try {
             const response = await fetch(
@@ -163,20 +188,24 @@ const AddDetailEnquiry = (props) => {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data",
+                        Accept: "application/json",
                     },
                     method: "POST",
                     body: formData,
                 }
             );
-            console.log("---response---->", response)
             if (response.status === 201) {
+                props.getNewData();
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
-        } catch (error) {
+        } catch (errMsg) {
             toast.error("Failed to submit enquiry.");
         }
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -351,18 +380,18 @@ const AddDetailEnquiry = (props) => {
                                         </button>
                                     </li>
                                 </ul>
-                                <div className="tab-content" id="myTabContent">
+                                <div className="tab-content mt-4" id="myTabContent">
                                     <div
                                         className="tab-pane fade show active"
                                         id="pills-home"
                                         role="tabpanel"
                                         aria-labelledby="home-tab"
                                     >
-                                        <div className="">
+                                        <div >
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="col-md-12">
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Current Enquiry
                                                             </label>
@@ -384,7 +413,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Current Education Details
                                                             </label>
@@ -413,7 +442,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 className="col-sm-4 col-form-label"
                                                                 required
@@ -443,7 +472,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Twelveth Education Details
                                                             </label>
@@ -471,7 +500,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Graduation Education Details
                                                             </label>
@@ -500,7 +529,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Work Experience
                                                             </label>
@@ -542,7 +571,7 @@ const AddDetailEnquiry = (props) => {
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="col-md-12">
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Toefl Exam
                                                             </label>
@@ -564,7 +593,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Ielts Exam
                                                             </label>
@@ -586,7 +615,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 PTE Exam
                                                             </label>
@@ -608,7 +637,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Duolingo Exam
                                                             </label>
@@ -633,7 +662,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 GRE Exam
                                                             </label>
@@ -655,7 +684,7 @@ const AddDetailEnquiry = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Gmat Exam
                                                             </label>
@@ -691,7 +720,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-1 mt-2">
+                                                    <div className="row mb-2">
                                                         <label
                                                             for="inputText"
                                                             className="col-sm-4 col-form-label"
@@ -709,7 +738,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-1">
+                                                    <div className="row mb-2">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -740,7 +769,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -758,7 +787,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -777,7 +806,7 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -796,7 +825,7 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -814,7 +843,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -832,7 +861,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -863,7 +892,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -881,7 +910,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -900,7 +929,7 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -919,7 +948,7 @@ const AddDetailEnquiry = (props) => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -937,7 +966,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -955,7 +984,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -986,7 +1015,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -1004,7 +1033,7 @@ const AddDetailEnquiry = (props) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -1036,7 +1065,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-3 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label
                                                             for="inputNumber"
                                                             className="col-sm-4 col-form-label"
@@ -1067,7 +1096,7 @@ const AddDetailEnquiry = (props) => {
                                         <div>
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-1 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label className="col-sm-4 col-form-label">
                                                             Refusal
                                                         </label>
@@ -1102,7 +1131,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-1 mt-3">
+                                                    <div className="row mb-2">
                                                         <label className="col-sm-4 col-form-label">
                                                             Confirmed Services
                                                         </label>
@@ -1112,7 +1141,6 @@ const AddDetailEnquiry = (props) => {
                                                                 name="Confirmed_Services"
                                                                 value={detailEnquiry.Confirmed_Services}
                                                                 onChange={handleChange}
-                                                                required
                                                                 multiple
                                                             >
                                                                 {props.ServicesData.map((services) => (
@@ -1136,7 +1164,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-1 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label className="col-sm-4 col-form-label">
                                                             Enquiry Status
                                                         </label>
@@ -1171,7 +1199,7 @@ const AddDetailEnquiry = (props) => {
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-1 mt-3">
+                                                    <div className="row mb-2  ">
                                                         <label className="col-sm-4 col-form-label">
                                                             DetaiEnquiryFollowup
                                                         </label>
@@ -1179,9 +1207,9 @@ const AddDetailEnquiry = (props) => {
                                                             <select
                                                                 className="form-select"
                                                                 aria-label="Default select example"
-                                                                name="followup"
+                                                                name="DetaiEnquiryFollowup"
                                                                 onChange={handleChange}
-                                                                value={detailEnquiry.followup}
+                                                                value={detailEnquiry.DetaiEnquiryFollowup}
                                                                 required
                                                             >
                                                                 <option selected>Select FollowUp Status</option>
@@ -1238,7 +1266,11 @@ const AddDetailEnquiry = (props) => {
                         <Modal.Title>Add FollowUp</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <DetaiEnquiryFollowup />
+                        <DetaiEnquiryFollowup
+                            closeModal={closeModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
                     </Modal.Body>
                 </Modal>
             )}

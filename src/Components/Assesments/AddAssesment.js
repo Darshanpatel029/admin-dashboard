@@ -34,8 +34,7 @@ const AddAssesment = (props) => {
         if (!assessmentData.assigned_users) {
             setFormError("Assigned user is Required");
             return false;
-        }
-        else if (!assessmentData.enquiry) {
+        } else if (!assessmentData.enquiry) {
             setFormError("Enquiry is Required");
             return false;
         }
@@ -55,8 +54,6 @@ const AddAssesment = (props) => {
             isSubmitting: false,
         });
     };
-
-
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -105,7 +102,7 @@ const AddAssesment = (props) => {
                         <div className="card">
                             <div className="card-body">
                                 <ul
-                                    className="nav nav-pills mb-3"
+                                    className="nav nav-pills mb-2"
                                     id="pills-tab"
                                     role="tablist"
                                 >
@@ -152,7 +149,7 @@ const AddAssesment = (props) => {
                                         </button>
                                     </li>
                                 </ul>
-                                <div className="tab-content" id="myTabContent">
+                                <div className="tab-content mt-4" id="myTabContent">
                                     <div
                                         className="tab-pane fade show active"
                                         id="pills-home"
@@ -163,7 +160,7 @@ const AddAssesment = (props) => {
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="col-md-12">
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Assigned users
                                                             </label>
@@ -174,7 +171,6 @@ const AddAssesment = (props) => {
                                                                     aria-label="Default select example"
                                                                     value={assessmentData.assigned_users}
                                                                     onChange={handleChange}
-
                                                                 >
                                                                     <option selected>Select User</option>
                                                                     {props.userData.map((user) => (
@@ -185,7 +181,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Enquiry
                                                             </label>
@@ -212,7 +208,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Student country
                                                             </label>
@@ -256,7 +252,7 @@ const AddAssesment = (props) => {
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="col-md-12">
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 University
                                                             </label>
@@ -283,7 +279,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Level Applying For
                                                             </label>
@@ -307,7 +303,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Course Interested
                                                             </label>
@@ -331,7 +327,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Intake Interested
                                                             </label>
@@ -355,8 +351,7 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-
-                                                        <div className="row mb-1 mt-2">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputText"
                                                                 className="col-sm-4 col-form-label"
@@ -374,7 +369,7 @@ const AddAssesment = (props) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputNumber"
                                                                 className="col-sm-4 col-form-label"
@@ -392,7 +387,7 @@ const AddAssesment = (props) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputNumber"
                                                                 className="col-sm-4 col-form-label"
@@ -410,7 +405,7 @@ const AddAssesment = (props) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputNumber"
                                                                 className="col-sm-4 col-form-label"
@@ -428,7 +423,7 @@ const AddAssesment = (props) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputNumber"
                                                                 className="col-sm-4 col-form-label"
@@ -446,7 +441,7 @@ const AddAssesment = (props) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="row mb-1">
+                                                        <div className="row mb-2">
                                                             <label
                                                                 for="inputNumber"
                                                                 className="col-sm-4 col-form-label"
@@ -473,27 +468,66 @@ const AddAssesment = (props) => {
                                         className="tab-pane fade"
                                         id="pills-contact"
                                         role="tabpanel"
-                                        aria-labelledby="contact-tab"
+                                        aria-labelledby="profile-tab"
                                     >
                                         <div className="">
                                             <div className="card-body">
                                                 <form className="row g-3">
-                                                    <div className="row mb-3">
-                                                        <label
-                                                            htmlFor="inputPassword"
-                                                            className="col-sm-4 col-form-label"
+                                                    <div className="col-md-12">
+                                                        <div className="row mb-2">
+                                                            <label className="col-sm-4 col-form-label">
+                                                                Assessment Status
+                                                            </label>
+                                                            <div className="col-md-6">
+                                                                <select
+                                                                    className="form-select"
+                                                                    aria-label="Default select example"
+                                                                    name="ass_status"
+                                                                    value={assessmentData.ass_status}
+                                                                    onChange={handleChange}
+                                                                    required
+                                                                >
+                                                                    <option selected>
+                                                                        select Assessment Status
+                                                                    </option>
+                                                                    {props.status.map((status) => (
+                                                                        <option key={status.id} value={status.id}>
+                                                                            {status.status}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className="tab-pane fade"
+                                                            id="pills-contact"
+                                                            role="tabpanel"
+                                                            aria-labelledby="contact-tab"
                                                         >
-                                                            Notes
-                                                        </label>
-                                                        <div className="col-md-6">
-                                                            <textarea
-                                                                className="form-control"
-                                                                style={{ height: "100px" }}
-                                                                name="notes"
-                                                                value={assessmentData.notes}
-                                                                onChange={handleChange}
-                                                                required
-                                                            ></textarea>
+                                                            <div className="">
+                                                                <div className="card-body">
+                                                                    <form className="row g-3">
+                                                                        <div className="row mb-2">
+                                                                            <label
+                                                                                htmlFor="inputPassword"
+                                                                                className="col-sm-4 col-form-label"
+                                                                            >
+                                                                                Notes
+                                                                            </label>
+                                                                            <div className="col-md-6">
+                                                                                <textarea
+                                                                                    className="form-control"
+                                                                                    style={{ height: "100px" }}
+                                                                                    name="notes"
+                                                                                    value={assessmentData.notes}
+                                                                                    onChange={handleChange}
+                                                                                    required
+                                                                                ></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -503,7 +537,7 @@ const AddAssesment = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row mb-3 text-center">
+                        <div className="row mb-2 text-center">
                             <div className="col-sm-10 ">
                                 {formStatus.isError ? (
                                     <div className="text-danger mb-2">{formStatus.errMsg}</div>

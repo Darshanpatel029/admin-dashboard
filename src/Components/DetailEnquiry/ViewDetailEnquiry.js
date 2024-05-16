@@ -7,6 +7,7 @@ import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
 
 const ViewDetailEnquiry = () => {
+  const [data, setData] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [DetailEnquiryData, setDetailEnquiryData] = useState([]);
   const [EnquiryData, setEnquiryData] = useState([]);
@@ -22,6 +23,7 @@ const ViewDetailEnquiry = () => {
   const [ServicesData, setServicesData] = useState([]);
   const [statusData, setStatusData] = useState([]);
   const [followupData, setFollowupData] = useState([]);
+  const [userData, setuserData] = useState([]);
 
   const [errs, setErrs] = useState("");
 
@@ -40,8 +42,9 @@ const ViewDetailEnquiry = () => {
     Refusal();
     AvailableServices();
     EnquiryStatus();
+    fetchuserData(token);
     DetailEnquiryFollowUp();
-  }, []);
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
@@ -53,7 +56,11 @@ const ViewDetailEnquiry = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        setter(data);
+        if (data.length === 0) {
+          setErrs("No Data Found");
+        } else {
+          setter(data);
+        }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
@@ -161,6 +168,12 @@ const ViewDetailEnquiry = () => {
       "No Detail found"
     );
 
+  const fetchuserData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+      setuserData,
+      "No Intake Data found"
+    );
   const columnDefs = [
     // { headerName: "No", field: "no" },
     {
@@ -182,6 +195,10 @@ const ViewDetailEnquiry = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const getNewData = () => {
+    setData(1);
+  }
 
   return (
     <div>
@@ -255,8 +272,10 @@ const ViewDetailEnquiry = () => {
               RefusalData={RefusalData}
               ServicesData={ServicesData}
               statusData={statusData}
+              userData={userData}
               followupData={followupData}
               closeModal={closeModal}
+              getNewData={getNewData}
             />
           </Modal.Body>
         </Modal>

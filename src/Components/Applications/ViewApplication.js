@@ -7,18 +7,19 @@ import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
 
 const ViewApplication = () => {
+  const [data, setData] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [applicationData, setapplicationData] = useState([]);
   const [EnquiryData, setEnquiryData] = useState([]);
   const [statusData, setstatusData] = useState([]);
-  const [errs, setErrs] = useState("");
+  const [errs, setErrs] = useState();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetchApplications(token);
     fetchEnquiries();
     fetchStatusData();
-  }, []);
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
@@ -28,11 +29,13 @@ const ViewApplication = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("response", response);
       if (response.status === 200) {
         const data = await response.json();
-        console.log("------sdfsfsd------->", data);
-        setter(data);
+        if (data.length === 0) {
+          setErrs("No Data Found");
+        } else {
+          setter(data);
+        }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
@@ -82,6 +85,10 @@ const ViewApplication = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const getNewData = () => {
+    setData(1);
+  }
 
   return (
     <div>
@@ -145,6 +152,7 @@ const ViewApplication = () => {
               EnquiryData={EnquiryData}
               statusData={statusData}
               closeModal={closeModal}
+              getNewData={getNewData}
             />
           </Modal.Body>
         </Modal>

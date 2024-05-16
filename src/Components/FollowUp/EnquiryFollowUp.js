@@ -91,7 +91,6 @@ const FollowUp = (props) => {
 
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -100,20 +99,19 @@ const FollowUp = (props) => {
             errMsg: null,
             isSubmitting: true,
         });
-        const formData = new FormData();
-        formData.append("attachment_enquiryFollowup", FollowUpData.attachment_enquiryFollowup);
+        const { reminder_date, reminder_time, ...formData } = FollowUpData;
+        const reminder_date_time = `${reminder_date}T${reminder_time}:00`;
 
-        // Concatenate date and time into a single string
-        const reminderDateTime = `${FollowUpData.reminder_date} ${FollowUpData.reminder_time}`;
+        const formDataToSend = new FormData();
+        formDataToSend.append("attachment_enquiryFollowup", FollowUpData.attachment_enquiryFollowup);
 
-        // Pass concatenated date and time in the array
-        formData.append("reminder_date_time", reminderDateTime);
-
-        Object.keys(FollowUpData).forEach((key) => {
-            if (key !== "attachment_enquiryFollowup" && key !== "reminder_time") {
-                formData.append(key, FollowUpData[key]);
+        Object.keys(formData).forEach((key) => {
+            if (key !== "attachment_enquiryFollowup" && key !== "reminder_date" && key !== "reminder_time") {
+                formDataToSend.append(key, formData[key]);
             }
         });
+
+        formDataToSend.append("reminder_date_time", reminder_date_time);
 
         try {
             const response = await fetch(
@@ -124,17 +122,19 @@ const FollowUp = (props) => {
                         Accept: "application/json",
                     },
                     method: "POST",
-                    body: formData,
+                    body: formDataToSend,
                 }
             );
             if (response.status === 201) {
+                props.getNewData();
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
-        } catch (error) {
+        } catch (errMsg) {
             toast.error("Failed to submit enquiry.");
         }
     };
+
 
     return (
         <div className="col">
@@ -294,12 +294,13 @@ const FollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-2">                                                <label
-                                                htmlFor="Source_Enquiry"
-                                                className="col-sm-4 col-form-label"
-                                            >
-                                                Reminder Frequency
-                                            </label>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="Source_Enquiry"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Reminder Frequency
+                                                </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
@@ -461,7 +462,11 @@ const FollowUp = (props) => {
                                                         onChange={handleChange}
                                                     >
                                                         <option selected>Select User</option>
-                                                        <option value={1}>Admin</option>
+                                                        {props.user.map((user) => (
+                                                            <option key={user.id} value={user.id}>
+                                                                {user.username}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
                                             </div>

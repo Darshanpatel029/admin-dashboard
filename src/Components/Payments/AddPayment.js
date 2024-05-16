@@ -201,7 +201,7 @@ const AddPayment = (props) => {
                     <div>
                       <div className="card-body">
                         <div className="row g-3">
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"
@@ -225,7 +225,7 @@ const AddPayment = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_First_Name"
                               className="col-sm-4 col-form-label"
@@ -245,7 +245,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"
@@ -270,7 +270,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Interested Services
                             </label>
@@ -291,7 +291,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_First_Name"
                               className="col-sm-4 col-form-label"
@@ -311,7 +311,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_Last_Name"
                               className="col-sm-4 col-form-label"
@@ -331,7 +331,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"
@@ -356,7 +356,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3">
+                          <div className="row mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"
@@ -381,7 +381,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label
                               htmlFor="student_Last_Name"
                               className="col-sm-4 col-form-label"
@@ -401,7 +401,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-4">
+                          <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Payment Remarks
                             </label>
@@ -417,7 +417,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3 mt-3">
+                          <div className="row mb-2 ">
                             <label
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
@@ -436,7 +436,7 @@ const AddPayment = (props) => {
                             </div>
                           </div>
 
-                          <div className="row mb-3">
+                          <div className="row  mb-2">
                             <label
                               htmlFor="Source_Enquiry"
                               className="col-sm-4 col-form-label"

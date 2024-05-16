@@ -143,8 +143,8 @@ const AddEnquiry = (props) => {
 
     try {
       const response = await fetch(apiURL, requestOptions);
-      console.log(response);
       if (response.status === 201) {
+        props.getNewData();
         toast.success("Enquiry submitted successfully!");
         props.closeModal();
       } else {
@@ -158,6 +158,10 @@ const AddEnquiry = (props) => {
         isSubmitting: false,
       });
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -811,7 +815,11 @@ const AddEnquiry = (props) => {
             <Modal.Title>Add FollowUp</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <EnquiryFollowup />
+            <EnquiryFollowup
+              closeModal={closeModal}
+              user={props.userData}
+              getNewData={props.getNewData}
+            />
           </Modal.Body>
         </Modal>
       )}
