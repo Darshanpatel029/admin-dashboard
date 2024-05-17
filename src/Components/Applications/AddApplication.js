@@ -10,7 +10,7 @@ const initialSubmit = {
 };
 
 const AddApplication = (props) => {
-  const [application, setApplication] = useState({
+  const [applicationData, setApplicationData] = useState({
     application: "",
     application_status: "",
     Rejection_reason: "",
@@ -36,23 +36,23 @@ const AddApplication = (props) => {
   const [formStatus, setFormStatus] = useState(initialSubmit);
 
   const validateForm = () => {
-    if (!application.application) {
+    if (!applicationData.application) {
       setFormError("Application is Required");
       return false;
     }
-    else if (!application.application_status) {
+    else if (!applicationData.application_status) {
       setFormError("Application status is Required");
       return false;
     }
-    else if (!application.sop) {
+    else if (!applicationData.sop) {
       setFormError("SOP is Required");
       return false;
     }
-    else if (!application.cv) {
+    else if (!applicationData.cv) {
       setFormError("CV is Required");
       return false;
     }
-    else if (!application.passport) {
+    else if (!applicationData.passport) {
       setFormError("Passport is Required");
       return false;
     }
@@ -72,21 +72,10 @@ const AddApplication = (props) => {
       isSubmitting: false,
     });
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setApplication((prevState) => ({
-        ...prevState,
-        token: token,
-      }));
-    }
-  }, []);
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     const newValue = files ? files[0] : value;
-    setApplication((prevState) => ({
+    setApplicationData((prevState) => ({
       ...prevState,
       [name]: newValue,
     }));
@@ -102,23 +91,24 @@ const AddApplication = (props) => {
     });
     const formData = new FormData();
 
-    formData.append("diploma_marksheet", application.diploma_marksheet);
-    formData.append("bachelor_marksheet", application.bachelor_marksheet);
-    formData.append("master_marksheet", application.master_marksheet);
 
-    formData.append("ielts", application.ielts);
-    formData.append("gre", application.gre);
-    formData.append("toefl", application.toefl);
-    formData.append("gmat", application.gmat);
-    formData.append("pte", application.pte);
-    formData.append("work_experience", application.work_experience);
-    formData.append("other_documents", application.other_documents);
+    formData.append("diploma_marksheet", applicationData.diploma_marksheet);
+    formData.append("bachelor_marksheet", applicationData.bachelor_marksheet);
+    formData.append("master_marksheet", applicationData.master_marksheet);
 
-    formData.append("sop", application.sop);
-    formData.append("cv", application.cv);
-    formData.append("passport", application.passport);
+    formData.append("ielts", applicationData.ielts);
+    formData.append("gre", applicationData.gre);
+    formData.append("toefl", applicationData.toefl);
+    formData.append("gmat", applicationData.gmat);
+    formData.append("pte", applicationData.pte);
+    formData.append("work_experience", applicationData.work_experience);
+    formData.append("other_documents", applicationData.other_documents);
 
-    Object.keys(application).forEach((key) => {
+    formData.append("sop", applicationData.sop);
+    formData.append("cv", applicationData.cv);
+    formData.append("passport", applicationData.passport);
+
+    Object.keys(applicationData).forEach((key) => {
       if (
         key !== "diploma_marksheet" &&
         key !== "bachelor_marksheet" &&
@@ -138,7 +128,7 @@ const AddApplication = (props) => {
         key !== "cv" &&
         key !== "passport"
       ) {
-        formData.append(key, application[key]);
+        formData.append(key, applicationData[key]);
       }
     });
 
@@ -157,21 +147,16 @@ const AddApplication = (props) => {
         requestOptions
       );
 
-      const data = await response.json();
-      console.log(data);
-
-      if (!response.ok) {
-        throw new Error(
-          `API call failed with status: ${response.status
-          }, body: ${JSON.stringify(data)}`
-        );
+      if (response.status === 201) {
+        props.getNewData();
+        toast.success("Application submitted successfully!");
+        props.closeModal();
       }
-      toast.success("Application submitted successfully!");
-      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit Application.");
     }
   };
+
 
   return (
     <section className="section">
@@ -266,7 +251,7 @@ const AddApplication = (props) => {
                                   aria-label="Default select example"
                                   onChange={handleChange}
                                   name="application"
-                                  value={application.application}
+                                  value={applicationData.application}
 
                                 >
                                   <option selected>Select Source</option>
@@ -275,6 +260,7 @@ const AddApplication = (props) => {
                                       {Enquiry.enquiry.Current_Enquiry.student_First_Name}
                                     </option>
                                   ))}
+
                                 </select>
                               </div>
                             </div>
@@ -291,7 +277,7 @@ const AddApplication = (props) => {
                                   aria-label="Default select example"
                                   onChange={handleChange}
                                   name="application_status"
-                                  value={application.application_status}
+                                  value={applicationData.application_status}
 
                                 >
                                   <option selected>Select Source</option>
@@ -526,6 +512,21 @@ const AddApplication = (props) => {
                     <div className="">
                       <div className="card-body">
                         <form className="row g-3">
+
+                          <div className="row mb-2">
+                            <label className="col-sm-4 col-form-label">
+                              Rejection Reason
+                            </label>
+                            <div className="col-md-6">
+                              <textarea
+                                className="form-control"
+                                style={{ height: "100px" }}
+                                name="Rejection_reason"
+                                value={applicationData.Rejection_reason}
+                                onChange={handleChange}
+                              ></textarea>
+                            </div>
+                          </div>
                           <div className="row mb-2">
                             <label
                               for="inputNumber"

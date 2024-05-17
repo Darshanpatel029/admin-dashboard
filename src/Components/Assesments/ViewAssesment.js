@@ -19,6 +19,7 @@ const ViewAssesment = () => {
   const [userData, setuserData] = useState([]);
   const [IntakeData, setIntakeData] = useState([]);
   const [statusData, setstatusData] = useState([]);
+  const [followupData, setFollowUpData] = useState([]);
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const ViewAssesment = () => {
     fetchCourseData();
     fetchIntakeData();
     fetchStatusData();
+    fetchFollowupData();
   }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
@@ -118,6 +120,12 @@ const ViewAssesment = () => {
       "https://cloudconnectcampaign.com/espicrmnew/api/assessment-statuses/",
       setstatusData,
       "No Intake Data found"
+    );
+  const fetchFollowupData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmnew/api/assessment-followups/",
+      setFollowUpData,
+      "No FollowUp Data found"
     );
 
   const columnDefs = [
@@ -210,6 +218,7 @@ const ViewAssesment = () => {
               IntakeData={IntakeData}
               userData={userData}
               status={statusData}
+              followupData={followupData}
               closeModal={closeModal}
               getNewData={getNewData}
             />
