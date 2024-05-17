@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
+import Modal from "react-bootstrap/Modal";
+import AssessmentFollowup from "../FollowUp/AssessmentFollowup";
 
 const initialSubmit = {
     isError: false,
@@ -10,6 +12,7 @@ const initialSubmit = {
 };
 
 const AddAssesment = (props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [assessmentData, setAssessmentData] = useState({
         assigned_users: "",
         enquiry: "",
@@ -72,6 +75,40 @@ const AddAssesment = (props) => {
             isSubmitting: true,
         });
         const token = localStorage.getItem("token");
+        const data = {
+            assigned_users: parseInt(assessmentData.assigned_users),
+            enquiry: parseInt(assessmentData.enquiry),
+            student_country: parseInt(assessmentData.student_country),
+            university: parseInt(assessmentData.university),
+            level_applying_for: parseInt(assessmentData.level_applying_for),
+            course_interested: parseInt(assessmentData.course_interested),
+            intake_interested: parseInt(assessmentData.intake_interested),
+            specialisation: assessmentData.specialisation,
+            duration: assessmentData.duration,
+            application_fee: assessmentData.application_fee,
+            tution_fee: assessmentData.tution_fee,
+            fee_currency: assessmentData.fee_currency,
+            course_link: assessmentData.course_link,
+            AssesmentFollowup: parseInt(assessmentData.AssesmentFollowup),
+            ass_status: parseInt(assessmentData.ass_status),
+            notes: assessmentData.notes,
+        };
+        // const formData = new FormData();
+        // formData.append("assigned_users", assessmentData.assigned_users);
+        // formData.append("enquiry", assessmentData.enquiry);
+        // formData.append("student_country", assessmentData.student_country);
+        // formData.append("university", assessmentData.university);
+        // formData.append("level_applying_for", assessmentData.level_applying_for);
+        // formData.append("course_interested", assessmentData.course_interested);
+
+        // formData.append("specialisation", assessmentData.specialisation);
+        // formData.append("duration", assessmentData.duration);
+        // formData.append("application_fee", assessmentData.application_fee);
+        // formData.append("fee_currency", assessmentData.fee_currency);
+        // formData.append("course_link", assessmentData.course_link);
+        // formData.append("AssesmentFollowup", assessmentData.AssesmentFollowup);
+        // formData.append("ass_status", assessmentData.ass_status);
+        // formData.append("notes", assessmentData.notes);
         try {
             const response = await fetch(
                 "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
@@ -82,18 +119,23 @@ const AddAssesment = (props) => {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-                    body: JSON.stringify(assessmentData),
+                    body: JSON.stringify(data),
                 }
             );
-            if (!response.ok) {
-                throw new Error("Failed to submit form");
+            if (response.status === 201) {
+                props.getNewData();
+                toast.success("Assessment submitted successfully!");
+                props.closeModal();
             }
-            toast.success("Assessment submitted successfully!");
-            props.closeModal();
         } catch (error) {
             toast.error("Assessment not submitted !");
         }
     };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <section className="section">
             <div className="row">
@@ -476,6 +518,21 @@ const AddAssesment = (props) => {
                                                     <div className="col-md-12">
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
+                                                                Notes
+                                                            </label>
+                                                            <div className="col-md-6">
+                                                                <textarea
+                                                                    className="form-control"
+                                                                    style={{ height: "100px" }}
+                                                                    name="notes"
+                                                                    value={assessmentData.notes}
+                                                                    onChange={handleChange}
+                                                                ></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="row mb-2">
+                                                            <label className="col-sm-4 col-form-label">
                                                                 Assessment Status
                                                             </label>
                                                             <div className="col-md-6">
@@ -498,34 +555,37 @@ const AddAssesment = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div
-                                                            className="tab-pane fade"
-                                                            id="pills-contact"
-                                                            role="tabpanel"
-                                                            aria-labelledby="contact-tab"
-                                                        >
-                                                            <div className="">
-                                                                <div className="card-body">
-                                                                    <form className="row g-3">
-                                                                        <div className="row mb-2">
-                                                                            <label
-                                                                                htmlFor="inputPassword"
-                                                                                className="col-sm-4 col-form-label"
-                                                                            >
-                                                                                Notes
-                                                                            </label>
-                                                                            <div className="col-md-6">
-                                                                                <textarea
-                                                                                    className="form-control"
-                                                                                    style={{ height: "100px" }}
-                                                                                    name="notes"
-                                                                                    value={assessmentData.notes}
-                                                                                    onChange={handleChange}
-                                                                                    required
-                                                                                ></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
+                                                        <div className="row mb-2">
+                                                            <label className="col-sm-4 col-form-label">
+                                                                Enquiry Followup
+                                                            </label>
+                                                            <div className="col-md-6 d-flex">
+                                                                <select
+                                                                    type="number"
+                                                                    name="AssesmentFollowup"
+                                                                    className="form-select"
+                                                                    value={assessmentData.AssesmentFollowup}
+                                                                    onChange={handleChange}
+                                                                    required
+                                                                >
+                                                                    <option selected>Select Services</option>
+                                                                    {props.followupData.map((Followup) => (
+                                                                        <option
+                                                                            key={Followup.id}
+                                                                            value={Followup.id}
+                                                                        >
+                                                                            {Followup.next_followup_date}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setIsModalOpen(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -556,6 +616,25 @@ const AddAssesment = (props) => {
                     </form>
                 </div>
             </div>
+
+            {isModalOpen && (
+                <Modal
+                    show={isModalOpen}
+                    onHide={() => setIsModalOpen(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AssessmentFollowup
+                            closeModal={closeModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
         </section>
     );
 };
