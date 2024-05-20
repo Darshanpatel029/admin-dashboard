@@ -204,7 +204,7 @@ const AddAssesment = (props) => {
                                                     <div className="col-md-12">
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
-                                                                Assigned users
+                                                                Assigned User
                                                             </label>
                                                             <div className="col-md-6">
                                                                 <select
@@ -237,7 +237,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select menu
+                                                                        Select Enquiry
                                                                     </option>
                                                                     {props.EnquiryData.map((Enquiry) => (
                                                                         <option key={Enquiry.id} value={Enquiry.id}>
@@ -264,7 +264,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select country
+                                                                        select Country
                                                                     </option>
                                                                     {props.InterestedCountryData.map(
                                                                         (Country) => (
@@ -308,7 +308,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select country
+                                                                        Select University
                                                                     </option>
                                                                     {props.universitiesData.map((University) => (
                                                                         <option
@@ -335,7 +335,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select Course Level
+                                                                        Select Level For Applying
                                                                     </option>
                                                                     {props.levelData.map((Level) => (
                                                                         <option key={Level.id} value={Level.id}>
@@ -359,7 +359,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select Course Level
+                                                                        Select Interested Course
                                                                     </option>
                                                                     {props.courseData.map((Course) => (
                                                                         <option key={Course.id} value={Course.id}>
@@ -383,7 +383,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Open this select Course Level
+                                                                        Select Interested Intake
                                                                     </option>
                                                                     {props.IntakeData.map((Intake) => (
                                                                         <option key={Intake.id} value={Intake.id}>
@@ -545,7 +545,7 @@ const AddAssesment = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        select Assessment Status
+                                                                        Select Assessment Status
                                                                     </option>
                                                                     {props.status.map((status) => (
                                                                         <option key={status.id} value={status.id}>
@@ -557,7 +557,7 @@ const AddAssesment = (props) => {
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
-                                                                Enquiry Followup
+                                                                Assessment Followup
                                                             </label>
                                                             <div className="col-md-6 d-flex">
                                                                 <select
@@ -568,7 +568,7 @@ const AddAssesment = (props) => {
                                                                     onChange={handleChange}
                                                                     required
                                                                 >
-                                                                    <option selected>Select Services</option>
+                                                                    <option selected>Select Assessment FollowUp</option>
                                                                     {props.followupData.map((Followup) => (
                                                                         <option
                                                                             key={Followup.id}

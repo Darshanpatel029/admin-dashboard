@@ -459,7 +459,7 @@ const AddDetailEnquiry = (props) => {
                                                                     required
                                                                 >
                                                                     <option selected>
-                                                                        Select Current Education
+                                                                        Select Tenth Education
                                                                     </option>
                                                                     {props.EducationData.map((Education) => (
                                                                         <option
@@ -584,7 +584,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.Toefl_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>Toefl</option>
+                                                                    <option selected>Overall Toefl Score</option>
                                                                     {props.ToeflData.map((Toefl) => (
                                                                         <option key={Toefl.id} value={Toefl.id}>
                                                                             {Toefl.Overall}
@@ -606,7 +606,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.ielts_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>ielts</option>
+                                                                    <option selected>Overall Ielts Score</option>
                                                                     {props.IeltsData.map((Ielts) => (
                                                                         <option key={Ielts.id} value={Ielts.id}>
                                                                             {Ielts.Overall}
@@ -628,7 +628,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.PTE_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>pte</option>
+                                                                    <option selected>Overall pte Score</option>
                                                                     {props.PteData.map((Pte) => (
                                                                         <option key={Pte.id} value={Pte.id}>
                                                                             {Pte.Overall}
@@ -650,7 +650,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.Duolingo_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>Duolingo</option>
+                                                                    <option selected>Overall Duolingo Score</option>
                                                                     {props.DuolingoData.map((Duolingo) => (
                                                                         <option
                                                                             key={Duolingo.id}
@@ -675,7 +675,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.Gre_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>Gmat</option>
+                                                                    <option selected>Overall Gmat Score</option>
                                                                     {props.GreData.map((Gre) => (
                                                                         <option key={Gre.id} value={Gre.id}>
                                                                             {Gre.Overall}
@@ -697,7 +697,7 @@ const AddDetailEnquiry = (props) => {
                                                                     value={detailEnquiry.Gmat_Exam}
                                                                     required
                                                                 >
-                                                                    <option selected>Gmat</option>
+                                                                    <option selected>Overall Gmat Score</option>
                                                                     {props.GmatData.map((Gmat) => (
                                                                         <option key={Gmat.id} value={Gmat.id}>
                                                                             {Gmat.Overall}
@@ -1196,7 +1196,7 @@ const AddDetailEnquiry = (props) => {
                                         role="tabpanel"
                                         aria-labelledby="FollowUp-tab"
                                     >
-                                        <div className="">
+                                        <div>
                                             <div className="card-body">
                                                 <form className="row g-3">
                                                     <div className="row mb-2  ">
@@ -1212,7 +1212,7 @@ const AddDetailEnquiry = (props) => {
                                                                 value={detailEnquiry.DetaiEnquiryFollowup}
                                                                 required
                                                             >
-                                                                <option selected>Select FollowUp Status</option>
+                                                                <option selected>Select DetaiEnquiry Followup Status</option>
                                                                 {props.followupData.map((followup) => (
                                                                     <option key={followup.id} value={followup.id}>
                                                                         {followup.next_followup_date}

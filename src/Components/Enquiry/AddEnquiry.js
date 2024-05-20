@@ -182,7 +182,7 @@ const AddEnquiry = (props) => {
                       id="pills-home-tab"
                       data-bs-toggle="pill"
                       data-bs-target="#pills-home"
-                      type="button"
+                      type="button "
                       role="tab"
                       aria-controls="pills-home"
                       aria-selected="true"
@@ -327,7 +327,7 @@ const AddEnquiry = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Source Enquiry</option>
                                 {props.sourceEnquiry.map((option) => (
                                   <option key={option.id} value={option.id}>
                                     {option.Source}
@@ -501,7 +501,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Current Education</option>
                                 {props.EducationData.map((EducationOption) => (
                                   <option
                                     key={EducationOption.id}
@@ -599,7 +599,7 @@ const AddEnquiry = (props) => {
                                 required
                               >
                                 <option selected>
-                                  Select Level For applying
+                                  Select Level For Applying
                                 </option>
                                 {props.level.map((levelForApplying) => (
                                   <option
@@ -625,7 +625,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Course</option>
+                                <option selected>Select Interested Course</option>
                                 {props.courseData.map((course) => (
                                   <option key={course.id} value={course.id}>
                                     {course.course_name}
@@ -647,7 +647,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Intake</option>
+                                <option selected>Select Interested Intake</option>
                                 {props.IntakeData.map((intake) => (
                                   <option key={intake.id} value={intake.id}>
                                     {intake.intake_Name}
@@ -702,7 +702,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select User</option>
                                 {props.userData.map((user) => (
                                   <option key={user.id} value={user.id}>
                                     {user.username}
@@ -724,7 +724,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Services</option>
+                                <option selected>Select Enquiry Status</option>
                                 {props.StatusData.map((status) => (
                                   <option key={status.id} value={status.id}>
                                     {status.status}
@@ -746,7 +746,7 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Services</option>
+                                <option selected>Select Enquiry Followup</option>
                                 {props.followupData.map((Followup) => (
                                   <option key={Followup.id} value={Followup.id}>
                                     {Followup.next_followup_date}

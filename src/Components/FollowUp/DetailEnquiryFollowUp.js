@@ -17,7 +17,6 @@ const FollowUp = (props) => {
         next_followup_date: "",
         next_followup_purpose: "",
         next_followup_method: "",
-        next_followup_date: "",
         reminder_date_time: "",
         reminder_frequency: "",
         reminder_notification_method: "",
@@ -30,7 +29,6 @@ const FollowUp = (props) => {
         user: "",
     });
 
-    console.log("---------->", FollowUpData)
     const token = localStorage.getItem("token");
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
@@ -296,12 +294,13 @@ const FollowUp = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-2">                                                <label
-                                                htmlFor="Source_Enquiry"
-                                                className="col-sm-4 col-form-label"
-                                            >
-                                                Reminder Frequency
-                                            </label>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="Source_Enquiry"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Reminder Frequency
+                                                </label>
                                                 <div className="col-md-6">
                                                     <select
                                                         type="number"
@@ -358,7 +357,7 @@ const FollowUp = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
+                                                        <option selected>Select Priority Level</option>
                                                         <option value="high">High</option>
                                                         <option value="medium">Medium</option>
                                                         <option value="low">Low</option>
@@ -381,7 +380,7 @@ const FollowUp = (props) => {
                                             </div>
 
                                             <div className="row mb-2">
-                                                <label className="col-sm-4 col-form-label">notes</label>
+                                                <label className="col-sm-4 col-form-label">Notes</label>
                                                 <div className="col-md-6">
                                                     <textarea
                                                         className="form-control"
@@ -409,8 +408,8 @@ const FollowUp = (props) => {
                                                         onChange={handleChange}
                                                     >
                                                         <option selected>Select Status</option>
-                                                        <option value="pending" >Pending</option>
-                                                        <option value="completed" >Completed</option>
+                                                        <option value="pending">Pending</option>
+                                                        <option value="completed">Completed</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -434,7 +433,7 @@ const FollowUp = (props) => {
                                                     for="inputNumber"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Attachment enquiryFollowup
+                                                    Attachment EnquiryFollowup
                                                 </label>
                                                 <div className="col-md-5">
                                                     <input

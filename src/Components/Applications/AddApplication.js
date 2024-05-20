@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 
@@ -254,7 +254,7 @@ const AddApplication = (props) => {
                                   value={applicationData.application}
 
                                 >
-                                  <option selected>Select Source</option>
+                                  <option selected>Select Application</option>
                                   {props.EnquiryData.map((Enquiry) => (
                                     <option key={Enquiry.id} value={Enquiry.id}>
                                       {Enquiry.enquiry.Current_Enquiry.student_First_Name}
@@ -280,7 +280,7 @@ const AddApplication = (props) => {
                                   value={applicationData.application_status}
 
                                 >
-                                  <option selected>Select Source</option>
+                                  <option selected>Select Application Status</option>
                                   {props.statusData.map((Status) => (
                                     <option key={Status.id} value={Status.id}>
                                       {Status.App_status}
@@ -549,7 +549,7 @@ const AddApplication = (props) => {
                               for="inputNumber"
                               className="col-sm-4 col-form-label"
                             >
-                              Cv
+                              CV
                             </label>
                             <div className="col-md-6">
                               <input
