@@ -24,18 +24,7 @@ const AddPayment = (props) => {
     payment_document: "",
     payment_received_by: "",
   });
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setPaymentData((prevState) => ({
-        ...prevState,
-        token: token,
-      }));
-    }
-  }, []);
-
-
+  const token = localStorage.getItem("token");
   const [formStatus, setFormStatus] = useState(initialSubmit);
 
   const validateForm = () => {
@@ -136,10 +125,8 @@ const AddPayment = (props) => {
       const requestOptions = {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
-          ...(paymentData.token && {
-            Authorization: `Bearer ${paymentData.token}`,
-          }),
         },
         body: formData,
       };
@@ -149,16 +136,11 @@ const AddPayment = (props) => {
         requestOptions
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          `API call failed with status: ${response.status
-          }, body: ${JSON.stringify(data)}`
-        );
+      if (response.status === 201) {
+        props.getNewData();
+        toast.success("Payment Data submitted successfully!");
+        props.closeModal();
       }
-      toast.success("Payment Data submitted successfully!");
-      props.closeModal();
     } catch (error) {
       toast.error("Failed to submit Payment Data.");
     }
@@ -171,7 +153,7 @@ const AddPayment = (props) => {
           <form onSubmit={handleSubmit}>
             <div className="card">
               <div className="card-body">
-                <ul
+                {/* <ul
                   className="nav nav-pills mb-3"
                   id="pills-tab"
                   role="tablist"
@@ -190,7 +172,7 @@ const AddPayment = (props) => {
                       Payment Details
                     </button>
                   </li>
-                </ul>
+                </ul> */}
                 <div className="tab-content" id="myTabContent">
                   <div
                     className="tab-pane fade show active"
@@ -216,7 +198,7 @@ const AddPayment = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Memo</option>
                                 {props.enquiryData.map((Enquiry) => (
                                   <option key={Enquiry.id} value={Enquiry.id}>
                                     {Enquiry.Current_Enquiry.student_First_Name}
@@ -230,7 +212,7 @@ const AddPayment = (props) => {
                               htmlFor="student_First_Name"
                               className="col-sm-4 col-form-label"
                             >
-                              Payment id
+                              Payment Id
                             </label>
                             <div className="col-md-6">
                               <input
@@ -240,7 +222,6 @@ const AddPayment = (props) => {
                                 id="student_First_Name"
                                 value={paymentData.payment_id}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -260,7 +241,7 @@ const AddPayment = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Payment Type</option>
                                 {props.paymentTypes.map((Types) => (
                                   <option key={Types.id} value={Types.id}>
                                     {Types.Type}
@@ -326,7 +307,6 @@ const AddPayment = (props) => {
                                 id="student_Last_Name"
                                 value={paymentData.payment_amount}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -346,7 +326,7 @@ const AddPayment = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Payment Mode</option>
                                 {props.paymentMode.map((Mode) => (
                                   <option key={Mode.id} value={Mode.id}>
                                     {Mode.Mode}
@@ -371,7 +351,7 @@ const AddPayment = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Select Payment Status</option>
                                 {props.paymentStatus.map((status) => (
                                   <option key={status.id} value={status.id}>
                                     {status.Status}
@@ -451,7 +431,7 @@ const AddPayment = (props) => {
                                 className="form-select"
                                 onChange={handleChange}
                               >
-                                <option selected>Select Source</option>
+                                <option selected>Received By</option>
                                 {props.userData.map((user) => (
                                   <option key={user.id} value={user.id}>
                                     {user.username}

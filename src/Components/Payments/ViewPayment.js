@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
@@ -7,6 +8,7 @@ import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
 
 const ViewPayment = () => {
+  const [data, setData] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [paymentData, setpaymentData] = useState([]);
   const [enquiryData, setEnquiryData] = useState([]);
@@ -26,7 +28,7 @@ const ViewPayment = () => {
     fetchPaymentModes();
     fetchPaymentStatus();
     fetchUsers();
-  }, []);
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
     try {
@@ -101,6 +103,14 @@ const ViewPayment = () => {
       "No User Data found"
     );
 
+  const openInNewTabRenderer = (params) => {
+    return (
+      <Link to={`${params.value}`} target="_blank" >
+        {params.value}
+      </Link>
+    );
+  };
+
   const columnDefs = [
     {
       headerName: "Payment Id",
@@ -134,6 +144,7 @@ const ViewPayment = () => {
     {
       headerName: "Payment Document",
       field: "payment_document",
+      cellRenderer: openInNewTabRenderer
     },
     {
       headerName: "Pending Amount",
@@ -144,6 +155,10 @@ const ViewPayment = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const getNewData = () => {
+    setData(1);
+  }
 
   return (
     <div>
@@ -207,6 +222,7 @@ const ViewPayment = () => {
               paymentStatus={paymentStatus}
               userData={userData}
               closeModal={closeModal}
+              getNewData={getNewData}
             />
           </Modal.Body>
         </Modal>

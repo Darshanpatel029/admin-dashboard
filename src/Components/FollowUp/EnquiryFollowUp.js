@@ -357,7 +357,7 @@ const FollowUp = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select Source</option>
+                                                        <option selected>Select Priority Level</option>
                                                         <option value="high">High</option>
                                                         <option value="medium">Medium</option>
                                                         <option value="low">Low</option>
@@ -380,7 +380,7 @@ const FollowUp = (props) => {
                                             </div>
 
                                             <div className="row mb-2">
-                                                <label className="col-sm-4 col-form-label">notes</label>
+                                                <label className="col-sm-4 col-form-label">Notes</label>
                                                 <div className="col-md-6">
                                                     <textarea
                                                         className="form-control"
@@ -433,7 +433,7 @@ const FollowUp = (props) => {
                                                     for="inputNumber"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Attachment enquiryFollowup
+                                                    Attachment EnquiryFollowup
                                                 </label>
                                                 <div className="col-md-5">
                                                     <input
@@ -470,7 +470,6 @@ const FollowUp = (props) => {
                                                     </select>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

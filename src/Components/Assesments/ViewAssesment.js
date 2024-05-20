@@ -148,7 +148,7 @@ const ViewAssesment = () => {
   };
   const getNewData = () => {
     setData(1);
-  }
+  };
 
   return (
     <div>

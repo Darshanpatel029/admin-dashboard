@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
@@ -67,6 +68,14 @@ const ViewApplication = () => {
       "No Inquiry found"
     );
 
+  const openInNewTabRenderer = (params) => {
+    return (
+      <Link to={`${params.value}`} target="_blank" >
+        {params.value}
+      </Link>
+    );
+  };
+
 
   const columnDefs = [
     {
@@ -77,9 +86,21 @@ const ViewApplication = () => {
       headerName: "Application Status",
       field: "application_status.App_status",
     },
-    { headerName: "SOP", field: "sop" },
-    { headerName: "Passport", field: "passport" },
-    { headerName: "CV", field: "cv" },
+    {
+      headerName: "SOP", field: "sop",
+      cellRenderer: openInNewTabRenderer,
+
+    },
+    {
+      headerName: "Passport", field: "passport",
+      cellRenderer: openInNewTabRenderer,
+
+    },
+    {
+      headerName: "CV", field: "cv",
+      cellRenderer: openInNewTabRenderer,
+
+    },
   ];
 
   const closeModal = () => {

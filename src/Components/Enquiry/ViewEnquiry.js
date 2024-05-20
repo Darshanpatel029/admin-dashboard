@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
 import AddEnquiry from "./AddEnquiry";
 import Breadcrumbs from "../UI/Breadcrumbs/Breadcrumbs";
 import Table from "../UI/Table/Table";
+import { toast } from "react-toastify";
 
 const ViewEnquiry = () => {
   const [data, setData] = useState(0);
@@ -79,14 +81,13 @@ const ViewEnquiry = () => {
         },
         body: JSON.stringify(data),
       });
-      const responseData = await response.json();
       if (response.ok) {
-        console.log("Update successful:", responseData);
+        toast.success("Update Successfully");
       } else {
-        console.error("Update failed:", responseData);
+        toast.error("Update Failed");
       }
     } catch (error) {
-      console.error("Failed to update data:", error);
+      toast.error("Update Failed");
     }
   };
 
@@ -193,6 +194,7 @@ const ViewEnquiry = () => {
       headerName: "Student First Name",
       field: "student_First_Name",
       editable: true,
+
     },
     {
       headerName: "Student Last Name",
