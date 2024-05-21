@@ -152,6 +152,9 @@ const AddApplication = (props) => {
         toast.success("Application submitted successfully!");
         props.closeModal();
       }
+      else {
+        toast.error("Failed to submit Application.");
+      }
     } catch (error) {
       toast.error("Failed to submit Application.");
     }

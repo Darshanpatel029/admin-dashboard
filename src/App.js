@@ -19,6 +19,7 @@ function App() {
   const location = useLocation();
   const hideComponents = location.pathname === "/";
 
+
   return (
     <body>
       {!hideComponents && <NavBar />}

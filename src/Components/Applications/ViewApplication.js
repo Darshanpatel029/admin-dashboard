@@ -33,14 +33,14 @@ const ViewApplication = () => {
       if (response.status === 200) {
         const data = await response.json();
         if (data.length === 0) {
-          setErrs("No Data Found");
+          setErrs("Data Not Found");
         } else {
           setter(data);
         }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
-        setErrs("No Data Found");
+        setErrs("Data Not Found");
       }
     } catch (error) {
       console.log("error", error);
@@ -69,12 +69,16 @@ const ViewApplication = () => {
     );
 
   const openInNewTabRenderer = (params) => {
-    return (
-      <Link to={`${params.value}`} target="_blank" >
-        {params.value}
-      </Link>
-    );
+    if (params.value) {
+      return (
+        <a href={params.value} target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-arrow-down-circle" style={{ color: "red" }}></i>
+        </a>
+      );
+    }
+    return null;
   };
+
 
 
   const columnDefs = [

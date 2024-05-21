@@ -141,6 +141,9 @@ const AddPayment = (props) => {
         toast.success("Payment Data submitted successfully!");
         props.closeModal();
       }
+      else {
+        toast.error("Failed to submit Payment.");
+      }
     } catch (error) {
       toast.error("Failed to submit Payment Data.");
     }

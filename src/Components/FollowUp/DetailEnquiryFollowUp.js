@@ -130,6 +130,9 @@ const FollowUp = (props) => {
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
+            else {
+                toast.error("Failed to submit FollowUp.");
+            }
         } catch (errMsg) {
             toast.error("Failed to submit enquiry.");
         }

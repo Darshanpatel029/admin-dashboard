@@ -199,6 +199,9 @@ const AddDetailEnquiry = (props) => {
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
+            else {
+                toast.error("Failed to submit DetailEnquiry.");
+            }
         } catch (errMsg) {
             toast.error("Failed to submit enquiry.");
         }
@@ -1212,7 +1215,7 @@ const AddDetailEnquiry = (props) => {
                                                                 value={detailEnquiry.DetaiEnquiryFollowup}
                                                                 required
                                                             >
-                                                                <option selected>Select DetaiEnquiry Followup Status</option>
+                                                                <option selected>Select DetaiEnquiry Followup</option>
                                                                 {props.followupData.map((followup) => (
                                                                     <option key={followup.id} value={followup.id}>
                                                                         {followup.next_followup_date}

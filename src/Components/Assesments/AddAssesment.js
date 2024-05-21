@@ -127,6 +127,9 @@ const AddAssesment = (props) => {
                 toast.success("Assessment submitted successfully!");
                 props.closeModal();
             }
+            else {
+                toast.error("Failed to submit Assessment.");
+            }
         } catch (error) {
             toast.error("Assessment not submitted !");
         }

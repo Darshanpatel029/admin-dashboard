@@ -17,7 +17,6 @@ const FollowUp = (props) => {
         next_followup_date: "",
         next_followup_purpose: "",
         next_followup_method: "",
-        next_followup_date: "",
         reminder_date_time: "",
         reminder_frequency: "",
         reminder_notification_method: "",
@@ -129,6 +128,9 @@ const FollowUp = (props) => {
                 props.getNewData();
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
+            }
+            else {
+                toast.error("Failed to submit FollowUp.");
             }
         } catch (errMsg) {
             toast.error("Failed to submit enquiry.");
