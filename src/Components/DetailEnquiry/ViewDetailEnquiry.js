@@ -57,14 +57,14 @@ const ViewDetailEnquiry = () => {
       if (response.status === 200) {
         const data = await response.json();
         if (data.length === 0) {
-          setErrs("No Data Found");
+          setErrs("Data Not Found");
         } else {
           setter(data);
         }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
-        setErrs("No Data Found");
+        setErrs("Data Not Found");
       }
     } catch (error) {
       console.log("error", error);
