@@ -214,7 +214,7 @@ const ViewDetailEnquiry = () => {
               className="btn btn-primary btn-sm"
               onClick={() => setIsModalOpen(true)}
             >
-              <i class="bi bi-file-plus"></i>&nbsp; Add Detail-Enquiry
+              <i className="bi bi-file-plus"></i>&nbsp; Add Detail-Enquiry
             </button>
           </div>
         </div>
