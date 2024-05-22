@@ -72,7 +72,7 @@ const ViewApplication = () => {
     if (params.value) {
       return (
         <a href={params.value} target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-arrow-down-circle" style={{ color: "red" }}></i>
+          <i className="bi bi-arrow-down-circle" style={{ color: "red" }}></i>
         </a>
       );
     }
@@ -129,7 +129,7 @@ const ViewApplication = () => {
               className="btn btn-primary btn-sm"
               onClick={() => setIsModalOpen(true)}
             >
-              <i class="bi bi-file-plus"></i>&nbsp; Add Application
+              <i className="bi bi-file-plus"></i>&nbsp; Add Application
             </button>
           </div>
         </div>

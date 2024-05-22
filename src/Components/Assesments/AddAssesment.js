@@ -587,7 +587,7 @@ const AddAssesment = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setIsModalOpen(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>

@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
 import EnquiryFollowup from "../FollowUp/EnquiryFollowUp";
+import Source from "../AddDetails/Source";
+import CurrentEducation from "../AddDetails/CurrentEducation";
+import Intake from "../AddDetails/Intake";
+import CountryIntrested from "../AddDetails/CountryIntrested";
+import LevelApplying from "../AddDetails/LevelApplying";
 
 // part of validation
 const initialSubmit = {
@@ -15,6 +20,12 @@ const initialSubmit = {
 
 const AddEnquiry = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [SourceModel, setSourceModel] = useState(false);
+  const [EducationModel, setEducationModel] = useState(false);
+  const [IntakeModel, setIntakeModel] = useState(false);
+  const [LevelModel, setLevelModel] = useState(false);
+  const [CountryModel, setCountryModel] = useState(false);
+
   const [formData, setFormData] = useState({
     student_First_Name: "",
     student_Last_Name: "",
@@ -164,6 +175,25 @@ const AddEnquiry = (props) => {
     setIsModalOpen(false);
   };
 
+  const closeSource = () => {
+    setSourceModel(false);
+  };
+
+  const closeEducation = () => {
+    setEducationModel(false);
+  };
+
+  const closeIntake = () => {
+    setIntakeModel(false);
+  };
+
+  const closeCountry = () => {
+    setCountryModel(false);
+  };
+
+  const closeLevel = () => {
+    setLevelModel(false);
+  };
   return (
     <section className="section">
       <div className="row">
@@ -319,7 +349,7 @@ const AddEnquiry = (props) => {
                             >
                               Source Enquiry
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex">
                               <select
                                 type="number"
                                 name="Source_Enquiry"
@@ -334,6 +364,15 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setSourceModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -492,7 +531,7 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Current Education
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex">
                               <select
                                 type="number"
                                 className="form-control"
@@ -511,6 +550,15 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setEducationModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -530,7 +578,7 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Country Interested
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 type="number"
                                 className="form-control"
@@ -553,6 +601,15 @@ const AddEnquiry = (props) => {
                                   )
                                 )}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setCountryModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
 
@@ -560,7 +617,7 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               University Interested
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 type="number"
                                 className="form-control"
@@ -583,13 +640,22 @@ const AddEnquiry = (props) => {
                                   )
                                 )}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setIsModalOpen(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                           <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Level Applying For
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 type="number"
                                 className="form-control"
@@ -610,13 +676,22 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setLevelModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                           <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Course Interested
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 type="number"
                                 className="form-control"
@@ -632,13 +707,22 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setIsModalOpen(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                           <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Intake Interested
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 type="number"
                                 className="form-control"
@@ -654,13 +738,22 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setIntakeModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                           <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Interested Services
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex ">
                               <select
                                 className="form-control"
                                 name="Interested_Services"
@@ -674,6 +767,15 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setIsModalOpen(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -759,7 +861,7 @@ const AddEnquiry = (props) => {
                                   className="btn btn-primary btn-sm"
                                   onClick={() => setIsModalOpen(true)}
                                 >
-                                  <i class="bi bi-file-plus"></i>
+                                  <i className="bi bi-file-plus"></i>
                                 </button>
                               </div>
                             </div>
@@ -823,6 +925,96 @@ const AddEnquiry = (props) => {
           </Modal.Body>
         </Modal>
       )}
+
+      {SourceModel && (
+        <Modal
+          show={SourceModel}
+          onHide={() => setSourceModel(false)}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add FollowUp</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Source
+              getNewData={props.getNewData}
+              closeModal={closeSource}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {EducationModel && (
+        <Modal
+          show={EducationModel}
+          onHide={() => setEducationModel(false)}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add FollowUp</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CurrentEducation
+              getNewData={props.getNewData}
+              closeModal={closeEducation}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {IntakeModel && (
+        <Modal
+          show={IntakeModel}
+          onHide={() => setEducationModel(false)}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add FollowUp</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Intake
+              getNewData={props.getNewData}
+              closeModal={closeIntake}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+      {CountryModel && (
+        <Modal
+          show={CountryModel}
+          onHide={() => setCountryModel(false)}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add FollowUp</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CountryIntrested
+              getNewData={props.getNewData}
+              closeModal={closeCountry}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {LevelModel && (
+        <Modal
+          show={LevelModel}
+          onHide={() => setLevelModel(false)}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add FollowUp</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <LevelApplying
+              getNewData={props.getNewData}
+              closeModal={closeLevel}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
     </section>
   );
 };
