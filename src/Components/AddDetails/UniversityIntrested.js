@@ -110,17 +110,23 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Source
+                                                    University
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="Source"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Source}
+                                                    <select
+                                                        type="number"
+                                                        name="user"
+                                                        value={SourceData.user}
+                                                        className="form-select"
                                                         onChange={handleChange}
-                                                    />
+                                                    >
+                                                        <option selected>Select User</option>
+                                                        {props.user.map((user) => (
+                                                            <option key={user.id} value={user.id}>
+                                                                {user.username}
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -141,8 +147,6 @@ const Source = (props) => {
                                                     />
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
