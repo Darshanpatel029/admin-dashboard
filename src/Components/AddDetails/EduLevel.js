@@ -9,34 +9,23 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Source = (props) => {
+const EduLevel = (props) => {
     const [SourceData, setSourceData] = useState({
-        course_name: "",
-        id: "",
-        Remark: "",
-        Active: "",
-        university: "",
-        course_levels: "",
-        tenth_std_percentage_requirement: "",
-        twelfth_std_percentage_requirement: "",
-        bachelor_requirement: "",
-        masters_requirement: "",
-        Toefl_Exam: "",
-        ielts_Exam: "",
-        PTE_Exam: "",
-        Duolingo_Exam: "",
-        Gre_Exam: "",
-        Gmat_Exam: "",
-        intake: [],
-        documents_required: []
+        level: "",
+        Stream: "",
+        Percentage: "",
+        Year_of_Passing: "",
+        Name_of_Institute: "",
+        Medium_of_Education: "",
+        Board: ""
     });
 
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.course_name) {
-            setFormError("Course Name is Required");
+        if (!SourceData.level) {
+            setFormError("Education Level is Required");
             return false;
         }
         setFormStatus({
@@ -58,11 +47,10 @@ const Source = (props) => {
 
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        const newValue = files ? files[0] : value;
+        const { name, value } = e.target;
         setSourceData((prevState) => ({
             ...prevState,
-            [name]: newValue,
+            [name]: value,
         }));
 
     };
@@ -77,7 +65,7 @@ const Source = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/courses/";
+                "https://cloudconnectcampaign.com/espicrmnew/api/edu-levels/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -123,23 +111,17 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    University
+                                                    Level
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <select
-                                                        type="number"
-                                                        name="user"
-                                                        value={SourceData.university}
-                                                        className="form-select"
+                                                    <input
+                                                        type="text"
+                                                        name="level"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.level}
                                                         onChange={handleChange}
-                                                    >
-                                                        <option selected>Select University</option>
-                                                        {props.user.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -147,15 +129,15 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Course Name
+                                                    Stream
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="Reference_Number"
+                                                        name="Stream"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.course_name}
+                                                        value={SourceData.Stream}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -166,23 +148,17 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Course Levels
+                                                    Percentage
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <select
-                                                        type="number"
-                                                        name="user"
-                                                        value={SourceData.university}
-                                                        className="form-select"
+                                                    <input
+                                                        type="text"
+                                                        name="Percentage"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Percentage}
                                                         onChange={handleChange}
-                                                    >
-                                                        <option selected>Select University</option>
-                                                        {props.user.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                    />
                                                 </div>
                                             </div>
 
@@ -191,39 +167,70 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Intake
+                                                    Year Of Passing
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <select
-                                                        type="number"
-                                                        name="user"
-                                                        value={SourceData.university}
-                                                        className="form-select"
+                                                    <input
+                                                        type="text"
+                                                        name="Year_of_Passing"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Year_of_Passing}
                                                         onChange={handleChange}
-                                                    >
-                                                        <option selected>Select University</option>
-                                                        {props.user.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                    />
                                                 </div>
                                             </div>
 
                                             <div className="row mb-2">
                                                 <label
-                                                    for="inputNumber"
+                                                    htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Documents Required
+                                                    Name of Institute
                                                 </label>
-                                                <div className="col-md-5">
+                                                <div className="col-md-6">
                                                     <input
+                                                        type="text"
+                                                        name="Name_of_Institute"
                                                         className="form-control"
-                                                        type="file"
-                                                        id="formFile"
-                                                        name="attachment_enquiryFollowup"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Name_of_Institute}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Medium of Education
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="Medium_of_Education"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Medium_of_Education}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Board
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="Board"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Board}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -257,4 +264,4 @@ const Source = (props) => {
     );
 };
 
-export default Source;
+export default EduLevel;

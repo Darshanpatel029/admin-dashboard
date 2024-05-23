@@ -965,7 +965,7 @@ const AddEnquiry = (props) => {
       {IntakeModel && (
         <Modal
           show={IntakeModel}
-          onHide={() => setEducationModel(false)}
+          onHide={() => setIntakeModel(false)}
           size="lg"
         >
           <Modal.Header closeButton>

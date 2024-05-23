@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
 import DetaiEnquiryFollowup from "../FollowUp/DetailEnquiryFollowUp";
+import EduLevel from "../AddDetails/EduLevel";
 
 const initialSubmit = {
     isError: false,
@@ -13,6 +14,7 @@ const initialSubmit = {
 
 const AddDetailEnquiry = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [Edulevel, setEdulevel] = useState(false);
     const [detailEnquiry, setDetailEnquiry] = useState({
         Current_Enquiry: "",
         Current_Education_Details: "",
@@ -208,6 +210,10 @@ const AddDetailEnquiry = (props) => {
     };
 
     const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const closeEduModal = () => {
         setIsModalOpen(false);
     };
 
@@ -420,7 +426,7 @@ const AddDetailEnquiry = (props) => {
                                                             <label className="col-sm-4 col-form-label">
                                                                 Current Education Details
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -443,6 +449,15 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setEdulevel(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
@@ -1271,6 +1286,25 @@ const AddDetailEnquiry = (props) => {
                     <Modal.Body>
                         <DetaiEnquiryFollowup
                             closeModal={closeModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {Edulevel && (
+                <Modal
+                    show={Edulevel}
+                    onHide={() => setEdulevel(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <EduLevel
+                            closeModal={closeEduModal}
                             user={props.userData}
                             getNewData={props.getNewData}
                         />
