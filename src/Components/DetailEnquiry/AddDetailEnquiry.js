@@ -5,6 +5,13 @@ import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
 import DetaiEnquiryFollowup from "../FollowUp/DetailEnquiryFollowUp";
 import EduLevel from "../AddDetails/EduLevel";
+import Ielts from "../AddDetails/DetailEnquiry/Ielts";
+import Pte from "../AddDetails/DetailEnquiry/Pte";
+import Duolingo from "../AddDetails/DetailEnquiry/Duolingo";
+import Gmat from "../AddDetails/DetailEnquiry/Gmat";
+import Gre from "../AddDetails/DetailEnquiry/Gre";
+import Toefl from "../AddDetails/DetailEnquiry/Toefl";
+import Refusal from "../AddDetails/DetailEnquiry/Refusal";
 
 const initialSubmit = {
     isError: false,
@@ -15,6 +22,14 @@ const initialSubmit = {
 const AddDetailEnquiry = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [Edulevel, setEdulevel] = useState(false);
+    const [ielts, setIelts] = useState(false);
+    const [toefl, setToefl] = useState(false);
+    const [pte, setPte] = useState(false);
+    const [gmat, setGmat] = useState(false);
+    const [duolingo, setDuolingo] = useState(false);
+    const [gre, setGre] = useState(false);
+    const [refusal, setRefusal] = useState(false);
+
     const [detailEnquiry, setDetailEnquiry] = useState({
         Current_Enquiry: "",
         Current_Education_Details: "",
@@ -215,6 +230,10 @@ const AddDetailEnquiry = (props) => {
 
     const closeEduModal = () => {
         setIsModalOpen(false);
+    };
+
+    const closeRefusal = () => {
+        setRefusal(false);
     };
 
     return (
@@ -593,7 +612,7 @@ const AddDetailEnquiry = (props) => {
                                                             <label className="col-sm-4 col-form-label">
                                                                 Toefl Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -609,13 +628,22 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setToefl(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Ielts Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -631,13 +659,22 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setIelts(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 PTE Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -653,13 +690,22 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setPte(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Duolingo Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -678,13 +724,22 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setDuolingo(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 GRE Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -700,13 +755,22 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setGre(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
                                                             <label className="col-sm-4 col-form-label">
                                                                 Gmat Exam
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -722,6 +786,15 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setGmat(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1118,7 +1191,7 @@ const AddDetailEnquiry = (props) => {
                                                         <label className="col-sm-4 col-form-label">
                                                             Refusal
                                                         </label>
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-6 d-flex">
                                                             <select
                                                                 className="form-select"
                                                                 aria-label="Default select example"
@@ -1134,6 +1207,15 @@ const AddDetailEnquiry = (props) => {
                                                                     </option>
                                                                 ))}
                                                             </select>
+                                                            <div className="d-flex justify-content-center align-items-center m-2">
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-primary btn-sm"
+                                                                    onClick={() => setRefusal(true)}
+                                                                >
+                                                                    <i class="bi bi-file-plus"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1305,6 +1387,139 @@ const AddDetailEnquiry = (props) => {
                     <Modal.Body>
                         <EduLevel
                             closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {ielts && (
+                <Modal
+                    show={ielts}
+                    onHide={() => setIelts(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Ielts
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {pte && (
+                <Modal
+                    show={pte}
+                    onHide={() => setPte(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Pte
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {duolingo && (
+                <Modal
+                    show={duolingo}
+                    onHide={() => setDuolingo(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Duolingo
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {gmat && (
+                <Modal
+                    show={gmat}
+                    onHide={() => setGmat(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Gmat
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {gre && (
+                <Modal
+                    show={gre}
+                    onHide={() => setGre(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Gre
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {toefl && (
+                <Modal
+                    show={toefl}
+                    onHide={() => setToefl(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Toefl
+                            closeModal={closeEduModal}
+                            user={props.userData}
+                            getNewData={props.getNewData}
+                        />
+                    </Modal.Body>
+                </Modal>
+            )}
+
+            {refusal && (
+                <Modal
+                    show={refusal}
+                    onHide={() => setRefusal(false)}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add FollowUp</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Refusal
+                            closeModal={closeRefusal}
                             user={props.userData}
                             getNewData={props.getNewData}
                         />
