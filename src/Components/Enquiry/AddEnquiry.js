@@ -9,6 +9,7 @@ import CurrentEducation from "../AddDetails/CurrentEducation";
 import Intake from "../AddDetails/Intake";
 import CountryIntrested from "../AddDetails/CountryIntrested";
 import LevelApplying from "../AddDetails/LevelApplying";
+import Status from "../AddDetails/Status";
 
 // part of validation
 const initialSubmit = {
@@ -25,6 +26,7 @@ const AddEnquiry = (props) => {
   const [IntakeModel, setIntakeModel] = useState(false);
   const [LevelModel, setLevelModel] = useState(false);
   const [CountryModel, setCountryModel] = useState(false);
+  const [StatusModel, setStatusModel] = useState(false);
 
   const [formData, setFormData] = useState({
     student_First_Name: "",
@@ -193,6 +195,10 @@ const AddEnquiry = (props) => {
 
   const closeLevel = () => {
     setLevelModel(false);
+  };
+
+  const closeStatus = () => {
+    setStatusModel(false);
   };
   return (
     <section className="section">
@@ -540,7 +546,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Current Education</option>
+                                <option selected>
+                                  Select Current Education
+                                </option>
                                 {props.EducationData.map((EducationOption) => (
                                   <option
                                     key={EducationOption.id}
@@ -700,7 +708,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Interested Course</option>
+                                <option selected>
+                                  Select Interested Course
+                                </option>
                                 {props.courseData.map((course) => (
                                   <option key={course.id} value={course.id}>
                                     {course.course_name}
@@ -731,7 +741,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Interested Intake</option>
+                                <option selected>
+                                  Select Interested Intake
+                                </option>
                                 {props.IntakeData.map((intake) => (
                                   <option key={intake.id} value={intake.id}>
                                     {intake.intake_Name}
@@ -817,7 +829,7 @@ const AddEnquiry = (props) => {
                             <label className="col-sm-4 col-form-label">
                               Enquiry Status
                             </label>
-                            <div className="col-md-6">
+                            <div className="col-md-6 d-flex">
                               <select
                                 type="number"
                                 name="enquiry_status"
@@ -833,6 +845,16 @@ const AddEnquiry = (props) => {
                                   </option>
                                 ))}
                               </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setStatusModel(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
+
                             </div>
                           </div>
                           <div className="row mb-2">
@@ -848,7 +870,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Enquiry Followup</option>
+                                <option selected>
+                                  Select Enquiry Followup
+                                </option>
                                 {props.followupData.map((Followup) => (
                                   <option key={Followup.id} value={Followup.id}>
                                     {Followup.next_followup_date}
@@ -933,13 +957,10 @@ const AddEnquiry = (props) => {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
+            <Modal.Title>Add Source Enquiry</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Source
-              getNewData={props.getNewData}
-              closeModal={closeSource}
-            />
+            <Source getNewData={props.getNewData} closeModal={closeSource} />
           </Modal.Body>
         </Modal>
       )}
@@ -951,7 +972,7 @@ const AddEnquiry = (props) => {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
+            <Modal.Title>Add Current Education</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <CurrentEducation
@@ -969,13 +990,10 @@ const AddEnquiry = (props) => {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
+            <Modal.Title>Add Intake</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Intake
-              getNewData={props.getNewData}
-              closeModal={closeIntake}
-            />
+            <Intake getNewData={props.getNewData} closeModal={closeIntake} />
           </Modal.Body>
         </Modal>
       )}
@@ -986,7 +1004,7 @@ const AddEnquiry = (props) => {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
+            <Modal.Title>Add Country</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <CountryIntrested
@@ -998,13 +1016,9 @@ const AddEnquiry = (props) => {
       )}
 
       {LevelModel && (
-        <Modal
-          show={LevelModel}
-          onHide={() => setLevelModel(false)}
-          size="lg"
-        >
+        <Modal show={LevelModel} onHide={() => setLevelModel(false)} size="lg">
           <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
+            <Modal.Title>Add Level For Applying</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <LevelApplying
@@ -1015,6 +1029,19 @@ const AddEnquiry = (props) => {
         </Modal>
       )}
 
+      {StatusModel && (
+        <Modal show={StatusModel} onHide={() => setLevelModel(false)} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Add Status</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Status
+              getNewData={props.getNewData}
+              closeModal={closeStatus}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
     </section>
   );
 };
