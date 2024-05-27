@@ -2,16 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
-import Modal from "react-bootstrap/Modal";
 import DetaiEnquiryFollowup from "../FollowUp/DetailEnquiryFollowUp";
 import EduLevel from "../AddDetails/EduLevel";
-import Ielts from "../AddDetails/DetailEnquiry/Ielts";
-import Pte from "../AddDetails/DetailEnquiry/Pte";
-import Duolingo from "../AddDetails/DetailEnquiry/Duolingo";
-import Gmat from "../AddDetails/DetailEnquiry/Gmat";
-import Gre from "../AddDetails/DetailEnquiry/Gre";
-import Toefl from "../AddDetails/DetailEnquiry/Toefl";
-import Refusal from "../AddDetails/DetailEnquiry/Refusal";
+import WorkExpierience from "../AddDetails/DetailEnquiryButtons/WorkExpierience";
+import Ielts from "../AddDetails/DetailEnquiryButtons/Ielts";
+import Pte from "../AddDetails/DetailEnquiryButtons/Pte";
+import Duolingo from "../AddDetails/DetailEnquiryButtons/Duolingo";
+import Gmat from "../AddDetails/DetailEnquiryButtons/Gmat";
+import Gre from "../AddDetails/DetailEnquiryButtons/Gre";
+import Toefl from "../AddDetails/DetailEnquiryButtons/Toefl";
+import Refusal from "../AddDetails/DetailEnquiryButtons/Refusal";
+import ModalComponent from "../UI/Modal/ModalComponent";
 
 const initialSubmit = {
     isError: false,
@@ -22,6 +23,7 @@ const initialSubmit = {
 const AddDetailEnquiry = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [Edulevel, setEdulevel] = useState(false);
+    const [WorkModel, setWorkModel] = useState(false);
     const [ielts, setIelts] = useState(false);
     const [toefl, setToefl] = useState(false);
     const [pte, setPte] = useState(false);
@@ -118,7 +120,6 @@ const AddDetailEnquiry = (props) => {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -201,7 +202,7 @@ const AddDetailEnquiry = (props) => {
 
         try {
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/create-detail-enquiry/",
+                "https://cloudconnectcampaign.com/espicrmlatest/api/create-detail-enquiry/",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -234,6 +235,10 @@ const AddDetailEnquiry = (props) => {
 
     const closeRefusal = () => {
         setRefusal(false);
+    };
+
+    const closeWorkModel = () => {
+        setWorkModel(false);
     };
 
     return (
@@ -570,7 +575,7 @@ const AddDetailEnquiry = (props) => {
                                                             <label className="col-sm-4 col-form-label">
                                                                 Work Experience
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -591,6 +596,15 @@ const AddDetailEnquiry = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setWorkModel(true)}
+                                                                    >
+                                                                        <i class="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1356,176 +1370,137 @@ const AddDetailEnquiry = (props) => {
                     </form>
                 </div>
             </div>
-            {isModalOpen && (
-                <Modal
-                    show={isModalOpen}
-                    onHide={() => setIsModalOpen(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <DetaiEnquiryFollowup
-                            closeModal={closeModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
 
-            {Edulevel && (
-                <Modal
-                    show={Edulevel}
-                    onHide={() => setEdulevel(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <EduLevel
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={isModalOpen}
+                onHide={() => setIsModalOpen(false)}
+                size="lg"
+                title="Add Detail Enquiry"
+            >
+                <DetaiEnquiryFollowup
+                    closeModal={closeModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {ielts && (
-                <Modal
-                    show={ielts}
-                    onHide={() => setIelts(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Ielts
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={Edulevel}
+                onHide={() => setEdulevel(false)}
+                size="lg"
+                title="Add Current Education Detail"
+            >
+                <EduLevel
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {pte && (
-                <Modal
-                    show={pte}
-                    onHide={() => setPte(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Pte
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={WorkModel}
+                onHide={() => setWorkModel(false)}
+                size="lg"
+                title="Add Work Expierience Detail"
+            >
+                <WorkExpierience
+                    closeModal={closeWorkModel}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {duolingo && (
-                <Modal
-                    show={duolingo}
-                    onHide={() => setDuolingo(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Duolingo
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={ielts}
+                onHide={() => setIelts(false)}
+                size="lg"
+                title="Add Overall IELTS Score"
+            >
+                <Ielts
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {gmat && (
-                <Modal
-                    show={gmat}
-                    onHide={() => setGmat(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Gmat
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={pte}
+                onHide={() => setPte(false)}
+                size="lg"
+                title="Add Overall PTE Score"
+            >
+                <Pte
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {gre && (
-                <Modal
-                    show={gre}
-                    onHide={() => setGre(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Gre
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={duolingo}
+                onHide={() => setDuolingo(false)}
+                size="lg"
+                title="Add Overall Duolingo Score"
+            >
+                <Duolingo
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {toefl && (
-                <Modal
-                    show={toefl}
-                    onHide={() => setToefl(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Toefl
-                            closeModal={closeEduModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={gmat}
+                onHide={() => setGmat(false)}
+                size="lg"
+                title="Add Overall GMAT Score"
+            >
+                <Gmat
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
-            {refusal && (
-                <Modal
-                    show={refusal}
-                    onHide={() => setRefusal(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Refusal
-                            closeModal={closeRefusal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={gre}
+                onHide={() => setGre(false)}
+                size="lg"
+                title="Add Overall GRE Score"
+            >
+                <Gre
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
+            <ModalComponent
+                show={toefl}
+                onHide={() => setToefl(false)}
+                size="lg"
+                title="Add Overall TOEFL Score"
+            >
+                <Toefl
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
+            <ModalComponent
+                show={refusal}
+                onHide={() => setRefusal(false)}
+                size="lg"
+                title="Add Refusal"
+            >
+                <Refusal
+                    closeModal={closeRefusal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
         </section>
     );
 };

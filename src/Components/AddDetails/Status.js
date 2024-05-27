@@ -58,7 +58,7 @@ const Status = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-statuses/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-statuses/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",

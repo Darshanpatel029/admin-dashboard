@@ -114,7 +114,7 @@ const FollowUp = (props) => {
 
         try {
             const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/assessment-followups/",
+                "https://cloudconnectcampaign.com/espicrmlatest/api/assessment-followups/",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

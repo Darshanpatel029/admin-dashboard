@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../UI/Loading/Loading";
-
+// let Country = require('country-state-city').Country;
 
 const initialSubmit = {
     isError: false,
@@ -10,28 +10,29 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Gre = (props) => {
+const Refusal = (props) => {
+    // const [selectedCountry, setSelectedCountry] = useState(null);
     const [SourceData, setSourceData] = useState({
-        Verbal: "",
-        Quantitative: "",
-        Analytical: "",
-        Overall: ""
+        Refusal_Reason: "",
+        Refusal_Country: "",
+        Refusal_Visa_Category: "",
+        Refusal_Date: "",
+        Refusal_Letter: "",
     });
 
+    const token = localStorage.getItem("token");
     const [formStatus, setFormStatus] = useState(initialSubmit);
     const validateForm = () => {
-        if (!SourceData.Verbal) {
+        if (!SourceData.Refusal_Reason) {
             setFormError("Verbal is Required");
             return false;
-        } else if (!SourceData.Quantitative) {
-            setFormError("Quantitative is Required");
-            return false;
         }
-        else if (!SourceData.Analytical) {
+        else if (!SourceData.Refusal_Visa_Category) {
             setFormError("Analytical is Required");
             return false;
         }
-        else if (!SourceData.Overall) {
+
+        else if (!SourceData.Refusal_Letter) {
             setFormError("Overall is Required");
             return false;
         }
@@ -60,6 +61,14 @@ const Gre = (props) => {
         }));
     };
 
+    // const handleCountryChange = (selectedOption) => {
+    //     setSelectedCountry(selectedOption); // Update selected country state
+    //     setSourceData(prevState => ({
+    //         ...prevState,
+    //         Refusal_Country: selectedOption ? selectedOption.name : "" // Update Refusal_Country in sourceData
+    //     }));
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -68,30 +77,44 @@ const Gre = (props) => {
             errMsg: null,
             isSubmitting: true,
         });
+        const formData = new FormData();
+        formData.append("Refusal_Reason", SourceData.Refusal_Reason);
+        formData.append("Refusal_Country", SourceData.Refusal_Country);
+        formData.append("Refusal_Visa_Category", SourceData.Refusal_Visa_Category);
+        formData.append("Refusal_Date", SourceData.Refusal_Date);
+        formData.append("Refusal_Letter", SourceData.Refusal_Letter);
+
+
+        Object.keys(SourceData).forEach((key) => {
+            if (
+                key !== "Refusal_Letter"
+            ) {
+                formData.append(key, SourceData[key]);
+            }
+        });
+
         try {
-            const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/gre_exams/";
-            const token = localStorage.getItem("token");
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(SourceData),
-            };
-            const response = await fetch(apiURL, requestOptions);
+            const response = await fetch(
+                "https://cloudconnectcampaign.com/espicrmlatest/api/rejection_reasons/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        Accept: "application/json",
+                    },
+                    method: "POST",
+                    body: formData,
+                }
+            );
             if (response.status === 201) {
                 props.getNewData();
                 toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit enquiry.");
+                toast.error("Failed to submit SourceData.");
             }
-        } catch (error) {
-            console.log(error);
+        } catch (errMsg) {
+            toast.error("Failed to submit enquiry.");
         }
     };
 
@@ -109,24 +132,22 @@ const Gre = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
-
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Verbal
+                                                    Refusal Reason
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Verbal"
+                                                    <textarea
                                                         className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Verbal}
+                                                        style={{ height: "100px" }}
+                                                        name="Refusal_Reason"
+                                                        value={SourceData.Refusal_Reason}
                                                         onChange={handleChange}
-                                                    />
+                                                    ></textarea>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -134,17 +155,25 @@ const Gre = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Quantitative
+                                                    Refusal Country
                                                 </label>
                                                 <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Quantitative"
+
+                                                    {/* <input
+                                                        type="text"
+                                                        name="Refusal_Country"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Quantitative}
+                                                        value={SourceData.Refusal_Country}
                                                         onChange={handleChange}
-                                                    />
+                                                    /> */}
+                                                    {/* <Select
+                                                        name="Refusal_Country"
+                                                        options={Country.getAllCountries()}
+                                                        getOptionLabel={(options) => options["isoCode"]}
+                                                        getOptionValue={(options) => options["isoCode"]}
+                                                        value={selectedCountry}
+                                                        onChange={handleCountryChange} /> */}
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -152,15 +181,15 @@ const Gre = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Analytical
+                                                    Refusal Visa Category
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="number"
-                                                        name="Analytical"
+                                                        type="text"
+                                                        name="Refusal_Visa_Category"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Analytical}
+                                                        value={SourceData.Refusal_Visa_Category}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -171,16 +200,35 @@ const Gre = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Overall
+                                                    Refusal Date
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="number"
-                                                        name="intake_year"
+                                                        type="date"
+                                                        name="Refusal_Date"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.intake_year}
+                                                        value={SourceData.Refusal_Date}
                                                         onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Refusal Letter
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        className="form-control"
+                                                        type="file"
+                                                        id="formFile"
+                                                        name="Refusal_Letter"
+                                                        onChange={handleChange}
+                                                        required
                                                     />
                                                 </div>
                                             </div>
@@ -213,4 +261,4 @@ const Gre = (props) => {
     );
 };
 
-export default Gre;
+export default Refusal;

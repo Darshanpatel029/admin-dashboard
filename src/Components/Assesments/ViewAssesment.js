@@ -63,67 +63,67 @@ const ViewAssesment = () => {
 
   const fetchAssessment = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/assesment/",
       setAssessmentData,
       "No Inquiry found"
     );
 
   const fetchuserData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
       setuserData,
       "No Intake Data found"
     );
 
   const fetchEnquiry = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/detailsEnquiry/",
       setEnquiryData,
       "No Enquiry found"
     );
 
   const fetchIntrestedCountryData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/countriesIntersted/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/",
       setinterestedCountryData,
       "No interested Country Data found"
     );
 
   const fetchLevelData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/course-levels/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/",
       setLevelData,
       "No level Data found"
     );
   const fetchCourseData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/courses/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/courses/",
       setCourseData,
       "No Course Data found"
     );
   const fetchUniversityData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/universities/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/universities/",
       setUniversities,
       "No University Data found"
     );
 
   const fetchIntakeData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/intakes/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/intakes/",
       setIntakeData,
       "No Intake Data found"
     );
 
   const fetchStatusData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/assessment-statuses/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/assessment-statuses/",
       setstatusData,
       "No Intake Data found"
     );
   const fetchFollowupData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/assessment-followups/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/assessment-followups/",
       setFollowUpData,
       "No FollowUp Data found"
     );

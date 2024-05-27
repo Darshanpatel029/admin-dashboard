@@ -143,7 +143,7 @@ const AddApplication = (props) => {
       };
 
       const response = await fetch(
-        "https://cloudconnectcampaign.com/espicrmnew/api/application/",
+        "https://cloudconnectcampaign.com/espicrmlatest/api/application/",
         requestOptions
       );
 

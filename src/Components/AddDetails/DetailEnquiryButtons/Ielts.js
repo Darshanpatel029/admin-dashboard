@@ -3,14 +3,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../UI/Loading/Loading";
 
-
 const initialSubmit = {
     isError: false,
     errMsg: null,
     isSubmitting: false,
 };
 
-const Toefl = (props) => {
+const Ielts = (props) => {
     const [SourceData, setSourceData] = useState({
         Listening: "",
         Reading: "",
@@ -75,7 +74,7 @@ const Toefl = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/toefl_exams/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/ielts_exams/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -114,7 +113,6 @@ const Toefl = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
-
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
@@ -239,4 +237,4 @@ const Toefl = (props) => {
     );
 };
 
-export default Toefl;
+export default Ielts;
