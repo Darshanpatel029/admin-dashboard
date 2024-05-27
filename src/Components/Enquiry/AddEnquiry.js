@@ -9,6 +9,7 @@ import CurrentEducation from "../AddDetails/CurrentEducation";
 import Intake from "../AddDetails/Intake";
 import CountryIntrested from "../AddDetails/CountryIntrested";
 import LevelApplying from "../AddDetails/LevelApplying";
+import ModalComponent from "../UI/Modal/Modal";
 
 // part of validation
 const initialSubmit = {
@@ -540,7 +541,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Current Education</option>
+                                <option selected>
+                                  Select Current Education
+                                </option>
                                 {props.EducationData.map((EducationOption) => (
                                   <option
                                     key={EducationOption.id}
@@ -700,7 +703,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Interested Course</option>
+                                <option selected>
+                                  Select Interested Course
+                                </option>
                                 {props.courseData.map((course) => (
                                   <option key={course.id} value={course.id}>
                                     {course.course_name}
@@ -731,7 +736,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Interested Intake</option>
+                                <option selected>
+                                  Select Interested Intake
+                                </option>
                                 {props.IntakeData.map((intake) => (
                                   <option key={intake.id} value={intake.id}>
                                     {intake.intake_Name}
@@ -848,7 +855,9 @@ const AddEnquiry = (props) => {
                                 onChange={handleChange}
                                 required
                               >
-                                <option selected>Select Enquiry Followup</option>
+                                <option selected>
+                                  Select Enquiry Followup
+                                </option>
                                 {props.followupData.map((Followup) => (
                                   <option key={Followup.id} value={Followup.id}>
                                     {Followup.next_followup_date}
@@ -936,10 +945,7 @@ const AddEnquiry = (props) => {
             <Modal.Title>Add FollowUp</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Source
-              getNewData={props.getNewData}
-              closeModal={closeSource}
-            />
+            <Source getNewData={props.getNewData} closeModal={closeSource} />
           </Modal.Body>
         </Modal>
       )}
@@ -972,49 +978,31 @@ const AddEnquiry = (props) => {
             <Modal.Title>Add FollowUp</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Intake
-              getNewData={props.getNewData}
-              closeModal={closeIntake}
-            />
+            <Intake getNewData={props.getNewData} closeModal={closeIntake} />
           </Modal.Body>
         </Modal>
       )}
-      {CountryModel && (
-        <Modal
-          show={CountryModel}
-          onHide={() => setCountryModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <CountryIntrested
-              getNewData={props.getNewData}
-              closeModal={closeCountry}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      
+      <ModalComponent
+        show={CountryModel}
+        onHide={() => setCountryModel(false)}
+        size="lg"
+        title="Add FollowUp"
+      >
+        <CountryIntrested
+          getNewData={props.getNewData}
+          closeModal={closeCountry}
+        />
+      </ModalComponent>
 
-      {LevelModel && (
-        <Modal
-          show={LevelModel}
-          onHide={() => setLevelModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <LevelApplying
-              getNewData={props.getNewData}
-              closeModal={closeLevel}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
-
+      <ModalComponent
+        show={LevelModel}
+        onHide={() => setLevelModel(false)}
+        title="Add FollowUp"
+        size="lg"
+      >
+        <LevelApplying getNewData={props.getNewData} closeModal={closeLevel} />
+      </ModalComponent>
     </section>
   );
 };
