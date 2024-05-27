@@ -57,48 +57,48 @@ const ViewPayment = () => {
 
   const fetchPaymentData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/payments/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/payments/",
       setpaymentData,
       "No Payment found"
     );
 
   const fetchEnquiryData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/detailsEnquiry/",
       setEnquiryData,
       "No Enquiry found"
     );
 
   const fetchPaymentTypes = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/payment_types/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_types/",
       setPaymentType,
       "No PaymentType Data found"
     );
 
   const fetchAvailableServices = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/available-services/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/available-services/",
       setAvailableServices,
       "No interested Country Data found"
     );
   const fetchPaymentModes = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/payment_modes/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_modes/",
       setPaymentMode,
       "No Country Data found"
     );
 
   const fetchPaymentStatus = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/payment_statuses/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_statuses/",
       setpaymentStatus,
       "No University Data found"
     );
 
   const fetchUsers = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
       setUserData,
       "No User Data found"
     );

@@ -73,104 +73,104 @@ const ViewDetailEnquiry = () => {
 
   const fetchDetailEnquiries = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/detailsEnquiry/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/detailsEnquiry/",
       setDetailEnquiryData,
       "No Detail Inquiry found"
     );
 
   const fetchEnquiry = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/enquiries/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiries/",
       setEnquiryData,
       "No Enquiry found"
     );
 
   const EduLevel = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/edu-levels/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/edu-levels/",
       setEducationData,
       "No Detail found"
     );
 
   const WorkExperienceData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/work-experiences/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/work-experiences/",
       setWorkExperience,
       "No Detail found"
     );
 
   const ToeflExam = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/toefl_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/toefl_exams/",
       setToeflData,
       "No Detail found"
     );
 
   const Ielts = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/ielts_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/ielts_exams/",
       setIeltsData,
       "No Detail found"
     );
 
   const Pte = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/pte_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/pte_exams/",
       setPteData,
       "No Detail found"
     );
 
   const DuolingoExam = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/duolingo_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/duolingo_exams/",
       setDuolingoData,
       "No Detail found"
     );
 
   const GreExam = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/gre_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/gre_exams/",
       setGreData,
       "No Detail found"
     );
   const GmatExam = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/gmat_exams/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/gmat_exams/",
       setGmatData,
       "No Detail found"
     );
 
   const Refusal = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/rejection_reasons/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/rejection_reasons/",
       setRefusalData,
       "No Detail found"
     );
 
   const AvailableServices = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/available-services/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/available-services/",
       setServicesData,
       "No Detail found"
     );
 
   const EnquiryStatus = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/enquiry-statuses/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-statuses/",
       setStatusData,
       "No Detail found"
     );
 
   const DetailEnquiryFollowUp = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/detail-enquiry-followups/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/detail-enquiry-followups/",
       setFollowupData,
       "No Detail found"
     );
 
   const fetchuserData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/users/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
       setuserData,
       "No Intake Data found"
     );

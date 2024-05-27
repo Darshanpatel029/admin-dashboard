@@ -49,21 +49,21 @@ const ViewApplication = () => {
 
   const fetchApplications = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/application/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/application/",
       setapplicationData,
       "No Detail Inquiry found"
     );
 
   const fetchEnquiries = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/assesment/",
       setEnquiryData,
       "No Inquiry found"
     );
 
   const fetchStatusData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmnew/api/application-statuses/",
+      "https://cloudconnectcampaign.com/espicrmlatest/api/application-statuses/",
       setstatusData,
       "No Inquiry found"
     );

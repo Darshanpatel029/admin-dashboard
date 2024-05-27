@@ -9,17 +9,29 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Duolingo = (props) => {
+const WorkExpierience = (props) => {
     const [SourceData, setSourceData] = useState({
-        Overall: ""
+        Company_Name: "",
+        Designation: "",
+        Start_Date: "",
+        End_Date: ""
     });
 
-
     const [formStatus, setFormStatus] = useState(initialSubmit);
-
     const validateForm = () => {
-        if (!SourceData.Overall) {
-            setFormError("Overall is Required");
+        if (!SourceData.Company_Name) {
+            setFormError("Company Name is Required");
+            return false;
+        } else if (!SourceData.Designation) {
+            setFormError("Designation is Required");
+            return false;
+        }
+        else if (!SourceData.Start_Date) {
+            setFormError("Start Date is Required");
+            return false;
+        }
+        else if (!SourceData.End_Date) {
+            setFormError("End Date is Required");
             return false;
         }
         setFormStatus({
@@ -39,13 +51,11 @@ const Duolingo = (props) => {
     };
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        const newValue = files ? files[0] : value;
+        const { name, value } = e.target;
         setSourceData((prevState) => ({
             ...prevState,
-            [name]: newValue,
+            [name]: value,
         }));
-
     };
 
     const handleSubmit = async (e) => {
@@ -58,7 +68,7 @@ const Duolingo = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/duolingo_exams/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/work-experiences/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -97,22 +107,76 @@ const Duolingo = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
-
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Overall
+                                                    Company Name
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="Overall"
+                                                        name="Company_Name"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Overall}
+                                                        value={SourceData.Company_Name}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Designation
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="Designation"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Designation}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Start Date
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="date"
+                                                        name="Start_Date"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Start_Date}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    End Date
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="date"
+                                                        name="End_Date"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.End_Date}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -147,4 +211,4 @@ const Duolingo = (props) => {
     );
 };
 
-export default Duolingo;
+export default WorkExpierience;

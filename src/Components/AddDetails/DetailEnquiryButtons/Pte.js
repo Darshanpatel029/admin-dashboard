@@ -75,7 +75,7 @@ const Pte = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/pte_exams/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/pte_exams/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",

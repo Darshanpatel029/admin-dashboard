@@ -132,7 +132,7 @@ const AddPayment = (props) => {
       };
 
       const response = await fetch(
-        "https://cloudconnectcampaign.com/espicrmnew/api/payments/",
+        "https://cloudconnectcampaign.com/espicrmlatest/api/payments/",
         requestOptions
       );
 

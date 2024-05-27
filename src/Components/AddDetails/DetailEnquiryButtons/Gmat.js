@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
+
 
 const initialSubmit = {
     isError: false,
@@ -9,23 +10,29 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const EduLevel = (props) => {
+const Gmat = (props) => {
     const [SourceData, setSourceData] = useState({
-        level: "",
-        Stream: "",
-        Percentage: "",
-        Year_of_Passing: "",
-        Name_of_Institute: "",
-        Medium_of_Education: "",
-        Board: ""
+        Verbal: "",
+        Quantitative: "",
+        Analytical: "",
+        Overall: ""
     });
 
-
     const [formStatus, setFormStatus] = useState(initialSubmit);
-
     const validateForm = () => {
-        if (!SourceData.level) {
-            setFormError("Education Level is Required");
+        if (!SourceData.Verbal) {
+            setFormError("Verbal is Required");
+            return false;
+        } else if (!SourceData.Quantitative) {
+            setFormError("Quantitative is Required");
+            return false;
+        }
+        else if (!SourceData.Analytical) {
+            setFormError("Analytical is Required");
+            return false;
+        }
+        else if (!SourceData.Overall) {
+            setFormError("Overall is Required");
             return false;
         }
         setFormStatus({
@@ -44,15 +51,13 @@ const EduLevel = (props) => {
         });
     };
 
-
-
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
+        const newValue = files ? files[0] : value;
         setSourceData((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: newValue,
         }));
-
     };
 
     const handleSubmit = async (e) => {
@@ -65,7 +70,7 @@ const EduLevel = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/edu-levels/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/gmat_exams/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -111,15 +116,15 @@ const EduLevel = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Level
+                                                    Verbal
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="level"
+                                                        type="number"
+                                                        name="Verbal"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.level}
+                                                        value={SourceData.Verbal}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -129,53 +134,33 @@ const EduLevel = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Stream
+                                                    Quantitative
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="Stream"
+                                                        type="number"
+                                                        name="Quantitative"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Stream}
+                                                        value={SourceData.Quantitative}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Percentage
+                                                    Analytical
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="Percentage"
+                                                        type="number"
+                                                        name="Analytical"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Percentage}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Year Of Passing
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="Year_of_Passing"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Year_of_Passing}
+                                                        value={SourceData.Analytical}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -186,51 +171,15 @@ const EduLevel = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Name of Institute
+                                                    Overall
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="Name_of_Institute"
+                                                        type="number"
+                                                        name="Overall"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Name_of_Institute}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Medium of Education
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="Medium_of_Education"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Medium_of_Education}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Board
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="Board"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Board}
+                                                        value={SourceData.Overall}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -264,4 +213,4 @@ const EduLevel = (props) => {
     );
 };
 
-export default EduLevel;
+export default Gmat;

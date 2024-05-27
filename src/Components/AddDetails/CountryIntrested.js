@@ -58,7 +58,7 @@ const CountryIntrested = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/countriesIntersted/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",

@@ -3,36 +3,32 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../UI/Loading/Loading";
 
+
 const initialSubmit = {
     isError: false,
     errMsg: null,
     isSubmitting: false,
 };
 
-const Ielts = (props) => {
+const Gre = (props) => {
     const [SourceData, setSourceData] = useState({
-        Listening: "",
-        Reading: "",
-        Writing: "",
-        Speaking: "",
+        Verbal: "",
+        Quantitative: "",
+        Analytical: "",
         Overall: ""
     });
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
     const validateForm = () => {
-        if (!SourceData.Listening) {
-            setFormError("Listening is Required");
+        if (!SourceData.Verbal) {
+            setFormError("Verbal is Required");
             return false;
-        } else if (!SourceData.Reading) {
-            setFormError("Reading is Required");
-            return false;
-        }
-        else if (!SourceData.Writing) {
-            setFormError("Writing is Required");
+        } else if (!SourceData.Quantitative) {
+            setFormError("Quantitative is Required");
             return false;
         }
-        else if (!SourceData.Speaking) {
-            setFormError("Speaking is Required");
+        else if (!SourceData.Analytical) {
+            setFormError("Analytical is Required");
             return false;
         }
         else if (!SourceData.Overall) {
@@ -74,7 +70,7 @@ const Ielts = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/ielts_exams/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/gre_exams/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -113,21 +109,22 @@ const Ielts = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
+
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Listening
+                                                    Verbal
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="number"
-                                                        name="Listening"
+                                                        name="Verbal"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Listening}
+                                                        value={SourceData.Verbal}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -137,15 +134,15 @@ const Ielts = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Reading
+                                                    Quantitative
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="number"
-                                                        name="Reading"
+                                                        name="Quantitative"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Reading}
+                                                        value={SourceData.Quantitative}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -155,34 +152,15 @@ const Ielts = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Writing
+                                                    Analytical
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="number"
-                                                        name="Writing"
+                                                        name="Analytical"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Writing}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Speaking
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Speaking"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Speaking}
+                                                        value={SourceData.Analytical}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -198,16 +176,14 @@ const Ielts = (props) => {
                                                 <div className="col-md-6">
                                                     <input
                                                         type="number"
-                                                        name="Overall"
+                                                        name="intake_year"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Overall}
+                                                        value={SourceData.intake_year}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -237,4 +213,4 @@ const Ielts = (props) => {
     );
 };
 
-export default Ielts;
+export default Gre;

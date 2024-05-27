@@ -3,35 +3,22 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../UI/Loading/Loading";
 
-
 const initialSubmit = {
     isError: false,
     errMsg: null,
     isSubmitting: false,
 };
 
-const Gmat = (props) => {
+const Duolingo = (props) => {
     const [SourceData, setSourceData] = useState({
-        Verbal: "",
-        Quantitative: "",
-        Analytical: "",
         Overall: ""
     });
 
+
     const [formStatus, setFormStatus] = useState(initialSubmit);
+
     const validateForm = () => {
-        if (!SourceData.Verbal) {
-            setFormError("Verbal is Required");
-            return false;
-        } else if (!SourceData.Quantitative) {
-            setFormError("Quantitative is Required");
-            return false;
-        }
-        else if (!SourceData.Analytical) {
-            setFormError("Analytical is Required");
-            return false;
-        }
-        else if (!SourceData.Overall) {
+        if (!SourceData.Overall) {
             setFormError("Overall is Required");
             return false;
         }
@@ -58,6 +45,7 @@ const Gmat = (props) => {
             ...prevState,
             [name]: newValue,
         }));
+
     };
 
     const handleSubmit = async (e) => {
@@ -70,7 +58,7 @@ const Gmat = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmnew/api/gmat_exams/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/duolingo_exams/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -116,66 +104,11 @@ const Gmat = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Verbal
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Verbal"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Verbal}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Quantitative
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Quantitative"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Quantitative}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Analytical
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="number"
-                                                        name="Analytical"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Analytical}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
                                                     Overall
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="number"
+                                                        type="text"
                                                         name="Overall"
                                                         className="form-control"
                                                         id="student_First_Name"
@@ -184,6 +117,7 @@ const Gmat = (props) => {
                                                     />
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -213,4 +147,4 @@ const Gmat = (props) => {
     );
 };
 
-export default Gmat;
+export default Duolingo;

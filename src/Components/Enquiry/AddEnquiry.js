@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
-import Modal from "react-bootstrap/Modal";
 import EnquiryFollowup from "../FollowUp/EnquiryFollowUp";
 import Source from "../AddDetails/Source";
 import CurrentEducation from "../AddDetails/CurrentEducation";
@@ -11,6 +10,8 @@ import CountryIntrested from "../AddDetails/CountryIntrested";
 import LevelApplying from "../AddDetails/LevelApplying";
 import Status from "../AddDetails/Status";
 import ModalComponent from "../UI/Modal/ModalComponent";
+import UniversityInterested from "../AddDetails/UniversityIntrested";
+import CourseIntrested from "../AddDetails/CourseIntrested"
 
 // part of validation
 const initialSubmit = {
@@ -27,6 +28,8 @@ const AddEnquiry = (props) => {
   const [IntakeModel, setIntakeModel] = useState(false);
   const [LevelModel, setLevelModel] = useState(false);
   const [CountryModel, setCountryModel] = useState(false);
+  const [courseModel, setCourseModel] = useState(false);
+  const [UniversityModel, setUniversityModel] = useState(false);
   const [StatusModel, setStatusModel] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -143,7 +146,7 @@ const AddEnquiry = (props) => {
     });
 
     const apiURL =
-      "https://cloudconnectcampaign.com/espicrmnew/api/create-enquiry/";
+      "https://cloudconnectcampaign.com/espicrmlatest/api/create-enquiry/";
     const token = localStorage.getItem("token");
     const requestOptions = {
       method: "POST",
@@ -192,6 +195,10 @@ const AddEnquiry = (props) => {
 
   const closeCountry = () => {
     setCountryModel(false);
+  };
+
+  const closeUniversity = () => {
+    setUniversityModel(false);
   };
 
   const closeLevel = () => {
@@ -653,7 +660,7 @@ const AddEnquiry = (props) => {
                                 <button
                                   type="button"
                                   className="btn btn-primary btn-sm"
-                                  onClick={() => setIsModalOpen(true)}
+                                  onClick={() => setUniversityModel(true)}
                                 >
                                   <i className="bi bi-file-plus"></i>
                                 </button>
@@ -722,7 +729,7 @@ const AddEnquiry = (props) => {
                                 <button
                                   type="button"
                                   className="btn btn-primary btn-sm"
-                                  onClick={() => setIsModalOpen(true)}
+                                  onClick={() => setCourseModel(true)}
                                 >
                                   <i className="bi bi-file-plus"></i>
                                 </button>
@@ -855,7 +862,6 @@ const AddEnquiry = (props) => {
                                   <i className="bi bi-file-plus"></i>
                                 </button>
                               </div>
-
                             </div>
                           </div>
                           <div className="row mb-2">
@@ -932,72 +938,49 @@ const AddEnquiry = (props) => {
         </div>
       </div>
 
-      {isModalOpen && (
-        <Modal
-          show={isModalOpen}
-          onHide={() => setIsModalOpen(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add FollowUp</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <EnquiryFollowup
-              closeModal={closeModal}
-              user={props.userData}
-              getNewData={props.getNewData}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={isModalOpen}
+        onHide={() => setIsModalOpen(false)}
+        size="lg"
+        title="Add FollowUp"
+      >
+        <EnquiryFollowup
+          closeModal={closeModal}
+          user={props.userData}
+          getNewData={props.getNewData}
+        />
+      </ModalComponent>
 
-      {SourceModel && (
-        <Modal
-          show={SourceModel}
-          onHide={() => setSourceModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add Source Enquiry</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Source getNewData={props.getNewData} closeModal={closeSource} />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={SourceModel}
+        onHide={() => setSourceModel(false)}
+        size="lg"
+        title="Add Source Enquiry"
+      >
+        <Source getNewData={props.getNewData} closeModal={closeSource} />
+      </ModalComponent>
 
-      {EducationModel && (
-        <Modal
-          show={EducationModel}
-          onHide={() => setEducationModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add Current Education</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <CurrentEducation
-              getNewData={props.getNewData}
-              closeModal={closeEducation}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={EducationModel}
+        onHide={() => setEducationModel(false)}
+        size="lg"
+        title="Add Current Education"
+      >
+        <CurrentEducation
+          getNewData={props.getNewData}
+          closeModal={closeEducation}
+        />
+      </ModalComponent>
 
-      {IntakeModel && (
-        <Modal
-          show={IntakeModel}
-          onHide={() => setIntakeModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add Intake</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Intake getNewData={props.getNewData} closeModal={closeIntake} />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={IntakeModel}
+        onHide={() => setIntakeModel(false)}
+        size="lg"
+        title="Add Intake"
+      >
+        <Intake getNewData={props.getNewData} closeModal={closeIntake} />
+      </ModalComponent>
+
       <ModalComponent
         show={CountryModel}
         onHide={() => setCountryModel(false)}
@@ -1011,6 +994,47 @@ const AddEnquiry = (props) => {
       </ModalComponent>
 
       <ModalComponent
+        show={UniversityModel}
+        onHide={() => setUniversityModel(false)}
+        size="lg"
+        title="Add Interested University"
+      >
+        <UniversityInterested
+          getNewData={props.getNewData}
+          closeModal={closeUniversity}
+          userData={props.userData}
+          IeltsData={props.IeltsData}
+          PteData={props.PteData}
+          ToeflData={props.ToeflData}
+          GreData={props.GreData}
+          GmatData={props.GmatData}
+          DuolingoData={props.DuolingoData}
+        />
+      </ModalComponent>
+
+      <ModalComponent
+        show={courseModel}
+        onHide={() => setCourseModel(false)}
+        title="Add Course Intrested Data"
+        size="lg"
+      >
+        <CourseIntrested
+          getNewData={props.getNewData}
+          closeModal={closeLevel}
+          userData={props.userData}
+          IeltsData={props.IeltsData}
+          PteData={props.PteData}
+          ToeflData={props.ToeflData}
+          GreData={props.GreData}
+          GmatData={props.GmatData}
+          DuolingoData={props.DuolingoData}
+          universitiesData={props.universitiesData}
+          courseData={props.courseLevel}
+          IntakeData={props.IntakeData}
+        />
+      </ModalComponent>
+
+      <ModalComponent
         show={LevelModel}
         onHide={() => setLevelModel(false)}
         title="Add FollowUp"
@@ -1019,19 +1043,14 @@ const AddEnquiry = (props) => {
         <LevelApplying getNewData={props.getNewData} closeModal={closeLevel} />
       </ModalComponent>
 
-      {StatusModel && (
-        <Modal show={StatusModel} onHide={() => setLevelModel(false)} size="lg">
-          <Modal.Header closeButton>
-            <Modal.Title>Add Status</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Status
-              getNewData={props.getNewData}
-              closeModal={closeStatus}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={StatusModel}
+        onHide={() => setStatusModel(false)}
+        size="lg"
+        title="Add Status"
+      >
+        <Status getNewData={props.getNewData} closeModal={closeStatus} />
+      </ModalComponent>
     </section>
   );
 };
