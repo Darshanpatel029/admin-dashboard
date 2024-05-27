@@ -10,6 +10,7 @@ import Intake from "../AddDetails/Intake";
 import CountryIntrested from "../AddDetails/CountryIntrested";
 import LevelApplying from "../AddDetails/LevelApplying";
 import Status from "../AddDetails/Status";
+import ModalComponent from "../UI/Modal/ModalComponent";
 
 // part of validation
 const initialSubmit = {
@@ -997,37 +998,26 @@ const AddEnquiry = (props) => {
           </Modal.Body>
         </Modal>
       )}
-      {CountryModel && (
-        <Modal
-          show={CountryModel}
-          onHide={() => setCountryModel(false)}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add Country</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <CountryIntrested
-              getNewData={props.getNewData}
-              closeModal={closeCountry}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={CountryModel}
+        onHide={() => setCountryModel(false)}
+        size="lg"
+        title="Add FollowUp"
+      >
+        <CountryIntrested
+          getNewData={props.getNewData}
+          closeModal={closeCountry}
+        />
+      </ModalComponent>
 
-      {LevelModel && (
-        <Modal show={LevelModel} onHide={() => setLevelModel(false)} size="lg">
-          <Modal.Header closeButton>
-            <Modal.Title>Add Level For Applying</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <LevelApplying
-              getNewData={props.getNewData}
-              closeModal={closeLevel}
-            />
-          </Modal.Body>
-        </Modal>
-      )}
+      <ModalComponent
+        show={LevelModel}
+        onHide={() => setLevelModel(false)}
+        title="Add FollowUp"
+        size="lg"
+      >
+        <LevelApplying getNewData={props.getNewData} closeModal={closeLevel} />
+      </ModalComponent>
 
       {StatusModel && (
         <Modal show={StatusModel} onHide={() => setLevelModel(false)} size="lg">
