@@ -8,8 +8,11 @@ import Duolingo from "./DetailEnquiryButtons/Duolingo";
 import Gmat from "./DetailEnquiryButtons/Gmat";
 import Gre from "./DetailEnquiryButtons/Gre";
 import Toefl from "./DetailEnquiryButtons/Toefl";
-import ModalComponent from "../UI/Modal/ModalComponent";
-
+import TenthScore from "../AddDetails/TenthScore"
+import TwelfthScore from "../AddDetails/TwelfthScore";
+import BachelorScore from "../AddDetails/BachelorScore";
+import MasterScore from "../AddDetails/MasterScore";
+import ModalComponent from "../UI/Modal/ModalComponent"
 const initialSubmit = {
     isError: false,
     errMsg: null,
@@ -24,11 +27,16 @@ const Source = (props) => {
     const [gmat, setGmat] = useState(false);
     const [duolingo, setDuolingo] = useState(false);
     const [gre, setGre] = useState(false);
+    const [Tenth, setTenth] = useState(false);
+    const [Twelfth, setTwelfth] = useState(false);
+    const [Bachelor, setBachelor] = useState(false);
+    const [Master, setMaster] = useState(false);
+
 
     const [SourceData, setSourceData] = useState({
         course_name: "",
         Remark: "",
-        Active: "",
+        Active: false,
         university: "",
         course_levels: "",
         tenth_std_percentage_requirement: null,
@@ -44,14 +52,14 @@ const Source = (props) => {
         intake: "",
         documents_required: "",
     });
-
+    const token = localStorage.getItem("token");
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.univ_name) {
+        if (!SourceData.university) {
             setFormError("University Name is Required");
             return false;
-        } else if (!SourceData.country) {
+        } else if (!SourceData.course_name) {
             setFormError("Country is Required");
             return false;
         }
@@ -72,14 +80,25 @@ const Source = (props) => {
     };
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        const newValue = files ? files[0] : value;
-        setSourceData((prevState) => ({
-            ...prevState,
-            [name]: newValue,
-        }));
+        const { name, value, type, files } = e.target;
+        const newValue = type === 'file' ? files[0] : value;
 
+        if (e.target.multiple) {
+            const selectedOptions = Array.from(e.target.selectedOptions).map(
+                (option) => option.value
+            );
+            setSourceData((prevState) => ({
+                ...prevState,
+                [name]: selectedOptions,
+            }));
+        } else {
+            setSourceData((prevState) => ({
+                ...prevState,
+                [name]: newValue,
+            }));
+        }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -89,39 +108,49 @@ const Source = (props) => {
             errMsg: null,
             isSubmitting: true,
         });
+        const formData = new FormData();
+        formData.append("application_form", SourceData.application_form);
+        formData.append("newsletter", SourceData.newsletter);
+
+
+        Object.keys(SourceData).forEach((key) => {
+            if (
+                key !== "application_form" &&
+                key !== "newsletter" &&
+                key !== "univ_logo"
+            ) {
+                formData.append(key, SourceData[key]);
+            }
+        });
+
         try {
-            const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry_sources/";
-            const token = localStorage.getItem("token");
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(SourceData),
-            };
-            const response = await fetch(apiURL, requestOptions);
+            const response = await fetch(
+                "https://cloudconnectcampaign.com/espicrmlatest/api/courses/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        Accept: "application/json",
+                    },
+                    method: "POST",
+                    body: formData,
+                }
+            );
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("University submitted successfully!");
+                toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit University.");
+                toast.error("Failed to submit SourceData.");
             }
-        } catch (error) {
-            console.log(error);
+        } catch (errMsg) {
+            toast.error("Failed to submit enquiry.");
         }
     };
-
-
 
     const closeEduModal = () => {
         setEduModal(false);
     };
-
 
     return (
         <div className="col">
@@ -153,7 +182,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select University</option>
                                                         {props.universitiesData.map((university) => (
                                                             <option key={university.id} value={university.id}>
                                                                 {university.univ_name}
@@ -197,7 +226,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select Course Levels</option>
                                                         {props.courseData.map((course) => (
                                                             <option key={course.id} value={course.id}>
                                                                 {course.levels}
@@ -238,20 +267,31 @@ const Source = (props) => {
                                                 >
                                                     Document Required
                                                 </label>
-                                                <div className="col-md-5">
-                                                    {/* <select
-                                                        className="form-control"
+                                                <div className="col-md-6 d-flex">
+                                                    <select
+                                                        type="number"
                                                         name="documents_required"
                                                         value={SourceData.documents_required}
+                                                        className="form-select"
                                                         onChange={handleChange}
                                                         multiple
                                                     >
-                                                        {props.ServicesData.map((services) => (
-                                                            <option key={services.id} value={services.id}>
-                                                                {services.Services}
+                                                        {props.DocumentData.map((Document) => (
+                                                            <option key={Document.id} value={Document.id}>
+                                                                {Document.docu_name}
                                                             </option>
                                                         ))}
-                                                    </select> */}
+
+                                                    </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setTenth(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -260,9 +300,9 @@ const Source = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Tenth Std Percentage Requirement
+                                                    Tenth Std Percentage
                                                 </label>
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 d-flex">
                                                     <select
                                                         type="number"
                                                         name="tenth_std_percentage_requirement"
@@ -270,14 +310,23 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
-                                                        {props.userData.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
+                                                        <option selected>Select Tenth Percentage</option>
+                                                        {props.TenthData.map((Tenth) => (
+                                                            <option key={Tenth.id} value={Tenth.id}>
+                                                                {Tenth.percentage}
                                                             </option>
                                                         ))}
 
                                                     </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setTenth(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -286,9 +335,9 @@ const Source = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Twelfth Std Percentage Requirement
+                                                    Twelfth Std Percentage
                                                 </label>
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 d-flex">
                                                     <select
                                                         type="number"
                                                         name="twelfth_std_percentage_requirement"
@@ -296,13 +345,22 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
-                                                        {props.userData.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
+                                                        <option selected>Select Twelfth Percentage </option>
+                                                        {props.TwelthData.map((Twelth) => (
+                                                            <option key={Twelth.id} value={Twelth.id}>
+                                                                {Twelth.percentage}
                                                             </option>
                                                         ))}
                                                     </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setTwelfth(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -311,9 +369,9 @@ const Source = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Bachelor Requirement
+                                                    Bachelor Score
                                                 </label>
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 d-flex">
                                                     <select
                                                         type="number"
                                                         name="bachelor_requirement"
@@ -321,13 +379,22 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
-                                                        {props.userData.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
+                                                        <option selected>Select Bachelor Score</option>
+                                                        {props.BachelorData.map((Bachelor) => (
+                                                            <option key={Bachelor.id} value={Bachelor.id}>
+                                                                {Bachelor.requirement}
                                                             </option>
                                                         ))}
                                                     </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setBachelor(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -336,9 +403,9 @@ const Source = (props) => {
                                                     htmlFor="Source_Enquiry"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Masters Requirement
+                                                    Masters Score
                                                 </label>
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 d-flex">
                                                     <select
                                                         type="number"
                                                         name="masters_requirement"
@@ -346,13 +413,22 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
-                                                        {props.userData.map((user) => (
-                                                            <option key={user.id} value={user.id}>
-                                                                {user.username}
+                                                        <option selected>Select Master Score</option>
+                                                        {props.MasterData.map((Master) => (
+                                                            <option key={Master.id} value={Master.id}>
+                                                                {Master.requirement}
                                                             </option>
                                                         ))}
                                                     </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setMaster(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -362,7 +438,7 @@ const Source = (props) => {
                                                 >
                                                     TOEFL Exam
                                                 </label>
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 d-flex">
                                                     <select
                                                         type="number"
                                                         name="Toefl_Exam"
@@ -370,13 +446,22 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select Toefl Score</option>
                                                         {props.ToeflData.map((Toefl) => (
                                                             <option key={Toefl.id} value={Toefl.id}>
                                                                 {Toefl.Overall}
                                                             </option>
                                                         ))}
                                                     </select>
+                                                    <div className="d-flex justify-content-center align-items-center m-2">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-sm"
+                                                            onClick={() => setToefl(true)}
+                                                        >
+                                                            <i class="bi bi-file-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -394,7 +479,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select IELTS Score</option>
                                                         {props.IeltsData.map((Ielts) => (
                                                             <option key={Ielts.id} value={Ielts.id}>
                                                                 {Ielts.Overall}
@@ -427,7 +512,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select PTE Score</option>
                                                         {props.PteData.map((Pte) => (
                                                             <option key={Pte.id} value={Pte.id}>
                                                                 {Pte.Overall}
@@ -460,7 +545,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select Duolingo Score</option>
                                                         {props.DuolingoData.map((Duolingo) => (
                                                             <option key={Duolingo.id} value={Duolingo.id}>
                                                                 {Duolingo.Overall}
@@ -494,7 +579,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select GRE Score</option>
                                                         {props.GreData.map((Gre) => (
                                                             <option key={Gre.id} value={Gre.id}>
                                                                 {Gre.Overall}
@@ -527,7 +612,7 @@ const Source = (props) => {
                                                         className="form-select"
                                                         onChange={handleChange}
                                                     >
-                                                        <option selected>Select User</option>
+                                                        <option selected>Select Gmat Score</option>
                                                         {props.GmatData.map((Gmat) => (
                                                             <option key={Gmat.id} value={Gmat.id}>
                                                                 {Gmat.Overall}
@@ -554,7 +639,7 @@ const Source = (props) => {
                                                     <textarea
                                                         className="form-control"
                                                         style={{ height: "100px" }}
-                                                        name="Remark    "
+                                                        name="Remark"
                                                         value={SourceData.Remark}
                                                         onChange={handleChange}
                                                     ></textarea>
@@ -585,6 +670,60 @@ const Source = (props) => {
                     </div>
                 </div>
             </form>
+
+
+
+            <ModalComponent
+                show={Tenth}
+                onHide={() => setTenth(false)}
+                size="lg"
+                title="Add Tenth Score"
+            >
+                <TenthScore
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
+            <ModalComponent
+                show={Twelfth}
+                onHide={() => setTwelfth(false)}
+                size="lg"
+                title="Add Twelfth Score"
+            >
+                <TwelfthScore
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
+            <ModalComponent
+                show={Bachelor}
+                onHide={() => setBachelor(false)}
+                size="lg"
+                title="Add Bachelor Score"
+            >
+                <BachelorScore
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
+
+            <ModalComponent
+                show={Master}
+                onHide={() => setMaster(false)}
+                size="lg"
+                title="Add Master Score"
+            >
+                <MasterScore
+                    closeModal={closeEduModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
             <ModalComponent
                 show={ielts}

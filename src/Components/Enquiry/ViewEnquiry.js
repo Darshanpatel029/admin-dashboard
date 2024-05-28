@@ -30,6 +30,12 @@ const ViewEnquiry = () => {
   const [GmatData, setGmatData] = useState([]);
   const [GreData, setGreData] = useState([]);
   const [courseLevel, setCourseLevel] = useState([]);
+  const [TenthPercentage, setTenthPercent] = useState([]);
+  const [TwelthPercentage, setTwelthPercent] = useState([]);
+  const [BachelorData, setBachelorData] = useState([]);
+  const [MasterData, setMasterData] = useState([]);
+  const [DocumentData, setDocumentData] = useState([]);
+
 
   const [errs, setErrs] = useState("");
 
@@ -55,6 +61,11 @@ const ViewEnquiry = () => {
     fetchGreData();
     fetchToeflData();
     fetchCourseLevels();
+    fetchTenthData();
+    fetchTwelveData();
+    fetchBachelorData();
+    fetchMasterData();
+    fetchDocumentData();
   }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
@@ -214,21 +225,21 @@ const ViewEnquiry = () => {
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/pte_exams/",
       setPteData,
-      "No Ielts Data found"
+      "No PTE Data found"
     );
 
   const fetchGmatData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/gmat_exams/",
       setGmatData,
-      "No Ielts Data found"
+      "No GMAT Data found"
     );
 
   const fetchDuolingoData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/duolingo_exams/",
       setDuolingoData,
-      "No Ielts Data found"
+      "No Duolingo Data found"
     );
 
 
@@ -236,25 +247,57 @@ const ViewEnquiry = () => {
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/gre_exams/",
       setGreData,
-      "No Ielts Data found"
+      "No GRE Data found"
     );
 
   const fetchToeflData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/toefl_exams/",
       setToeflData,
-      "No Ielts Data found"
+      "No Toefl Data found"
     );
 
   const fetchCourseLevels = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/",
       setCourseLevel,
-      "No Ielts Data found"
+      "No CourseLevel Data found"
     );
 
+  const fetchTenthData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/tenth_std_percentage_requirements/",
+      setTenthPercent,
+      "No Tenth Data found"
+    );
 
+  const fetchTwelveData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/twelfth_std_percentage_requirements/",
+      setTwelthPercent,
+      "No Twelth Data found"
+    );
 
+  const fetchBachelorData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/bachelor_requirements/",
+      setBachelorData,
+      "No Bachelor Data found"
+    );
+
+  const fetchMasterData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/masters_requirements/",
+      setMasterData,
+      "No Master Data found"
+    );
+
+  const fetchDocumentData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/documents-required/",
+      setDocumentData,
+      "No Document Data found"
+    );
   const columnDefs = [
     {
       headerName: "Student First Name",
@@ -409,8 +452,13 @@ const ViewEnquiry = () => {
               GreData={GreData}
               ToeflData={ToeflData}
               courseLevel={courseLevel}
+              TenthData={TenthPercentage}
+              TwelthData={TwelthPercentage}
+              BachelorData={BachelorData}
+              MasterData={MasterData}
               closeModal={closeModal}
               getNewData={getNewData}
+              DocumentData={DocumentData}
             />
           </Modal.Body>
         </Modal>

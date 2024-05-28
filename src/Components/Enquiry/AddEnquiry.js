@@ -9,9 +9,9 @@ import Intake from "../AddDetails/Intake";
 import CountryIntrested from "../AddDetails/CountryIntrested";
 import LevelApplying from "../AddDetails/LevelApplying";
 import Status from "../AddDetails/Status";
-import ModalComponent from "../UI/Modal/ModalComponent";
 import UniversityInterested from "../AddDetails/UniversityIntrested";
 import CourseIntrested from "../AddDetails/CourseIntrested"
+import ModalComponent from "../UI/Modal/ModalComponent";
 
 // part of validation
 const initialSubmit = {
@@ -1008,7 +1008,12 @@ const AddEnquiry = (props) => {
           ToeflData={props.ToeflData}
           GreData={props.GreData}
           GmatData={props.GmatData}
+          IntrestedCountryData={props.IntrestedCountryData}
           DuolingoData={props.DuolingoData}
+          TenthData={props.TenthData}
+          TwelthData={props.TwelthData}
+          BachelorData={props.BachelorData}
+          MasterData={props.MasterData}
         />
       </ModalComponent>
 
@@ -1031,6 +1036,11 @@ const AddEnquiry = (props) => {
           universitiesData={props.universitiesData}
           courseData={props.courseLevel}
           IntakeData={props.IntakeData}
+          TenthData={props.TenthData}
+          TwelthData={props.TwelthData}
+          BachelorData={props.BachelorData}
+          MasterData={props.MasterData}
+          DocumentData={props.DocumentData}
         />
       </ModalComponent>
 
@@ -1040,7 +1050,9 @@ const AddEnquiry = (props) => {
         title="Add FollowUp"
         size="lg"
       >
-        <LevelApplying getNewData={props.getNewData} closeModal={closeLevel} />
+        <LevelApplying
+          getNewData={props.getNewData}
+          closeModal={closeLevel} />
       </ModalComponent>
 
       <ModalComponent
@@ -1049,7 +1061,9 @@ const AddEnquiry = (props) => {
         size="lg"
         title="Add Status"
       >
-        <Status getNewData={props.getNewData} closeModal={closeStatus} />
+        <Status
+          getNewData={props.getNewData}
+          closeModal={closeStatus} />
       </ModalComponent>
     </section>
   );

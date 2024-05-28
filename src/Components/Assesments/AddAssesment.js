@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import Modal from "react-bootstrap/Modal";
 import AssessmentFollowup from "../FollowUp/AssessmentFollowup";
+import AssessmentStatus from "../AddDetails/AssessmentButtons/AssessmentStatus"
+import ModalComponent from "../UI/Modal/ModalComponent";
 
 const initialSubmit = {
     isError: false,
@@ -13,6 +15,7 @@ const initialSubmit = {
 
 const AddAssesment = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [statusModel, setStatusModel] = useState(false);
     const [assessmentData, setAssessmentData] = useState({
         assigned_users: "",
         enquiry: "",
@@ -538,7 +541,7 @@ const AddAssesment = (props) => {
                                                             <label className="col-sm-4 col-form-label">
                                                                 Assessment Status
                                                             </label>
-                                                            <div className="col-md-6">
+                                                            <div className="col-md-6 d-flex">
                                                                 <select
                                                                     className="form-select"
                                                                     aria-label="Default select example"
@@ -556,6 +559,15 @@ const AddAssesment = (props) => {
                                                                         </option>
                                                                     ))}
                                                                 </select>
+                                                                <div className="d-flex justify-content-center align-items-center m-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-primary btn-sm"
+                                                                        onClick={() => setStatusModel(true)}
+                                                                    >
+                                                                        <i className="bi bi-file-plus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mb-2">
@@ -620,24 +632,29 @@ const AddAssesment = (props) => {
                 </div>
             </div>
 
-            {isModalOpen && (
-                <Modal
-                    show={isModalOpen}
-                    onHide={() => setIsModalOpen(false)}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add FollowUp</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <AssessmentFollowup
-                            closeModal={closeModal}
-                            user={props.userData}
-                            getNewData={props.getNewData}
-                        />
-                    </Modal.Body>
-                </Modal>
-            )}
+            <ModalComponent
+                show={statusModel}
+                onHide={() => setStatusModel(false)}
+                size="lg"
+                title="Add Status"
+            >
+                <AssessmentStatus
+                    getNewData={props.getNewData}
+                    closeModal={closeModal} />
+            </ModalComponent>
+
+            <ModalComponent
+                show={isModalOpen}
+                onHide={() => setIsModalOpen(false)}
+                size="lg"
+                title="Add FollowUp"
+            >
+                <AssessmentFollowup
+                    closeModal={closeModal}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
         </section>
     );
 };
