@@ -158,7 +158,6 @@ const Refusal = (props) => {
                                                     Refusal Country
                                                 </label>
                                                 <div className="col-md-6">
-
                                                     {/* <input
                                                         type="text"
                                                         name="Refusal_Country"
