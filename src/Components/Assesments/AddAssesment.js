@@ -69,72 +69,44 @@ const AddAssesment = (props) => {
         }));
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         if (!validateForm()) return;
         setFormStatus({
             isError: false,
             errMsg: null,
             isSubmitting: true,
         });
-        const token = localStorage.getItem("token");
-        const data = {
-            assigned_users: parseInt(assessmentData.assigned_users),
-            enquiry: parseInt(assessmentData.enquiry),
-            student_country: parseInt(assessmentData.student_country),
-            university: parseInt(assessmentData.university),
-            level_applying_for: parseInt(assessmentData.level_applying_for),
-            course_interested: parseInt(assessmentData.course_interested),
-            intake_interested: parseInt(assessmentData.intake_interested),
-            specialisation: assessmentData.specialisation,
-            duration: assessmentData.duration,
-            application_fee: assessmentData.application_fee,
-            tution_fee: assessmentData.tution_fee,
-            fee_currency: assessmentData.fee_currency,
-            course_link: assessmentData.course_link,
-            AssesmentFollowup: parseInt(assessmentData.AssesmentFollowup),
-            ass_status: parseInt(assessmentData.ass_status),
-            notes: assessmentData.notes,
-        };
-        // const formData = new FormData();
-        // formData.append("assigned_users", assessmentData.assigned_users);
-        // formData.append("enquiry", assessmentData.enquiry);
-        // formData.append("student_country", assessmentData.student_country);
-        // formData.append("university", assessmentData.university);
-        // formData.append("level_applying_for", assessmentData.level_applying_for);
-        // formData.append("course_interested", assessmentData.course_interested);
 
-        // formData.append("specialisation", assessmentData.specialisation);
-        // formData.append("duration", assessmentData.duration);
-        // formData.append("application_fee", assessmentData.application_fee);
-        // formData.append("fee_currency", assessmentData.fee_currency);
-        // formData.append("course_link", assessmentData.course_link);
-        // formData.append("AssesmentFollowup", assessmentData.AssesmentFollowup);
-        // formData.append("ass_status", assessmentData.ass_status);
-        // formData.append("notes", assessmentData.notes);
+        const apiURL =
+            "https://cloudconnectcampaign.com/espicrmnew/api/assesment/";
+        const token = localStorage.getItem("token");
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(assessmentData),
+        };
+
         try {
-            const response = await fetch(
-                "https://cloudconnectcampaign.com/espicrmnew/api/assesment/",
-                {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify(data),
-                }
-            );
+            const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
                 toast.success("Assessment submitted successfully!");
                 props.closeModal();
-            }
-            else {
+            } else {
                 toast.error("Failed to submit Assessment.");
             }
         } catch (error) {
-            toast.error("Assessment not submitted !");
+            toast.error("Failed to submit Assessment.");
+        } finally {
+            setFormStatus({
+                ...formStatus,
+                isSubmitting: false,
+            });
         }
     };
 

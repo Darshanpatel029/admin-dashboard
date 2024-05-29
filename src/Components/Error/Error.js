@@ -17,7 +17,7 @@ const Error = () => {
                         alt="Page Not Found"
                     />
                     <div className="credits">
-                        Designed by{" "}
+                        Designed by
                         <Link to="/https://anantsoftcomputing.com/">
                             Anant Soft Computing
                         </Link>
