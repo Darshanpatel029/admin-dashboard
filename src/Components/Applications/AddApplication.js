@@ -91,7 +91,6 @@ const AddApplication = (props) => {
     });
     const formData = new FormData();
 
-
     formData.append("diploma_marksheet", applicationData.diploma_marksheet);
     formData.append("bachelor_marksheet", applicationData.bachelor_marksheet);
     formData.append("master_marksheet", applicationData.master_marksheet);
@@ -160,7 +159,7 @@ const AddApplication = (props) => {
     }
   };
 
-
+  console.log(props.EnquiryData)
   return (
     <section className="section">
       <div className="row">
@@ -244,7 +243,6 @@ const AddApplication = (props) => {
                             <div className="row mb-2">
                               <label
                                 className="col-sm-4 col-form-label"
-                                required
                               >
                                 Application
                               </label>
@@ -255,7 +253,6 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application"
                                   value={applicationData.application}
-
                                 >
                                   <option selected>Select Application</option>
                                   {props.EnquiryData.map((Enquiry) => (
@@ -263,7 +260,6 @@ const AddApplication = (props) => {
                                       {Enquiry.enquiry.Current_Enquiry.student_First_Name}
                                     </option>
                                   ))}
-
                                 </select>
                               </div>
                             </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Modal from "react-bootstrap/Modal";
@@ -167,7 +166,7 @@ const ViewApplication = () => {
         <Modal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
-          size="lg"
+          size="xl"
         >
           <Modal.Header closeButton>
             <Modal.Title>Add Application</Modal.Title>

@@ -426,7 +426,7 @@ const ViewEnquiry = () => {
         <Modal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
-          size="lg"
+          size="xl"
         >
           <Modal.Header closeButton>
             <Modal.Title>Add Enquiry</Modal.Title>
