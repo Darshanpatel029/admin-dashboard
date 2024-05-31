@@ -203,7 +203,7 @@ const ViewAssesment = () => {
         <Modal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
-          size="xl"
+          size="lg"
         >
           <Modal.Header closeButton>
             <Modal.Title>Add Assessment</Modal.Title>

@@ -31,6 +31,7 @@ const Source = (props) => {
     const [Twelfth, setTwelfth] = useState(false);
     const [Bachelor, setBachelor] = useState(false);
     const [Master, setMaster] = useState(false);
+    const [documents, setDocuments] = useState(false);
 
 
     const [SourceData, setSourceData] = useState({
@@ -289,7 +290,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setTenth(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -324,7 +325,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setTenth(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -358,7 +359,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setTwelfth(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -392,7 +393,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setBachelor(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -426,7 +427,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setMaster(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -459,7 +460,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setToefl(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -492,7 +493,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setIelts(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -525,7 +526,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setPte(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -559,7 +560,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setDuolingo(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -592,7 +593,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setGre(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -625,7 +626,7 @@ const Source = (props) => {
                                                             className="btn btn-primary btn-sm"
                                                             onClick={() => setGmat(true)}
                                                         >
-                                                            <i class="bi bi-file-plus"></i>
+                                                            <i className="bi bi-file-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
