@@ -377,6 +377,7 @@ const ViewEnquiry = () => {
     setData(1);
   }
 
+
   return (
     <div>
       <main id="main" className="main">

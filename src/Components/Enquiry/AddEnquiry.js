@@ -56,7 +56,7 @@ const AddEnquiry = (props) => {
     intake_interested: "",
     Interested_Services: [],
     assigned_users: "",
-    created_by: 1,
+    // created_by: 1,
     enquiry_status: "",
     EnquiryFollowup: "",
     notes: "",

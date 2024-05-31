@@ -479,7 +479,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setEdulevel(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -602,7 +602,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setWorkModel(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -648,7 +648,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setToefl(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -679,7 +679,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setIelts(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -710,7 +710,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setPte(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -744,7 +744,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setDuolingo(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -775,7 +775,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setGre(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -806,7 +806,7 @@ const AddDetailEnquiry = (props) => {
                                                                         className="btn btn-primary btn-sm"
                                                                         onClick={() => setGmat(true)}
                                                                     >
-                                                                        <i class="bi bi-file-plus"></i>
+                                                                        <i className="bi bi-file-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1227,7 +1227,7 @@ const AddDetailEnquiry = (props) => {
                                                                     className="btn btn-primary btn-sm"
                                                                     onClick={() => setRefusal(true)}
                                                                 >
-                                                                    <i class="bi bi-file-plus"></i>
+                                                                    <i className="bi bi-file-plus"></i>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -1339,7 +1339,7 @@ const AddDetailEnquiry = (props) => {
                                                                     className="btn btn-primary btn-sm"
                                                                     onClick={() => setIsModalOpen(true)}
                                                                 >
-                                                                    <i class="bi bi-file-plus"></i>
+                                                                    <i className="bi bi-file-plus"></i>
                                                                 </button>
                                                             </div>
                                                         </div>
