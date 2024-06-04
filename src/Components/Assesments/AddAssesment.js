@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
-import Modal from "react-bootstrap/Modal";
 import AssessmentFollowup from "../FollowUp/AssessmentFollowup";
 import AssessmentStatus from "../AddDetails/AssessmentButtons/AssessmentStatus"
 import ModalComponent from "../UI/Modal/ModalComponent";
@@ -109,6 +108,8 @@ const AddAssesment = (props) => {
             });
         }
     };
+
+    console.log(props.enquiry)
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -220,8 +221,7 @@ const AddAssesment = (props) => {
                                                                     {props.EnquiryData.map((Enquiry) => (
                                                                         <option key={Enquiry.id} value={Enquiry.id}>
                                                                             {
-                                                                                Enquiry.Current_Enquiry
-                                                                                    .student_First_Name
+                                                                                Enquiry.Current_Enquiry.student_First_Name
                                                                             }
                                                                         </option>
                                                                     ))}

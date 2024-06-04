@@ -68,6 +68,8 @@ const ViewEnquiry = () => {
     fetchDocumentData();
   }, [data]);
 
+
+
   const fetchData = async (url, setter, errorMessage) => {
     try {
       const token = localStorage.getItem("token");
@@ -312,7 +314,7 @@ const ViewEnquiry = () => {
     {
       headerName: "Student Email",
       field: "student_email",
-      editable: true
+      editable: true,
     },
     {
       headerName: "Country Interested",
