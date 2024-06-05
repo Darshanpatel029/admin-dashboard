@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,17 +9,22 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const CountryIntrested = (props) => {
+const Source = (props) => {
     const [SourceData, setSourceData] = useState({
-        country: "",
+        intake_Name: "",
+        intake_month: "",
+        intake_year: "",
     });
 
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.country) {
+        if (!SourceData.intake_Name) {
             setFormError("Source is Required");
+            return false;
+        } else if (!SourceData.intake_month) {
+            setFormError("Reference Number is Required");
             return false;
         }
         setFormStatus({
@@ -58,7 +63,7 @@ const CountryIntrested = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/intakes/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -72,11 +77,11 @@ const CountryIntrested = (props) => {
             const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("Country Add successfully!");
+                toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit Country.");
+                toast.error("Failed to submit enquiry.");
             }
         } catch (error) {
             console.log(error);
@@ -104,19 +109,57 @@ const CountryIntrested = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Country
+                                                    Intake Name
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="country"
+                                                        name="intake_Name"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.country}
+                                                        value={SourceData.intake_Name}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Intake Month
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="intake_month"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.intake_month}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Intake Year
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="intake_year"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.intake_year}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -146,4 +189,4 @@ const CountryIntrested = (props) => {
     );
 };
 
-export default CountryIntrested;
+export default Source;

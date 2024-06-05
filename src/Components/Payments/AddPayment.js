@@ -1,7 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
+import ModalComponent from "../UI/Modal/ModalComponent";
+import PaymentFollowUp from "../FollowUp/PaymentFollowUp";
 
 const initialSubmit = {
   isError: false,
@@ -10,6 +12,7 @@ const initialSubmit = {
 };
 
 const AddPayment = (props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [paymentData, setPaymentData] = useState({
     Memo_For: "",
     payment_id: "",
@@ -23,6 +26,7 @@ const AddPayment = (props) => {
     payment_remarks: "",
     payment_document: "",
     payment_received_by: "",
+    PaymentFollowup: ""
   });
   const token = localStorage.getItem("token");
   const [formStatus, setFormStatus] = useState(initialSubmit);
@@ -149,6 +153,10 @@ const AddPayment = (props) => {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section className="section">
       <div className="row">
@@ -156,26 +164,6 @@ const AddPayment = (props) => {
           <form onSubmit={handleSubmit}>
             <div className="card">
               <div className="card-body">
-                {/* <ul
-                  className="nav nav-pills mb-3"
-                  id="pills-tab"
-                  role="tablist"
-                >
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className="nav-link active"
-                      id="pills-home-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-home"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-home"
-                      aria-selected="true"
-                    >
-                      Payment Details
-                    </button>
-                  </li>
-                </ul> */}
                 <div className="tab-content" id="myTabContent">
                   <div
                     className="tab-pane fade show active"
@@ -418,6 +406,39 @@ const AddPayment = (props) => {
                               />
                             </div>
                           </div>
+                          <div className="row mb-2">
+                            <label className="col-sm-4 col-form-label">
+                              Enquiry Followup
+                            </label>
+                            <div className="col-md-6 d-flex">
+                              <select
+                                type="number"
+                                name="PaymentFollowup"
+                                className="form-select"
+                                value={paymentData.PaymentFollowup}
+                                onChange={handleChange}
+                                required
+                              >
+                                <option selected>
+                                  Select Enquiry Followup
+                                </option>
+                                {props.followupData.map((Followup) => (
+                                  <option key={Followup.id} value={Followup.id}>
+                                    {Followup.next_followup_date}
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="d-flex justify-content-center align-items-center m-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  onClick={() => setIsModalOpen(true)}
+                                >
+                                  <i className="bi bi-file-plus"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
 
                           <div className="row  mb-2">
                             <label
@@ -469,6 +490,18 @@ const AddPayment = (props) => {
           </form>
         </div>
       </div>
+      <ModalComponent
+        show={isModalOpen}
+        onHide={() => setIsModalOpen(false)}
+        size="lg"
+        title="Add FollowUp"
+      >
+        <PaymentFollowUp
+          closeModal={closeModal}
+          user={props.userData}
+          getNewData={props.getNewData}
+        />
+      </ModalComponent>
     </section>
   );
 };

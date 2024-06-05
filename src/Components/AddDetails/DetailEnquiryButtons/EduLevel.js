@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,

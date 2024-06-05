@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,17 +9,17 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Document = (props) => {
+const CountryIntrested = (props) => {
     const [SourceData, setSourceData] = useState({
-        docu_name: ""
+        levels: "",
     });
 
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.docu_name) {
-            setFormError("Document Name is Required");
+        if (!SourceData.levels) {
+            setFormError("Source is Required");
             return false;
         }
         setFormStatus({
@@ -39,10 +39,11 @@ const Document = (props) => {
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
+        const newValue = files ? files[0] : value;
         setSourceData((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: newValue,
         }));
 
     };
@@ -57,7 +58,7 @@ const Document = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/documents-required/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -71,11 +72,11 @@ const Document = (props) => {
             const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("Enquiry submitted successfully!");
+                toast.success("Country Add successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit enquiry.");
+                toast.error("Failed to submit Country.");
             }
         } catch (error) {
             console.log(error);
@@ -103,20 +104,19 @@ const Document = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Document Name
+                                                    Levels
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="docu_name"
+                                                        name="levels"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.docu_name}
+                                                        value={SourceData.levels}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -146,4 +146,4 @@ const Document = (props) => {
     );
 };
 
-export default Document;
+export default CountryIntrested;

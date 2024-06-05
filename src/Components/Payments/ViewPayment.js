@@ -16,6 +16,7 @@ const ViewPayment = () => {
   const [paymentTypes, setPaymentType] = useState([]);
   const [avilableServices, setAvailableServices] = useState([]);
   const [paymentStatus, setpaymentStatus] = useState([]);
+  const [followupData, setfollowupData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [errs, setErrs] = useState("");
 
@@ -28,6 +29,7 @@ const ViewPayment = () => {
     fetchPaymentModes();
     fetchPaymentStatus();
     fetchUsers();
+    fetchFollowupData();
   }, [data]);
 
   const fetchData = async (url, setter, errorMessage) => {
@@ -101,6 +103,13 @@ const ViewPayment = () => {
       "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
       setUserData,
       "No User Data found"
+    );
+
+  const fetchFollowupData = () =>
+    fetchData(
+      "https://cloudconnectcampaign.com/espicrmlatest/api/payment-followups/",
+      setfollowupData,
+      "No PaymentFollowUp Data found"
     );
 
   const openInNewTabRenderer = (params) => {
@@ -208,7 +217,7 @@ const ViewPayment = () => {
         <Modal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
-          size="xl"
+          size="lg"
         >
           <Modal.Header closeButton>
             <Modal.Title>Add Payment</Modal.Title>
@@ -221,6 +230,7 @@ const ViewPayment = () => {
               avilableServices={avilableServices}
               paymentStatus={paymentStatus}
               userData={userData}
+              followupData={followupData}
               closeModal={closeModal}
               getNewData={getNewData}
             />

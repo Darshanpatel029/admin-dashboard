@@ -36,7 +36,7 @@ const ViewAssesment = () => {
     fetchFollowupData();
   }, [data]);
 
-  const fetchData = async (url, setter, errorMessage) => {
+  const fetchData = async (url, setter, errorMessage, showNoDataMessage = true) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(url, {
@@ -46,86 +46,95 @@ const ViewAssesment = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        if (data.length === 0) {
-          setErrs("Data Not Found");
+        if (data.length === 0 && showNoDataMessage) {
+          setErrs(errorMessage);
         } else {
           setter(data);
         }
       } else if (response.status === 500) {
         setErrs(errorMessage);
       } else {
-        setErrs("Data Not Found");
+        setter([]);
       }
     } catch (error) {
       console.log("error", error);
     }
   };
-
   const fetchAssessment = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/assesment/",
       setAssessmentData,
-      "No Inquiry found"
+      "No Inquiry found",
+      true
     );
 
   const fetchuserData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
       setuserData,
-      "No Intake Data found"
+      "No Intake Data found",
+      false
     );
 
   const fetchEnquiry = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/detailsEnquiry/",
       setEnquiryData,
-      "No Enquiry found"
+      "No Enquiry found",
+      false
     );
 
   const fetchIntrestedCountryData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/",
       setinterestedCountryData,
-      "No interested Country Data found"
+      "No interested Country Data found",
+      false
     );
 
   const fetchLevelData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/",
       setLevelData,
-      "No level Data found"
+      "No level Data found",
+      false
     );
   const fetchCourseData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/courses/",
       setCourseData,
-      "No Course Data found"
+      "No Course Data found",
+      false
     );
   const fetchUniversityData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/universities/",
       setUniversities,
-      "No University Data found"
+      "No University Data found",
+      false
     );
 
   const fetchIntakeData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/intakes/",
       setIntakeData,
-      "No Intake Data found"
+      "No Intake Data found",
+      false
     );
 
   const fetchStatusData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/assessment-statuses/",
       setstatusData,
-      "No Intake Data found"
+      "No Intake Data found",
+      false
     );
   const fetchFollowupData = () =>
     fetchData(
       "https://cloudconnectcampaign.com/espicrmlatest/api/assessment-followups/",
       setFollowUpData,
-      "No FollowUp Data found"
+      "No FollowUp Data found",
+      false
     );
 
   const columnDefs = [
@@ -142,6 +151,8 @@ const ViewAssesment = () => {
     { headerName: "Application fee", field: "application_fee" },
     { headerName: "Tution fee", field: "tution_fee" },
   ];
+
+  console.log(EnquiryData)
 
   const closeModal = () => {
     setIsModalOpen(false);

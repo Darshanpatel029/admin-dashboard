@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,18 +9,15 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Source = (props) => {
+const TwelfthScore = (props) => {
     const [SourceData, setSourceData] = useState({
-        Source: "",
-        Reference_Number: "",
+        percentage: ""
     });
 
-
     const [formStatus, setFormStatus] = useState(initialSubmit);
-
     const validateForm = () => {
-        if (!SourceData.current_education) {
-            setFormError("Current Education is Required");
+        if (!SourceData.percentage) {
+            setFormError("Percentage is Required");
             return false;
         }
         setFormStatus({
@@ -39,8 +36,6 @@ const Source = (props) => {
         });
     };
 
-
-
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         const newValue = files ? files[0] : value;
@@ -48,7 +43,6 @@ const Source = (props) => {
             ...prevState,
             [name]: newValue,
         }));
-
     };
 
     const handleSubmit = async (e) => {
@@ -61,7 +55,7 @@ const Source = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/current-education/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/twelfth_std_percentage_requirements/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -75,11 +69,11 @@ const Source = (props) => {
             const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("Current Education submitted successfully!");
+                toast.success("Enquiry submitted successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit Current Education.");
+                toast.error("Failed to submit enquiry.");
             }
         } catch (error) {
             console.log(error);
@@ -100,22 +94,21 @@ const Source = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
-
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Current Education
+                                                    Percentage
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="current_education"
+                                                        type="number"
+                                                        name="percentage"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.current_education}
+                                                        value={SourceData.percentage}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -150,4 +143,4 @@ const Source = (props) => {
     );
 };
 
-export default Source;
+export default TwelfthScore;

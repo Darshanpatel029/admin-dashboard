@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,22 +9,17 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Source = (props) => {
+const CountryIntrested = (props) => {
     const [SourceData, setSourceData] = useState({
-        intake_Name: "",
-        intake_month: "",
-        intake_year: "",
+        country: "",
     });
 
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.intake_Name) {
+        if (!SourceData.country) {
             setFormError("Source is Required");
-            return false;
-        } else if (!SourceData.intake_month) {
-            setFormError("Reference Number is Required");
             return false;
         }
         setFormStatus({
@@ -63,7 +58,7 @@ const Source = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/intakes/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -77,11 +72,11 @@ const Source = (props) => {
             const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("Enquiry submitted successfully!");
+                toast.success("Country Add successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit enquiry.");
+                toast.error("Failed to submit Country.");
             }
         } catch (error) {
             console.log(error);
@@ -109,57 +104,19 @@ const Source = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Intake Name
+                                                    Country
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="intake_Name"
+                                                        name="country"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.intake_Name}
+                                                        value={SourceData.country}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Intake Month
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="intake_month"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.intake_month}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Intake Year
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="intake_year"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.intake_year}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -189,4 +146,4 @@ const Source = (props) => {
     );
 };
 
-export default Source;
+export default CountryIntrested;
