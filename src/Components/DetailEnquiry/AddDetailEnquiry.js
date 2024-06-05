@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import DetaiEnquiryFollowup from "../FollowUp/DetailEnquiryFollowUp";
-import EduLevel from "../AddDetails/EduLevel";
+import EduLevel from "../AddDetails/DetailEnquiryButtons/EduLevel";
 import WorkExpierience from "../AddDetails/DetailEnquiryButtons/WorkExpierience";
 import Ielts from "../AddDetails/DetailEnquiryButtons/Ielts";
 import Pte from "../AddDetails/DetailEnquiryButtons/Pte";
@@ -66,7 +66,7 @@ const AddDetailEnquiry = (props) => {
         Passport_Document: "",
         Offer_Letter: "",
         Refusal: "",
-        Confirmed_Services: [],
+        Confirmed_Services: "",
         Enquiry_Status: "",
         DetaiEnquiryFollowup: "",
     });
@@ -129,27 +129,27 @@ const AddDetailEnquiry = (props) => {
             isSubmitting: true,
         });
         const formData = new FormData();
-        formData.append("Current_Enquiry", detailEnquiry.Current_Enquiry);
-        formData.append("Current_Education_Details", detailEnquiry.Current_Education_Details);
-        formData.append("Tenth_Education_Details", detailEnquiry.Tenth_Education_Details);
-        formData.append("Twelveth_Education_Details", detailEnquiry.Twelveth_Education_Details);
-        formData.append("Graduation_Education_Details", detailEnquiry.Graduation_Education_Details);
-        formData.append("Work_Experience", detailEnquiry.Work_Experience);
+        // formData.append("Current_Enquiry", detailEnquiry.Current_Enquiry);
+        // formData.append("Current_Education_Details", detailEnquiry.Current_Education_Details);
+        // formData.append("Tenth_Education_Details", detailEnquiry.Tenth_Education_Details);
+        // formData.append("Twelveth_Education_Details", detailEnquiry.Twelveth_Education_Details);
+        // formData.append("Graduation_Education_Details", detailEnquiry.Graduation_Education_Details);
+        // formData.append("Work_Experience", detailEnquiry.Work_Experience);
 
-        formData.append("Toefl_Exam", detailEnquiry.Toefl_Exam);
-        formData.append("ielts_Exam", detailEnquiry.ielts_Exam);
-        formData.append("PTE_Exam", detailEnquiry.PTE_Exam);
-        formData.append("Duolingo_Exam", detailEnquiry.Duolingo_Exam);
-        formData.append("Gre_Exam", detailEnquiry.Gre_Exam);
-        formData.append("Gmat_Exam", detailEnquiry.Gmat_Exam);
+        // formData.append("Toefl_Exam", detailEnquiry.Toefl_Exam);
+        // formData.append("ielts_Exam", detailEnquiry.ielts_Exam);
+        // formData.append("PTE_Exam", detailEnquiry.PTE_Exam);
+        // formData.append("Duolingo_Exam", detailEnquiry.Duolingo_Exam);
+        // formData.append("Gre_Exam", detailEnquiry.Gre_Exam);
+        // formData.append("Gmat_Exam", detailEnquiry.Gmat_Exam);
 
-        formData.append("Father_Occupation", detailEnquiry.Father_Occupation);
-        formData.append("Father_Annual_Income", detailEnquiry.Father_Annual_Income);
+        // formData.append("Father_Occupation", detailEnquiry.Father_Occupation);
+        // formData.append("Father_Annual_Income", detailEnquiry.Father_Annual_Income);
 
-        formData.append("Refusal", detailEnquiry.Refusal);
+        // formData.append("Refusal", detailEnquiry.Refusal);
         formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
-        formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
+        // formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
+        // formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
 
 
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
@@ -213,8 +213,8 @@ const AddDetailEnquiry = (props) => {
                 }
             );
             if (response.status === 201) {
-                props.getNewData();
                 toast.success("Enquiry submitted successfully!");
+                props.getNewData();
                 props.closeModal();
             }
             else {
@@ -236,9 +236,32 @@ const AddDetailEnquiry = (props) => {
     const closeRefusal = () => {
         setRefusal(false);
     };
-
     const closeWorkModel = () => {
         setWorkModel(false);
+    };
+
+    const closeIelts = () => {
+        setIelts(false);
+    };
+
+    const closePte = () => {
+        setPte(false);
+    };
+
+    const closeGmat = () => {
+        setGmat(false);
+    };
+
+    const closeGre = () => {
+        setGre(false);
+    };
+
+    const closeDuolingo = () => {
+        setDuolingo(false);
+    };
+
+    const closeToefl = () => {
+        setToefl(false);
     };
 
     return (
@@ -1375,11 +1398,11 @@ const AddDetailEnquiry = (props) => {
                 show={isModalOpen}
                 onHide={() => setIsModalOpen(false)}
                 size="lg"
-                title="Add Detail Enquiry"
+                title="Add Detail-Enquiry FollowUp"
             >
                 <DetaiEnquiryFollowup
-                    closeModal={closeModal}
                     user={props.userData}
+                    closeModal={closeModal}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1391,8 +1414,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Current Education Detail"
             >
                 <EduLevel
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeEduModal}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1404,8 +1427,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Work Expierience Detail"
             >
                 <WorkExpierience
-                    closeModal={closeWorkModel}
                     user={props.userData}
+                    closeModal={closeWorkModel}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1417,8 +1440,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall IELTS Score"
             >
                 <Ielts
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeIelts}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1430,8 +1453,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall PTE Score"
             >
                 <Pte
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closePte}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1443,8 +1466,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall Duolingo Score"
             >
                 <Duolingo
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeDuolingo}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1456,8 +1479,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall GMAT Score"
             >
                 <Gmat
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeGmat}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1469,8 +1492,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall GRE Score"
             >
                 <Gre
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeGre}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1482,8 +1505,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Overall TOEFL Score"
             >
                 <Toefl
-                    closeModal={closeEduModal}
                     user={props.userData}
+                    closeModal={closeToefl}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
@@ -1495,8 +1518,8 @@ const AddDetailEnquiry = (props) => {
                 title="Add Refusal"
             >
                 <Refusal
-                    closeModal={closeRefusal}
                     user={props.userData}
+                    closeModal={closeRefusal}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>

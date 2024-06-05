@@ -109,10 +109,12 @@ const AddAssesment = (props) => {
         }
     };
 
-    console.log(props.enquiry)
-
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const closeStatus = () => {
+        setStatusModel(false);
     };
 
     return (
@@ -209,20 +211,15 @@ const AddAssesment = (props) => {
                                                             <div className="col-md-6">
                                                                 <select
                                                                     className="form-select"
-                                                                    name="enquiry"
                                                                     aria-label="Default select example"
-                                                                    value={assessmentData.enquiry}
                                                                     onChange={handleChange}
-                                                                    required
+                                                                    name="enquiry"
+                                                                    value={assessmentData.enquiry}
                                                                 >
-                                                                    <option selected>
-                                                                        Select Enquiry
-                                                                    </option>
+                                                                    <option selected>Select Application</option>
                                                                     {props.EnquiryData.map((Enquiry) => (
                                                                         <option key={Enquiry.id} value={Enquiry.id}>
-                                                                            {
-                                                                                Enquiry.Current_Enquiry.student_First_Name
-                                                                            }
+                                                                            {Enquiry.Current_Enquiry.student_First_Name}
                                                                         </option>
                                                                     ))}
                                                                 </select>
@@ -612,7 +609,7 @@ const AddAssesment = (props) => {
             >
                 <AssessmentStatus
                     getNewData={props.getNewData}
-                    closeModal={closeModal} />
+                    closeModal={closeStatus} />
             </ModalComponent>
 
             <ModalComponent
@@ -622,8 +619,8 @@ const AddAssesment = (props) => {
                 title="Add FollowUp"
             >
                 <AssessmentFollowup
-                    closeModal={closeModal}
                     user={props.userData}
+                    closeModal={closeModal}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>

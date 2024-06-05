@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,17 +9,21 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Status = (props) => {
+const Source = (props) => {
     const [SourceData, setSourceData] = useState({
-        status: "",
+        Source: "",
+        Reference_Number: "",
     });
 
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {
-        if (!SourceData.status) {
-            setFormError("Status is Required");
+        if (!SourceData.Source) {
+            setFormError("Source is Required");
+            return false;
+        } else if (!SourceData.Reference_Number) {
+            setFormError("Reference Number is Required");
             return false;
         }
         setFormStatus({
@@ -37,6 +41,8 @@ const Status = (props) => {
             isSubmitting: false,
         });
     };
+
+
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -58,7 +64,7 @@ const Status = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-statuses/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry_sources/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -104,19 +110,39 @@ const Status = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Status
+                                                    Source
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="text"
-                                                        name="status"
+                                                        name="Source"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.status}
+                                                        value={SourceData.Source}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="row mb-2">
+                                                <label
+                                                    htmlFor="student_First_Name"
+                                                    className="col-sm-4 col-form-label"
+                                                >
+                                                    Reference Number
+                                                </label>
+                                                <div className="col-md-6">
+                                                    <input
+                                                        type="text"
+                                                        name="Reference_Number"
+                                                        className="form-control"
+                                                        id="student_First_Name"
+                                                        value={SourceData.Reference_Number}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -146,4 +172,4 @@ const Status = (props) => {
     );
 };
 
-export default Status;
+export default Source;

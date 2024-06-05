@@ -1,18 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
-import Ielts from "./DetailEnquiryButtons/Ielts";
-import Pte from "./DetailEnquiryButtons/Pte";
-import Duolingo from "./DetailEnquiryButtons/Duolingo";
-import Gmat from "./DetailEnquiryButtons/Gmat";
-import Gre from "./DetailEnquiryButtons/Gre";
-import Toefl from "./DetailEnquiryButtons/Toefl";
-import TenthScore from "../AddDetails/TenthScore"
-import TwelfthScore from "../AddDetails/TwelfthScore";
-import BachelorScore from "../AddDetails/BachelorScore";
-import MasterScore from "../AddDetails/MasterScore";
-import ModalComponent from "../UI/Modal/ModalComponent"
+import Loading from "../../UI/Loading/Loading";
+import Ielts from "../DetailEnquiryButtons/Ielts";
+import Pte from "../DetailEnquiryButtons/Pte";
+import Duolingo from "../DetailEnquiryButtons/Duolingo";
+import Gmat from "../DetailEnquiryButtons/Gmat";
+import Gre from "../DetailEnquiryButtons/Gre";
+import Toefl from "../DetailEnquiryButtons/Toefl";
+import TenthScore from "../EnquiryButtons/TenthScore"
+import TwelfthScore from "../EnquiryButtons/TwelfthScore";
+import BachelorScore from "./BachelorScore";
+import MasterScore from "../EnquiryButtons/MasterScore";
+import ModalComponent from "../../UI/Modal/ModalComponent";
+import Document from "./Document"
 const initialSubmit = {
     isError: false,
     errMsg: null,
@@ -20,7 +21,6 @@ const initialSubmit = {
 };
 
 const Source = (props) => {
-    const [EduModel, setEduModal] = useState(false)
     const [ielts, setIelts] = useState(false);
     const [toefl, setToefl] = useState(false);
     const [pte, setPte] = useState(false);
@@ -32,7 +32,6 @@ const Source = (props) => {
     const [Bachelor, setBachelor] = useState(false);
     const [Master, setMaster] = useState(false);
     const [documents, setDocuments] = useState(false);
-
 
     const [SourceData, setSourceData] = useState({
         course_name: "",
@@ -149,9 +148,50 @@ const Source = (props) => {
         }
     };
 
-    const closeEduModal = () => {
-        setEduModal(false);
+
+    const closeIelts = () => {
+        setIelts(false);
     };
+
+    const closePte = () => {
+        setPte(false);
+    };
+
+    const closeGmat = () => {
+        setGmat(false);
+    };
+
+    const closeGre = () => {
+        setGre(false);
+    };
+
+    const closeDuolingo = () => {
+        setDuolingo(false);
+    };
+
+    const closeDocuments = () => {
+        setDocuments(false);
+    };
+
+    const closeTenth = () => {
+        setTenth(false);
+    };
+
+    const closeTwelfth = () => {
+        setTwelfth(false);
+    };
+
+    const closeBachelor = () => {
+        setBachelor(false);
+    };
+
+    const closeToefl = () => {
+        setToefl(false);
+    };
+    const closeMaster = () => {
+        setMaster(false);
+    };
+
 
     return (
         <div className="col">
@@ -288,7 +328,7 @@ const Source = (props) => {
                                                         <button
                                                             type="button"
                                                             className="btn btn-primary btn-sm"
-                                                            onClick={() => setTenth(true)}
+                                                            onClick={() => setDocuments(true)}
                                                         >
                                                             <i className="bi bi-file-plus"></i>
                                                         </button>
@@ -672,7 +712,18 @@ const Source = (props) => {
                 </div>
             </form>
 
-
+            <ModalComponent
+                show={documents}
+                onHide={() => setDocuments(false)}
+                size="lg"
+                title="Add Tenth Score"
+            >
+                <Document
+                    closeModal={closeDocuments}
+                    user={props.userData}
+                    getNewData={props.getNewData}
+                />
+            </ModalComponent>
 
             <ModalComponent
                 show={Tenth}
@@ -681,7 +732,7 @@ const Source = (props) => {
                 title="Add Tenth Score"
             >
                 <TenthScore
-                    closeModal={closeEduModal}
+                    closeModal={closeTenth}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -694,7 +745,7 @@ const Source = (props) => {
                 title="Add Twelfth Score"
             >
                 <TwelfthScore
-                    closeModal={closeEduModal}
+                    closeModal={closeTwelfth}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -707,7 +758,7 @@ const Source = (props) => {
                 title="Add Bachelor Score"
             >
                 <BachelorScore
-                    closeModal={closeEduModal}
+                    closeModal={closeBachelor}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -720,7 +771,7 @@ const Source = (props) => {
                 title="Add Master Score"
             >
                 <MasterScore
-                    closeModal={closeEduModal}
+                    closeModal={closeMaster}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -733,7 +784,7 @@ const Source = (props) => {
                 title="Add Overall IELTS Score"
             >
                 <Ielts
-                    closeModal={closeEduModal}
+                    closeModal={closeIelts}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -746,7 +797,7 @@ const Source = (props) => {
                 title="Add Overall PTE Score"
             >
                 <Pte
-                    closeModal={closeEduModal}
+                    closeModal={closePte}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -759,7 +810,7 @@ const Source = (props) => {
                 title="Add Overall Duolingo Score"
             >
                 <Duolingo
-                    closeModal={closeEduModal}
+                    closeModal={closeDuolingo}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -772,7 +823,7 @@ const Source = (props) => {
                 title="Add Overall GMAT Score"
             >
                 <Gmat
-                    closeModal={closeEduModal}
+                    closeModal={closeGmat}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -785,7 +836,7 @@ const Source = (props) => {
                 title="Add Overall GRE Score"
             >
                 <Gre
-                    closeModal={closeEduModal}
+                    closeModal={closeGre}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
@@ -798,14 +849,12 @@ const Source = (props) => {
                 title="Add Overall TOEFL Score"
             >
                 <Toefl
-                    closeModal={closeEduModal}
+                    closeModal={closeToefl}
                     user={props.userData}
                     getNewData={props.getNewData}
                 />
             </ModalComponent>
         </div>
-
-
     );
 };
 

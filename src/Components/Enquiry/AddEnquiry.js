@@ -3,14 +3,14 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../UI/Loading/Loading";
 import EnquiryFollowup from "../FollowUp/EnquiryFollowUp";
-import Source from "../AddDetails/Source";
-import CurrentEducation from "../AddDetails/CurrentEducation";
-import Intake from "../AddDetails/Intake";
-import CountryIntrested from "../AddDetails/CountryIntrested";
-import LevelApplying from "../AddDetails/LevelApplying";
-import Status from "../AddDetails/Status";
-import UniversityInterested from "../AddDetails/UniversityIntrested";
-import CourseIntrested from "../AddDetails/CourseIntrested"
+import Source from "../AddDetails/EnquiryButtons/Source";
+import CurrentEducation from "../AddDetails/EnquiryButtons/CurrentEducation";
+import Intake from "../AddDetails/EnquiryButtons/Intake";
+import CountryIntrested from "../AddDetails/EnquiryButtons/CountryIntrested";
+import LevelApplying from "../AddDetails/EnquiryButtons/LevelApplying";
+import Status from "../AddDetails/EnquiryButtons/Status";
+import UniversityInterested from "../AddDetails/EnquiryButtons/UniversityIntrested";
+import CourseIntrested from "../AddDetails/EnquiryButtons/CourseIntrested"
 import ModalComponent from "../UI/Modal/ModalComponent";
 
 // part of validation
@@ -203,6 +203,10 @@ const AddEnquiry = (props) => {
 
   const closeLevel = () => {
     setLevelModel(false);
+  };
+
+  const closeCourse = () => {
+    setCourseModel(false);
   };
 
   const closeStatus = () => {
@@ -1025,7 +1029,7 @@ const AddEnquiry = (props) => {
       >
         <CourseIntrested
           getNewData={props.getNewData}
-          closeModal={closeLevel}
+          closeModal={closeCourse}
           userData={props.userData}
           IeltsData={props.IeltsData}
           PteData={props.PteData}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,15 +9,17 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const TwelfthScore = (props) => {
+const Status = (props) => {
     const [SourceData, setSourceData] = useState({
-        percentage: ""
+        status: "",
     });
 
+
     const [formStatus, setFormStatus] = useState(initialSubmit);
+
     const validateForm = () => {
-        if (!SourceData.percentage) {
-            setFormError("Percentage is Required");
+        if (!SourceData.status) {
+            setFormError("Status is Required");
             return false;
         }
         setFormStatus({
@@ -43,6 +45,7 @@ const TwelfthScore = (props) => {
             ...prevState,
             [name]: newValue,
         }));
+
     };
 
     const handleSubmit = async (e) => {
@@ -55,7 +58,7 @@ const TwelfthScore = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/twelfth_std_percentage_requirements/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-statuses/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -94,26 +97,26 @@ const TwelfthScore = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
+
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Percentage
+                                                    Status
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="number"
-                                                        name="percentage"
+                                                        type="text"
+                                                        name="status"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.percentage}
+                                                        value={SourceData.status}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -143,4 +146,4 @@ const TwelfthScore = (props) => {
     );
 };
 
-export default TwelfthScore;
+export default Status;

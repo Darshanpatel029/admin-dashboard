@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,15 +9,15 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const MasterScore = (props) => {
+const BachelorScore = (props) => {
     const [SourceData, setSourceData] = useState({
-        percentage: ""
+        requirement: ""
     });
 
     const [formStatus, setFormStatus] = useState(initialSubmit);
     const validateForm = () => {
-        if (!SourceData.percentage) {
-            setFormError("Percentage is Required");
+        if (!SourceData.requirement) {
+            setFormError("This Field is Required");
             return false;
         }
         setFormStatus({
@@ -37,12 +37,12 @@ const MasterScore = (props) => {
     };
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        const newValue = files ? files[0] : value;
+        const { name, value } = e.target;
         setSourceData((prevState) => ({
             ...prevState,
-            [name]: newValue,
+            [name]: value,
         }));
+
     };
 
     const handleSubmit = async (e) => {
@@ -55,7 +55,7 @@ const MasterScore = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/masters_requirements/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/bachelor_requirements/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -100,15 +100,15 @@ const MasterScore = (props) => {
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Percentage
+                                                    Requirement
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
                                                         type="number"
-                                                        name="percentage"
+                                                        name="requirement"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.percentage}
+                                                        value={SourceData.requirement}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -143,4 +143,4 @@ const MasterScore = (props) => {
     );
 };
 
-export default MasterScore;
+export default BachelorScore;

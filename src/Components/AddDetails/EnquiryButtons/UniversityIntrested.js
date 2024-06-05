@@ -1,18 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
-import Ielts from "./DetailEnquiryButtons/Ielts";
-import Pte from "./DetailEnquiryButtons/Pte";
-import Duolingo from "./DetailEnquiryButtons/Duolingo";
-import Gmat from "./DetailEnquiryButtons/Gmat";
-import Gre from "./DetailEnquiryButtons/Gre";
-import Toefl from "./DetailEnquiryButtons/Toefl";
+import Loading from "../../UI/Loading/Loading";
+import Ielts from "../DetailEnquiryButtons/Ielts";
+import Pte from "../DetailEnquiryButtons/Pte";
+import Duolingo from "../DetailEnquiryButtons/Duolingo";
+import Gmat from "../DetailEnquiryButtons/Gmat";
+import Gre from "../DetailEnquiryButtons/Gre";
+import Toefl from "../DetailEnquiryButtons/Toefl";
 import TenthScore from "./TenthScore";
 import TwelfthScore from "./TwelfthScore";
 import BachelorScore from "./BachelorScore";
 import MasterScore from "./MasterScore";
-import ModalComponent from "../UI/Modal/ModalComponent";
+import ModalComponent from "../../UI/Modal/ModalComponent";
 
 const initialSubmit = {
     isError: false,

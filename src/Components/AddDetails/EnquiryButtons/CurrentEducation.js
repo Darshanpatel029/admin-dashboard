@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,15 +9,18 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const TenthScore = (props) => {
+const Source = (props) => {
     const [SourceData, setSourceData] = useState({
-        percentage: ""
+        Source: "",
+        Reference_Number: "",
     });
 
+
     const [formStatus, setFormStatus] = useState(initialSubmit);
+
     const validateForm = () => {
-        if (!SourceData.percentage) {
-            setFormError("Percentage is Required");
+        if (!SourceData.current_education) {
+            setFormError("Current Education is Required");
             return false;
         }
         setFormStatus({
@@ -36,6 +39,8 @@ const TenthScore = (props) => {
         });
     };
 
+
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         const newValue = files ? files[0] : value;
@@ -43,6 +48,7 @@ const TenthScore = (props) => {
             ...prevState,
             [name]: newValue,
         }));
+
     };
 
     const handleSubmit = async (e) => {
@@ -55,7 +61,7 @@ const TenthScore = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/tenth_std_percentage_requirements/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/current-education/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -69,11 +75,11 @@ const TenthScore = (props) => {
             const response = await fetch(apiURL, requestOptions);
             if (response.status === 201) {
                 props.getNewData();
-                toast.success("Enquiry submitted successfully!");
+                toast.success("Current Education submitted successfully!");
                 props.closeModal();
             }
             else {
-                toast.error("Failed to submit enquiry.");
+                toast.error("Failed to submit Current Education.");
             }
         } catch (error) {
             console.log(error);
@@ -94,21 +100,22 @@ const TenthScore = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
+
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Percentage
+                                                    Current Education
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="number"
-                                                        name="percentage"
+                                                        type="text"
+                                                        name="current_education"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.percentage}
+                                                        value={SourceData.current_education}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
@@ -143,4 +150,4 @@ const TenthScore = (props) => {
     );
 };
 
-export default TenthScore;
+export default Source;

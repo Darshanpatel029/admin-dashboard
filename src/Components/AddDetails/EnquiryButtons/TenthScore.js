@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../UI/Loading/Loading";
+import Loading from "../../UI/Loading/Loading";
 
 const initialSubmit = {
     isError: false,
@@ -9,21 +9,15 @@ const initialSubmit = {
     isSubmitting: false,
 };
 
-const Source = (props) => {
+const TenthScore = (props) => {
     const [SourceData, setSourceData] = useState({
-        Source: "",
-        Reference_Number: "",
+        percentage: ""
     });
 
-
     const [formStatus, setFormStatus] = useState(initialSubmit);
-
     const validateForm = () => {
-        if (!SourceData.Source) {
-            setFormError("Source is Required");
-            return false;
-        } else if (!SourceData.Reference_Number) {
-            setFormError("Reference Number is Required");
+        if (!SourceData.percentage) {
+            setFormError("Percentage is Required");
             return false;
         }
         setFormStatus({
@@ -42,8 +36,6 @@ const Source = (props) => {
         });
     };
 
-
-
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         const newValue = files ? files[0] : value;
@@ -51,7 +43,6 @@ const Source = (props) => {
             ...prevState,
             [name]: newValue,
         }));
-
     };
 
     const handleSubmit = async (e) => {
@@ -64,7 +55,7 @@ const Source = (props) => {
         });
         try {
             const apiURL =
-                "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry_sources/";
+                "https://cloudconnectcampaign.com/espicrmlatest/api/tenth_std_percentage_requirements/";
             const token = localStorage.getItem("token");
             const requestOptions = {
                 method: "POST",
@@ -103,45 +94,25 @@ const Source = (props) => {
                             >
                                 <div>
                                     <div className="card-body">
-
                                         <div className="row g-3">
                                             <div className="row mb-2">
                                                 <label
                                                     htmlFor="student_First_Name"
                                                     className="col-sm-4 col-form-label"
                                                 >
-                                                    Source
+                                                    Percentage
                                                 </label>
                                                 <div className="col-md-6">
                                                     <input
-                                                        type="text"
-                                                        name="Source"
+                                                        type="number"
+                                                        name="percentage"
                                                         className="form-control"
                                                         id="student_First_Name"
-                                                        value={SourceData.Source}
+                                                        value={SourceData.percentage}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="row mb-2">
-                                                <label
-                                                    htmlFor="student_First_Name"
-                                                    className="col-sm-4 col-form-label"
-                                                >
-                                                    Reference Number
-                                                </label>
-                                                <div className="col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name="Reference_Number"
-                                                        className="form-control"
-                                                        id="student_First_Name"
-                                                        value={SourceData.Reference_Number}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                            </div>
-
 
                                         </div>
                                     </div>
@@ -172,4 +143,4 @@ const Source = (props) => {
     );
 };
 
-export default Source;
+export default TenthScore;
