@@ -78,8 +78,6 @@ const ViewApplication = () => {
     return null;
   };
 
-
-
   const columnDefs = [
     {
       headerName: "Application",

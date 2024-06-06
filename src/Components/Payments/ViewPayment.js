@@ -113,12 +113,17 @@ const ViewPayment = () => {
     );
 
   const openInNewTabRenderer = (params) => {
-    return (
-      <Link to={`${params.value}`} target="_blank" >
-        {params.value}
-      </Link>
-    );
+    if (params.value) {
+      return (
+        <a href={params.value} target="_blank" rel="noopener noreferrer">
+          <i className="bi bi-arrow-down-circle" style={{ color: "red" }}></i>
+        </a>
+      );
+    }
+    return null;
   };
+
+
 
   const columnDefs = [
     {
@@ -160,6 +165,8 @@ const ViewPayment = () => {
       field: "0",
     },
   ];
+
+
 
   const closeModal = () => {
     setIsModalOpen(false);

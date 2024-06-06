@@ -4,7 +4,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 
-const Table = ({ rowData, columnDefs, paginationPageSize = 10 ,onCellValueChanged ,rowSelection}) => {
+const Table = ({ rowData, columnDefs, paginationPageSize = 10, onCellValueChanged, rowSelection }) => {
     const gridOptions = {
         rowData,
         columnDefs,

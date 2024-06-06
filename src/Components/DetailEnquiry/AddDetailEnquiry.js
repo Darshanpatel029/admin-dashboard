@@ -122,6 +122,7 @@ const AddDetailEnquiry = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!validateForm()) return;
         setFormStatus({
             isError: false,
@@ -129,29 +130,8 @@ const AddDetailEnquiry = (props) => {
             isSubmitting: true,
         });
         const formData = new FormData();
-        // formData.append("Current_Enquiry", detailEnquiry.Current_Enquiry);
-        // formData.append("Current_Education_Details", detailEnquiry.Current_Education_Details);
-        // formData.append("Tenth_Education_Details", detailEnquiry.Tenth_Education_Details);
-        // formData.append("Twelveth_Education_Details", detailEnquiry.Twelveth_Education_Details);
-        // formData.append("Graduation_Education_Details", detailEnquiry.Graduation_Education_Details);
-        // formData.append("Work_Experience", detailEnquiry.Work_Experience);
 
-        // formData.append("Toefl_Exam", detailEnquiry.Toefl_Exam);
-        // formData.append("ielts_Exam", detailEnquiry.ielts_Exam);
-        // formData.append("PTE_Exam", detailEnquiry.PTE_Exam);
-        // formData.append("Duolingo_Exam", detailEnquiry.Duolingo_Exam);
-        // formData.append("Gre_Exam", detailEnquiry.Gre_Exam);
-        // formData.append("Gmat_Exam", detailEnquiry.Gmat_Exam);
-
-        // formData.append("Father_Occupation", detailEnquiry.Father_Occupation);
-        // formData.append("Father_Annual_Income", detailEnquiry.Father_Annual_Income);
-
-        // formData.append("Refusal", detailEnquiry.Refusal);
         formData.append("Confirmed_Services", detailEnquiry.Confirmed_Services);
-        // formData.append("Enquiry_Status", detailEnquiry.Enquiry_Status);
-        // formData.append("DetaiEnquiryFollowup", detailEnquiry.DetaiEnquiryFollowup);
-
-
         formData.append("Twelveth_Document", detailEnquiry.Twelveth_Document);
         formData.append("Tenth_Document", detailEnquiry.Tenth_Document);
         formData.append("Graduation_Marksheet", detailEnquiry.Graduation_Marksheet);
@@ -191,9 +171,9 @@ const AddDetailEnquiry = (props) => {
                 key !== "Work_Experience_Document" &&
                 key !== "Passport_Document" &&
                 key !== "Offer_Letter" &&
-                key !== "Refusal" &&
+                // key !== "Refusal" &&
                 key !== "Confirmed_Services" &&
-                key !== "Enquiry_Status" &&
+                // key !== "Enquiry_Status" &&
                 key !== "followup"
             ) {
                 formData.append(key, detailEnquiry[key]);
