@@ -36,7 +36,6 @@ const ViewEnquiry = () => {
   const [MasterData, setMasterData] = useState([]);
   const [DocumentData, setDocumentData] = useState([]);
 
-
   const [errs, setErrs] = useState("");
 
   useEffect(() => {
@@ -66,9 +65,7 @@ const ViewEnquiry = () => {
     fetchBachelorData();
     fetchMasterData();
     fetchDocumentData();
-  }, [data, setEnquiryData]);
-
-
+  }, [data]);
 
   const fetchData = async (url, setter, errorMessage, showNoDataMessage = true) => {
     try {
@@ -94,6 +91,8 @@ const ViewEnquiry = () => {
       console.log("error", error);
     }
   };
+
+  //FOR UPDATE VALUES
 
   const updateDataOnServer = async (data) => {
     try {
@@ -125,6 +124,8 @@ const ViewEnquiry = () => {
     // Call your existing API update function
     await updateDataOnServer(updatedRowData);
   };
+
+  //END UPDATE VALUE SECTION 
 
   const fetchEnquiries = () =>
     fetchData(
@@ -324,6 +325,7 @@ const ViewEnquiry = () => {
       "No Document Data found",
       false
     );
+
   const columnDefs = [
     {
       headerName: "Student First Name",
@@ -394,6 +396,9 @@ const ViewEnquiry = () => {
       editable: true,
     },
   ];
+
+
+  //FOR CLOSING MODALS
 
   const closeModal = () => {
     setIsModalOpen(false);

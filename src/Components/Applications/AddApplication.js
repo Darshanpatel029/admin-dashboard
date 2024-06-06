@@ -32,6 +32,7 @@ const AddApplication = (props) => {
     passport: "",
   });
 
+
   const token = localStorage.getItem("token");
   const [formStatus, setFormStatus] = useState(initialSubmit);
 

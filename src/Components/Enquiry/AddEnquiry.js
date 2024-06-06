@@ -19,7 +19,7 @@ const initialSubmit = {
   errMsg: null,
   isSubmitting: false,
 };
-// part of validation
+
 
 const AddEnquiry = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -138,6 +138,7 @@ const AddEnquiry = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm()) return;
     setFormStatus({
       isError: false,
@@ -212,6 +213,8 @@ const AddEnquiry = (props) => {
   const closeStatus = () => {
     setStatusModel(false);
   };
+
+
   return (
     <section className="section">
       <div className="row">

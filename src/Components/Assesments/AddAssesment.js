@@ -15,6 +15,7 @@ const initialSubmit = {
 const AddAssesment = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [statusModel, setStatusModel] = useState(false);
+
     const [assessmentData, setAssessmentData] = useState({
         assigned_users: "",
         enquiry: "",
@@ -33,6 +34,7 @@ const AddAssesment = (props) => {
         ass_status: "",
         notes: "",
     });
+
     const [formStatus, setFormStatus] = useState(initialSubmit);
 
     const validateForm = () => {

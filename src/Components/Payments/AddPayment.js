@@ -28,6 +28,7 @@ const AddPayment = (props) => {
     payment_received_by: "",
     PaymentFollowup: ""
   });
+
   const token = localStorage.getItem("token");
   const [formStatus, setFormStatus] = useState(initialSubmit);
 

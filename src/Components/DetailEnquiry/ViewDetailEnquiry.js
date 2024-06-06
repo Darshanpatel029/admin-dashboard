@@ -175,7 +175,6 @@ const ViewDetailEnquiry = () => {
       "No Intake Data found"
     );
   const columnDefs = [
-    // { headerName: "No", field: "no" },
     {
       headerName: "Current Enquiry",
       field: "Current_Enquiry.student_First_Name",
