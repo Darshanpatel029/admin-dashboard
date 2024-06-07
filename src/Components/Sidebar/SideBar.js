@@ -4,6 +4,10 @@ import { Link, useLocation } from 'react-router-dom'
 const SideBar = () => {
     const location = useLocation();
 
+    const handleSignOut = () => {
+        localStorage.removeItem('token');
+    }
+
     return (
         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
             <aside id="sidebar" className="sidebar">
@@ -39,7 +43,7 @@ const SideBar = () => {
                         </Link>
                     </li>
                     <li className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
-                        <Link to="/" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login">
+                        <Link to="/" className="nav-link collapsed" data-bs-toggle="tooltip" data-bs-placement="right" title="Login" onClick={handleSignOut}>
                             <i className="bi bi-box-arrow-in-right"></i>
                             <span>Sign Out</span>
                         </Link>
