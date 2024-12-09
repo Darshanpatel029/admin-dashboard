@@ -48,21 +48,21 @@ const ViewApplication = () => {
 
   const fetchApplications = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/application/",
+      "https://espicrm.co/latest/api/application/",
       setapplicationData,
       "No Detail Inquiry found"
     );
 
   const fetchEnquiries = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/assesment/",
+      "https://espicrm.co/latest/api/assesment/",
       setEnquiryData,
       "No Inquiry found"
     );
 
   const fetchStatusData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/application-statuses/",
+      "https://espicrm.co/latest/api/application-statuses/",
       setstatusData,
       "No Inquiry found"
     );
@@ -88,19 +88,19 @@ const ViewApplication = () => {
       field: "application_status.App_status",
     },
     {
-      headerName: "SOP", field: "sop",
+      headerName: "SOP",
+      field: "sop",
       cellRenderer: openInNewTabRenderer,
-
     },
     {
-      headerName: "Passport", field: "passport",
+      headerName: "Passport",
+      field: "passport",
       cellRenderer: openInNewTabRenderer,
-
     },
     {
-      headerName: "CV", field: "cv",
+      headerName: "CV",
+      field: "cv",
       cellRenderer: openInNewTabRenderer,
-
     },
   ];
 
@@ -110,7 +110,7 @@ const ViewApplication = () => {
 
   const getNewData = () => {
     setData(1);
-  }
+  };
 
   return (
     <div>

@@ -67,7 +67,12 @@ const ViewEnquiry = () => {
     fetchDocumentData();
   }, [data]);
 
-  const fetchData = async (url, setter, errorMessage, showNoDataMessage = true) => {
+  const fetchData = async (
+    url,
+    setter,
+    errorMessage,
+    showNoDataMessage = true
+  ) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(url, {
@@ -97,7 +102,7 @@ const ViewEnquiry = () => {
   const updateDataOnServer = async (data) => {
     try {
       const token = localStorage.getItem("token");
-      const url = `https://cloudconnectcampaign.com/espicrmlatest/api/enquiries/${data.id}/`;
+      const url = `https://espicrm.co/latest/api/enquiries/${data.id}/`;
       const response = await fetch(url, {
         method: "PATCH",
         headers: {
@@ -125,11 +130,11 @@ const ViewEnquiry = () => {
     await updateDataOnServer(updatedRowData);
   };
 
-  //END UPDATE VALUE SECTION 
+  //END UPDATE VALUE SECTION
 
   const fetchEnquiries = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiries/",
+      "https://espicrm.co/latest/api/enquiries/",
       setEnquiryData,
       "No Enquiry found",
       true
@@ -137,7 +142,7 @@ const ViewEnquiry = () => {
 
   const fetchSourceData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry_sources/",
+      "https://espicrm.co/latest/api/enquiry_sources/",
       setSourceData,
       "No Source Inquiry found",
       false
@@ -145,7 +150,7 @@ const ViewEnquiry = () => {
 
   const fetchEducationData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/current-education/",
+      "https://espicrm.co/latest/api/current-education/",
       setEducationData,
       "No Education Data found",
       false
@@ -153,14 +158,14 @@ const ViewEnquiry = () => {
 
   const fetchIntrestedCountryData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/countriesIntersted/",
+      "https://espicrm.co/latest/api/countriesIntersted/",
       setinterestedCountryData,
       "No interested Country Data found",
       false
     );
   const fetchCountryData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/countries/",
+      "https://espicrm.co/latest/api/countries/",
       setCountryData,
       "No Country Data found",
       false
@@ -168,7 +173,7 @@ const ViewEnquiry = () => {
 
   const fetchUniversityData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/universities/",
+      "https://espicrm.co/latest/api/universities/",
       setUniversities,
       "No University Data found",
       false
@@ -176,7 +181,7 @@ const ViewEnquiry = () => {
 
   const fetchLevelData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/",
+      "https://espicrm.co/latest/api/course-levels/",
       setLevelData,
       "No level Data found",
       false
@@ -184,7 +189,7 @@ const ViewEnquiry = () => {
 
   const fetchCourseData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/courses/",
+      "https://espicrm.co/latest/api/courses/",
       setCourseData,
       "No Course Data found",
       false
@@ -192,14 +197,14 @@ const ViewEnquiry = () => {
 
   const fetchIntakeData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/intakes/",
+      "https://espicrm.co/latest/api/intakes/",
       setIntakeData,
       "No Intake Data found",
       false
     );
   const fetchuserData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
+      "https://espicrm.co/latest/api/users/",
       setuserData,
       "No Intake Data found",
       false
@@ -207,7 +212,7 @@ const ViewEnquiry = () => {
 
   const fetchServicesData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/available-services/",
+      "https://espicrm.co/latest/api/available-services/",
       setServicesData,
       "No Services Data found",
       false
@@ -215,7 +220,7 @@ const ViewEnquiry = () => {
 
   const fetchStatusData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-statuses/",
+      "https://espicrm.co/latest/api/enquiry-statuses/",
       serStatusData,
       "No EnquiryStatus Data found",
       false
@@ -223,7 +228,7 @@ const ViewEnquiry = () => {
 
   const fetchfollowupData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/enquiry-followups/",
+      "https://espicrm.co/latest/api/enquiry-followups/",
       setFollowupData,
       "No Followup Data found",
       false
@@ -231,7 +236,7 @@ const ViewEnquiry = () => {
 
   const fetchIeltsData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/ielts_exams/",
+      "https://espicrm.co/latest/api/ielts_exams/",
       setIeltsData,
       "No Ielts Data found",
       false
@@ -239,7 +244,7 @@ const ViewEnquiry = () => {
 
   const fetchPteData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/pte_exams/",
+      "https://espicrm.co/latest/api/pte_exams/",
       setPteData,
       "No PTE Data found",
       false
@@ -247,7 +252,7 @@ const ViewEnquiry = () => {
 
   const fetchGmatData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/gmat_exams/",
+      "https://espicrm.co/latest/api/gmat_exams/",
       setGmatData,
       "No GMAT Data found",
       false
@@ -255,16 +260,15 @@ const ViewEnquiry = () => {
 
   const fetchDuolingoData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/duolingo_exams/",
+      "https://espicrm.co/latest/api/duolingo_exams/",
       setDuolingoData,
       "No Duolingo Data found",
       false
     );
 
-
   const fetchGreData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/gre_exams/",
+      "https://espicrm.co/latest/api/gre_exams/",
       setGreData,
       "No GRE Data found",
       false
@@ -272,7 +276,7 @@ const ViewEnquiry = () => {
 
   const fetchToeflData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/toefl_exams/",
+      "https://espicrm.co/latest/api/toefl_exams/",
       setToeflData,
       "No Toefl Data found",
       false
@@ -280,7 +284,7 @@ const ViewEnquiry = () => {
 
   const fetchCourseLevels = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/course-levels/",
+      "https://espicrm.co/latest/api/course-levels/",
       setCourseLevel,
       "No CourseLevel Data found",
       false
@@ -288,7 +292,7 @@ const ViewEnquiry = () => {
 
   const fetchTenthData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/tenth_std_percentage_requirements/",
+      "https://espicrm.co/latest/api/tenth_std_percentage_requirements/",
       setTenthPercent,
       "No Tenth Data found",
       false
@@ -296,7 +300,7 @@ const ViewEnquiry = () => {
 
   const fetchTwelveData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/twelfth_std_percentage_requirements/",
+      "https://espicrm.co/latest/api/twelfth_std_percentage_requirements/",
       setTwelthPercent,
       "No Twelth Data found",
       false
@@ -304,7 +308,7 @@ const ViewEnquiry = () => {
 
   const fetchBachelorData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/bachelor_requirements/",
+      "https://espicrm.co/latest/api/bachelor_requirements/",
       setBachelorData,
       "No Bachelor Data found",
       false
@@ -312,7 +316,7 @@ const ViewEnquiry = () => {
 
   const fetchMasterData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/masters_requirements/",
+      "https://espicrm.co/latest/api/masters_requirements/",
       setMasterData,
       "No Master Data found",
       false
@@ -320,7 +324,7 @@ const ViewEnquiry = () => {
 
   const fetchDocumentData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/documents-required/",
+      "https://espicrm.co/latest/api/documents-required/",
       setDocumentData,
       "No Document Data found",
       false
@@ -397,7 +401,6 @@ const ViewEnquiry = () => {
     },
   ];
 
-
   //FOR CLOSING MODALS
 
   const closeModal = () => {
@@ -406,8 +409,7 @@ const ViewEnquiry = () => {
 
   const getNewData = () => {
     setData(1);
-  }
-
+  };
 
   return (
     <div>

@@ -59,55 +59,55 @@ const ViewPayment = () => {
 
   const fetchPaymentData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/payments/",
+      "https://espicrm.co/latest/api/payments/",
       setpaymentData,
       "No Payment found"
     );
 
   const fetchEnquiryData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/detailsEnquiry/",
+      "https://espicrm.co/latest/api/detailsEnquiry/",
       setEnquiryData,
       "No Enquiry found"
     );
 
   const fetchPaymentTypes = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_types/",
+      "https://espicrm.co/latest/api/payment_types/",
       setPaymentType,
       "No PaymentType Data found"
     );
 
   const fetchAvailableServices = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/available-services/",
+      "https://espicrm.co/latest/api/available-services/",
       setAvailableServices,
       "No interested Country Data found"
     );
   const fetchPaymentModes = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_modes/",
+      "https://espicrm.co/latest/api/payment_modes/",
       setPaymentMode,
       "No Country Data found"
     );
 
   const fetchPaymentStatus = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/payment_statuses/",
+      "https://espicrm.co/latest/api/payment_statuses/",
       setpaymentStatus,
       "No University Data found"
     );
 
   const fetchUsers = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/users/",
+      "https://espicrm.co/latest/api/users/",
       setUserData,
       "No User Data found"
     );
 
   const fetchFollowupData = () =>
     fetchData(
-      "https://cloudconnectcampaign.com/espicrmlatest/api/payment-followups/",
+      "https://espicrm.co/latest/api/payment-followups/",
       setfollowupData,
       "No PaymentFollowUp Data found"
     );
@@ -122,8 +122,6 @@ const ViewPayment = () => {
     }
     return null;
   };
-
-
 
   const columnDefs = [
     {
@@ -158,7 +156,7 @@ const ViewPayment = () => {
     {
       headerName: "Payment Document",
       field: "payment_document",
-      cellRenderer: openInNewTabRenderer
+      cellRenderer: openInNewTabRenderer,
     },
     {
       headerName: "Pending Amount",
@@ -166,15 +164,13 @@ const ViewPayment = () => {
     },
   ];
 
-
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const getNewData = () => {
     setData(1);
-  }
+  };
 
   return (
     <div>

@@ -10,7 +10,7 @@ import CountryIntrested from "../AddDetails/EnquiryButtons/CountryIntrested";
 import LevelApplying from "../AddDetails/EnquiryButtons/LevelApplying";
 import Status from "../AddDetails/EnquiryButtons/Status";
 import UniversityInterested from "../AddDetails/EnquiryButtons/UniversityIntrested";
-import CourseIntrested from "../AddDetails/EnquiryButtons/CourseIntrested"
+import CourseIntrested from "../AddDetails/EnquiryButtons/CourseIntrested";
 import ModalComponent from "../UI/Modal/ModalComponent";
 
 // part of validation
@@ -19,7 +19,6 @@ const initialSubmit = {
   errMsg: null,
   isSubmitting: false,
 };
-
 
 const AddEnquiry = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -146,8 +145,7 @@ const AddEnquiry = (props) => {
       isSubmitting: true,
     });
 
-    const apiURL =
-      "https://cloudconnectcampaign.com/espicrmlatest/api/create-enquiry/";
+    const apiURL = "https://espicrm.co/latest/api/create-enquiry/";
     const token = localStorage.getItem("token");
     const requestOptions = {
       method: "POST",
@@ -213,7 +211,6 @@ const AddEnquiry = (props) => {
   const closeStatus = () => {
     setStatusModel(false);
   };
-
 
   return (
     <section className="section">
@@ -1057,9 +1054,7 @@ const AddEnquiry = (props) => {
         title="Add FollowUp"
         size="lg"
       >
-        <LevelApplying
-          getNewData={props.getNewData}
-          closeModal={closeLevel} />
+        <LevelApplying getNewData={props.getNewData} closeModal={closeLevel} />
       </ModalComponent>
 
       <ModalComponent
@@ -1068,9 +1063,7 @@ const AddEnquiry = (props) => {
         size="lg"
         title="Add Status"
       >
-        <Status
-          getNewData={props.getNewData}
-          closeModal={closeStatus} />
+        <Status getNewData={props.getNewData} closeModal={closeStatus} />
       </ModalComponent>
     </section>
   );
