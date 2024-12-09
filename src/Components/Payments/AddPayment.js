@@ -26,7 +26,7 @@ const AddPayment = (props) => {
     payment_remarks: "",
     payment_document: "",
     payment_received_by: "",
-    PaymentFollowup: ""
+    PaymentFollowup: "",
   });
 
   const token = localStorage.getItem("token");
@@ -36,36 +36,28 @@ const AddPayment = (props) => {
     if (!paymentData.Memo_For) {
       setFormError("Memo is Required");
       return false;
-    }
-    else if (!paymentData.payment_id) {
+    } else if (!paymentData.payment_id) {
       setFormError("Payment id is Required");
       return false;
-    }
-    else if (!paymentData.Payment_Type) {
+    } else if (!paymentData.Payment_Type) {
       setFormError("Payment Type is Required");
       return false;
-    }
-    else if (!paymentData.payment_date) {
+    } else if (!paymentData.payment_date) {
       setFormError("Payment Date is Required");
       return false;
-    }
-    else if (!paymentData.payment_amount) {
+    } else if (!paymentData.payment_amount) {
       setFormError("PAyment Amount is Required");
       return false;
-    }
-    else if (!paymentData.payment_mode) {
+    } else if (!paymentData.payment_mode) {
       setFormError("PAyment Mode is Required");
       return false;
-    }
-    else if (!paymentData.payment_status) {
+    } else if (!paymentData.payment_status) {
       setFormError("Payment Status is Required");
       return false;
-    }
-    else if (!paymentData.payment_document) {
+    } else if (!paymentData.payment_document) {
       setFormError("Payment Document is Required");
       return false;
-    }
-    else if (!paymentData.payment_received_by) {
+    } else if (!paymentData.payment_received_by) {
       setFormError("Payment Receiver is Required");
       return false;
     }
@@ -137,7 +129,7 @@ const AddPayment = (props) => {
       };
 
       const response = await fetch(
-        "https://cloudconnectcampaign.com/espicrmlatest/api/payments/",
+        "https://espicrm.co/latest/api/payments/",
         requestOptions
       );
 
@@ -145,8 +137,7 @@ const AddPayment = (props) => {
         props.getNewData();
         toast.success("Payment Data submitted successfully!");
         props.closeModal();
-      }
-      else {
+      } else {
         toast.error("Failed to submit Payment.");
       }
     } catch (error) {
@@ -279,7 +270,6 @@ const AddPayment = (props) => {
                                 id="student_First_Name"
                                 value={paymentData.payment_date}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>
@@ -368,7 +358,6 @@ const AddPayment = (props) => {
                                 id="student_Last_Name"
                                 value={paymentData.payment_reference}
                                 onChange={handleChange}
-
                               />
                             </div>
                           </div>

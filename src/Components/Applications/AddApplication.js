@@ -32,7 +32,6 @@ const AddApplication = (props) => {
     passport: "",
   });
 
-
   const token = localStorage.getItem("token");
   const [formStatus, setFormStatus] = useState(initialSubmit);
 
@@ -40,20 +39,16 @@ const AddApplication = (props) => {
     if (!applicationData.application) {
       setFormError("Application is Required");
       return false;
-    }
-    else if (!applicationData.application_status) {
+    } else if (!applicationData.application_status) {
       setFormError("Application status is Required");
       return false;
-    }
-    else if (!applicationData.sop) {
+    } else if (!applicationData.sop) {
       setFormError("SOP is Required");
       return false;
-    }
-    else if (!applicationData.cv) {
+    } else if (!applicationData.cv) {
       setFormError("CV is Required");
       return false;
-    }
-    else if (!applicationData.passport) {
+    } else if (!applicationData.passport) {
       setFormError("Passport is Required");
       return false;
     }
@@ -143,7 +138,7 @@ const AddApplication = (props) => {
       };
 
       const response = await fetch(
-        "https://cloudconnectcampaign.com/espicrmlatest/api/application/",
+        "https://espicrm.co/latest/api/application/",
         requestOptions
       );
 
@@ -151,8 +146,7 @@ const AddApplication = (props) => {
         props.getNewData();
         toast.success("Application submitted successfully!");
         props.closeModal();
-      }
-      else {
+      } else {
         toast.error("Failed to submit Application.");
       }
     } catch (error) {
@@ -160,7 +154,7 @@ const AddApplication = (props) => {
     }
   };
 
-  console.log(props.EnquiryData)
+  console.log(props.EnquiryData);
   return (
     <section className="section">
       <div className="row">
@@ -242,9 +236,7 @@ const AddApplication = (props) => {
                         <form className="row g-3">
                           <div className="col-md-12">
                             <div className="row mb-2">
-                              <label
-                                className="col-sm-4 col-form-label"
-                              >
+                              <label className="col-sm-4 col-form-label">
                                 Application
                               </label>
                               <div className="col-md-6">
@@ -258,17 +250,17 @@ const AddApplication = (props) => {
                                   <option selected>Select Application</option>
                                   {props.EnquiryData.map((Enquiry) => (
                                     <option key={Enquiry.id} value={Enquiry.id}>
-                                      {Enquiry.enquiry.Current_Enquiry.student_First_Name}
+                                      {
+                                        Enquiry.enquiry.Current_Enquiry
+                                          .student_First_Name
+                                      }
                                     </option>
                                   ))}
                                 </select>
                               </div>
                             </div>
                             <div className="row mb-2">
-                              <label
-                                className="col-sm-4 col-form-label"
-
-                              >
+                              <label className="col-sm-4 col-form-label">
                                 Application Status
                               </label>
                               <div className="col-md-6">
@@ -278,9 +270,10 @@ const AddApplication = (props) => {
                                   onChange={handleChange}
                                   name="application_status"
                                   value={applicationData.application_status}
-
                                 >
-                                  <option selected>Select Application Status</option>
+                                  <option selected>
+                                    Select Application Status
+                                  </option>
                                   {props.statusData.map((Status) => (
                                     <option key={Status.id} value={Status.id}>
                                       {Status.App_status}
@@ -512,7 +505,6 @@ const AddApplication = (props) => {
                     <div className="">
                       <div className="card-body">
                         <form className="row g-3">
-
                           <div className="row mb-2">
                             <label className="col-sm-4 col-form-label">
                               Rejection Reason

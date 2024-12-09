@@ -28,17 +28,14 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://cloudconnectcampaign.com/espicrmlatest/api/login/",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bodyData),
-        }
-      );
+      const response = await fetch("https://espicrm.co/latest/api/login/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyData),
+      });
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem("token", data.access);
@@ -46,8 +43,7 @@ const Login = () => {
         toast.success("LogIn Successful");
       } else if (response.status === 401) {
         toast.error("Invalid username or password");
-      }
-      else {
+      } else {
         toast.error("Some Problem Occurred. Please try again.");
       }
     } catch (error) {
